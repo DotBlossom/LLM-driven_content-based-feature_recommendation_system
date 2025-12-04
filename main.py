@@ -3,12 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 import torch
 import uvicorn
 from pytorch_metric_learning import losses, miners, distances
-
+from routers.embed_items import embed_items_router
 from routers.gpu_test import gpu_test_router
 
 app = FastAPI()
 
-# CORS configuration
+# CORS configuration for test
 origins = [
     "*" 
 ]
@@ -20,10 +20,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+#router
 api_router = APIRouter(prefix="/ai-api")
 api_router.include_router(gpu_test_router, prefix="/test")
+api_router.include_router(embed_items_router, prefix="/item")
 app.include_router(api_router)
 
+
+#health check line
 @app.get("/")
 def home():
     cuda_status = torch.cuda.is_available()
@@ -33,6 +37,7 @@ def home():
     }
 
 
+#query test
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: str = None):
     return {"item_id": item_id, "query_param": q}

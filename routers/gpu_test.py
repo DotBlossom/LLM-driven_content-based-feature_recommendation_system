@@ -1,10 +1,62 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, BackgroundTasks
+from pydantic import BaseModel
+from typing import List, Optional
+
 import torch
 from pytorch_metric_learning import losses, miners, distances
 
-
+from pydantic import BaseModel
+from typing import List, Optional
+import model
 
 gpu_test_router = APIRouter() 
+
+class ClothesInfo(BaseModel):
+    category: List[str] 
+
+class ProductItem(BaseModel):
+    id: int
+    clothes: ClothesInfo
+    vector: Optional[List[float]] = None 
+
+class TrainRequest(BaseModel):
+    products: List[ProductItem]
+    epochs: int = 5
+    batch_size: int = 32
+
+class InferenceRequest(BaseModel):
+    vector: List[float]
+
+
+@gpu_test_router.post("/train")
+async def train_endpoint(req: TrainRequest, background_tasks: BackgroundTasks):
+    product_list = [item.dict() for item in req.products]
+    background_tasks.add_task(model.train_model, product_list, req.epochs, req.batch_size)
+    return {"message": "Training started in background."}
+
+
+@gpu_test_router.post("/train_sync")
+def train_sync_endpoint(req: TrainRequest):
+    product_list = [item.dict() for item in req.products]
+    try:
+        history = model.train_model(product_list, req.epochs, req.batch_size)
+        return {"status": "success", "history": history}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@gpu_test_router.post("/inference")
+def inference_endpoint(req: InferenceRequest):
+    if len(req.vector) != 512:
+        raise HTTPException(status_code=400, detail="Input vector must be 512 dimensions.")
+    try:
+        optimized_vec = model.load_and_infer(req.vector)
+        return {"input_dim": 512, "output_dim": 128, "vector": optimized_vec}
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Model not found. Please train the model first.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 
 @gpu_test_router.get("/metric")
@@ -39,3 +91,5 @@ def test_result():
         "계산된 Loss 값" : loss.item(),
         "completed" : "yes"
     }
+    
+    
