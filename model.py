@@ -9,6 +9,8 @@ from collections import defaultdict
 import random
 import os
 
+#mongo 연결 필요, metadata 연결 필요
+
 # --- 1. Dataset & Sampler ---
 class RichAttributeDataset(Dataset):
     def __init__(self, product_list):
