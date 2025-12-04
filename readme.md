@@ -5,9 +5,9 @@
 
 ## 프로젝트 개요 (Overview)
 
- 이 프로젝트는 기존 협업 필터링(CF)의 한계인 **Cold Start** 문제와 **인기 편향(Popularity Bias)**을 해결하기 위해 구축된 딥러닝 기반 추천 시스템입니다.
+ 이 프로젝트는 기존 협업 필터링(CF)의 한계인 **Cold Start** 문제와 **Popularity Bias** 을 해결하기 위해 구축된 딥러닝 기반 추천 시스템입니다.
 
- LLM을 통해 정제된 **구조적 속성(Structured Attributes)**을 활용하며, Coarse-to-Fine (Cross-Attention) 아키텍처와 Deep Pyramid 구조를 통해 상품의 미세한 뉘앙스까지 벡터 공간에 반영합니다.
+ LLM을 통해 정제된 **구조적 속성(Structured Attributes)** 을 활용하며, Coarse-to-Fine (Cross-Attention) 아키텍처와 Deep Pyramid 구조를 통해 상품의 미세한 뉘앙스까지 벡터 공간에 반영합니다.
 
 ## 시스템 아키텍처 (System Architecture)
 
