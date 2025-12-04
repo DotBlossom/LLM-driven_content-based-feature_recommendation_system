@@ -2,6 +2,9 @@ from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 import torch
 import uvicorn
+from pytorch_metric_learning import losses, miners, distances
+
+from routers.gpu_test import gpu_test_router
 
 app = FastAPI()
 
@@ -18,7 +21,8 @@ app.add_middleware(
 )
 
 api_router = APIRouter(prefix="/ai-api")
-
+api_router.include_router(gpu_test_router, prefix="/test")
+app.include_router(api_router)
 
 @app.get("/")
 def home():
