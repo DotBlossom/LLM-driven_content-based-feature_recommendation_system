@@ -1,9 +1,3 @@
-
-### 구조도
-![description](./image/IMG_4814.jpeg)
-
-
-
 # Deep Coarse-to-Fine Metric Learning Recommendation System
 
 > **LLM 기반의 고품질 피쳐와 계층적 메트릭 러닝을 활용한 하이브리드 추천 시스템**
@@ -11,13 +5,19 @@
 
 ## 프로젝트 개요 (Overview)
 
-이 프로젝트는 기존 협업 필터링(CF)의 한계인 **Cold Start** 문제와 **인기 편향(Popularity Bias)**을 해결하기 위해 구축된 딥러닝 기반 추천 시스템입니다.
+ 이 프로젝트는 기존 협업 필터링(CF)의 한계인 **Cold Start** 문제와 **인기 편향(Popularity Bias)**을 해결하기 위해 구축된 딥러닝 기반 추천 시스템입니다.
 
-LLM을 통해 정제된 **구조적 속성(Structured Attributes)**을 활용하며, Coarse-to-Fine (Cross-Attention) 아키텍처와 Deep Pyramid 구조를 통해 상품의 미세한 뉘앙스까지 벡터 공간에 반영합니다.
+ LLM을 통해 정제된 **구조적 속성(Structured Attributes)**을 활용하며, Coarse-to-Fine (Cross-Attention) 아키텍처와 Deep Pyramid 구조를 통해 상품의 미세한 뉘앙스까지 벡터 공간에 반영합니다.
 
 ## 시스템 아키텍처 (System Architecture)
 
 전체 파이프라인은 **[Feature Extraction] → [Stage 1: Embedding] → [Stage 2: Optimization] → [Serving]** 단계로 구성됩니다.
+
+
+### 구조도
+![description](./image/IMG_4814.jpeg)
+
+
 
 ```mermaid
 graph TD
@@ -92,16 +92,16 @@ graph TD
 
 #### 3. Hierarchical Metric Learning
 
-    전략: 도메인 지식(카테고리 계층)을 반영한 Hierarchical Batch Sampling.
+ - 전략: 도메인 지식(카테고리 계층)을 반영한 Hierarchical Batch Sampling.
 
-    방법: 배치 내에 의도적으로 Coat와 Jacket을 함께 구성하여 모델에게 Hard Negative 문제를 지속적으로 출제.
+ - 방법: 배치 내에 의도적으로 Coat와 Jacket을 함께 구성하여 모델에게 Hard Negative 문제를 지속적으로 출제.
 
-    결과: 유저 로그가 없는 신상품에 대해서도 정교한 벡터 위치를 찾아내어 Zero-shot Cold Start 해결.
+ - 결과: 유저 로그가 없는 신상품에 대해서도 정교한 벡터 위치를 찾아내어 Zero-shot Cold Start 해결.
 
 #### 4. Diversity-Aware Serving
 
-    Reranker: Transformer 기반의 Self-Attention Reranker 도입.
+ - Reranker: Transformer 기반의 Self-Attention Reranker 도입.
 
-    기능: 추천 후보 리스트 전체를 조망하여, 유사도가 지나치게 높은 중복 상품을 필터링(MMR 효과).
+ - 기능: 추천 후보 리스트 전체를 조망하여, 유사도가 지나치게 높은 중복 상품을 필터링(MMR 효과).
 
-    지표: Catalog Coverage 및 ILD(Intra-List Diversity) 지표 대폭 개선.
+ - 지표: Catalog Coverage 및 ILD(Intra-List Diversity) 지표 대폭 개선.
