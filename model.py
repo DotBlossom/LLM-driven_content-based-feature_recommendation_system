@@ -183,9 +183,29 @@ class OptimizedItemTower(nn.Module):
         )
         
     def forward(self, x):
-        x = self.layer(x)
-        return F.normalize(x, p=2, dim=1)
+        # [Log 1] 입력 데이터 확인
+        if not self.training: # 추론(eval) 모드일 때만 로그 출력 (학습 땐 너무 많음)
+            print(f"\n  [Model Internal] Input Vector Shape: {x.shape}")
+            print(f"  [Model Internal] Input Sample (First 5): {x[0, :5].detach().cpu().numpy()}")
 
+        # 레이어 통과
+        x = self.layer(x)
+        
+        # [Log 2] 압축 후 데이터 확인
+        if not self.training:
+            print(f"  [Model Internal] After Linear Layer Shape: {x.shape}")
+
+        # 정규화 (L2 Normalization)
+        x = F.normalize(x, p=2, dim=1)
+        
+        # [Log 3] 정규화 확인 (Norm이 1.0에 가까운지)
+        if not self.training:
+            norm_check = torch.norm(x, p=2, dim=1).mean().item()
+            print(f"  [Model Internal] Output Normalized Shape: {x.shape} | Avg Norm: {norm_check:.4f} (Expected ~1.0)")
+            
+        return x
+    
+    
 # ----------------------------------------------------------------------
 # 5. Dataset & Sampler & Training Function (Stage 2 Logic) / first INPUT from DB
 # ----------------------------------------------------------------------
@@ -340,21 +360,43 @@ def train_model(product_list, epochs=5, batch_size=32, save_path="models/final_o
     return history
 
 
+# serving APUI nneeded
 def load_and_infer(input_vector, model_path="models/final_optimized_adapter.pth"):
-    # ... (load_and_infer 함수 로직 유지) ...
+    print("="*60)
+    print(f"[Inference Step 1] Initializing Inference Pipeline...")
+    
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"[Inference Step 2] Target Device: {device}")
+    
+    # 모델 초기화
     model = OptimizedItemTower().to(device)
     
+    # 모델 가중치 로드
     if not os.path.exists(model_path):
+        print(f"[Error] Model file not found at: {model_path}")
         raise FileNotFoundError("Model file not found. Train first.")
-        
-    model.load_state_dict(torch.load(model_path, map_location=device))
+    
+    print(f"[Inference Step 3] Loading weights from: {model_path}")
+    state_dict = torch.load(model_path, map_location=device)
+    model.load_state_dict(state_dict)
+    
+    # 평가 모드 전환 (Dropout, Batchnorm 고정)
     model.eval()
+    print(f"[Inference Step 4] Model set to EVAL mode.")
     
     with torch.no_grad():
+        # 입력 텐서 변환
         tensor_in = torch.tensor([input_vector], dtype=torch.float32).to(device)
-        output = model(tensor_in)
+        print(f"[Inference Step 5] Input Tensor created on {device}. Shape: {tensor_in.shape}")
         
-    return output.cpu().numpy().tolist()[0]
-
-
+        # 모델 Forward 실행 (여기서 위에서 정의한 [Model Internal] 로그가 찍힘)
+        print("-" * 30 + " Model Forward Start " + "-" * 30)
+        output = model(tensor_in)
+        print("-" * 30 + " Model Forward End " + "-" * 30)
+        
+    # 결과 반환
+    result_vector = output.cpu().numpy().tolist()[0]
+    print(f"[Inference Step 6] Final Output Vector generated. Length: {len(result_vector)}")
+    print("="*60)
+    
+    return result_vector
