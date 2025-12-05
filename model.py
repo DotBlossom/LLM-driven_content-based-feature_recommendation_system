@@ -9,7 +9,6 @@ from collections import defaultdict
 import random
 import os
 
-#mongo 연결 필요, metadata 연결 필요
 
 # --- 1. Dataset & Sampler ---
 class RichAttributeDataset(Dataset):
@@ -31,7 +30,7 @@ class RichAttributeDataset(Dataset):
             self.data.append(vec)
             
             full_cat = item['clothes']['category'][0]
-            coarse_cat = full_cat.split('_')[0]
+            coarse_cat = full_cat[:2]
             
             if full_cat not in self.label_to_id:
                 self.label_to_id[full_cat] = len(self.label_to_id)
@@ -45,35 +44,63 @@ class RichAttributeDataset(Dataset):
     def __getitem__(self, idx):
         return self.data[idx], self.fine_labels[idx]
 
+
 class HierarchicalBatchSampler(Sampler):
     def __init__(self, dataset, batch_size, samples_per_class=4):
         self.dataset = dataset
         self.batch_size = batch_size
         self.samples_per_class = samples_per_class
+        
+        # 데이터 구조화
         self.structure = defaultdict(lambda: defaultdict(list))
+        self.all_indices = [] # 랜덤 채우기를 위한 전체 인덱스 풀
         
         for idx, (fine_id, coarse_name) in enumerate(zip(dataset.fine_labels, dataset.coarse_labels)):
             self.structure[coarse_name][fine_id].append(idx)
+            self.all_indices.append(idx)
+            
         self.coarse_keys = list(self.structure.keys())
 
     def __iter__(self):
         num_batches = len(self.dataset) // self.batch_size
+        
         for _ in range(num_batches):
             batch_indices = []
+            
+            # 1. 타겟 대분류 선택
             target_coarse = random.choice(self.coarse_keys)
             fine_dict = self.structure[target_coarse]
             available_fine_labels = list(fine_dict.keys())
             
-            if len(available_fine_labels) < (self.batch_size // self.samples_per_class):
-                continue # 데이터 부족시 스킵 (단순화)
-
+            # 배치에 필요한 클래스(소분류) 개수
             num_classes_needed = self.batch_size // self.samples_per_class
-            selected_fines = random.choices(available_fine_labels, k=num_classes_needed)
             
-            for f_label in selected_fines:
-                indices = fine_dict[f_label]
-                selected_indices = random.choices(indices, k=self.samples_per_class)
-                batch_indices.extend(selected_indices)
+            
+            # A. 충분한 소분류가 있는 경우 (Hard Negative Mode)
+            if len(available_fine_labels) >= num_classes_needed:
+                selected_fines = random.sample(available_fine_labels, k=num_classes_needed)
+                
+                for f_label in selected_fines:
+                    indices = fine_dict[f_label]
+                    # 복원 추출(choices)로 데이터가 적어도 4개를 채움
+                    selected_indices = random.choices(indices, k=self.samples_per_class)
+                    batch_indices.extend(selected_indices)
+            
+            # B. 소분류가 부족한 경우 (Fallback: Noise Mixing Mode)
+            else:
+                # 1) 일단 가진 걸 다 넣음 (수영복 등)
+                for f_label in available_fine_labels:
+                    indices = fine_dict[f_label]
+                    selected_indices = random.choices(indices, k=self.samples_per_class)
+                    batch_indices.extend(selected_indices)
+                
+                # 2) 나머지는 '전체 데이터'에서 랜덤하게 뽑아서 채움 (Noise)
+                # -> 이렇게 하면 "수영복 vs 랜덤상품" 구도가 되어 학습 가능
+                remaining_slots = self.batch_size - len(batch_indices)
+                if remaining_slots > 0:
+                    noise_indices = random.choices(self.all_indices, k=remaining_slots)
+                    batch_indices.extend(noise_indices)
+            
             
             yield batch_indices
 
@@ -113,6 +140,8 @@ def train_model(product_list, epochs=5, batch_size=32, save_path="models/final_o
     model = OptimizedItemTower().to(device)
     optimizer = optim.Adam(model.parameters(), lr=0.001)
     
+    
+    #del easy Negative, outlier => semihard (b(b-1)(b-2))
     distance = distances.CosineSimilarity()
     loss_func = losses.TripletMarginLoss(margin=0.2, distance=distance)
     mining_func = miners.TripletMarginMiner(margin=0.2, distance=distance, type_of_triplets="semihard")
@@ -169,10 +198,6 @@ def load_and_infer(input_vector, model_path="models/final_optimized_adapter.pth"
 
 
 class ResidualBlock(nn.Module):
-    """
-    유튜브 논문의 ReLU 층을 현대적으로 해석한 ResNet 블록
-    Input 차원과 Output 차원이 같을 때 사용
-    """
     def __init__(self, dim, dropout=0.1):
         super().__init__()
         self.block = nn.Sequential(
@@ -187,9 +212,7 @@ class ResidualBlock(nn.Module):
         return x + self.block(x)
 
 class DeepPyramidTower(nn.Module):
-    """
-    깔때기(Funnel) 모양으로 차원을 줄여나가는 Deep MLP
-    """
+
     def __init__(self, input_dim, output_dim=128):
         super().__init__()
         
@@ -226,7 +249,6 @@ class DeepPyramidTower(nn.Module):
         x = self.expansion(x)
         x = self.deep_layers(x)
         return x
-
 
 
 
