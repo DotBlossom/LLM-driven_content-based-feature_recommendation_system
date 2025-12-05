@@ -88,14 +88,14 @@ class HierarchicalBatchSampler(Sampler):
             
             # B. 소분류가 부족한 경우 (Fallback: Noise Mixing Mode)
             else:
-                # 1) 일단 가진 걸 다 넣음 (수영복 등)
+                # 1) 일단 가진 걸 다 넣음 
                 for f_label in available_fine_labels:
                     indices = fine_dict[f_label]
                     selected_indices = random.choices(indices, k=self.samples_per_class)
                     batch_indices.extend(selected_indices)
                 
                 # 2) 나머지는 '전체 데이터'에서 랜덤하게 뽑아서 채움 (Noise)
-                # -> 이렇게 하면 "수영복 vs 랜덤상품" 구도가 되어 학습 가능
+                # -> 이렇게 하면 "rack vs 랜덤상품" 구도가 되어 학습 가능
                 remaining_slots = self.batch_size - len(batch_indices)
                 if remaining_slots > 0:
                     noise_indices = random.choices(self.all_indices, k=remaining_slots)
