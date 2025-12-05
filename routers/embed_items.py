@@ -2,30 +2,32 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Optional, Tuple
 import torch
-import model  # 프로젝트 루트의 model.py
-import vocab  # 프로젝트 루트의 vocab.py
+import model 
+import vocab 
+import numpy as np
+
 
 # --- 라우터 선언 ---
 embed_items_router = APIRouter()
 
 # --- 설정 ---
-EMBED_DIM = 64
-OUTPUT_DIM = 512  # 최적화 타워로 보낼 차원
+# 모델의 기본 임베딩 차원(64d)과 출력 차원을 model.py에서 가져와 일관성을 유지합니다.
+EMBED_DIM = model.EMBED_DIM_CAT  # 64
+OUTPUT_DIM = model.OUTPUT_DIM_ITEM_TOWER # 512
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # --- 모델 초기화 ---
 # 이 파일이 import 될 때 모델이 메모리에 로드됩니다.
 try:
     item_tower = model.CoarseToFineItemTower(
-        vocab_size=vocab.VOCAB_SIZE,
         embed_dim=EMBED_DIM,
         output_dim=OUTPUT_DIM
     ).to(DEVICE)
     item_tower.eval()
-    print(f"Item Tower Model Loaded on {DEVICE}")
+    print(f"Item Tower Model Loaded on {DEVICE} with Dual Embeddings.")
 except Exception as e:
     print(f"Model Load Error: {e}")
-    # 실제 운영 시엔 여기서 에러를 raise 하거나 로그를 남겨야 함
+
 
 # --- Request Schema ---
 class ProductInput(BaseModel):
@@ -47,7 +49,7 @@ def preprocess_split_input(product: ProductInput) -> Tuple[torch.Tensor, torch.T
     # 1. Standard Features (clothes 필드) 처리
     for key, values in product.clothes.items():
         for v in values:
-            tid = vocab.get_token_id(v)
+            tid = vocab.get_std_id(v)
             if tid > 0:
                 std_tokens.append(tid)
     
@@ -55,7 +57,7 @@ def preprocess_split_input(product: ProductInput) -> Tuple[torch.Tensor, torch.T
     if product.reinforced_feature_value:
         for key, values in product.reinforced_feature_value.items():
             for v in values:
-                tid = vocab.get_token_id(v)
+                tid = vocab.get_re_id(v) 
                 if tid > 0:
                     re_tokens.append(tid)
     
@@ -70,7 +72,8 @@ def preprocess_split_input(product: ProductInput) -> Tuple[torch.Tensor, torch.T
     return t_std, t_re
 
 # --- Endpoints ---
-# @app.post 대신 @router.post 사용
+
+# product 여러개 및, product category 추출해서 return 필요.
 
 @embed_items_router.post("/embed", response_model=EmbeddingOutput)
 def embed_product(product: ProductInput):
@@ -84,7 +87,7 @@ def embed_product(product: ProductInput):
         # 2. 추론 (std와 re를 따로 넣음)
         with torch.no_grad():
             vector = item_tower(t_std, t_re)
-            
+        # DB 에 Return + category 저장.            
         # 3. 결과 반환
         return {
             "product_id": product.id,
@@ -92,4 +95,8 @@ def embed_product(product: ProductInput):
         }
         
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        # 모델 초기화 오류가 발생했을 경우를 대비하여 item_tower의 존재 유무를 확인합니다.
+        if 'item_tower' not in globals() or item_tower is None:
+            raise HTTPException(status_code=503, detail="Model initialization failed. Cannot process request.")
+            
+        raise HTTPException(status_code=500, detail=f"Inference Error: {str(e)}")

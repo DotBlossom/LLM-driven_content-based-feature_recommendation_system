@@ -1,37 +1,13 @@
 from fastapi import FastAPI, Depends, HTTPException, APIRouter
-from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Any
-from sqlalchemy import create_engine, Column, Integer
+from sqlalchemy import create_engine, Column, Integer,String, select
 from sqlalchemy.orm import sessionmaker, Session, DeclarativeBase, mapped_column
-from sqlalchemy.dialects.postgresql import JSONB
-from pgvector.sqlalchemy import Vector
-from database import get_db, Base
 
+from database import get_db, Base, Vectors,TripletCreate,PreCreate,TripletSearch, ProductFeature, ProductFeatureCreate
+from database import DBDataLoader
+from model import train_model
 
 controller_router = APIRouter()
 
-
-class Vectors(Base):
-    __tablename__ = "vectors"
-
-    id = Column(Integer, primary_key=True, index=True)
-    vector_triplet = mapped_column(Vector(128), nullable=True)
-    vector_pre = mapped_column(Vector(512), nullable=True)
-
-
-# --- [Triplet: 128차원 전용] ---
-class TripletCreate(BaseModel):
-    id: int
-    vector: List[float] = Field(..., min_items=128, max_items=128, description="128차원 벡터")
-
-class TripletSearch(BaseModel):
-    vector: List[float] = Field(..., min_items=128, max_items=128)
-    top_k: int = 5
-
-# --- [Pre: 512차원 전용] ---
-class PreCreate(BaseModel):
-    id: int
-    vector: List[float] = Field(..., min_items=512, max_items=512, description="512차원 벡터")
 
 
 
@@ -98,20 +74,6 @@ def search_triplet(req: TripletSearch, db: Session = Depends(get_db)):
 
 
 
-class ProductFeature(Base):
-    __tablename__ = "product_feature"
-
-    # product_id INTEGER PRIMARY KEY
-    product_id = Column(Integer, primary_key=True)
-    
-    # feature_data JSONB
-    feature_data = Column(JSONB)
-
-# JSON 데이터 입력용 스키마
-class ProductFeatureCreate(BaseModel):
-    product_id: int
-    feature_data: Dict[str, Any] # 자유로운 JSON 포맷
-
 
 
 @controller_router.post("/db/features/")
@@ -138,3 +100,39 @@ def get_feature(product_id: int, db: Session = Depends(get_db)):
     if not feature:
         raise HTTPException(status_code=404, detail="Product feature not found")
     return feature
+
+
+
+@controller_router.get("/invoke/")
+def run_db_based_training():
+    print(">>> [System] Initializing Stage 2 Training Pipeline...")
+
+    # 1. DB 연결 및 데이터 로드 
+    loader = DBDataLoader()
+    
+    # 결과: [{'vector': [...], 'clothes': {'category': ['top/tee']}}, ...]
+    product_list = loader.fetch_training_data()
+    
+    if not product_list:
+        print(">>> [System] No training data found. Aborting.")
+        return
+
+    # 2. Dataset/Dataloader 및 학습 실행
+    print(f">>> [System] Starting Training with {len(product_list)} samples...")
+    
+    save_path = "models/stage2_triplet_optimized.pth"
+    
+    history = train_model(
+        product_list=product_list,
+        epochs=10, 
+        batch_size=64, # (e.g., 256, 1024)
+        save_path=save_path
+    )
+    
+    print(f">>> [System] Training Complete. Model saved at {save_path}")
+
+
+    # run_inference_and_update(loader, save_path) 
+
+if __name__ == "__main__":
+    run_db_based_training()

@@ -1,12 +1,12 @@
 # vocab.py
-
+import threading
 # 0번은 Padding/Unknown 용도로 예약
 PAD_TOKEN = "<PAD>"
 PAD_ID = 0
-
+RE_VOCAB_LOCK = threading.Lock()
 # 도메인별 유효 값 정의 (Finite Domain)
-# reinforced_feature_value의 값들도 이 도메인 안에 포함된다고 가정합니다.
-VOCAB_CONFIG = {
+
+STD_VOCAB_CONFIG = {
     "category": [
         "01outer_01coat", "01outer_02jacket", "01outer_03jumper", "01outer_04cardigan",
         "02top_01blouse", "02top_02t-shirt", "02top_03sweater", "02top_04shirt", "02top_05vest",
@@ -43,52 +43,127 @@ VOCAB_CONFIG = {
     "skirt.design": ["A-line and bell line", "mermaid line", "Others"],
     
     # --- Metadata (Optional) ---
-    # specification.metadata가 자연어라면 별도 Tokenizer가 필요하지만,
-    # 만약 정형화된 태그(예: "Modern", "Classic")라면 여기에 추가하면 됩니다.
+
     "metadata_keywords": [] 
 }
 
-# --- 1. 통합 사전 생성 (Shared Vocabulary Build) ---
-ALL_TOKENS = set()
+# 추가 dummy 필요 1개씩 or zero, key는 있어야지.
+GENERATED_METADATA = {
+    "pant.silhouette": ["slim straight", "comfort fit", "tapered"],
+    "color": ["Neon Green", "Pastel Blue", "Midnight Black"],
+    "top.neck_color_design": ["mandarin collar"]
+}
 
-for key, values in VOCAB_CONFIG.items():
+# --- A. STD Vocabulary 구축 (정적) ---
+
+ALL_STD_TOKENS = set()
+for key, values in STD_VOCAB_CONFIG.items():
     for v in values:
-        ALL_TOKENS.add(v)
+        ALL_STD_TOKENS.add(v)
 
-# 정렬하여 순서 보장 (매번 실행해도 ID가 바뀌지 않게 함)
-SORTED_TOKENS = sorted(list(ALL_TOKENS))
+SORTED_STD_TOKENS = sorted(list(ALL_STD_TOKENS))
+# ID는 1부터 시작 (0은 PAD). STD와 RE 모두 이 로직을 따릅니다.
+STD_TOKEN_TO_ID = {token: i + 1 for i, token in enumerate(SORTED_STD_TOKENS)}
+STD_VOCAB_SIZE = len(STD_TOKEN_TO_ID) + 1  # (STD 토큰 개수) + PAD(1)
 
-# ID 매핑 생성 (0: PAD, 1~N: Tokens)
-TOKEN_TO_ID = {token: i+1 for i, token in enumerate(SORTED_TOKENS)}
-ID_TO_TOKEN = {i+1: token for i, token in enumerate(SORTED_TOKENS)}
 
-# 0번 추가
-ID_TO_TOKEN[PAD_ID] = PAD_TOKEN
+# --- B. RE Vocabulary 구축 (동적 관리 대상) ---
 
-# 전체 단어장 크기 (Embedding Layer의 input dimension)
-VOCAB_SIZE = len(TOKEN_TO_ID) + 1
+# RE 사전을 관리하는 전역 딕셔너리
+# 초기 GENERATED_METADATA 로드 및 ID 할당 로직 (STD와 동일한 ID 부여 로직 적용)
+INITIAL_RE_TOKENS = set()
+for key, new_values in GENERATED_METADATA.items():
+    for value in new_values:
+        # STD와 중복되지 않는 고유한 값만 RE 토큰으로 등록
+        if value not in ALL_STD_TOKENS:
+            INITIAL_RE_TOKENS.add(value)
 
-# --- 2. Helper Functions ---
+SORTED_INITIAL_RE_TOKENS = sorted(list(INITIAL_RE_TOKENS))
 
-def get_token_id(value: str) -> int:
+# 초기 RE 사전 구축: ID는 1부터 시작 (0은 PAD)
+RE_TOKEN_TO_ID = {token: i + 1 for i, token in enumerate(SORTED_INITIAL_RE_TOKENS)}
+
+# 동적 ID 할당을 위한 카운터: 이미 할당된 다음 ID로 설정
+_RE_ID_COUNTER = len(RE_TOKEN_TO_ID) + 1
+
+
+
+
+
+def get_std_id(value: str) -> int:
     """
-    문자열 값을 입력받아 정수 ID를 반환합니다.
-    사전에 정의되지 않은 값(Unknown)은 0(PAD)을 반환하여 무시합니다.
+    STD 토큰에 대한 정수 ID (1부터 시작)를 반환합니다.
+    STD에 없는 값은 0 (PAD)을 반환합니다.
     """
     if value is None:
         return PAD_ID
-    return TOKEN_TO_ID.get(str(value), PAD_ID)
+    return STD_TOKEN_TO_ID.get(str(value), PAD_ID)
 
-def get_token_from_id(token_id: int) -> str:
-    """
-    정수 ID를 입력받아 원래 문자열을 반환합니다.
-    """
-    return ID_TO_TOKEN.get(token_id, PAD_TOKEN)
 
-# 디버깅용 정보 출력
+def get_re_id(value: str) -> int:
+    """
+    RE 토큰에 대한 정수 ID (1부터 시작)를 반환합니다.
+    
+    1. 값이 STD 토큰에 있으면 0 (PAD)을 반환합니다.
+    2. RE 사전에 값이 있으면 해당 ID를 반환합니다.
+    3. RE 사전에 값이 없으면, 새로운 ID를 부여하고 사전에 등록한 후 반환합니다.
+    """
+    global _RE_ID_COUNTER
+    if value is None:
+        return PAD_ID
+    
+    str_value = str(value)
+
+    # 1. STD 토큰과 중복 검사 (STD 토큰은 RE 인코더로 들어갈 수 없음)
+    if str_value in STD_TOKEN_TO_ID:
+        return PAD_ID
+    
+    # 2. RE 사전에 이미 있는지 확인
+    if str_value in RE_TOKEN_TO_ID:
+        return RE_TOKEN_TO_ID[str_value]
+    
+    # 3. 새로운 RE 토큰인 경우: 락을 걸고 등록
+    with RE_VOCAB_LOCK:
+        # 락을 잡은 후 다시 한번 확인 (Race Condition 방지)
+        if str_value in RE_TOKEN_TO_ID:
+            return RE_TOKEN_TO_ID[str_value]
+
+        # 새로운 ID 할당 및 카운터 증가
+        new_id = _RE_ID_COUNTER
+        RE_TOKEN_TO_ID[str_value] = new_id
+        _RE_ID_COUNTER += 1
+        
+        # print(f"DEBUG: New RE token registered: '{str_value}' -> {new_id}")
+        return new_id
+
+
+def get_vocab_sizes() -> tuple[int, int]:
+    """
+    STD의 전체 어휘 크기 (PAD 포함)와 현재 RE의 전체 어휘 크기를 반환합니다.
+    """
+    # RE 크기는 PAD(1) + 현재 등록된 토큰 개수
+    current_re_size = len(RE_TOKEN_TO_ID) + 1
+    return STD_VOCAB_SIZE, current_re_size
+
 if __name__ == "__main__":
-    print(f"✅ Vocab Loaded!")
-    print(f"Total Unique Tokens: {len(TOKEN_TO_ID)}")
-    print(f"Vocab Size (incl. PAD): {VOCAB_SIZE}")
-    print(f"Sample Mapping: 'Black' -> {get_token_id('Black')}")
-    print(f"Sample Mapping: '01outer_01coat' -> {get_token_id('01outer_01coat')}")
+    # 테스트 코드
+    print(f"✅ Vocab Module Initialized")
+    print("-" * 30)
+    print(f"Initial STD Size: {get_vocab_sizes()[0]}")
+    print(f"Initial RE Size: {get_vocab_sizes()[1]}")
+    print(f"STD ID for 'Black': {get_std_id('Black')}") # STD에 있음
+    print(f"RE ID for 'Neon Green': {get_re_id('Neon Green')}") # 초기 RE에 있음
+    print("-" * 30)
+
+    # 새로운 RE 토큰 등록 시뮬레이션
+    new_re_token = "ultra slim fit"
+    new_id = get_re_id(new_re_token)
+    
+    print(f"Registering new token '{new_re_token}'...")
+    print(f"Assigned ID: {new_id}")
+    print(f"Updated RE Size: {get_vocab_sizes()[1]}")
+    
+    # STD와 중복되는 값 시도 (PAD 0이 반환되어야 함)
+    std_token = "Black"
+    std_id_in_re_space = get_re_id(std_token)
+    print(f"RE ID for '{std_token}' (should be 0): {std_id_in_re_space}")
