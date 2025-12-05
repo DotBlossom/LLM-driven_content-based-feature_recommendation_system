@@ -7,7 +7,7 @@ from routers.embed_items import embed_items_router
 from routers.gpu_test import gpu_test_router
 from APIController.controller import controller_router
 from database import engine, Base
-
+from APIController.serving_controller import serving_controller_router
 
 
 Base.metadata.create_all(bind=engine)
@@ -31,7 +31,7 @@ app.add_middleware(
 api_router = APIRouter(prefix="/ai-api")
 api_router.include_router(gpu_test_router, prefix="/test")
 api_router.include_router(embed_items_router, prefix="/item")
-
+api_router.include_router(serving_controller_router="/serving")
 app.include_router(api_router)
 
 #separatable Instance

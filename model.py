@@ -1,3 +1,5 @@
+from typing import List, Union
+from sqlalchemy import select
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -10,20 +12,23 @@ import os
 import numpy as np
 import math
 import vocab
-
-
-
+from database import ProductInput,ProductFeature, SessionLocal
+from .APIController import serving_controller 
+from sqlalchemy.orm import Session
+import copy
+import random
+from tqdm import tqdm
 
 # ItemTowerEmbedding(S1) * N -> save..DB -> stage2 (optimizer pass -> triplet)  
 
 
-
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 # --- Global Configuration (전체 시스템이 참조하는 공통 차원) ---
 EMBED_DIM_CAT = 64 # Feature의 임베딩 차원 (Transformer d_model)
 OUTPUT_DIM_TRIPLET = 128 # Stage 2 최종 압축 차원
-OUTPUT_DIM_ITEM_TOWER = 512 # Stage 1 최종 출력 차원 (Triplet Tower Input)
+OUTPUT_DIM_ITEM_TOWER = 128 # Stage 1 최종 출력 차원 (Triplet Tower Input)
 RE_MAX_CAPACITY = 50000 # <<<<<<<<<<<< RE 토큰의 최대 개수를 미리 할당
 # ----------------------------------------------------------------------
 # 1. Utility Modules (Shared for both Item Tower and Optimization Tower)
@@ -54,42 +59,36 @@ class ResidualBlock(nn.Module):
 # --- Deep Residual Head (Pyramid Funnel) ---
 class DeepResidualHead(nn.Module):
     """
-    Categorical Vector(64d)를 받아 512d로 확장 및 정제
+    Categorical Vector(64d) -> 256 -> 128
     """
     def __init__(self, input_dim, output_dim=OUTPUT_DIM_ITEM_TOWER):
         super().__init__()
         
-        # 1. 확장 차원 정의: 입력 64d -> 4배 확장 (256d)
-        hidden_dim = input_dim * 4  # 64 * 4 = 256
+        # 1. 내부 확장 (Expansion): 표현력을 위해 4배 확장은 유지 (64 -> 256)
+        hidden_dim = input_dim * 4 
         
-        # 1. Expansion (확장)
         self.expand = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim), # 64 -> 256
+            nn.Linear(input_dim, hidden_dim),
             nn.BatchNorm1d(hidden_dim),
             nn.ReLU(),
             nn.Dropout(0.1)
         )
         
-        # 2. Compression & Residuals (압축 및 심화)
-        self.deep_layers = nn.Sequential(
-            # Layer 1: 차원 축소 시작 (256 -> 128)
-            nn.Linear(hidden_dim, hidden_dim // 2), 
-            nn.BatchNorm1d(hidden_dim // 2),
-            nn.ReLU(),
-            
-            # Layer 2 & 3: Residual Blocks (128차원 유지하며 깊이 추가)
-            ResidualBlock(hidden_dim // 2),
-            ResidualBlock(hidden_dim // 2), 
-            
-            # Layer 4: 최종 출력 차원 맞추기 (128 -> 512)
-            nn.Linear(hidden_dim // 2, output_dim) 
+        # 2. Deep Interaction (ResBlocks): 256차원에서 특징 추출
+        self.res_blocks = nn.Sequential(
+            ResidualBlock(hidden_dim), # 256 유지
+            ResidualBlock(hidden_dim)  # 256 유지
         )
         
+        # 3. Projection (Compression): 바로 목표 차원(128)으로 압축
+        self.project = nn.Linear(hidden_dim, output_dim) 
+        
     def forward(self, x):
-        x = self.expand(x)
-        x = self.deep_layers(x)
+        x = self.expand(x)      # 64 -> 256
+        x = self.res_blocks(x)  # 256 -> 256 (Deep Feature Extraction)
+        x = self.project(x)     # 256 -> 128 (Final Output)
         return x
-
+ 
 # ----------------------------------------------------------------------
 # 3. Main Model: CoarseToFineItemTower (Stage 1)
 # ----------------------------------------------------------------------
@@ -159,7 +158,7 @@ class CoarseToFineItemTower(nn.Module):
         # v_fused = torch.cat([v_final, shape_vecs], dim=1) # 이 코드가 제거됨.
         
         # 6. Deep Residual Head
-        # Deep Head Pass (64 -> 512)
+        # Deep Head Pass (I : 64 -> O : 128)
         final_vector = self.head(pooled_output)
         
         return final_vector
@@ -171,13 +170,13 @@ class CoarseToFineItemTower(nn.Module):
 
 class OptimizedItemTower(nn.Module):
     """
-    [Optimization Tower]: Stage 1의 512차원 벡터를 받아 Triplet Loss로 128차원으로 압축.
+    [Optimization Tower]: Stage 1의 vector non-liner
     """
     def __init__(self, input_dim=OUTPUT_DIM_ITEM_TOWER, output_dim=OUTPUT_DIM_TRIPLET):
         super().__init__()
         self.layer = nn.Sequential(
             nn.Linear(input_dim, input_dim),
-            nn.BatchNorm1d(input_dim),
+            nn.LayerNorm(input_dim),
             nn.ReLU(),
             nn.Linear(input_dim, output_dim),
         )
@@ -191,10 +190,6 @@ class OptimizedItemTower(nn.Module):
         # 레이어 통과
         x = self.layer(x)
         
-        # [Log 2] 압축 후 데이터 확인
-        if not self.training:
-            print(f"  [Model Internal] After Linear Layer Shape: {x.shape}")
-
         # 정규화 (L2 Normalization)
         x = F.normalize(x, p=2, dim=1)
         
@@ -210,193 +205,184 @@ class OptimizedItemTower(nn.Module):
 # 5. Dataset & Sampler & Training Function (Stage 2 Logic) / first INPUT from DB
 # ----------------------------------------------------------------------
 
-class RichAttributeDataset(Dataset):
-    """
-    Stage 2 학습을 위한 데이터셋. 입력은 Stage 1의 최종 출력(512d) 벡터입니다.
-    """
-def __init__(self, product_list):
-        # 1. 임시 저장소 (가벼운 Python List 사용)
-        temp_vectors = []
-        self.fine_labels = []
-        self.coarse_labels = []
-        self.label_to_id = {}
+
+class SimCSEModelWrapper(nn.Module):
+    def __init__(self, encoder, projector):
+        super().__init__()
+        self.encoder = encoder      # 이것이 CoarseToFineItemTower
+        self.projector = projector  # 이것이 OptimizedItemTower
+
+
+    def forward(self, t_std, t_re):
+        # 1. 받은 2개 인자를 encoder에게 그대로 토스
+        enc_out = self.encoder(t_std, t_re) 
         
-        # 2. Loop: 데이터 정제 및 라벨링 (여기서는 Tensor 변환 금지!)
-        for item in product_list:
-            # --- Vector 처리 ---
-            vec = item.get('vector')
-            if vec is None:
-                # Mock vector (리스트 형태)
-                vec = np.random.randn(512).astype(np.float32).tolist()
-            
-            # 여기서 torch.tensor(vec)를 하지 않고, 그냥 리스트(혹은 numpy) 상태로 둡니다.
-            temp_vectors.append(vec)
-            
-            # --- Label 처리 ---
-            full_cat = item['clothes']['category'][0]
-            coarse_cat = full_cat[:2] # 예: "top" from "top/tee"
-            
-            if full_cat not in self.label_to_id:
-                self.label_to_id[full_cat] = len(self.label_to_id)
-            
-            self.fine_labels.append(self.label_to_id[full_cat])
-            self.coarse_labels.append(coarse_cat)
-
-        # 3. [핵심 최적화] Bulk Conversion (한방에 텐서화)
-        # 리스트의 리스트 -> 하나의 거대한 FloatTensor (N, 512)
-        # 이 방식이 메모리를 훨씬 적게 쓰고, 연산 속도도 빠릅니다.
-        self.data = torch.tensor(temp_vectors, dtype=torch.float32)
-        
-        # 라벨도 마찬가지로 LongTensor로 한 번에 변환
-        self.fine_labels = torch.tensor(self.fine_labels, dtype=torch.long)
-
-        def __len__(self):
-            return len(self.data)
-
-        def __getitem__(self, idx):
-            # 인덱싱 속도도 훨씬 빠름 (텐서 슬라이싱)
-            return self.data[idx], self.fine_labels[idx]
+        # 2. 그 결과를 projector에게 토스
+        return self.projector(enc_out)
 
 
-class HierarchicalBatchSampler(Sampler):
-    # ... (Sampler 클래스 정의 유지) ...
-    def __init__(self, dataset, batch_size, samples_per_class=4):
-        self.dataset = dataset
-        self.batch_size = batch_size
-        self.samples_per_class = samples_per_class
-        self.structure = defaultdict(lambda: defaultdict(list))
-        self.all_indices = []
-        
-        for idx, (fine_id, coarse_name) in enumerate(zip(dataset.fine_labels, dataset.coarse_labels)):
-            self.structure[coarse_name][fine_id].append(idx)
-            self.all_indices.append(idx)
-            
-        self.coarse_keys = list(self.structure.keys())
-
-    def __iter__(self):
-        num_batches = len(self.dataset) // self.batch_size
-        
-        for _ in range(num_batches):
-            batch_indices = []
-            target_coarse = random.choice(self.coarse_keys)
-            fine_dict = self.structure[target_coarse]
-            available_fine_labels = list(fine_dict.keys())
-            num_classes_needed = self.batch_size // self.samples_per_class
-            
-            # A. 충분한 소분류가 있는 경우 (Hard Negative Mode)
-            if len(available_fine_labels) >= num_classes_needed:
-                selected_fines = random.sample(available_fine_labels, k=num_classes_needed)
-                
-                for f_label in selected_fines:
-                    indices = fine_dict[f_label]
-                    selected_indices = random.choices(indices, k=self.samples_per_class)
-                    batch_indices.extend(selected_indices)
-            
-            # B. 소분류가 부족한 경우 (Fallback: Noise Mixing Mode)
-            else:
-                for f_label in available_fine_labels:
-                    indices = fine_dict[f_label]
-                    selected_indices = random.choices(indices, k=self.samples_per_class)
-                    batch_indices.extend(selected_indices)
-                
-                remaining_slots = self.batch_size - len(batch_indices)
-                if remaining_slots > 0:
-                    noise_indices = random.choices(self.all_indices, k=remaining_slots)
-                    batch_indices.extend(noise_indices)
-            
-            yield batch_indices
+class SimCSERecSysDataset(Dataset):
+    def __init__(self, products: List[ProductInput], dropout_prob: float = 0.2):
+        self.products = products
+        self.dropout_prob = dropout_prob
 
     def __len__(self):
-        return len(self.dataset) // self.batch_size
+        return len(self.products)
 
+    def input_feature_dropout(self, product: ProductInput) -> ProductInput:
+        """
+        [Augmentation Logic]
+        JSON 구조("clothes", "reinforced_feature_value")에 맞춰
+        랜덤하게 속성(Key-Value)을 제거합니다.
+        """
+        # 원본 데이터 보호를 위해 Deep Copy (매우 중요)
+        aug_p = copy.deepcopy(product)
+        
+        # 1. Standard Features (clothes) Dropout
+        # 예: "top.neck_color_design" 키를 삭제하여 모델이 다른 속성(소재, 핏)을 보게 함
+        if aug_p.clothes:
+            keys = list(aug_p.clothes.keys())
+            for k in keys:
+                if random.random() < self.dropout_prob:
+                    del aug_p.clothes[k]
+        
+        # 2. Reinforced Features Dropout
+        # 예: "specification.metadata" 삭제
+        if aug_p.reinforced_feature_value:
+            keys = list(aug_p.reinforced_feature_value.keys())
+            for k in keys:
+                if random.random() < self.dropout_prob:
+                    del aug_p.reinforced_feature_value[k]
+                
+        return aug_p
 
-def train_model(product_list, epochs=5, batch_size=32, save_path="models/final_optimized_adapter.pth"):
-    # ... (train_model 함수 로직 유지) ...
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    def __getitem__(self, idx):
+        raw_product = self.products[idx]
+        
+        # SimCSE: 같은 상품을 두 번 변형해서 (View1, View2) 생성
+        view1 = self.input_feature_dropout(raw_product)
+        view2 = self.input_feature_dropout(raw_product)
+        
+        return view1, view2
 
-    dataset = RichAttributeDataset(product_list)
+def collate_simcse(batch):
+    """(View1, View2) 리스트 -> Tensor 변환"""
+    view1_list = [item[0] for item in batch]
+    view2_list = [item[1] for item in batch]
     
-    if len(dataset) < batch_size:
-        dataloader = DataLoader(dataset, batch_size=len(dataset))
-    else:
-        sampler = HierarchicalBatchSampler(dataset, batch_size)
-        dataloader = DataLoader(dataset, batch_sampler=sampler)
-
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = OptimizedItemTower().to(device)
-    optimizer = optim.Adam(model.parameters(), lr=0.001)
+    t_std1, t_re1 = serving_controller.preprocess_batch_input(view1_list)
+    t_std2, t_re2 = serving_controller.preprocess_batch_input(view2_list)
     
-    distance = distances.CosineSimilarity()
-    loss_func = losses.TripletMarginLoss(margin=0.2, distance=distance)
-    mining_func = miners.TripletMarginMiner(margin=0.2, distance=distance, type_of_triplets="semihard")
+    return t_std1, t_re1, t_std2, t_re2
 
-    model.train()
-    history = []
+
+## 메모리 최적화: db_session.query(Model).all() 대신 select(...).mappings().all()을 사용하여 딕셔너리로 데이터를 로드하세요
+
+def train_simcse_from_db(    
+    encoder: nn.Module,       
+    projector: nn.Module,
+    batch_size: int = 128, 
+    epochs: int = 5,
+    lr: float = 1e-4
+):
+    print("🚀 Fetching data from DB...")
     
+    # 혹시 모를 taskbackground떄문에 일단.
+    db_session = SessionLocal()
+    
+    
+    stmt = select(ProductFeature.product_id, ProductFeature.feature_data)
+    result = db_session.execute(stmt).mappings().all()
+    
+    if not result:
+        print("❌ No data found.")
+        return
+
+    # [수정 2] Dictionary -> Pydantic 변환
+    products_list = []
+    for row in result:
+        # row['feature_data'] 접근
+        f_data = row['feature_data']
+        p_input = ProductInput(
+            id=row['product_id'],
+            clothes=f_data.get("clothes", {}),
+            reinforced_feature_value=f_data.get("reinforced_feature_value", {})
+        )
+        products_list.append(p_input)
+        
+    print(f"✅ Loaded {len(products_list)} items.")
+    
+    # 3. 모델 설정
+    model = SimCSEModelWrapper(encoder, projector).to(DEVICE)
+    model.train() # Dropout ON (필수)
+    
+    # Optimizer는 두 모델의 파라미터를 모두 학습해야 함
+    optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
+    
+    # Loss Function (Contrastive Learning)
+    loss_func = losses.NTXentLoss(temperature=0.07)
+    
+    dataset = SimCSERecSysDataset(products_list, dropout_prob=0.2)
+    dataloader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=True, 
+        collate_fn=collate_simcse,
+        drop_last=True
+    )
+    
+    print("🔥 Starting Training Loop...")
+    
+    # 5. Training Loop
     for epoch in range(epochs):
         total_loss = 0
-        triplets_count = 0
+        step = 0
         
-        for batch_vecs, batch_labels in dataloader:
-            batch_vecs = batch_vecs.to(device)
-            batch_labels = batch_labels.to(device)
+        progress = tqdm(dataloader, desc=f"Epoch {epoch+1}/{epochs}")
+        for t_std1, t_re1, t_std2, t_re2 in progress:
+            t_std1, t_re1 = t_std1.to(DEVICE), t_re1.to(DEVICE)
+            t_std2, t_re2 = t_std2.to(DEVICE), t_re2.to(DEVICE)
             
             optimizer.zero_grad()
-            embeddings = model(batch_vecs)
-            indices_tuple = mining_func(embeddings, batch_labels)
-            loss = loss_func(embeddings, batch_labels, indices_tuple)
             
-            if loss > 0:
-                loss.backward()
-                optimizer.step()
-                total_loss += loss.item()
-                triplets_count += mining_func.num_triplets
+            # Forward (Cross-Attention)
+            emb1 = model(t_std1, t_re1)
+            emb2 = model(t_std2, t_re2)
             
-        log = f"Epoch {epoch+1}: Loss={total_loss:.4f}, Valid Triplets={triplets_count}"
-        print(log)
-        history.append(log)
-
-    torch.save(model.state_dict(), save_path)
-    return history
-
-
-# serving APUI nneeded
-def load_and_infer(input_vector, model_path="models/final_optimized_adapter.pth"):
-    print("="*60)
-    print(f"[Inference Step 1] Initializing Inference Pipeline...")
-    
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"[Inference Step 2] Target Device: {device}")
-    
-    # 모델 초기화
-    model = OptimizedItemTower().to(device)
-    
-    # 모델 가중치 로드
-    if not os.path.exists(model_path):
-        print(f"[Error] Model file not found at: {model_path}")
-        raise FileNotFoundError("Model file not found. Train first.")
-    
-    print(f"[Inference Step 3] Loading weights from: {model_path}")
-    state_dict = torch.load(model_path, map_location=device)
-    model.load_state_dict(state_dict)
-    
-    # 평가 모드 전환 (Dropout, Batchnorm 고정)
-    model.eval()
-    print(f"[Inference Step 4] Model set to EVAL mode.")
-    
-    with torch.no_grad():
-        # 입력 텐서 변환
-        tensor_in = torch.tensor([input_vector], dtype=torch.float32).to(device)
-        print(f"[Inference Step 5] Input Tensor created on {device}. Shape: {tensor_in.shape}")
+            # Contrastive Loss Calculation
+            embeddings = torch.cat([emb1, emb2], dim=0)
+            
+            # Label generation
+            # 배치 사이즈만큼 0~N 라벨을 만들고 두 번 반복
+            batch_curr = emb1.size(0)
+            labels = torch.arange(batch_curr).to(DEVICE)
+            labels = torch.cat([labels, labels], dim=0)
+            
+            loss = loss_func(embeddings, labels)
+            
+            loss.backward()
+            optimizer.step()
+            
+            total_loss += loss.item()
+            step += 1
+            progress.set_postfix({"loss": f"{loss.item():.4f}"})
+            
+        print(f"Epoch {epoch+1} Avg Loss: {total_loss/step:.4f}")
         
-        # 모델 Forward 실행 (여기서 위에서 정의한 [Model Internal] 로그가 찍힘)
-        print("-" * 30 + " Model Forward Start " + "-" * 30)
-        output = model(tensor_in)
-        print("-" * 30 + " Model Forward End " + "-" * 30)
-        
-    # 결과 반환
-    result_vector = output.cpu().numpy().tolist()[0]
-    print(f"[Inference Step 6] Final Output Vector generated. Length: {len(result_vector)}")
-    print("="*60)
+    print("Training Finished.")
     
-    return result_vector
+    print("💾 Saving models...")
+    torch.save(encoder.state_dict(), "encoder_stage1.pth")
+    torch.save(projector.state_dict(), "projector_stage2.pth")
+    
+    # torch.save(model.state_dict(), "final_simcse_model.pth")    
+
+
+
+
+
+
+
+
+
+

@@ -2,11 +2,19 @@ import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine,select, Column, Integer , String
 from sqlalchemy.orm import sessionmaker, DeclarativeBase, mapped_column
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from sqlalchemy.dialects.postgresql import JSONB
 from pgvector.sqlalchemy import Vector
 from pydantic import BaseModel, Field
 
+
+'''
+/stage1/batch-embed: Stage 1 모델을 사용하여 Raw Data -> DB(vector_pre) 파이프라인 수행.
+
+/stage2/batch-inference: Stage 2 모델을 사용하여 vector_pre -> vector_triplet 변환 수행. (DB 저장 없이 결과만 리턴하여 서빙 로직에서 즉시 사용 가능하도록 설계)
+
+
+'''
 
 # 1. .env 파일 로드 (환경변수로 등록됨)
 load_dotenv()
@@ -25,14 +33,17 @@ def get_db():
     try:
         yield db
     finally:
+
         db.close()
+
+
 
 class Vectors(Base):
     __tablename__ = "vectors"
 
     id = Column(Integer, primary_key=True, index=True)
     vector_triplet = mapped_column(Vector(128), nullable=True)
-    vector_pre = mapped_column(Vector(512), nullable=True)
+    vector_pre = mapped_column(Vector(128), nullable=True)
     category = Column(String, nullable=True, index=True)
     # category 추가 필요
 
@@ -43,7 +54,21 @@ class ProductFeature(Base):
     product_id = Column(Integer, primary_key=True)
     
     # feature_data JSONB
+    # 이 컬럼 안에 "clothes"와 "reinforced_feature_value"가 들어있음
     feature_data = Column(JSONB)
+    
+    
+    
+# dataform
+
+
+
+
+
+
+
+
+
 
 
 # --- [Triplet: 128차원 전용] ---
@@ -55,7 +80,7 @@ class TripletSearch(BaseModel):
     vector: List[float] = Field(..., min_items=128, max_items=128)
     top_k: int = 5
 
-# --- [Pre: 512차원 전용] ---
+# --- [Pre] ---
 class PreCreate(BaseModel):
     id: int
     vector: List[float] = Field(..., min_items=512, max_items=512, description="512차원 벡터")
@@ -67,6 +92,48 @@ class ProductFeatureCreate(BaseModel):
 
 
 
+# 1-1. Stage 1 입력용 (Raw Product Data)
+class ClothesInfo(BaseModel):
+    category: List[str]
+    # 기타 속성들...
+
+class ProductInput(BaseModel):
+    id: int
+    clothes: ClothesInfo
+    # feature_data 등...
+
+class BatchProductInput(BaseModel):
+    products: List[ProductInput]
+
+class EmbeddingOutput(BaseModel):
+    processed_count: int
+    failed_ids: List[int]
+
+
+
+# 1-2. Stage 2 입력용 (Pre-computed Vectors)
+class VectorItem(BaseModel):
+    id: Optional[int] = None # 서빙용일 경우 ID가 없을 수도 있음
+    vector: List[float] = Field(..., min_items=128, max_items=128)
+
+class BatchVectorInput(BaseModel):
+    items: List[VectorItem]
+
+class BatchVectorOutput(BaseModel):
+    results: List[Dict[str, Any]] # [{'id': 1, 'vector': [...]}, ...]
+
+
+# stage2(SE 어쩌구 Loss)
+
+class ProductInput(BaseModel):
+    id: int
+    # DB JSON 구조 그대로 매핑
+    clothes: Dict[str, List[str]] = Field(default_factory=dict)
+    reinforced_feature_value: Dict[str, List[str]] = Field(default_factory=dict)
+
+    class Config:
+        from_attributes = True
+         
 
 class DBDataLoader:
     def __init__(self):
@@ -75,7 +142,7 @@ class DBDataLoader:
 
     def fetch_training_data(self) -> List[Dict[str, Any]]:
         """
-        Vectors 테이블 단일 조회로 (Vector 512d, Category) 쌍을 가져옵니다.
+        Vectors 테이블 단일 조회로 (Vector, Category) 쌍을 가져옵니다.
         """
         session = self.SessionLocal()
         training_data = []
