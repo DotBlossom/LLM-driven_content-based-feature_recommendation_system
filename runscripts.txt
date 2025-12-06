@@ -35,3 +35,43 @@ swagger
 [NTXentLoss] loss = func(embeddings, labels)
       ★ 동작: 64개끼리 서로 지지고 볶아서(유사도 계산),
               "같은 상품 출신끼리 붙어있니?"를 검사함.
+
+
+              "clothes": {
+            "category": [
+                "01outer_01coat", 
+                "01outer_02jacket", 
+                "01outer_03jumper",
+                "01outer_04cardigan",
+                "02top_01blouse", 
+                "02top_02t-shirt", 
+                "02top_03sweater", 
+                "02top_04shirt", 
+                "02top_05vest", 
+                "03-1onepiece(dress)", 
+                "03-2onepiece(jumpsuite)", 
+                "04bottom_01pants", 
+                "04bottom_02skirt"
+            ],
+						"season": ["spring&fall", "summer", "winter"],
+					  "fiber_composition": ["Cotton", "Hemp", "cellulose fiber Others", "Silk", "Wool", "protein fiber Others", "Viscos rayon", "regenerated fiber Others", "Polyester", "Nylon", "Polyurethane", "synthetic fiber Others"],
+					  "elasticity": ["none at all", "none", "contain", "contain little", "contain a lot"],
+					  "transparency": ["none at all", "none", "contain", "contain little", "contain a lot"],
+						"isfleece": ["fleece_contain", "fleece_none"],
+						"color": ["Black", "White", "Gray", "Red", "Orange", "Pink", "Yellow", "Brown", "Green", "Blue", "Purple", "Beige", "Mixed"],
+			      "gender": ["male", "female", "both"],
+			      "category_specification": ["outer","top","onepiece","bottom"],
+			      "top.length_type": ["crop", "nomal", "long", "midi", "short"],
+					  "top.sleeve_length_type": ["sleeveless", "short sleeves", "long sleeves"],
+					  "top.neck_color_design": ["shirts collar", "bow collar", "sailor collar", "shawl collar", "polo collar", "Peter Pan collar", "tailored collar", "Chinese collar", "band collar", "hood", "round neck", "U-neck", "V-neck", "halter neck", "off shoulder", "one shoulder", "square neck", "turtle neck", "boat neck", "cowl neck", "sweetheart neck", "no neckline", "Others"],
+					  "top.sleeve_design": ["basic sleeve", "ribbed sleeve", "shirt sleeve", "puff sleeve", "cape sleeve", "petal sleeve", "Others"]
+			      "pant.silhouette": ["skinny", "normal", "wide", "loose", "bell-bottom", "Others"],
+			      "skirt.design": ["A-line and bell line", "mermaid line", "Others"]
+	      },
+"reinforced_feature_value" : {
+															"category" : [""],
+															"fiber_composition":[""],
+															"color": [""],
+															"category_specification": [""],
+															"specification.metadata":[""]
+						},							

@@ -1,8 +1,9 @@
 
 from fastapi import FastAPI, Depends, HTTPException, APIRouter
+from pydantic import BaseModel
 import torch
 from torch.nn.utils.rnn import pad_sequence
-from typing import List, Tuple
+from typing import Any, Dict, List, Tuple
 from database import ProductInput, Vectors, get_db
 import vocab 
 import numpy as np
@@ -29,21 +30,30 @@ def preprocess_batch_input(products: List[ProductInput]) -> Tuple[torch.Tensor, 
         std_tokens = []
         re_tokens = []
         
+
+        feature_data: Dict[str, Any] = getattr(product, 'feature_data', {})
+        
+        clothes_data = feature_data.get("clothes", {})
+        re_data = feature_data.get("reinforced_feature_value", {})
+        
         # 1. Standard Features 처리
-        if product.clothes:
-            for key, values in product.clothes.items():
-                for v in values:
-                    tid = vocab.get_std_id(v)
-                    if tid > 0:
-                        std_tokens.append(tid)
+        if clothes_data:
+            # 딕셔너리 구조: {'key_name': ['value1', 'value2']}
+            for key, values in clothes_data.items():
+                if isinstance(values, list): # 값이 리스트인지 확인
+                    for v in values:
+                        tid = vocab.get_std_id(v)
+                        if tid > 0:
+                            std_tokens.append(tid)
         
         # 2. Reinforced Features 처리
-        if product.reinforced_feature_value:
-            for key, values in product.reinforced_feature_value.items():
-                for v in values:
-                    tid = vocab.get_re_id(v)
-                    if tid > 0:
-                        re_tokens.append(tid)
+        if re_data:
+            for key, values in re_data.items():
+                if isinstance(values, list): # 값이 리스트인지 확인 (이전 대화에서 리스트 형태였음)
+                    for v in values:
+                        tid = vocab.get_re_id(v)
+                        if tid > 0:
+                            re_tokens.append(tid)
         
         # 예외 처리: 데이터가 비어있으면 [0] (PAD) 넣기
         # (빈 리스트는 텐서 변환 시 문제를 일으킬 수 있음)
@@ -66,23 +76,28 @@ def preprocess_batch_input(products: List[ProductInput]) -> Tuple[torch.Tensor, 
 ## Batch API Layer
 
 
+class TrainingItem(BaseModel):
 
+    product_id: int
+    feature_data: Dict[str, Any]
 
-
+    class Config:
+        # Pydantic에게 SQLAlchemy 객체로부터 속성을 읽어오도록 지시합니다. (핵심)
+        from_attributes = True
 
 @serving_controller_router.post("/update-vectors")
 def process_and_save_vectors(
-    products: List[ProductInput], 
-    model: CoarseToFineItemTower, 
+    products: List[TrainingItem], 
     db: Session = Depends(get_db),
     batch_size: int = 32
 ):
+    
     """
     1. 데이터를 배치로 잘라 모델에 통과시킴
     2. 결과 벡터와 원본 상품의 ID, Category를 매핑
     3. DB에 즉시 저장 (Upsert)
     """
-    model.eval()
+    CoarseToFineItemTower.eval()
     total_count = len(products)
     print(f"총 {total_count}개의 상품 벡터 생성을 시작합니다.")
 
@@ -98,7 +113,7 @@ def process_and_save_vectors(
             t_std, t_re = preprocess_batch_input(batch_products)
             
             # 모델 실행 -> (Batch_Size, 128)
-            batch_output = model(t_std, t_re)
+            batch_output = CoarseToFineItemTower(t_std, t_re)
             
             # CPU로 이동 및 Numpy 변환
             batch_vectors = batch_output.cpu().numpy()
@@ -113,8 +128,8 @@ def process_and_save_vectors(
             
             for product, vector in zip(batch_products, batch_vectors):
                 insert_data_list.append({
-                    "id": product.id,                  # PK
-                    "category": product.feature_data.category,      # 메타데이터 수정필요!!!!!!!!!!!!
+                    "id": product.product_id,                  # PK
+                    "category": product.feature_data.clothes.category,      # 메타데이터 수정필요!!!!!!!!!!!!
                     "vector_pre": vector.tolist(),     # numpy array -> list[float]
                     # "vector_triplet": None           # 필요하다면 null 처리 or 생략
                 })

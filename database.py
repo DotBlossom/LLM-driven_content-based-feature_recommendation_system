@@ -47,8 +47,8 @@ class Vectors(Base):
     category = Column(String, nullable=True, index=True)
     # category 추가 필요
 
-class ProductFeature(Base):
-    __tablename__ = "product_feature"
+class ProductInput(Base):
+    __tablename__ = "product_input"
 
     # product_id INTEGER PRIMARY KEY
     product_id = Column(Integer, primary_key=True)
@@ -66,11 +66,12 @@ class ProductFeature(Base):
 
 
 
+class ProductInputSchema(BaseModel):
+    product_id: int
+    feature_data: Dict[str, Any] # 혹은 json 구조에 맞는 dict
 
 
-
-
-
+"""
 # --- [Triplet: 128차원 전용] ---
 class TripletCreate(BaseModel):
     id: int
@@ -96,14 +97,10 @@ class ProductFeatureCreate(BaseModel):
 class ClothesInfo(BaseModel):
     category: List[str]
     # 기타 속성들...
-
-class ProductInput(BaseModel):
-    id: int
-    clothes: ClothesInfo
-    # feature_data 등...
+"""
 
 class BatchProductInput(BaseModel):
-    products: List[ProductInput]
+    products: List[ProductInputSchema]
 
 class EmbeddingOutput(BaseModel):
     processed_count: int
@@ -123,27 +120,15 @@ class BatchVectorOutput(BaseModel):
     results: List[Dict[str, Any]] # [{'id': 1, 'vector': [...]}, ...]
 
 
-# stage2(SE 어쩌구 Loss)
 
-class ProductInput(BaseModel):
-    id: int
-    # DB JSON 구조 그대로 매핑
-    clothes: Dict[str, List[str]] = Field(default_factory=dict)
-    reinforced_feature_value: Dict[str, List[str]] = Field(default_factory=dict)
-
-    class Config:
-        from_attributes = True
-         
-
+"""
 class DBDataLoader:
     def __init__(self):
         self.engine = create_engine(DATABASE_URL)
         self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
 
     def fetch_training_data(self) -> List[Dict[str, Any]]:
-        """
-        Vectors 테이블 단일 조회로 (Vector, Category) 쌍을 가져옵니다.
-        """
+
         session = self.SessionLocal()
         training_data = []
         
@@ -185,9 +170,7 @@ class DBDataLoader:
             session.close()
 
     def update_triplet_vectors(self, id_vector_map: Dict[int, List[float]]):
-        """
-        학습된 결과(128d)를 DB에 업데이트
-        """
+
         session = self.SessionLocal()
         try:
             # 대량 업데이트 로직 (mappings 활용 권장)
@@ -204,3 +187,4 @@ class DBDataLoader:
         finally:
             session.close()
         
+"""

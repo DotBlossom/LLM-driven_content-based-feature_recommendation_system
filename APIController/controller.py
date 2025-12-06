@@ -4,9 +4,9 @@ from sqlalchemy import JSON, create_engine, Column, Integer,String, select
 from sqlalchemy.orm import sessionmaker, Session, DeclarativeBase, mapped_column
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from pgvector.sqlalchemy import Vector
-from database import get_db, Base, Vectors,TripletCreate,PreCreate,TripletSearch, ProductFeature, ProductFeatureCreate
-from database import DBDataLoader, EmbeddingOutput, BatchVectorInput, BatchVectorOutput,BatchProductInput, ProductInput, FeatuerImp
-from model import train_model, load_and_infer, train_simcse_from_db
+from database import get_db, Base
+from database import  ProductInput
+from train import  train_simcse_from_db
 from typing import List, Dict, Any, Optional
 
 import os
@@ -15,7 +15,7 @@ import numpy as np
 
 controller_router = APIRouter()
 
-
+"""
 
 @controller_router.post("db/triplet/")
 def save_triplet(item: TripletCreate, db: Session = Depends(get_db)):
@@ -143,7 +143,7 @@ def run_db_based_training():
 if __name__ == "__main__":
     run_db_based_training()
     
-    
+"""
 
 # --- [6] API Implementation ---
 
@@ -162,20 +162,46 @@ class ItemEmbedding(Base):
     vector = Column(JSON) # 리스트 형태의 벡터 저장
 
 
-# Pydantic 모델 (요청 바디 검증용)
-class FeatureInput(BaseModel):
-    features: Dict[str, Any] # 예: {"title": "...", "desc": "..."}
 
-@controller_router.post("/data/upload")
-async def upload_raw_features(inputs: List[FeatureInput], db: Session = Depends(get_db)):
-    """
-    [API 1] N개의 Raw Feature 데이터를 받아 DB에 저장합니다.
-    """
-    new_items = [RawItem(features=item.features) for item in inputs]
-    db.add_all(new_items)
-    db.commit()
+    #product_id = Column(Integer, primary_key=True)
     
-    return {"message": f"Successfully saved {len(new_items)} items.", "status": "success"}
+    # 이 컬럼 안에 "clothes"와 "reinforced_feature_value"가 들어있음
+    #feature_data = Column(JSONB)
+
+class ProductCreateRequest(BaseModel):
+    product_id: int
+    feature_data: Dict[str, Any]  # JSONB 컬럼에 매핑될 딕셔너리
+
+@controller_router.post("/products/bulk-upload")
+async def upload_product_features(
+    items: List[ProductCreateRequest], 
+    db: Session = Depends(get_db)
+):
+
+    try:
+        processed_count = 0
+        
+        for item in items:
+            # Pydantic 모델 -> SQLAlchemy 모델 변환
+            # db.merge: PK(product_id)가 있으면 Update, 없으면 Insert
+            db_item = ProductInput(
+                product_id=item.product_id,
+                feature_data=item.feature_data
+            )
+            db.merge(db_item) 
+            processed_count += 1
+        
+        db.commit()
+        
+        return {
+            "status": "success",
+            "message": f"Successfully processed {processed_count} items.",
+            "mode": "Upsert (Insert or Update)"
+        }
+
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
 
 # --- API 2. 학습 요청 (Background Task) ---
 @controller_router.post("/train/start")

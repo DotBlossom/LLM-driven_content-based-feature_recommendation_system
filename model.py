@@ -1,5 +1,7 @@
-from typing import List, Union
-from sqlalchemy import select
+from typing import Any, Dict, List, Union
+from fastapi import APIRouter, Depends
+from pydantic import BaseModel
+from sqlalchemy import Column, select
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -11,9 +13,10 @@ import random
 import os
 import numpy as np
 import math
+
 import vocab
-from database import ProductInput,ProductFeature, SessionLocal
-from .APIController import serving_controller 
+from database import SessionLocal
+
 from sqlalchemy.orm import Session
 import copy
 import random
@@ -21,9 +24,14 @@ from tqdm import tqdm
 
 # ItemTowerEmbedding(S1) * N -> save..DB -> stage2 (optimizer pass -> triplet)  
 
-
+model_router = APIRouter()
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+
+class TrainingItem(BaseModel):
+
+    product_id: int
+    feature_data: Dict[str, Any]
 
 # --- Global Configuration (전체 시스템이 참조하는 공통 차원) ---
 EMBED_DIM_CAT = 64 # Feature의 임베딩 차원 (Transformer d_model)
@@ -160,7 +168,7 @@ class CoarseToFineItemTower(nn.Module):
         # 6. Deep Residual Head
         # Deep Head Pass (I : 64 -> O : 128)
         final_vector = self.head(pooled_output)
-        
+
         return final_vector
     
 
@@ -222,14 +230,14 @@ class SimCSEModelWrapper(nn.Module):
 
 
 class SimCSERecSysDataset(Dataset):
-    def __init__(self, products: List[ProductInput], dropout_prob: float = 0.2):
+    def __init__(self, products: List[TrainingItem], dropout_prob: float = 0.2):
         self.products = products
         self.dropout_prob = dropout_prob
 
     def __len__(self):
         return len(self.products)
 
-    def input_feature_dropout(self, product: ProductInput) -> ProductInput:
+    def input_feature_dropout(self, product: TrainingItem) -> TrainingItem:
         """
         [Augmentation Logic]
         JSON 구조("clothes", "reinforced_feature_value")에 맞춰
@@ -238,24 +246,27 @@ class SimCSERecSysDataset(Dataset):
         # 원본 데이터 보호를 위해 Deep Copy (매우 중요)
         aug_p = copy.deepcopy(product)
         
+        feature_dict = aug_p.feature_data
+        
         # 1. Standard Features (clothes) Dropout
-        # 예: "top.neck_color_design" 키를 삭제하여 모델이 다른 속성(소재, 핏)을 보게 함
-        if aug_p.clothes:
-            keys = list(aug_p.clothes.keys())
+   
+        clothes_data = feature_dict.get("clothes")
+        if clothes_data:
+            keys = list(clothes_data.keys())
             for k in keys:
                 if random.random() < self.dropout_prob:
-                    del aug_p.clothes[k]
+                    del clothes_data[k]
         
         # 2. Reinforced Features Dropout
-        # 예: "specification.metadata" 삭제
-        if aug_p.reinforced_feature_value:
-            keys = list(aug_p.reinforced_feature_value.keys())
+  
+        re_data = feature_dict.get("reinforced_feature_value")
+        if re_data:
+            keys = list(re_data.keys())
             for k in keys:
                 if random.random() < self.dropout_prob:
-                    del aug_p.reinforced_feature_value[k]
-                
+                    del re_data[k]
+                    
         return aug_p
-
     def __getitem__(self, idx):
         raw_product = self.products[idx]
         
@@ -264,125 +275,4 @@ class SimCSERecSysDataset(Dataset):
         view2 = self.input_feature_dropout(raw_product)
         
         return view1, view2
-
-def collate_simcse(batch):
-    """(View1, View2) 리스트 -> Tensor 변환"""
-    view1_list = [item[0] for item in batch]
-    view2_list = [item[1] for item in batch]
-    
-    t_std1, t_re1 = serving_controller.preprocess_batch_input(view1_list)
-    t_std2, t_re2 = serving_controller.preprocess_batch_input(view2_list)
-    
-    return t_std1, t_re1, t_std2, t_re2
-
-
-## 메모리 최적화: db_session.query(Model).all() 대신 select(...).mappings().all()을 사용하여 딕셔너리로 데이터를 로드하세요
-
-def train_simcse_from_db(    
-    encoder: nn.Module,       
-    projector: nn.Module,
-    batch_size: int = 128, 
-    epochs: int = 5,
-    lr: float = 1e-4
-):
-    print("🚀 Fetching data from DB...")
-    
-    # 혹시 모를 taskbackground떄문에 일단.
-    db_session = SessionLocal()
-    
-    
-    stmt = select(ProductFeature.product_id, ProductFeature.feature_data)
-    result = db_session.execute(stmt).mappings().all()
-    
-    if not result:
-        print("❌ No data found.")
-        return
-
-    # [수정 2] Dictionary -> Pydantic 변환
-    products_list = []
-    for row in result:
-        # row['feature_data'] 접근
-        f_data = row['feature_data']
-        p_input = ProductInput(
-            id=row['product_id'],
-            clothes=f_data.get("clothes", {}),
-            reinforced_feature_value=f_data.get("reinforced_feature_value", {})
-        )
-        products_list.append(p_input)
-        
-    print(f"✅ Loaded {len(products_list)} items.")
-    
-    # 3. 모델 설정
-    model = SimCSEModelWrapper(encoder, projector).to(DEVICE)
-    model.train() # Dropout ON (필수)
-    
-    # Optimizer는 두 모델의 파라미터를 모두 학습해야 함
-    optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
-    
-    # Loss Function (Contrastive Learning)
-    loss_func = losses.NTXentLoss(temperature=0.07)
-    
-    dataset = SimCSERecSysDataset(products_list, dropout_prob=0.2)
-    dataloader = DataLoader(
-        dataset,
-        batch_size=batch_size,
-        shuffle=True, 
-        collate_fn=collate_simcse,
-        drop_last=True
-    )
-    
-    print("🔥 Starting Training Loop...")
-    
-    # 5. Training Loop
-    for epoch in range(epochs):
-        total_loss = 0
-        step = 0
-        
-        progress = tqdm(dataloader, desc=f"Epoch {epoch+1}/{epochs}")
-        for t_std1, t_re1, t_std2, t_re2 in progress:
-            t_std1, t_re1 = t_std1.to(DEVICE), t_re1.to(DEVICE)
-            t_std2, t_re2 = t_std2.to(DEVICE), t_re2.to(DEVICE)
-            
-            optimizer.zero_grad()
-            
-            # Forward (Cross-Attention)
-            emb1 = model(t_std1, t_re1)
-            emb2 = model(t_std2, t_re2)
-            
-            # Contrastive Loss Calculation
-            embeddings = torch.cat([emb1, emb2], dim=0)
-            
-            # Label generation
-            # 배치 사이즈만큼 0~N 라벨을 만들고 두 번 반복
-            batch_curr = emb1.size(0)
-            labels = torch.arange(batch_curr).to(DEVICE)
-            labels = torch.cat([labels, labels], dim=0)
-            
-            loss = loss_func(embeddings, labels)
-            
-            loss.backward()
-            optimizer.step()
-            
-            total_loss += loss.item()
-            step += 1
-            progress.set_postfix({"loss": f"{loss.item():.4f}"})
-            
-        print(f"Epoch {epoch+1} Avg Loss: {total_loss/step:.4f}")
-        
-    print("Training Finished.")
-    
-    print("💾 Saving models...")
-    torch.save(encoder.state_dict(), "encoder_stage1.pth")
-    torch.save(projector.state_dict(), "projector_stage2.pth")
-    
-    # torch.save(model.state_dict(), "final_simcse_model.pth")    
-
-
-
-
-
-
-
-
-
 

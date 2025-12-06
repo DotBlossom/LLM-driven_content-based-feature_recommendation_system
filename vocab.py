@@ -49,9 +49,10 @@ STD_VOCAB_CONFIG = {
 
 # 추가 dummy 필요 1개씩 or zero, key는 있어야지.
 GENERATED_METADATA = {
-    "pant.silhouette": ["slim straight", "comfort fit", "tapered"],
-    "color": ["Neon Green", "Pastel Blue", "Midnight Black"],
-    "top.neck_color_design": ["mandarin collar"]
+    "category" : [],
+    "fiber_composition":[],
+    "color": []
+
 }
 
 # --- A. STD Vocabulary 구축 (정적) ---

@@ -1,10 +1,17 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from typing import List, Dict, Optional, Tuple
+from typing import Any, List, Dict, Optional, Tuple
+from sqlalchemy import Column
 import torch
 import model 
 import vocab 
 import numpy as np
+from sqlalchemy.dialects.postgresql import JSONB
+
+class TrainingItem(BaseModel):
+
+    product_id: int
+    feature_data : Dict[str, Any]
 
 
 # --- 라우터 선언 ---
@@ -29,25 +36,18 @@ except Exception as e:
     print(f"Model Load Error: {e}")
 
 
-# --- Request Schema ---
-class ProductInput(BaseModel):
-    id: int
-    # 1. 일반 피쳐 (clothes) -> Standard Input
-    clothes: Dict[str, List[str]] 
-    # 2. 강화 피쳐 (reinforced) -> Reinforced Input
-    reinforced_feature_value: Optional[Dict[str, List[str]]] = {}
 
 class EmbeddingOutput(BaseModel):
     product_id: int
     vector: List[float]
 
 # --- Helper: JSON -> Two Tensors (Std, Re) 분리 ---
-def preprocess_split_input(product: ProductInput) -> Tuple[torch.Tensor, torch.Tensor]:
+def preprocess_split_input(product: TrainingItem) -> Tuple[torch.Tensor, torch.Tensor]:
     std_tokens = []
     re_tokens = []
     
     # 1. Standard Features (clothes 필드) 처리
-    for key, values in product.clothes.items():
+    for key, values in product.feature_data.clothes.items():
         for v in values:
             tid = vocab.get_std_id(v)
             if tid > 0:
@@ -55,7 +55,7 @@ def preprocess_split_input(product: ProductInput) -> Tuple[torch.Tensor, torch.T
     
     # 2. Reinforced Features 처리
     if product.reinforced_feature_value:
-        for key, values in product.reinforced_feature_value.items():
+        for key, values in product.feature_data.reinforced_feature_value.items():
             for v in values:
                 tid = vocab.get_re_id(v) 
                 if tid > 0:
@@ -75,11 +75,12 @@ def preprocess_split_input(product: ProductInput) -> Tuple[torch.Tensor, torch.T
 
 # product 여러개 및, product category 추출해서 return 필요.
 
+"""
 @embed_items_router.post("/embed", response_model=EmbeddingOutput)
-def embed_product(product: ProductInput):
-    """
-    상품 데이터를 받아 Coarse-to-Fine 임베딩을 생성합니다.
-    """
+def embed_product(product: TrainingItem):
+
+    #상품 데이터를 받아 Coarse-to-Fine 임베딩을 생성합니다.
+
     try:
         # 1. 전처리 (두 개의 텐서로 분리)
         t_std, t_re = preprocess_split_input(product)
@@ -100,3 +101,4 @@ def embed_product(product: ProductInput):
             raise HTTPException(status_code=503, detail="Model initialization failed. Cannot process request.")
             
         raise HTTPException(status_code=500, detail=f"Inference Error: {str(e)}")
+"""
