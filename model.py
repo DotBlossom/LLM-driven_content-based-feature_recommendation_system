@@ -14,7 +14,7 @@ import os
 import numpy as np
 import math
 
-import vocab
+import utils.vocab as vocab
 from database import SessionLocal
 
 from sqlalchemy.orm import Session

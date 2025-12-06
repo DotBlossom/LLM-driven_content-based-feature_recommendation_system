@@ -1,0 +1,77 @@
+uvicorn main:app --reload
+
+
+
+swagger
+ http://127.0.0.1:8000/docs
+
+
+ [입력 데이터] (Batch Size = 32)
+      |
+      V
+[SimCSERecSysDataset] -> (View1 데이터, View2 데이터) 생성
+      |
+      V
+[preprocess (collate)] -> 텐서 변환 (t_std1, t_re1), (t_std2, t_re2)
+      |
+      | --- (여기까지는 데이터 준비) ---
+      |
+      V
+[모델 실행 1] emb1 = model(t_std1, t_re1)  
+      ★ 중요: 여기서 Cross-Attention 발생! (STD <-> RE)
+      ★ 결과: 32개의 완성된 벡터 (emb1)
+      |
+[모델 실행 2] emb2 = model(t_std2, t_re2)
+      ★ 중요: 여기서도 Cross-Attention 발생!
+      ★ 결과: 32개의 완성된 벡터 (emb2)
+      |
+      | --- (모델 역할 끝. 이제 채점 준비) ---
+      |
+      V
+[torch.cat] embeddings = cat([emb1, emb2])
+      ★ 의미: 32개 + 32개 = 64개의 벡터를 한 리스트로 만듦
+      |
+      V
+[NTXentLoss] loss = func(embeddings, labels)
+      ★ 동작: 64개끼리 서로 지지고 볶아서(유사도 계산),
+              "같은 상품 출신끼리 붙어있니?"를 검사함.
+
+
+              "clothes": {
+            "category": [
+                "01outer_01coat", 
+                "01outer_02jacket", 
+                "01outer_03jumper",
+                "01outer_04cardigan",
+                "02top_01blouse", 
+                "02top_02t-shirt", 
+                "02top_03sweater", 
+                "02top_04shirt", 
+                "02top_05vest", 
+                "03-1onepiece(dress)", 
+                "03-2onepiece(jumpsuite)", 
+                "04bottom_01pants", 
+                "04bottom_02skirt"
+            ],
+						"season": ["spring&fall", "summer", "winter"],
+					  "fiber_composition": ["Cotton", "Hemp", "cellulose fiber Others", "Silk", "Wool", "protein fiber Others", "Viscos rayon", "regenerated fiber Others", "Polyester", "Nylon", "Polyurethane", "synthetic fiber Others"],
+					  "elasticity": ["none at all", "none", "contain", "contain little", "contain a lot"],
+					  "transparency": ["none at all", "none", "contain", "contain little", "contain a lot"],
+						"isfleece": ["fleece_contain", "fleece_none"],
+						"color": ["Black", "White", "Gray", "Red", "Orange", "Pink", "Yellow", "Brown", "Green", "Blue", "Purple", "Beige", "Mixed"],
+			      "gender": ["male", "female", "both"],
+			      "category_specification": ["outer","top","onepiece","bottom"],
+			      "top.length_type": ["crop", "nomal", "long", "midi", "short"],
+					  "top.sleeve_length_type": ["sleeveless", "short sleeves", "long sleeves"],
+					  "top.neck_color_design": ["shirts collar", "bow collar", "sailor collar", "shawl collar", "polo collar", "Peter Pan collar", "tailored collar", "Chinese collar", "band collar", "hood", "round neck", "U-neck", "V-neck", "halter neck", "off shoulder", "one shoulder", "square neck", "turtle neck", "boat neck", "cowl neck", "sweetheart neck", "no neckline", "Others"],
+					  "top.sleeve_design": ["basic sleeve", "ribbed sleeve", "shirt sleeve", "puff sleeve", "cape sleeve", "petal sleeve", "Others"]
+			      "pant.silhouette": ["skinny", "normal", "wide", "loose", "bell-bottom", "Others"],
+			      "skirt.design": ["A-line and bell line", "mermaid line", "Others"]
+	      },
+"reinforced_feature_value" : {
+															"category" : [""],
+															"fiber_composition":[""],
+															"color": [""],
+															"category_specification": [""],
+															"specification.metadata":[""]
+						},							

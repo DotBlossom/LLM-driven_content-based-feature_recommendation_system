@@ -4,7 +4,7 @@ from typing import Any, List, Dict, Optional, Tuple
 from sqlalchemy import Column
 import torch
 import model 
-import vocab 
+import utils.vocab as vocab 
 import numpy as np
 from sqlalchemy.dialects.postgresql import JSONB
 

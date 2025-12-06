@@ -6,15 +6,18 @@ from sqlalchemy import select
 import torch
 from tqdm import tqdm
 from database import ProductInput, SessionLocal
-from dependencies import get_global_encoder, get_global_projector
+from utils.dependencies import get_global_encoder, get_global_projector
 from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper, SimCSERecSysDataset
 import torch.nn as nn
 import torch.nn.functional as F
 from pytorch_metric_learning import losses
 from torch.utils.data import DataLoader
+import os
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 train_router = APIRouter()
+MODEL_DIR = "models"
+os.makedirs(MODEL_DIR, exist_ok=True)
 
 class TrainingItem(BaseModel):
 
@@ -128,9 +131,11 @@ def train_simcse_from_db(
         
     print("Training Finished.")
     
+
+    
     print("💾 Saving models...")
-    torch.save(encoder.state_dict(), "encoder_stage1.pth")
-    torch.save(projector.state_dict(), "projector_stage2.pth")
+    torch.save(encoder.state_dict(), os.path.join(MODEL_DIR, "encoder_stage1.pth"))
+    torch.save(projector.state_dict(), os.path.join(MODEL_DIR, "projector_stage2.pth"))
     
     # torch.save(model.state_dict(), "final_simcse_model.pth")    
 

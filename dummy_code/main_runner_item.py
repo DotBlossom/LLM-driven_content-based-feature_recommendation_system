@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from typing import List, Dict, Optional, Tuple
 import torch
 import model
-import vocab # 이전에 만든 vocab.py (토큰 매핑용)
+import utils.vocab as vocab # 이전에 만든 vocab.py (토큰 매핑용)
 
 app = FastAPI(title="Coarse-to-Fine Item Tower")
 

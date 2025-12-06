@@ -5,7 +5,7 @@ import torch
 from torch.nn.utils.rnn import pad_sequence
 from typing import Any, Dict, List, Tuple
 from database import ProductInput, Vectors, get_db
-import vocab 
+import utils.vocab as vocab 
 import numpy as np
 from model import CoarseToFineItemTower
 from sqlalchemy.orm import Session
