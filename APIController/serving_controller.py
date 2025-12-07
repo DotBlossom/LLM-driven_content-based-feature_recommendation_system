@@ -1,4 +1,5 @@
 
+import os
 from fastapi import BackgroundTasks, FastAPI, Depends, HTTPException, APIRouter
 from pydantic import BaseModel
 import torch
@@ -12,10 +13,11 @@ import numpy as np
 from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper
 from sqlalchemy.orm import Session
 from sqlalchemy.dialects.postgresql import insert  
+import torch.nn as nn
 
 serving_controller_router = APIRouter()
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+MODEL_DIR = "models"
 
 # API 3 입력용
 class ProductIdListSchema(BaseModel):
@@ -78,8 +80,8 @@ def preprocess_batch_input(products: List[ProductInput]) -> Tuple[torch.Tensor, 
 
 def generate_item_vectors(
     products: List[ProductInput], 
-    encoder, 
-    projector
+    encoder: nn.Module, 
+    projector:nn.Module
 ) -> Dict[int, List[float]]:
     """
     [Core Inference Logic]
@@ -121,8 +123,8 @@ def generate_item_vectors(
 def run_pipeline_and_save(
     db_session: Session, 
     products: List[ProductInferenceInput],
-    encoder,
-    projector
+    encoder: nn.Module,     
+    projector: nn.Module,     
 ):
     """
     [공통 로직] 
@@ -136,6 +138,28 @@ def run_pipeline_and_save(
         ProductInput(product_id=p.product_id, feature_data=p.feature_data)
         for p in products
     ]
+
+
+    # 1-1. load
+
+    encoder_path = os.path.join(MODEL_DIR, "encoder_stage1.pth")
+    projector_path = os.path.join(MODEL_DIR, "projector_stage2.pth")
+
+    if os.path.exists(encoder_path) and os.path.exists(projector_path):
+        try:
+            encoder_state = torch.load(encoder_path, map_location=DEVICE)
+            projector_state = torch.load(projector_path, map_location=DEVICE)
+            
+            encoder.load_state_dict(encoder_state)
+            projector.load_state_dict(projector_state)
+            
+            print("✅ Models loaded successfully.")
+        except Exception as e:
+            print(f"❌ Error loading state dicts: {e}")
+            raise e
+    else:
+        raise FileNotFoundError(f"❌ Model files not found in {MODEL_DIR}")
+
 
     # 2. 실제 모델 추론 실행 (generate_item_vectors 호출)
     #    결과는 {product_id: [0.12, 0.55, ...]} 형태
@@ -189,8 +213,8 @@ def process_pending_vectors(
     batch_size: int = 100, 
     db: Session = Depends(get_db),
     # [수정] 모델 인스턴스 주입
-    encoder = Depends(get_global_encoder),
-    projector = Depends(get_global_projector)
+    encoder: CoarseToFineItemTower = Depends(get_global_encoder),
+    projector: OptimizedItemTower = Depends(get_global_projector)
 ):
     # 1. 처리되지 않은 데이터 조회
     pending_products = db.query(ProductInferenceInput)\
@@ -219,8 +243,8 @@ def process_vectors_by_ids(
     payload: ProductIdListSchema, 
     db: Session = Depends(get_db),
     # [수정] 모델 인스턴스 주입
-    encoder = Depends(get_global_encoder),
-    projector = Depends(get_global_projector)
+    encoder: CoarseToFineItemTower = Depends(get_global_encoder),
+    projector: OptimizedItemTower = Depends(get_global_projector)
 ):
     # 1. ID 조회
     target_products = db.query(ProductInferenceInput)\
@@ -237,59 +261,6 @@ def process_vectors_by_ids(
         "status": "success", 
         "processed_count": processed_count, 
         "message": "On-demand processing completed."
-    }
-
-class ProductIdListSchema(BaseModel):
-    product_ids: List[int]
-
-
-@serving_controller_router.post("/vectors/convert-to-serving")
-def convert_embedding_to_serving(
-    payload: ProductIdListSchema,
-    db: Session = Depends(get_db)
-    
-):
-    request_ids = payload.product_ids
-    if not request_ids:
-        return {"status": "error", "message": "Product IDs list is empty."}
-
-    # 1. DB에서 Raw Vector(vector_embedding) 조회
-    target_rows = db.query(ProductInferenceVectors).filter(
-        ProductInferenceVectors.id.in_(request_ids),
-        ProductInferenceVectors.vector_embedding.is_not(None)
-    ).all()
-    
-    if not target_rows:
-        return {"status": "warning", "message": "No valid raw vectors found for given IDs."}
-
-    # 2. 배치 처리를 위한 텐서 변환 (List -> Tensor)
-    #    vector_embedding은 List[float] 형태이므로 바로 텐서로 변환 가능
-    raw_vectors = [row.vector_embedding for row in target_rows]
-    input_tensor = torch.tensor(raw_vectors, dtype=torch.float32).to(DEVICE)
-
-    ## ?? 
-    serving_tensor = 0
-
-    serving_vectors = serving_tensor.cpu().tolist()
-
-    # 5. DB 업데이트 (Loop)
-    #    DB 조회 결과(target_rows)와 텐서 결과(serving_vectors)의 순서는 일치함
-    updated_count = 0
-    for row, vec in zip(target_rows, serving_vectors):
-        row.vector_serving = vec
-        updated_count += 1
-    
-    # 6. 커밋
-    try:
-        db.commit()
-    except Exception as e:
-        db.rollback()
-        raise HTTPException(status_code=500, detail=f"DB Commit Error: {e}")
-
-    return {
-        "status": "success",
-        "processed_count": updated_count,
-        "message": "Serving vectors updated using projector."
     }
 
 
