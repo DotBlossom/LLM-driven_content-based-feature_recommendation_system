@@ -4,7 +4,7 @@ from sqlalchemy import JSON, create_engine, Column, Integer,String, select
 from sqlalchemy.orm import sessionmaker, Session, DeclarativeBase, mapped_column
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from pgvector.sqlalchemy import Vector
-from database import get_db, Base
+from database import ProductInferenceInput, get_db, Base
 from database import  ProductInput
 from train import  train_simcse_from_db
 from typing import List, Dict, Any, Optional
@@ -145,71 +145,42 @@ if __name__ == "__main__":
     
 """
 
-# --- [6] API Implementation ---
-
-
-
-# [DB 테이블 1] Raw Feature 데이터 저장용
-class RawItem(Base):
-    __tablename__ = "raw_items"
-    id = Column(Integer, primary_key=True, index=True)
-    features = Column(JSON)  # N개의 feature를 JSON 형태로 저장 (예: {"category": "A", "price": 100})
-
-# [DB 테이블 2] 학습된 임베딩 저장용
-class ItemEmbedding(Base):
-    __tablename__ = "item_embeddings"
-    item_id = Column(Integer, primary_key=True) # RawItem의 ID와 매핑
-    vector = Column(JSON) # 리스트 형태의 벡터 저장
-
-
-
-    #product_id = Column(Integer, primary_key=True)
-    
-    # 이 컬럼 안에 "clothes"와 "reinforced_feature_value"가 들어있음
-    #feature_data = Column(JSONB)
+# ---  API Implementation ---
 
 class ProductCreateRequest(BaseModel):
     product_id: int
     feature_data: Dict[str, Any]  # JSONB 컬럼에 매핑될 딕셔너리
 
-@controller_router.post("/products/bulk-upload")
-async def upload_product_features(
-    items: List[ProductCreateRequest], 
-    db: Session = Depends(get_db)
-):
 
+
+
+@controller_router.post("/products/ingest")
+def ingest_products(payload: List[ProductCreateRequest], db: Session = Depends(get_db)):
+    """
+    [API 1] N개의 상품 데이터를 받아서 DB에 저장합니다.
+    초기 저장 시 is_vectorized는 default로 False가 됩니다.
+    """
     try:
-        processed_count = 0
-        
-        for item in items:
-            # Pydantic 모델 -> SQLAlchemy 모델 변환
-            # db.merge: PK(product_id)가 있으면 Update, 없으면 Insert
-            db_item = ProductInput(
-                product_id=item.product_id,
-                feature_data=item.feature_data
-            )
-            db.merge(db_item) 
-            processed_count += 1
+        saved_count = 0
+        for item in payload:
+            # 중복 체크 (이미 있으면 업데이트 or 패스 정책 결정)
+            existing = db.query(ProductInferenceInput).filter_by(product_id=item.product_id).first()
+            
+            if existing:
+                existing.feature_data = item.feature_data
+                existing.is_vectorized = False # 데이터가 바뀌었으니 다시 벡터화해야 함
+            else:
+                new_product = ProductInferenceInput(
+                    product_id=item.product_id,
+                    feature_data=item.feature_data,
+                    is_vectorized=False
+                )
+                db.add(new_product)
+            saved_count += 1
         
         db.commit()
+        return {"status": "success", "message": f"Saved {saved_count} items."}
         
-        return {
-            "status": "success",
-            "message": f"Successfully processed {processed_count} items.",
-            "mode": "Upsert (Insert or Update)"
-        }
-
     except Exception as e:
         db.rollback()
-        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
-
-# --- API 2. 학습 요청 (Background Task) ---
-@controller_router.post("/train/start")
-async def start_training(background_tasks: BackgroundTasks):
-    """
-    [API 2] DB에 있는 데이터로 SimCSE 학습을 시작합니다. (비동기 실행)
-    """
-    # 백그라운드에서 실행되도록 넘김 (API는 즉시 응답)
-    background_tasks.add_task(train_simcse_from_db)
-    
-    return {"message": "Training started in the background.", "status": "processing"}
+        raise HTTPException(status_code=500, detail=str(e))

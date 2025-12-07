@@ -74,7 +74,7 @@ def train_simcse_from_db(
     
     # 3. 모델 설정
     model = SimCSEModelWrapper(encoder, projector).to(DEVICE)
-    model.train() # Dropout ON (필수)
+    model.train() 
     
     # Optimizer는 두 모델의 파라미터를 모두 학습해야 함
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
@@ -104,6 +104,7 @@ def train_simcse_from_db(
             t_std2, t_re2 = t_std2.to(DEVICE), t_re2.to(DEVICE)
             
             optimizer.zero_grad()
+            
             
             # Forward (Cross-Attention)
             emb1 = model(t_std1, t_re1)
@@ -140,6 +141,10 @@ def train_simcse_from_db(
     # torch.save(model.state_dict(), "final_simcse_model.pth")    
 
 
+
+#DB에 있는 Item load -> positives(dropout) item 증강 -> collate가서 피쳐 토크나이저 하고 텐서화
+#이후 텐서 아이템타워가서 trnsf-> std, re cross att 하고 진행
+#ProductItem(DB) -> ItemTower(1차아이템텐서) -> opt tensor 학습 (1차학습)  
 @train_router.post("/run")
 def test_line(
 
@@ -153,3 +158,7 @@ def test_line(
     )
     
     return {"message": "SimCSE training task initiated and completed."}
+
+
+# real inference(new)
+# ProductItem(DB) 받아서 아이템타워로직 거침 -> 최적화 행렬로 값 재정렬 -> 실제 itemtensor 확보

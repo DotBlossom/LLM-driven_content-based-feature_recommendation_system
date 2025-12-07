@@ -139,6 +139,17 @@ class CoarseToFineItemTower(nn.Module):
         std_output = self.std_encoder(std_embed) # Shape: (B, L_std, D)
         re_output = self.re_encoder(re_embed)   # Shape: (B, L_re, D)
         
+        ### 배치환경에서 no data re_input attn 배제 
+        re_padding_mask = (re_input == vocab.PAD_ID)
+        
+        is_all_padding = re_padding_mask.all(dim=1)
+        
+        # 곱셈을 위한 게이트 생성 (정보가 없으면 0.0, 있으면 1.0)
+        valid_gate = (~is_all_padding).float().view(-1, 1, 1)
+        ###
+        
+        
+        
         # 3. Cross-Attention (STD(Q)가 RE(K/V)를 참조)
         # Query: STD (우리가 더 중요하다고 가정하는 기본적인 상품 정보)
         # Key/Value: RE (선택적으로 보강할 세부 정보)
@@ -150,6 +161,10 @@ class CoarseToFineItemTower(nn.Module):
             value=re_output,   
             need_weights=False
         )
+        
+        # re_input이 all zero 일 경우(batch 연산 특성 고려)
+        attn_output = attn_output * valid_gate
+        
         
         # 4. 잔차 연결(Residual Connection) 및 Layer Normalization
         # STD의 원본 정보에 RE로부터 추출된 강화 정보(attn_output)를 더합니다.

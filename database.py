@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from sqlalchemy import create_engine,select, Column, Integer , String
+from sqlalchemy import Boolean, create_engine,select, Column, Integer , String
 from sqlalchemy.orm import sessionmaker, DeclarativeBase, mapped_column
 from typing import List, Dict, Any, Optional
 from sqlalchemy.dialects.postgresql import JSONB
@@ -42,10 +42,22 @@ class Vectors(Base):
     __tablename__ = "vectors"
 
     id = Column(Integer, primary_key=True, index=True)
-    vector_triplet = mapped_column(Vector(128), nullable=True)
-    vector_pre = mapped_column(Vector(128), nullable=True)
+    vector_embedding = mapped_column(Vector(128), nullable=True)
+    vector_serving = mapped_column(Vector(128), nullable=True)
     category = Column(String, nullable=True, index=True)
     # category 추가 필요
+
+class ProductInferenceVectors(Base):
+    __tablename__ = "product_inference_vectors"
+
+    id = Column(Integer, primary_key=True, index=True)
+    vector_embedding = mapped_column(Vector(128), nullable=True)
+    vector_serving = mapped_column(Vector(128), nullable=True)
+    category = Column(String, nullable=True, index=True)
+    # category 추가 필요
+
+
+
 
 class ProductInput(Base):
     __tablename__ = "product_input"
@@ -57,11 +69,24 @@ class ProductInput(Base):
     # 이 컬럼 안에 "clothes"와 "reinforced_feature_value"가 들어있음
     feature_data = Column(JSONB)
     
-    
+    #추론해야할 실제 데이터임을 구분하는 bool 추가필요
     
 # dataform
 
 
+class ProductInferenceInput(Base):
+    __tablename__ = "product_inference_input"
+
+    # product_id INTEGER PRIMARY KEY
+    product_id = Column(Integer, primary_key=True)
+    
+    # feature_data JSONB
+    # 이 컬럼 안에 "clothes"와 "reinforced_feature_value"가 들어있음
+    feature_data = Column(JSONB)
+    is_vectorized = Column(Boolean, default=False, index=True)
+
+    #아이템벡터로 변환된 상품인지 체크하는 flag 필요 스키마
+# dataform
 
 
 

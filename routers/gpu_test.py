@@ -27,7 +27,7 @@ class TrainRequest(BaseModel):
 class InferenceRequest(BaseModel):
     vector: List[float]
 
-
+'''
 @gpu_test_router.post("/train")
 async def train_endpoint(req: TrainRequest, background_tasks: BackgroundTasks):
     product_list = [item.dict() for item in req.products]
@@ -93,3 +93,4 @@ def test_result():
     }
     
     
+'''

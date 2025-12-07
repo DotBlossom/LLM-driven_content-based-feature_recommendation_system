@@ -8,7 +8,7 @@ import utils.vocab as vocab
 import numpy as np
 from sqlalchemy.dialects.postgresql import JSONB
 
-class TrainingItem(BaseModel):
+class EmbeddingRequestItem(BaseModel):
 
     product_id: int
     feature_data : Dict[str, Any]
@@ -42,7 +42,7 @@ class EmbeddingOutput(BaseModel):
     vector: List[float]
 
 # --- Helper: JSON -> Two Tensors (Std, Re) 분리 ---
-def preprocess_split_input(product: TrainingItem) -> Tuple[torch.Tensor, torch.Tensor]:
+def preprocess_split_input(product: EmbeddingRequestItem) -> Tuple[torch.Tensor, torch.Tensor]:
     std_tokens = []
     re_tokens = []
     

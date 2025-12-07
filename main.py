@@ -13,13 +13,20 @@ from database import engine, Base
 from APIController.serving_controller import serving_controller_router
 
 from train import train_router
-Base.metadata.create_all(bind=engine)
+
 
 @asynccontextmanager
 async def lifespan(app:FastAPI) -> AsyncGenerator[None, None]:
 
     # 🌟 1. STARTUP (앱 시작 시 실행)
+    
+    print("✨ Lifespan 시작: DB conn ...")
+    #Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+    print("✨ Lifespan 시작: DB conn 완료...")
+    
     print("✨ Lifespan 시작: 모델 로딩 중...")
+    
     
     # dependencies.py에 정의된 모델 로딩 로직을 호출합니다.
     # 모델 로딩이 완료된 후, 앱이 요청을 처리할 준비가 됩니다.

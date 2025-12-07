@@ -1,11 +1,15 @@
 # dependencies.py
 from typing import Optional
-from model import CoarseToFineItemTower, OptimizedItemTower
+
+import torch
+from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper
 
 # 1. 모델 인스턴스를 저장할 전역 변수 (State)
 # Optional을 사용하여 초기에는 None임을 명시합니다.
 global_encoder: Optional[CoarseToFineItemTower] = None
 global_projector: Optional[OptimizedItemTower] = None
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 # 2. 모델 로딩 함수 (main.py의 startup 이벤트에서 호출됨)
 def initialize_global_models():
@@ -17,13 +21,13 @@ def initialize_global_models():
     global global_projector
     
     print("🚀 앱 시작: CoarseToFineItemTower 로딩 중...")
-    # 🚨 실제 모델을 로드하는 로직 (예: torch.load('model_path'))을 여기에 구현
     global_encoder = CoarseToFineItemTower(embed_dim=64, output_dim=128)
     print("✅ CoarseToFineItemTower 로드 완료.")
 
     print("🚀 앱 시작: OptimizedItemTower 로딩 중...")
     global_projector = OptimizedItemTower(input_dim=128, output_dim=128)
     print("✅ OptimizedItemTower 로드 완료.")
+
 
 # 3. 의존성 주입(DI) 제공자 함수
 def get_global_encoder() -> CoarseToFineItemTower:
@@ -38,3 +42,4 @@ def get_global_projector() -> OptimizedItemTower:
     if global_projector is None:
         raise Exception("Projector model has not been loaded yet. Check application startup events.")
     return global_projector
+

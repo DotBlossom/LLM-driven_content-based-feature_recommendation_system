@@ -1,13 +1,15 @@
 
-from fastapi import FastAPI, Depends, HTTPException, APIRouter
+from fastapi import BackgroundTasks, FastAPI, Depends, HTTPException, APIRouter
 from pydantic import BaseModel
 import torch
 from torch.nn.utils.rnn import pad_sequence
 from typing import Any, Dict, List, Tuple
-from database import ProductInput, Vectors, get_db
+from database import ProductInferenceInput, ProductInferenceVectors, ProductInput, Vectors, get_db
+from train import train_simcse_from_db
+from utils.dependencies import get_global_encoder, get_global_projector
 import utils.vocab as vocab 
 import numpy as np
-from model import CoarseToFineItemTower
+from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper
 from sqlalchemy.orm import Session
 from sqlalchemy.dialects.postgresql import insert  
 
@@ -15,13 +17,12 @@ serving_controller_router = APIRouter()
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-# productList -> (CoarseToFineItemTower)를 I : N개로 확장?
-# I : productList(featureForm)
+# API 3 입력용
+class ProductIdListSchema(BaseModel):
+    product_ids: List[int]
 
 
-# 가상의 ProductInput 타입과 vocab 객체 (기존 코드 문맥 따름)
-# DEVICE, vocab 등은 전역 변수 혹은 인자로 관리된다고 가정
-
+# func
 def preprocess_batch_input(products: List[ProductInput]) -> Tuple[torch.Tensor, torch.Tensor]:
     batch_std_tokens = []
     batch_re_tokens = []
@@ -73,10 +74,240 @@ def preprocess_batch_input(products: List[ProductInput]) -> Tuple[torch.Tensor, 
     return t_std_batch, t_re_batch
 
 
+
+
+def generate_item_vectors(
+    products: List[ProductInput], 
+    encoder, 
+    projector
+) -> Dict[int, List[float]]:
+    """
+    [Core Inference Logic]
+    ProductInput 리스트 -> SimCSE -> {product_id: vector} 반환
+    """
+    if not products:
+        return {}
+
+    # 1. 모델 Wrapper 설정 및 Eval 모드
+    model = SimCSEModelWrapper(encoder, projector).to(DEVICE)
+    model.eval()
+
+    # 2. 전처리 (collate_fn 로직 포함된 함수 사용 가정)
+    try:
+        t_std, t_re = preprocess_batch_input(products)
+    except Exception as e:
+        print(f"❌ Preprocessing Error: {e}")
+        return {}
+
+    t_std = t_std.to(DEVICE)
+    t_re = t_re.to(DEVICE)
+
+    # 3. 추론 (No Grad)
+    with torch.no_grad():
+        final_vectors_tensor = model(t_std, t_re)
+        
+    # 4. 결과 변환
+    vectors_list = final_vectors_tensor.cpu().numpy().tolist()
+    
+    result_map = {}
+    for idx, product in enumerate(products):
+        result_map[product.product_id] = vectors_list[idx]
+
+    return result_map
+
+
+
+
+def run_pipeline_and_save(
+    db_session: Session, 
+    products: List[ProductInferenceInput],
+    encoder,
+    projector
+):
+    """
+    [공통 로직] 
+    DB 객체 리스트 -> Pydantic 변환 -> 추론 -> 벡터 저장 -> Flag 업데이트
+    """
+    if not products:
+        return 0
+
+    # 1. DB 객체(ORM)를 모델 입력용 Pydantic 객체로 변환
+    input_list = [
+        ProductInput(product_id=p.product_id, feature_data=p.feature_data)
+        for p in products
+    ]
+
+    # 2. 실제 모델 추론 실행 (generate_item_vectors 호출)
+    #    결과는 {product_id: [0.12, 0.55, ...]} 형태
+    try:
+        vector_map = generate_item_vectors(input_list, encoder, projector)
+    except Exception as e:
+        print(f"❌ Inference Failed: {e}")
+        raise e
+
+    # 3. 결과 저장 및 플래그 업데이트
+    for p in products:
+        # 혹시 모를 에러로 특정 ID가 누락됐는지 확인
+        if p.product_id not in vector_map:
+            continue
+            
+        vector_val = vector_map[p.product_id]
+        
+        # 벡터 테이블에 저장 (Upsert 로직)
+        existing_vec = db_session.query(ProductInferenceVectors).filter_by(id=p.product_id).first()
+        if existing_vec:
+            existing_vec.vector_embedding= vector_val
+        else:
+            new_vec = ProductInferenceVectors(id=p.product_id, vector_embedding=vector_val)
+            db_session.add(new_vec)
+        
+        # [작업 완료 Flag 처리]
+        p.is_vectorized = True
+    
+    db_session.commit()
+    return len(vector_map)
+
+
+
+
+
+# --- API 2. 학습 요청 (Background Task) ---
+@serving_controller_router.post("/train/start")
+async def start_training(background_tasks: BackgroundTasks):
+    """
+    [API 2] DB에 있는 데이터로 SimCSE 학습을 시작합니다. (비동기 실행)
+    """
+    # 백그라운드에서 실행되도록 넘김 (API는 즉시 응답)
+    background_tasks.add_task(train_simcse_from_db)
+    
+    return {"message": "Training started in the background.", "status": "processing"}
+
+
+
+@serving_controller_router.post("/vectors/process-pending")
+def process_pending_vectors(
+    batch_size: int = 100, 
+    db: Session = Depends(get_db),
+    # [수정] 모델 인스턴스 주입
+    encoder = Depends(get_global_encoder),
+    projector = Depends(get_global_projector)
+):
+    # 1. 처리되지 않은 데이터 조회
+    pending_products = db.query(ProductInferenceInput)\
+                         .filter(ProductInferenceInput.is_vectorized == False)\
+                         .limit(batch_size)\
+                         .all()
+    
+    if not pending_products:
+        return {"status": "success", "message": "No pending products to process."}
+
+    # 2. 공통 파이프라인 실행 (모델 전달)
+    processed_count = run_pipeline_and_save(db, pending_products, encoder, projector)
+    
+    return {
+        "status": "success", 
+        "processed_count": processed_count, 
+        "message": "Batch processing completed."
+    }
+
+
+# ------------------------------------------------------------------
+# API 3. 특정 ID 리스트 기반 벡터화 (On-Demand Processing)
+# ------------------------------------------------------------------
+@serving_controller_router.post("/vectors/process-by-ids")
+def process_vectors_by_ids(
+    payload: ProductIdListSchema, 
+    db: Session = Depends(get_db),
+    # [수정] 모델 인스턴스 주입
+    encoder = Depends(get_global_encoder),
+    projector = Depends(get_global_projector)
+):
+    # 1. ID 조회
+    target_products = db.query(ProductInferenceInput)\
+                        .filter(ProductInferenceInput.product_id.in_(payload.product_ids))\
+                        .all()
+    
+    if not target_products:
+        raise HTTPException(status_code=404, detail="No products found for given IDs.")
+
+    # 2. 공통 파이프라인 실행 (모델 전달)
+    processed_count = run_pipeline_and_save(db, target_products, encoder, projector)
+    
+    return {
+        "status": "success", 
+        "processed_count": processed_count, 
+        "message": "On-demand processing completed."
+    }
+
+class ProductIdListSchema(BaseModel):
+    product_ids: List[int]
+
+
+@serving_controller_router.post("/vectors/convert-to-serving")
+def convert_embedding_to_serving(
+    payload: ProductIdListSchema,
+    db: Session = Depends(get_db)
+    
+):
+    request_ids = payload.product_ids
+    if not request_ids:
+        return {"status": "error", "message": "Product IDs list is empty."}
+
+    # 1. DB에서 Raw Vector(vector_embedding) 조회
+    target_rows = db.query(ProductInferenceVectors).filter(
+        ProductInferenceVectors.id.in_(request_ids),
+        ProductInferenceVectors.vector_embedding.is_not(None)
+    ).all()
+    
+    if not target_rows:
+        return {"status": "warning", "message": "No valid raw vectors found for given IDs."}
+
+    # 2. 배치 처리를 위한 텐서 변환 (List -> Tensor)
+    #    vector_embedding은 List[float] 형태이므로 바로 텐서로 변환 가능
+    raw_vectors = [row.vector_embedding for row in target_rows]
+    input_tensor = torch.tensor(raw_vectors, dtype=torch.float32).to(DEVICE)
+
+    ## ?? 
+    serving_tensor = 0
+
+    serving_vectors = serving_tensor.cpu().tolist()
+
+    # 5. DB 업데이트 (Loop)
+    #    DB 조회 결과(target_rows)와 텐서 결과(serving_vectors)의 순서는 일치함
+    updated_count = 0
+    for row, vec in zip(target_rows, serving_vectors):
+        row.vector_serving = vec
+        updated_count += 1
+    
+    # 6. 커밋
+    try:
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"DB Commit Error: {e}")
+
+    return {
+        "status": "success",
+        "processed_count": updated_count,
+        "message": "Serving vectors updated using projector."
+    }
+
+
+
+
+
+# productList -> (CoarseToFineItemTower)를 I : N개로 확장?
+# I : productList(featureForm)
+
+
+# 가상의 ProductInput 타입과 vocab 객체 (기존 코드 문맥 따름)
+# DEVICE, vocab 등은 전역 변수 혹은 인자로 관리된다고 가정
+
+
+
 ## Batch API Layer
-
-
-class TrainingItem(BaseModel):
+'''
+class EmbeddingRequestItem(BaseModel):
 
     product_id: int
     feature_data: Dict[str, Any]
@@ -87,16 +318,16 @@ class TrainingItem(BaseModel):
 
 @serving_controller_router.post("/update-vectors")
 def process_and_save_vectors(
-    products: List[TrainingItem], 
+    products: List[EmbeddingRequestItem], 
     db: Session = Depends(get_db),
     batch_size: int = 32
 ):
     
-    """
-    1. 데이터를 배치로 잘라 모델에 통과시킴
-    2. 결과 벡터와 원본 상품의 ID, Category를 매핑
-    3. DB에 즉시 저장 (Upsert)
-    """
+
+    #1. 데이터를 배치로 잘라 모델에 통과시킴
+    #2. 결과 벡터와 원본 상품의 ID, Category를 매핑
+    #3. DB에 즉시 저장 (Upsert)
+
     CoarseToFineItemTower.eval()
     total_count = len(products)
     print(f"총 {total_count}개의 상품 벡터 생성을 시작합니다.")
@@ -157,5 +388,4 @@ def process_and_save_vectors(
 
     print("모든 벡터 저장 완료.")
     
-    
-    
+'''    
