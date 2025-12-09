@@ -89,6 +89,7 @@ Retrieval 단계에서 추려진 후보군을 정밀하게 재정렬합니다.
     ├── encoder_stage1.pth  # SimCSE Pre-trained Encoder
     └── reranker_deepfm.pth # DeepFM Trained Weights
 
+```
 
 ## 🛠 Tech Stack
 
