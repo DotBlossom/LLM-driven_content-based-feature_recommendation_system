@@ -214,6 +214,7 @@ class CoarseToFineItemTower(nn.Module):
 
 # ----------------------------------------------------------------------
 # 4. OptimizedItemTower (Stage 2 Adapter - Triplet Training)
+#    Projection Head --> Contrastive Loss(Opt.z) / Representation(Encoder)
 # ----------------------------------------------------------------------
 
 class OptimizedItemTower(nn.Module):
