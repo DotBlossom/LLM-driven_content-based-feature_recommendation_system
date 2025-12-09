@@ -37,7 +37,7 @@ class TrainingItem(BaseModel):
 EMBED_DIM_CAT = 64 # Feature의 임베딩 차원 (Transformer d_model)
 OUTPUT_DIM_TRIPLET = 128 # Stage 2 최종 압축 차원
 OUTPUT_DIM_ITEM_TOWER = 128 # Stage 1 최종 출력 차원 (Triplet Tower Input)
-RE_MAX_CAPACITY = 50000 # <<<<<<<<<<<< RE 토큰의 최대 개수를 미리 할당
+RE_MAX_CAPACITY = 500 # <<<<<<<<<<<< RE 토큰의 최대 개수를 미리 할당
 # ----------------------------------------------------------------------
 # 1. Utility Modules (Shared for both Item Tower and Optimization Tower)
 # ----------------------------------------------------------------------
@@ -102,26 +102,35 @@ class DeepResidualHead(nn.Module):
 # ----------------------------------------------------------------------
 class CoarseToFineItemTower(nn.Module):
     """
-    [Item Tower]: Standard/Reinforced 피쳐를 융합하고 512차원 벡터 생성.
+    [Item Tower]: Standard/Reinforced 피쳐를 융합하고 128차원 벡터 생성.
     vocab.py의 이중 어휘 구조와 호환되도록 수정되었습니다.
     """
     def __init__(self, embed_dim=EMBED_DIM_CAT, nhead=4, output_dim=OUTPUT_DIM_ITEM_TOWER):
         super().__init__()
         
-        # 1. vocab.py에서 STD와 RE의 분리된 어휘 크기를 가져옵니다.
+        # 1. vocab.py에서 STD와 RE의 분리된 어휘 크기 import (re_vocab은 나중에 fix하거나, 변경될떄 변수로)
         std_vocab_size, re_vocab_size = vocab.get_vocab_sizes()
         
         # A. Dual Embedding (64d)
-        # 단일 임베딩 대신, 분리된 어휘 크기를 사용합니다.
+        # 아마 Re_vocab에 데이터 좀 넣어놓자. 오류난다면?
+        # 단일 임베딩 대신, 분리된 어휘 크기를 사용
         self.std_embedding = nn.Embedding(std_vocab_size, embed_dim, padding_idx=vocab.PAD_ID)
         self.re_embedding = nn.Embedding(RE_MAX_CAPACITY, embed_dim, padding_idx=vocab.PAD_ID)
         # B. Self-Attention Encoders (d_model=64)
         encoder_layer = nn.TransformerEncoderLayer(d_model=embed_dim, nhead=nhead, batch_first=True)
         self.std_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
         self.re_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
+
+        # [고려중] Title Embedding (Tokenizer의 Vocab Size 사용)
+        '''
+        self.title_vocab_size = TOKENIZER.vocab_size
+        self.title_embedding = nn.Embedding(self.title_vocab_size, embed_dim, padding_idx=vocab.PAD_ID)
+        self.title_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
+        '''
+
         
         # C. Cross-Attention (d_model=64, nhead=4)
-        # 이 레이어는 Q=STD, K/V=RE로 사용될 것입니다.
+        # 이 레이어는 Q=STD, K/V=RE로 사용
         # (수정됨) Shape Vector (128d)가 제거되어 입력은 64d가 됨.
         self.cross_attn = nn.MultiheadAttention(embed_dim, nhead, batch_first=True)
         self.layer_norm = nn.LayerNorm(embed_dim)
@@ -130,7 +139,7 @@ class CoarseToFineItemTower(nn.Module):
         head_input_dim = embed_dim
         self.head = DeepResidualHead(input_dim=head_input_dim, output_dim=output_dim)
 
-    def forward(self, std_input: torch.Tensor, re_input: torch.Tensor) -> torch.Tensor:
+    def forward(self, std_input: torch.Tensor, re_input: torch.Tensor ) -> torch.Tensor:
         # 1. 임베딩 (STD와 RE 분리 처리)
         std_embed = self.std_embedding(std_input)
         re_embed = self.re_embedding(re_input)
@@ -139,6 +148,21 @@ class CoarseToFineItemTower(nn.Module):
         std_output = self.std_encoder(std_embed) # Shape: (B, L_std, D)
         re_output = self.re_encoder(re_embed)   # Shape: (B, L_re, D)
         
+        ### ---------------
+        #    제목에 대한 LLM 기반 slicing이 된다면, 제목을 Re attention에 concat하여 진행
+        #    학습데이터셋은 reinforced에 text_align 붙여놓고, 그거 여기애서 cross atten (eng)
+        ### ---------------
+
+        ''' 
+        title_embed = self.title_embedding(title_input)
+        title_output = self.title_encoder(title_embed)
+        re_context_output = torch.cat([re_output, title_output], dim=1)
+        re_mask = (re_input == vocab.PAD_ID)
+        title_mask = (title_input == vocab.PAD_ID)
+        combined_key_padding_mask = torch.cat([re_mask, title_mask], dim=1)
+        
+        '''
+        
         ### 배치환경에서 no data re_input attn 배제 
         re_padding_mask = (re_input == vocab.PAD_ID)
         
@@ -146,9 +170,10 @@ class CoarseToFineItemTower(nn.Module):
         
         # 곱셈을 위한 게이트 생성 (정보가 없으면 0.0, 있으면 1.0)
         valid_gate = (~is_all_padding).float().view(-1, 1, 1)
-        ###
         
-        
+    
+    
+    
         
         # 3. Cross-Attention (STD(Q)가 RE(K/V)를 참조)
         # Query: STD (우리가 더 중요하다고 가정하는 기본적인 상품 정보)
@@ -200,7 +225,7 @@ class OptimizedItemTower(nn.Module):
         self.layer = nn.Sequential(
             nn.Linear(input_dim, input_dim),
             nn.LayerNorm(input_dim),
-            nn.ReLU(),
+            nn.GELU(), #nn.ReLU(), 
             nn.Linear(input_dim, output_dim),
         )
         
@@ -222,7 +247,28 @@ class OptimizedItemTower(nn.Module):
             print(f"  [Model Internal] Output Normalized Shape: {x.shape} | Avg Norm: {norm_check:.4f} (Expected ~1.0)")
             
         return x
-    
+
+
+
+
+# x = F.normalize(x, p=2, dim=1) 실제 추론떄는 h쪽 model load하여 쓰자. (same d)
+
+'''
+
+구조: Encoder -> Embedding(h) -> MLP Layer(Projection Head) -> Output(z) -> Loss
+
+원리: z 공간에서는 Contrastive Loss에 의해 데이터가 구체 표면으로 찌그러지며 정보 손실
+반면 그 전 단계인 h는 데이터의 원본 정보를 상대적 보존
+
+학습할 때: Projection Head를 붙여서 z 값으로 Loss 계산.
+
+서빙할 때: Projection Head를 떼어버리고 h 값을 사용.
+
+효과: 이렇게 하면 Representation Quality가 10~15% 향상 data
+
+'''
+
+
     
 # ----------------------------------------------------------------------
 # 5. Dataset & Sampler & Training Function (Stage 2 Logic) / first INPUT from DB
@@ -291,3 +337,122 @@ class SimCSERecSysDataset(Dataset):
         
         return view1, view2
 
+
+
+    
+# ----------------------------------------------------------------------
+# 6. userTowerClass 
+# ----------------------------------------------------------------------
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class UserTower(nn.Module):
+    def __init__(
+        self, 
+        pretrained_item_matrix: torch.Tensor, # SimCSE로 학습된 아이템 벡터 (Freeze)
+        token_vocab_size: int,                # Tokenizer Vocab Size (for Concept)
+        output_dim=128,                       # 최종 출력 차원
+        history_max_len=50,
+        nhead=4,
+        dropout=0.2
+    ):
+        super().__init__()
+        
+        # 임베딩 차원 자동 감지 (보통 64 or 128)
+        self.embed_dim = pretrained_item_matrix.shape[1] 
+        
+        # -------------------------------------------------------
+        # 1. Item History Encoder (Behavior)
+        # -------------------------------------------------------
+        self.item_embedding = nn.Embedding.from_pretrained(
+            pretrained_item_matrix, 
+            freeze=True, 
+            padding_idx=0
+        )
+        self.pos_embedding = nn.Embedding(history_max_len, self.embed_dim)
+        
+        encoder_layer = nn.TransformerEncoderLayer(d_model=self.embed_dim, nhead=nhead, batch_first=True)
+        self.history_encoder = nn.TransformerEncoder(encoder_layer, num_layers=2)
+        
+        # -------------------------------------------------------
+        # 2. Cart Concept Encoder (Context)
+        # -------------------------------------------------------
+        self.concept_embedding = nn.Embedding(token_vocab_size, self.embed_dim, padding_idx=0)
+        self.concept_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
+        
+        # -------------------------------------------------------
+        # 3. Physical Profile Encoder 
+        # -------------------------------------------------------
+        # 키, 몸무게 2개의 수치를 받아서 embed_dim 크기로 확장합니다.
+        # Input: (B, 2) -> Output: (B, embed_dim)
+        self.profile_projector = nn.Sequential(
+            nn.Linear(2, self.embed_dim),       # 2개(키, 체중)를 벡터 공간으로 투영
+            nn.BatchNorm1d(self.embed_dim),     # 수치 스케일 보정
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(self.embed_dim, self.embed_dim) # 한 번 더 정제
+        )
+
+        # -------------------------------------------------------
+        # 4. Fusion & Output
+        # -------------------------------------------------------
+        # (History + Concept + Profile) = 3 * D
+        fusion_input_dim = self.embed_dim * 3 
+        
+        self.fusion_mlp = nn.Sequential(
+            nn.Linear(fusion_input_dim, fusion_input_dim),
+            nn.BatchNorm1d(fusion_input_dim),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(fusion_input_dim, output_dim) # 최종 차원 (Item Tower와 동일하게)
+        )
+
+    def forward(self, history_ids, concept_input, profile_features):
+        """
+        Args:
+            history_ids (Tensor): (B, L_hist) - 아이템 ID 시퀀스
+            concept_input (Tensor): (B, L_txt) - 장바구니 컨셉 텍스트 토큰
+            profile_features (Tensor): (B, 2) - [Normalized Height, Normalized Weight]
+                                      예: [[1.2, -0.5], [0.0, 0.8], ...] (Z-score 권장)
+        """
+        
+        # --- A. Process History (Behavior) ---
+        hist_embed = self.item_embedding(history_ids)
+        B, L, _ = hist_embed.shape
+        
+        positions = torch.arange(L, device=history_ids.device).unsqueeze(0)
+        hist_embed = hist_embed + self.pos_embedding(positions)
+        
+        src_key_padding_mask = (history_ids == 0)
+        hist_output = self.history_encoder(hist_embed, src_key_padding_mask=src_key_padding_mask)
+        
+        # Mean Pooling
+        mask_expanded = (~src_key_padding_mask).unsqueeze(-1).float()
+        user_history_vec = (hist_output * mask_expanded).sum(dim=1) / mask_expanded.sum(dim=1).clamp(min=1e-9)
+
+        
+        # --- B. Process Cart Concept (Context) ---
+        concept_embed = self.concept_embedding(concept_input)
+        concept_mask = (concept_input == 0)
+        
+        concept_output = self.concept_encoder(concept_embed, src_key_padding_mask=concept_mask)
+        
+        # Mean Pooling
+        c_mask_expanded = (~concept_mask).unsqueeze(-1).float()
+        user_concept_vec = (concept_output * c_mask_expanded).sum(dim=1) / c_mask_expanded.sum(dim=1).clamp(min=1e-9)
+
+
+        # --- C. Process Physical Profile (Demographics) [NEW!] ---
+        # profile_features: (B, 2) -> (B, D)
+        user_profile_vec = self.profile_projector(profile_features)
+
+
+        # --- D. Final Fusion ---
+        # 3가지 벡터를 Concat: (B, D) + (B, D) + (B, D) -> (B, 3D)
+        combined = torch.cat([user_history_vec, user_concept_vec, user_profile_vec], dim=1)
+        
+        final_user_vector = self.fusion_mlp(combined)
+        
+        return final_user_vector

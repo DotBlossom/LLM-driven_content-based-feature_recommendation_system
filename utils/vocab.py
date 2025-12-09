@@ -4,6 +4,17 @@ import threading
 PAD_TOKEN = "<PAD>"
 PAD_ID = 0
 RE_VOCAB_LOCK = threading.Lock()
+
+from transformers import AutoTokenizer
+
+# 1. 가볍고 성능 좋은 Tokenizer 로드 (한 번만 로드)
+# 한국어/영어 혼합이라면 'bert-base-multilingual-cased' 또는 경량화된 모델 추천
+TOKENIZER = AutoTokenizer.from_pretrained("distilbert-base-multilingual-cased")
+TITLE_MAX_LEN = 32  # 제목은 핵심만 남겼으므로 길지 않게 설정
+
+# Disentangled Representation 위한거임../ 그리고 cross attention으로 qyery 강화
+
+
 # 도메인별 유효 값 정의 (Finite Domain)
 
 STD_VOCAB_CONFIG = {
@@ -146,25 +157,3 @@ def get_vocab_sizes() -> tuple[int, int]:
     current_re_size = len(RE_TOKEN_TO_ID) + 1
     return STD_VOCAB_SIZE, current_re_size
 
-if __name__ == "__main__":
-    # 테스트 코드
-    print(f"✅ Vocab Module Initialized")
-    print("-" * 30)
-    print(f"Initial STD Size: {get_vocab_sizes()[0]}")
-    print(f"Initial RE Size: {get_vocab_sizes()[1]}")
-    print(f"STD ID for 'Black': {get_std_id('Black')}") # STD에 있음
-    print(f"RE ID for 'Neon Green': {get_re_id('Neon Green')}") # 초기 RE에 있음
-    print("-" * 30)
-
-    # 새로운 RE 토큰 등록 시뮬레이션
-    new_re_token = "ultra slim fit"
-    new_id = get_re_id(new_re_token)
-    
-    print(f"Registering new token '{new_re_token}'...")
-    print(f"Assigned ID: {new_id}")
-    print(f"Updated RE Size: {get_vocab_sizes()[1]}")
-    
-    # STD와 중복되는 값 시도 (PAD 0이 반환되어야 함)
-    std_token = "Black"
-    std_id_in_re_space = get_re_id(std_token)
-    print(f"RE ID for '{std_token}' (should be 0): {std_id_in_re_space}")

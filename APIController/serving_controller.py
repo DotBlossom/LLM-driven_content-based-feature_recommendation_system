@@ -2,6 +2,7 @@
 import os
 from fastapi import BackgroundTasks, FastAPI, Depends, HTTPException, APIRouter
 from pydantic import BaseModel
+import torch.nn.functional as F
 import torch
 from torch.nn.utils.rnn import pad_sequence
 from typing import Any, Dict, List, Tuple
@@ -80,18 +81,18 @@ def preprocess_batch_input(products: List[ProductInput]) -> Tuple[torch.Tensor, 
 
 def generate_item_vectors(
     products: List[ProductInput], 
-    encoder: nn.Module, 
-    projector:nn.Module
+    encoder: nn.Module 
+    #projector:nn.Module
 ) -> Dict[int, List[float]]:
     """
     [Core Inference Logic]
-    ProductInput 리스트 -> SimCSE -> {product_id: vector} 반환
+    ProductInput 리스트 -> Encoder(Stage1) -> L2 Normalize -> {product_id: vector} 반환
     """
     if not products:
         return {}
 
     # 1. 모델 Wrapper 설정 및 Eval 모드
-    model = SimCSEModelWrapper(encoder, projector).to(DEVICE)
+    model = encoder.to(DEVICE)
     model.eval()
 
     # 2. 전처리 (collate_fn 로직 포함된 함수 사용 가정)
@@ -106,8 +107,8 @@ def generate_item_vectors(
 
     # 3. 추론 (No Grad)
     with torch.no_grad():
-        final_vectors_tensor = model(t_std, t_re)
-        
+        raw_v = model(t_std, t_re)
+        final_vectors_tensor = F.normalize(raw_v, p=2, dim=1)
     # 4. 결과 변환
     vectors_list = final_vectors_tensor.cpu().numpy().tolist()
     
@@ -123,8 +124,8 @@ def generate_item_vectors(
 def run_pipeline_and_save(
     db_session: Session, 
     products: List[ProductInferenceInput],
-    encoder: nn.Module,     
-    projector: nn.Module,     
+    encoder: nn.Module     
+    #projector: nn.Module,     
 ):
     """
     [공통 로직] 
@@ -143,15 +144,15 @@ def run_pipeline_and_save(
     # 1-1. load
 
     encoder_path = os.path.join(MODEL_DIR, "encoder_stage1.pth")
-    projector_path = os.path.join(MODEL_DIR, "projector_stage2.pth")
+    #projector_path = os.path.join(MODEL_DIR, "projector_stage2.pth")
 
-    if os.path.exists(encoder_path) and os.path.exists(projector_path):
+    if os.path.exists(encoder_path): #and os.path.exists(projector_path):
         try:
             encoder_state = torch.load(encoder_path, map_location=DEVICE)
-            projector_state = torch.load(projector_path, map_location=DEVICE)
+            #projector_state = torch.load(projector_path, map_location=DEVICE)
             
             encoder.load_state_dict(encoder_state)
-            projector.load_state_dict(projector_state)
+            #projector.load_state_dict(projector_state)
             
             print("✅ Models loaded successfully.")
         except Exception as e:
@@ -164,7 +165,7 @@ def run_pipeline_and_save(
     # 2. 실제 모델 추론 실행 (generate_item_vectors 호출)
     #    결과는 {product_id: [0.12, 0.55, ...]} 형태
     try:
-        vector_map = generate_item_vectors(input_list, encoder, projector)
+        vector_map = generate_item_vectors(input_list, encoder)
     except Exception as e:
         print(f"❌ Inference Failed: {e}")
         raise e
@@ -243,8 +244,8 @@ def process_vectors_by_ids(
     payload: ProductIdListSchema, 
     db: Session = Depends(get_db),
     # [수정] 모델 인스턴스 주입
-    encoder: CoarseToFineItemTower = Depends(get_global_encoder),
-    projector: OptimizedItemTower = Depends(get_global_projector)
+    encoder: CoarseToFineItemTower = Depends(get_global_encoder)
+    #projector: OptimizedItemTower = Depends(get_global_projector)
 ):
     # 1. ID 조회
     target_products = db.query(ProductInferenceInput)\
@@ -255,7 +256,7 @@ def process_vectors_by_ids(
         raise HTTPException(status_code=404, detail="No products found for given IDs.")
 
     # 2. 공통 파이프라인 실행 (모델 전달)
-    processed_count = run_pipeline_and_save(db, target_products, encoder, projector)
+    processed_count = run_pipeline_and_save(db, target_products, encoder)
     
     return {
         "status": "success", 

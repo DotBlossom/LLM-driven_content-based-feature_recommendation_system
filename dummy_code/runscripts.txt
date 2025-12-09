@@ -81,3 +81,42 @@ swagger
 															"category_specification": [""],
 															"specification.metadata":[""]
 						},							
+
+
+
+
+
+
+
+
+구조: Encoder -> Embedding(h) -> MLP Layer(Projection Head) -> Output(z) -> Loss
+
+원리: z 공간에서는 Contrastive Loss에 의해 데이터가 구체 표면으로 찌그러지며 정보 손실
+반면 그 전 단계인 h는 데이터의 원본 정보를 상대적 보존
+
+학습할 때: Projection Head를 붙여서 z 값으로 Loss 계산.
+
+서빙할 때: Projection Head를 떼어버리고 h 값을 사용.
+
+효과: 이렇게 하면 Representation Quality가 10~15% 향상 data
+
+
+Reinforce에서 제목에서 나온 토크나이저가 중요하겠네? 
+일단 학습단이니 뭐 .. reinfoced 없어도 상품만 분류하는거니까.
+
+제목 처리 .
+그냥 문제 성능보단 해결 과정을 좀 .
+
+
+text concate
+
+STD (Query): "나는 **'남성 바지'**라는 큰 틀이야. 내 구체적인 특징이 뭐지?" (질문자)
+
+RE (Key/Value): "소재는 데님이고, 핏은 와이드야." (구조화된 대답)
+
+Title (Key/Value): "상품명은 '빈티지 워싱 쿨링 진'이야." (비구조화된 대답)
+
+
+
+data aug by local modal
+빠른학습모드로 1000개정도 먼저 이미지 매칭해서 던져보자 제목증강 + reinfoece
