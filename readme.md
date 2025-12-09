@@ -3,7 +3,7 @@
 ## 📖 Overview
 이 프로젝트는 **LLM(Large Language Model)을 활용한 고품질 Feature Engineering**과 **Contrastive Learning(SimCSE)** 기반의 임베딩 학습을 결합한 커머스 추천 시스템입니다.
 
-기존의 단순 협업 필터링(CF)이나 텍스트 기반 검색의 한계를 넘어, 상품의 **구조적 속성(Standard)**과 **비정형 상세 속성(Reinforced)**을 **Cross-Attention**으로 융합하여 정교한 벡터 공간을 구축합니다. 이를 바탕으로 **Two-Tower 구조의 Retrieval(후보 추출)**과 **DeepFM 기반의 Reranking(정밀 정렬)** 파이프라인을 통해 유저의 신체 정보와 맥락까지 고려한 초개인화 추천을 제공합니다.
+기존의 단순 협업 필터링(CF)이나 텍스트 기반 검색의 한계를 넘어, 상품의 **구조적 속성(Standard)** 과 **비정형 상세 속성(Reinforced)** 을 **Cross-Attention** 으로 융합하여 정교한 벡터 공간을 구축합니다. 이를 바탕으로 **Two-Tower 구조의 Retrieval(후보 추출)** 과 **DeepFM 기반의 Reranking(정밀 정렬)** 파이프라인을 통해 유저의 신체 정보와 맥락까지 고려한 초개인화 추천을 제공합니다.
 
 ---
 
