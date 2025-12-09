@@ -6,7 +6,7 @@ import torch
 import uvicorn
 from pytorch_metric_learning import losses, miners, distances
 from utils.dependencies import initialize_global_models
-from routers.embed_items import embed_items_router
+from utils.embed_items import embed_items_router
 from routers.gpu_test import gpu_test_router
 from APIController.controller import controller_router
 from database import engine, Base
