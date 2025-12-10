@@ -134,6 +134,43 @@ graph TD
 ### Step 1. LLM-Based Feature Enrichment
 Raw Data(이미지, HTML 등)를 LLM에 주입하여 추천 모델이 이해하기 쉬운 **고밀도 피처(High-Density Features)**로 정제합니다. 단순 키워드 추출을 넘어 상품의 **'분위기(Vibe)'**나 **'잠재적 속성(Implicit Attributes)'**까지 추론하여 JSON으로 구조화합니다.
 
+
+### 📂 Data Structure Example
+LLM을 통해 구조화된 상품 데이터(JSON) 예시입니다. 데이터는 크게 **고정된 표준 속성(`clothes`)**과 **LLM이 증강한 상세 속성(`reinforced_feature_value`)**으로 나뉩니다.
+
+```json
+{
+  "data": {
+    "clothes": {
+      "__description__": "Standard (STD) Features - Fixed Domain Vocab",
+      "category": ["01outer_01coat"],
+      "season": ["winter"],
+      "fiber_composition": ["Cotton", "Polyester"],
+      "elasticity": ["none"],
+      "transparency": ["none at all"],
+      "isfleece": ["fleece_none"],
+      "color": ["Beige"],
+      "gender": ["both"],
+      "category_specification": ["outer"],
+      "top.length_type": ["long"],
+      "top.sleeve_length_type": ["long sleeves"],
+      "top.neck_color_design": ["tailored collar"],
+      "top.sleeve_design": ["basic sleeve"]
+    },
+    "reinforced_feature_value": {
+      "__description__": "Reinforced (RE) Features - LLM Augmented & Dynamic",
+      "category": [""],
+      "fiber_composition": ["Cotton blend"],
+      "color": [""],
+      "category_specification": ["trench coat"],
+      "specification.metadata": ["long", "winter wear"]
+    },
+    "일반 서비스 산출 데이터" : ["가격, categorical features .. "]
+  }
+}
+
+```
+
 ### Step 2. Feature Disentanglement (STD vs. RE)
 추출된 피처를 **표준 속성(Skeleton)**과 **보강 속성(Flesh)**으로 명확히 분리하여 Cross-Attention의 효율을 극대화합니다.
 * **STD (Standard):** 변하지 않는 고정된 기준 (Query 역할 / Anchor)
