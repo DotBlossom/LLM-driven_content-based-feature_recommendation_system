@@ -2,6 +2,7 @@
 
 ## 📖 Overview
 2024-10 ~ 2024-12 project(Partial Impl) -> complete AI Impl ver(Logic 전체 반영)
+[prev(24.10) github link](https://github.com/DotBlossom/flask-AI-inference-bedrock-controller)
 
 이 프로젝트는 **LLM(Large Language Model)을 활용한 고품질 Feature Engineering**과 **Contrastive Learning(SimCSE)** 기반의 임베딩 학습을 결합한 커머스 추천 시스템입니다.
 
