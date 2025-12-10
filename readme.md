@@ -7,6 +7,13 @@
 
 기존의 단순 협업 필터링(CF)이나 텍스트 기반 검색의 한계를 넘어, 상품의 **구조적 속성(Standard)** 과 **비정형 상세 속성(Reinforced)** 을 **Cross-Attention** 으로 융합하여 정교한 벡터 공간을 구축합니다. 이를 바탕으로 **Two-Tower 구조의 Retrieval(후보 추출)** 과 **DeepFM 기반의 Reranking(정밀 정렬)** 파이프라인을 통해 유저의 신체 정보와 맥락까지 고려한 초개인화 추천을 제공합니다.
 
+
+## Data Strategy & Processing Pipeline Overview
+
+본 프로젝트의 데이터 아키텍처는 **"LLM을 활용한 표현력 증강(Representation Enrichment)"** 을 기반으로 설계되었습니다.
+
+여기에 **AI Hub 패션 상품 데이터셋**과 호환 가능한 표준 스키마를 적용하여, 학습 데이터와 실제 서비스 데이터 간의 정합성을 보장하고 **Reranker(DeepFM, DLRM)** 등 고도화된 모듈로 즉시 확장 가능한 **범용적이고 유기적인 시스템**을 구축했습니다.
+
 ---
 
 ## 🏗️ System Architecture
@@ -75,6 +82,83 @@ Retrieval 단계에서 추려진 후보군을 정밀하게 재정렬합니다.
     * **Sparse Feat:** 카테고리, 브랜드, RE 속성 (Shared Embeddings).
     * **Dense Feat:** 유저 키, 몸무게.
     * **Implicit Interaction:** DNN을 통해 고차원 상호작용 모델링.
+
+---
+
+
+---
+
+## 2. Core Feature Strategy: STD-RE Symbiosis
+우리는 상품을 단순한 텍스트 덩어리로 보지 않고, **동일한 Feature Key**를 공유하지만 깊이가 다른 두 가지 속성으로 이원화하여 관리합니다.
+
+### Unified Representation Mechanism
+**STD(Standard)**와 **RE(Reinforced)**는 서로 다른 데이터가 아니라, 동일한 뿌리(Key)에서 나와 상호 보완적으로 작용하는 공생 관계입니다.
+
+| Feature Type | Role | Value Source | Example (Key: `Material`) |
+| :--- | :--- | :--- | :--- |
+| **STD (Base)** | **Structure** | Fixed Domain Vocab | `Wool` |
+| **RE (Augmented)** | **Specification** | **LLM-Augmented** | `100% Cashmere`, `Soft Touch`, `Virgin Wool` |
+
+* **Shared Key & Augmented Value:** RE는 STD의 데이터 형태(Form)를 답습하되, LLM을 통해 **상세하고 풍부한 표현(Specific Description)**으로 증강됩니다.
+* **Effect:** Cross-Attention 수행 시, Query(STD)와 Key(RE)가 **동일한 문맥(Shared Key)** 위에서 상호작용하므로, Attention Alignment가 매우 빠르고 정확하게 이루어집니다.
+
+```mermaid
+graph TD
+    subgraph Feature Definition Strategy
+    Root[Feature Key: Material]
+    
+    Root -->|Static Mapping| STD[STD: Wool]
+    Root -->|LLM Augmentation| RE[RE: 100% Cashmere / Soft Touch]
+    
+    STD -->|Query| Attention((Cross-Attention))
+    RE -->|Context| Attention
+    
+    Attention -->|Result| Vector[Specific Vector: <br>High-end Soft Wool]
+    end
+    
+    style Root fill:#f9f,stroke:#333,stroke-width:2px
+    style Attention fill:#bbf,stroke:#333,stroke-width:2px
+```
+## 3. Processing Pipeline (Step-by-Step)
+전체 데이터 처리 과정은 **Raw Data 입력**부터 모델 학습을 위한 **Tensor 변환**까지 4단계로 이루어집니다.
+
+
+```mermaid
+graph TD
+    A[Raw Product Data] -->|Step 1: Ingestion| B(LLM Inference Engine)
+    B -->|Step 2: Disentanglement| C{Structured JSON}
+    C -->|Step 3: Dual Vocab Mapping| D[STD ID Mapping] & E[RE ID Mapping]
+    D & E -->|Step 4: Tensor Construction| F[Model Input Tensor]
+```
+
+### Step 1. LLM-Based Feature Enrichment
+Raw Data(이미지, HTML 등)를 LLM에 주입하여 추천 모델이 이해하기 쉬운 **고밀도 피처(High-Density Features)**로 정제합니다. 단순 키워드 추출을 넘어 상품의 **'분위기(Vibe)'**나 **'잠재적 속성(Implicit Attributes)'**까지 추론하여 JSON으로 구조화합니다.
+
+### Step 2. Feature Disentanglement (STD vs. RE)
+추출된 피처를 **표준 속성(Skeleton)**과 **보강 속성(Flesh)**으로 명확히 분리하여 Cross-Attention의 효율을 극대화합니다.
+* **STD (Standard):** 변하지 않는 고정된 기준 (Query 역할 / Anchor)
+* **RE (Reinforced):** 상품의 고유성을 나타내는 가변 속성 (Context 역할 / Detail)
+
+### Step 3. Dual Vocabulary Mapping & Organic Expansion
+분리된 피처들을 모델이 연산 가능한 **정수 ID(Integer IDs)**로 변환합니다.
+* **Shared Embedding for STD:** 모든 STD 속성(카테고리, 색상 등)은 단일 통합 Vocab을 공유하여 메모리 효율을 극대화합니다.
+* **Dynamic Expansion for RE:** 신조어나 트렌드 용어(예: *Gorpcore*)가 등장하면 즉시 **RE Dynamic Vocab**에 등록됩니다. 이를 통해 시스템은 별도의 코드 수정 없이도 **데이터가 쌓일수록 스스로 진화(Organic Growth)**하는 특성을 가집니다.
+
+### Step 4. Tensor Construction & Augmentation
+SimCSE 학습을 위해 최종적으로 텐서를 생성하고 증강(Augmentation)을 수행합니다.
+* **Feature Dropout:** JSON 내의 Key-Value를 랜덤하게 제거하여 특정 키워드에 대한 과의존을 방지합니다.
+* **Token Masking:** Title 내의 단어를 랜덤하게 Masking하여 전체적인 맥락(Context) 추론 능력을 강화합니다.
+
+## 4. Key Characteristics & Impact
+
+### ① Universal Compatibility (AI Hub 호환성)
+AI Hub 패션 데이터셋과 호환 가능한 표준 스키마를 채택하여, 학습 데이터 확보의 용이성을 높였습니다. 또한 정규화된 피처 구조 덕분에 **DeepFM, DLRM** 같은 Reranker 도입 시 복잡한 피처 엔지니어링 없이 즉시 연동 가능한 높은 **확장성(Scalability)**을 가집니다.
+
+### ② Noise Robustness (노이즈 강건성)
+LLM이 마케팅 용어(Noise)를 제거하고 구조화된 데이터로 변환하기 때문에, 추천 모델은 **순도 높은 정보(High-SNR)**만 학습하게 됩니다. 이는 벡터 공간 내에서 아이템 간의 거리를 더욱 명확하게 만듭니다.
+
+### ③ Zero-Shot & Cold-Start Adaptation
+유저 행동 로그가 없는 신상품(Cold-Start)이라도, LLM이 생성한 **풍부한 RE 피처(텍스트 설명)**를 기반으로 초기 벡터를 생성하므로 **유사한 분위기의 기존 상품 근처**에 정확히 매핑됩니다. (Reference: *UniSRec, KDD 2022*)
 
 ---
 
