@@ -1,10 +1,11 @@
 # vocab.py
 import threading
+import zlib
 # 0번은 Padding/Unknown 용도로 예약
 PAD_TOKEN = "<PAD>"
 PAD_ID = 0
-RE_VOCAB_LOCK = threading.Lock()
-
+# RE_VOCAB_LOCK = threading.Lock()
+RE_MAX_CAPACITY = 500
 from transformers import AutoTokenizer
 
 # 1. 가볍고 성능 좋은 Tokenizer 로드 (한 번만 로드)
@@ -79,10 +80,52 @@ STD_TOKEN_TO_ID = {token: i + 1 for i, token in enumerate(SORTED_STD_TOKENS)}
 STD_VOCAB_SIZE = len(STD_TOKEN_TO_ID) + 1  # (STD 토큰 개수) + PAD(1)
 
 
+
+
+def get_std_id(value: str) -> int:
+    """
+    STD 토큰에 대한 정수 ID (1부터 시작)를 반환합니다.
+    STD에 없는 값은 0 (PAD)을 반환합니다.
+    """
+    if value is None:
+        return PAD_ID
+    return STD_TOKEN_TO_ID.get(str(value), PAD_ID)
+
+
+def get_re_hash_id(value: str) -> int:
+    """
+    [Stateless Hashing]
+    RE 토큰(가변적인 상세 속성)을 고정된 범위의 ID로 즉시 변환합니다.
+    저장소가 필요 없으며, 서버 재부팅 시에도 동일한 ID를 보장합니다.
+    """
+    if not value or value == "":
+        return PAD_ID
+    
+    # 1. 문자열을 바이트로 변환 후 CRC32 체크섬 계산 (OS/Platform 독립적)
+    # 2. 버킷 사이즈로 나눈 나머지 계산
+    # 3. 0은 PAD이므로 +1 하여 1 ~ (CAPACITY-1) 범위로 매핑
+    
+    hash_val = zlib.crc32(str(value).encode('utf-8'))
+    return (hash_val % (RE_MAX_CAPACITY - 1)) + 1
+
+def get_vocab_sizes() -> tuple[int, int]:
+    """
+    (STD Vocab Size, RE Max Capacity) 반환
+    """
+    return STD_VOCAB_SIZE, RE_MAX_CAPACITY
+
+
+
+
+
+
+
+
 # --- B. RE Vocabulary 구축 (동적 관리 대상) ---
 
 # RE 사전을 관리하는 전역 딕셔너리
 # 초기 GENERATED_METADATA 로드 및 ID 할당 로직 (STD와 동일한 ID 부여 로직 적용)
+'''
 INITIAL_RE_TOKENS = set()
 for key, new_values in GENERATED_METADATA.items():
     for value in new_values:
@@ -99,19 +142,10 @@ RE_TOKEN_TO_ID = {token: i + 1 for i, token in enumerate(SORTED_INITIAL_RE_TOKEN
 _RE_ID_COUNTER = len(RE_TOKEN_TO_ID) + 1
 
 
+'''
 
 
-
-def get_std_id(value: str) -> int:
-    """
-    STD 토큰에 대한 정수 ID (1부터 시작)를 반환합니다.
-    STD에 없는 값은 0 (PAD)을 반환합니다.
-    """
-    if value is None:
-        return PAD_ID
-    return STD_TOKEN_TO_ID.get(str(value), PAD_ID)
-
-
+'''
 def get_re_id(value: str) -> int:
     """
     RE 토큰에 대한 정수 ID (1부터 시작)를 반환합니다.
@@ -147,13 +181,4 @@ def get_re_id(value: str) -> int:
         
         # print(f"DEBUG: New RE token registered: '{str_value}' -> {new_id}")
         return new_id
-
-
-def get_vocab_sizes() -> tuple[int, int]:
-    """
-    STD의 전체 어휘 크기 (PAD 포함)와 현재 RE의 전체 어휘 크기를 반환합니다.
-    """
-    # RE 크기는 PAD(1) + 현재 등록된 토큰 개수
-    current_re_size = len(RE_TOKEN_TO_ID) + 1
-    return STD_VOCAB_SIZE, current_re_size
-
+'''

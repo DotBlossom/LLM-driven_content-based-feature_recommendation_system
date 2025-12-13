@@ -1,12 +1,17 @@
 # 🛍️ LLM-Driven content-based Feature Recommendation System
 
 ## 📖 Overview
-2024-10 ~ 2024-12 project(Partial Impl) -> complete AI Impl ver(Logic 전체 반영)
-[prev(24.10) github link](https://github.com/DotBlossom/flask-AI-inference-bedrock-controller)
 
-이 프로젝트는 **LLM(Large Language Model)을 활용한 고품질 Feature Engineering**과 **Contrastive Learning(SimCSE)** 기반의 임베딩 학습을 결합한 커머스 추천 시스템입니다.
+- **Project Duration:** 2024-10 ~ 2024-12 (Partial Impl) → **Complete AI Impl ver (Current, Logic 상세 구현)**
+- **Previous Repo:** [github link](https://github.com/DotBlossom/flask-AI-inference-bedrock-controller)
 
-기존의 단순 협업 필터링(CF)이나 텍스트 기반 검색의 한계를 넘어, 상품의 **구조적 속성(Standard)** 과 **비정형 상세 속성(Reinforced)** 을 **Cross-Attention** 으로 융합하여 정교한 벡터 공간을 구축합니다. 이를 바탕으로 **Two-Tower 구조의 Retrieval(후보 추출)** 과 **DeepFM 기반의 Reranking(정밀 정렬)** 파이프라인을 통해 유저의 신체 정보와 맥락까지 고려한 초개인화 추천을 제공합니다.
+이 프로젝트는 **LLM(Large Language Model)을 활용한 고품질 Feature Engineering**과 **Contrastive Learning(SimCSE)** 기반의 임베딩 학습을 결합한 차세대 커머스 추천 시스템입니다.
+
+기존의 단순 협업 필터링(CF)이나 텍스트 기반 검색의 한계를 넘어, 상품의 **구조적 속성(Standard)** 과 **비정형 상세 속성(Reinforced)** 을 **Hierarchical Residual Embedding(계층적 잔차 임베딩)** 으로 전처리합니다.
+
+이후, 이들을 **단일 시퀀스(Single Sequence)로 결합하여 Unified Transformer 내에서 속성 간의 상호작용(Self-Attention)을 학습하고, 최종적으로 Deep Residual MLP Layer로 압축하여** 정교한 벡터 공간을 구축합니다.
+
+이를 바탕으로 **Two-Tower 구조의 Retrieval(후보 추출)** 과 **DeepFM 기반의 Reranking(정밀 정렬)** 파이프라인을 통해 유저의 신체 정보와 맥락까지 고려한 초개인화 추천을 제공합니다.
 
 
 ## Data Strategy & Processing Pipeline Overview
@@ -49,22 +54,36 @@ graph LR
 ## 🔑 Key Logics & Features
 
 ### 1. Hybrid Vocabulary System (Data Strategy)
-LLM이 추출한 피처를 성격에 따라 두 가지 Vocab으로 분리하여 **연산 효율성**과 **표현력**을 동시에 확보했습니다.
-* **STD (Standard) Vocab:** 카테고리, 브랜드, 성별 등 고정된 도메인 피처. 단일 통합 임베딩 테이블을 공유하여 메모리를 최적화합니다.
-* **RE (Reinforced) Vocab:** 소재, 핏, 스타일, 상품명(Title) 등 가변적인 상세 속성. 동적으로 확장 가능한 Vocab 구조를 가집니다.
-* **ID Mapping:** 모든 텍스트 피처를 고유 ID로 매핑하여 Cross-Attention 시 노이즈를 제거하고 **직교성(Orthogonality)**을 확보합니다.
+
+데이터의 성격(정형/비정형)과 운영 효율성을 고려하여 이원화된 처리 전략을 사용합니다.
+
+* **STD (Standard) Vocab**
+    * 카테고리, 브랜드, 성별 등 고정된 도메인 피처.
+    * 사전 정의된 **Finite Lookup Table**을 사용하여 정확한 의미를 보존합니다.
+* **RE (Reinforced) Vocab**
+    * 소재, 핏, 스타일 등 가변적이고 무한히 확장되는 상세 속성.
+    * 별도의 사전 관리 없이 **Stateless Hashing (zlib)** 을 통해 고정된 차원의 ID로 즉시 변환하여, 서버 확장성과 운영 안정성을 극대화합니다.
+* **Field Embedding**
+    * 각 속성(Color, Season 등)의 역할을 정의하는 임베딩을 도입하여, STD와 RE가 동일한 위상 공간에서 상호작용하도록 유도합니다.
+
+---
 
 ### 2. Stage 1: Item Tower (Coarse-to-Fine Representation)
-상품의 본질적인 의미(Semantic)를 벡터화하는 단계입니다.
-* **Architecture:** Transformer-based Encoder + MLP Projection Head
-* **Cross-Attention Mechanism:**
-    * **Query (Anchor):** STD 피처 (예: "남성 상의") → 변하지 않는 기준점
-    * **Key/Value (Context):** RE 피처 + Title Tokens (예: "린넨", "오버핏", "여름 신상") → 보강 정보
-    * *Effect:* 표준 속성이 상세 속성을 참조하여 벡터를 강화(Reinforce)하는 구조.
-* **Training Objective (SimCSE):**
-    * **Augmentation:** Feature Dropout & Token Masking을 통해 Positive Pair 생성.
-    * **Loss:** `NTXentLoss` (InfoNCE) with In-batch Negatives.
-    * **Normalization:** 추론 시 L2 Normalization을 적용하여 Cosine Similarity 검색에 최적화.
+
+상품의 본질적인 의미(Semantic)를 벡터화하는 단계로, **TabTransformer** 구조를 응용하여 설계되었습니다.
+
+* **Architecture**
+    * **Unified Transformer Encoder** + **Deep Residual Head (MLP)**
+* **Hierarchical Residual Input (Core Logic)**
+    * **단일 시퀀스(Single Sequence)** 내에서 위계 구조를 수식적으로 강제합니다.
+    * **STD Token:** $Base\_Value + Field\_Key$
+    * **RE Token:** $RE\_Delta + \text{StopGrad}(STD\_Base) + Field\_Key$
+    * **Effect:** RE 피처는 독립적으로 존재하지 않고 STD를 **상속(Inheritance)** 받습니다. 이를 통해 데이터 희소성(Sparsity) 문제를 해결하고, 모델은 RE를 "STD와의 미세한 차이(Delta)"로 인식하여 학습 효율이 급증합니다.
+* **Training Objective (SimCSE)**
+    * **Augmentation:** 계층적 구조를 활용한 **Complementary Masking** (STD 위주 vs RE 위주) 및 Feature Dropout.
+    * **Loss:** `NTXentLoss` (InfoNCE). 모델은 같은 상품의 뼈대(STD)와 살(RE)이 본질적으로 같음을 학습합니다.
+
+---
 
 ### 3. Stage 2: User Tower (Multi-modal Retrieval)
 유저의 행동, 현재 의도(Context), 신체 정보를 결합하여 선호 아이템을 탐색합니다.
@@ -90,18 +109,23 @@ Retrieval 단계에서 추려진 후보군을 정밀하게 재정렬합니다.
 ---
 
 ## 2. Core Feature Strategy: STD-RE Symbiosis
-우리는 상품을 단순한 텍스트 덩어리로 보지 않고, **동일한 Feature Key**를 공유하지만 깊이가 다른 두 가지 속성으로 이원화하여 관리합니다.
+우리는 상품을 단순한 텍스트 나열로 보지 않고, **동일한 Feature Key**를 공유하는 **부모(STD)와 자식(RE)**의 관계로 정의합니다.
 
-### Unified Representation Mechanism
-**STD(Standard)**와 **RE(Reinforced)**는 서로 다른 데이터가 아니라, 동일한 뿌리(Key)에서 나와 상호 보완적으로 작용하는 공생 관계입니다.
+### Unified Representation Mechanism (Delta Learning)
 
-| Feature Type | Role | Value Source | Example (Key: `Material`) |
+**STD(Standard)**와 **RE(Reinforced)**는 별개의 정보가 아닙니다. RE는 STD라는 **기준점(Anchor)** 위에서 얼마나 구체화되었는지를 나타내는 **변형(Variation)** 정보입니다.
+
+| Feature Type | Role | Value Source | Input Logic |
 | :--- | :--- | :--- | :--- |
-| **STD (Base)** | **Structure** | Fixed Domain Vocab | `Wool` |
-| **RE (Augmented)** | **Specification** | **LLM-Augmented** | `100% Cashmere`, `Soft Touch`, `Virgin Wool` |
+| **STD (Base)** | **Structure (뼈대)** | Fixed Domain Vocab | $Emb(STD) + Emb(Field)$ |
+| **RE (Detail)** | **Specification (살)** | **LLM-Augmented & Hashed** | $Emb(RE_{hash}) + \text{StopGrad}(Emb(STD)) + Emb(Field)$ |
 
-* **Shared Key & Augmented Value:** RE는 STD의 데이터 형태(Form)를 답습하되, LLM을 통해 **상세하고 풍부한 표현(Specific Description)**으로 증강됩니다.
-* **Effect:** Cross-Attention 수행 시, Query(STD)와 Key(RE)가 **동일한 문맥(Shared Key)** 위에서 상호작용하므로, Attention Alignment가 매우 빠르고 정확하게 이루어집니다.
+* **Inheritance & Delta**
+    * RE 토큰은 입력 단계에서 STD 벡터를 더하고 시작합니다. 따라서 초기 학습 시점부터 **"Cold Start"** 문제가 없습니다.
+    * 학습이 진행될수록 STD가 표현하지 못하는 **"상세한 뉘앙스(Delta)"** 만을 집중적으로 학습합니다.
+* **Effect**
+    * 모든 피처가 **Unified Transformer** 내에서 평등하게 상호작용(Self-Attention)하되, 잔차 연결을 통해 구조적 연관성이 물리적으로 보장됩니다.
+    * 이는 Cross-Attention 방식보다 훨씬 직관적이며 강력한 문맥 결합을 만들어냅니다.
 
 ```mermaid
 graph TD

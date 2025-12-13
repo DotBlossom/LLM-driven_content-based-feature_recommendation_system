@@ -28,6 +28,17 @@ model_router = APIRouter()
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
+# 필드 순서 정의 (Field Embedding), 임시, data 보고 결정
+# key 순서 == 오는 json 데이타Load 순서
+ALL_FIELD_KEYS = [
+    "category", "season", "fiber_composition", "elasticity", "transparency", 
+    "isfleece", "color", "gender", "category_specification", 
+    # 필요한 만큼 추가...
+]
+FIELD_TO_IDX = {k: i for i, k in enumerate(ALL_FIELD_KEYS)}
+NUM_TOTAL_FIELDS = len(ALL_FIELD_KEYS)
+
+
 class TrainingItem(BaseModel):
 
     product_id: int
@@ -102,116 +113,92 @@ class DeepResidualHead(nn.Module):
 # ----------------------------------------------------------------------
 class CoarseToFineItemTower(nn.Module):
     """
-    [Item Tower]: Standard/Reinforced 피쳐를 융합하고 128차원 벡터 생성.
-    vocab.py의 이중 어휘 구조와 호환되도록 수정되었습니다.
+    [Item Tower - Residual Field Embedding Ver.]
+    TabTransformer의 아이디어를 응용하여, STD와 RE를 하나의 시퀀스로 통합하고
+    계층적 잔차 연결(Inheritance)을 통해 학습 안정성을 극대화한 구조.
     """
-    def __init__(self, embed_dim=EMBED_DIM_CAT, nhead=4, output_dim=OUTPUT_DIM_ITEM_TOWER):
+    def __init__(self, 
+                 embed_dim=EMBED_DIM_CAT,     # 64
+                 nhead=4, 
+                 num_layers=2,                # TabTransformer는 얕아도 충분함
+                 max_fields=50,               # 예상되는 최대 필드(컬럼) 개수
+                 output_dim=OUTPUT_DIM_ITEM_TOWER):
         super().__init__()
         
-        # 1. vocab.py에서 STD와 RE의 분리된 어휘 크기 import (re_vocab은 나중에 fix하거나, 변경될떄 변수로)
-        std_vocab_size, re_vocab_size = vocab.get_vocab_sizes()
+        # 1. Vocab Size 가져오기
+        std_vocab_size, _ = vocab.get_vocab_sizes()
         
-        # A. Dual Embedding (64d)
-        # 아마 Re_vocab에 데이터 좀 넣어놓자. 오류난다면?
-        # 단일 임베딩 대신, 분리된 어휘 크기를 사용
+        # 2. Embeddings
+        # A. STD Value Embedding (Base) , RE Value Embedding (Delta / Child)
         self.std_embedding = nn.Embedding(std_vocab_size, embed_dim, padding_idx=vocab.PAD_ID)
         self.re_embedding = nn.Embedding(RE_MAX_CAPACITY, embed_dim, padding_idx=vocab.PAD_ID)
-        # B. Self-Attention Encoders (d_model=64)
-        encoder_layer = nn.TransformerEncoderLayer(d_model=embed_dim, nhead=nhead, batch_first=True)
-        self.std_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
-        self.re_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
+        
+        # RE는 Delta(차이점)만 학습하므로 0 근처 초기화 (학습 초기 안정성)
+        nn.init.normal_(self.re_embedding.weight, mean=0.0, std=0.01)
 
-        # [고려중] Title Embedding (Tokenizer의 Vocab Size 사용)
-        '''
-        self.title_vocab_size = TOKENIZER.vocab_size
-        self.title_embedding = nn.Embedding(self.title_vocab_size, embed_dim, padding_idx=vocab.PAD_ID)
-        self.title_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
-        '''
-
+        # C. Field Embedding (Shared Key)
+        # 각 컬럼(Color, Brand 등)의 역할을 나타내는 임베딩
+        self.field_embedding = nn.Parameter(torch.randn(1, max_fields, embed_dim))
         
-        # C. Cross-Attention (d_model=64, nhead=4)
-        # 이 레이어는 Q=STD, K/V=RE로 사용
-        # (수정됨) Shape Vector (128d)가 제거되어 입력은 64d가 됨.
-        self.cross_attn = nn.MultiheadAttention(embed_dim, nhead, batch_first=True)
-        self.layer_norm = nn.LayerNorm(embed_dim)
-        
-        # D. Deep Residual Head (입력 차원: embed_dim = 64)
-        head_input_dim = embed_dim
-        self.head = DeepResidualHead(input_dim=head_input_dim, output_dim=output_dim)
-
-    def forward(self, std_input: torch.Tensor, re_input: torch.Tensor ) -> torch.Tensor:
-        # 1. 임베딩 (STD와 RE 분리 처리)
-        std_embed = self.std_embedding(std_input)
-        re_embed = self.re_embedding(re_input)
-        
-        # 2. Self-Attention Encoders
-        std_output = self.std_encoder(std_embed) # Shape: (B, L_std, D)
-        re_output = self.re_encoder(re_embed)   # Shape: (B, L_re, D)
-        
-        ### ---------------
-        #    제목에 대한 LLM 기반 slicing이 된다면, 제목을 Re attention에 concat하여 진행
-        #    학습데이터셋은 reinforced에 text_align 붙여놓고, 그거 여기애서 cross atten (eng)
-        ### ---------------
-
-        ''' 
-        title_embed = self.title_embedding(title_input)
-        title_output = self.title_encoder(title_embed)
-        re_context_output = torch.cat([re_output, title_output], dim=1)
-        re_mask = (re_input == vocab.PAD_ID)
-        title_mask = (title_input == vocab.PAD_ID)
-        combined_key_padding_mask = torch.cat([re_mask, title_mask], dim=1)
-        
-        '''
-        
-        ### 배치환경에서 no data re_input attn 배제 
-        re_padding_mask = (re_input == vocab.PAD_ID)
-        
-        is_all_padding = re_padding_mask.all(dim=1)
-        
-        # 곱셈을 위한 게이트 생성 (정보가 없으면 0.0, 있으면 1.0)
-        valid_gate = (~is_all_padding).float().view(-1, 1, 1)
-        
-    
-    
-    
-        
-        # 3. Cross-Attention (STD(Q)가 RE(K/V)를 참조)
-        # Query: STD (우리가 더 중요하다고 가정하는 기본적인 상품 정보)
-        # Key/Value: RE (선택적으로 보강할 세부 정보)
-        
-        # query, key, value 인자를 명시적으로 사용합니다.
-        attn_output, _ = self.cross_attn(
-            query=std_output,  
-            key=re_output,     
-            value=re_output,   
-            need_weights=False
+        # 3. Unified Transformer Encoder
+        # STD와 RE가 한 공간에서 상호작용 (Cross-Attn 대신 Self-Attn 사용)
+        encoder_layer = nn.TransformerEncoderLayer(
+            d_model=embed_dim, 
+            nhead=nhead, 
+            dim_feedforward=embed_dim * 4,
+            batch_first=True,
+            dropout=0.1,
+            activation='gelu'
+            #,norm_first=True # 최신 트렌드 (안정적 수렴)
         )
+        self.transformer = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
         
-        # re_input이 all zero 일 경우(batch 연산 특성 고려)
-        attn_output = attn_output * valid_gate
+        # 4. Projection Head
+        # 입력 차원: (STD필드수 + RE필드수) * embed_dim -> Flatten 후 압축
+        self.head = DeepResidualHead(input_dim=embed_dim, output_dim=output_dim) 
         
-        
-        # 4. 잔차 연결(Residual Connection) 및 Layer Normalization
-        # STD의 원본 정보에 RE로부터 추출된 강화 정보(attn_output)를 더합니다.
-        fused_output = self.layer_norm(std_output + attn_output)
-        
-        # 5. 풀링 (Sequence -> Vector)
-        # 최종적으로 Item 임베딩을 얻기 위해 평균 풀링을 수행합니다.
-        # Shape: (B, D)
 
-        
-        pooled_output = fused_output.mean(dim=1) 
 
-        ## 5. Shape Fusion Logic (제거됨)
-        # v_fused = torch.cat([v_final, shape_vecs], dim=1) # 이 코드가 제거됨.
+    def forward(self, std_input: torch.Tensor, re_input: torch.Tensor) -> torch.Tensor:
+        """
+        std_input: (Batch, Num_Fields) - 예: [Color_ID, Category_ID, ...]
+        re_input:  (Batch, Num_Fields) - 예: [MatteBlack_ID, 0, ...] (순서가 STD와 대응되어야 함)
+        """
+        B, num_fields = std_input.shape
         
-        # 6. Deep Residual Head
-        # Deep Head Pass (I : 64 -> O : 128)
-        final_vector = self.head(pooled_output)
-
-        return final_vector
+        # --- [Logic 1] Hierarchical Embedding Construction ---
+        
+        # (A) Field Embedding (Broadcasting)
+        # 현재 배치의 필드 개수만큼 자름 (혹시 모를 가변 길이에 대비)
+        field_emb = self.field_embedding[:, :num_fields, :] # (1, F, D)
+        
+        # (B) STD (Parent)
+        std_val = self.std_embedding(std_input) # (B, F, D)
+        std_token = std_val + field_emb
+        
+        # (C) RE (Child = Delta + Parent + Field)
+        re_delta = self.re_embedding(re_input) # (B, F, D)
+        
+        # * 핵심: RE가 0(PAD)이어도 std_val + field_emb가 남아서 'Parent' 역할을 수행함
+        # * detach(): RE의 그래디언트가 STD 임베딩을 망가뜨리지 않도록 차단
+        re_token = re_delta + std_val.detach() + field_emb
+        
+        # --- [Logic 2] Unified Sequence ---
+        # [STD_1, STD_2, ..., RE_1, RE_2, ...]
+        combined_seq = torch.cat([std_token, re_token], dim=1) # (B, 2*F, D)
+        
+        # --- [Logic 3] Transformer & Pooling ---
+        # PAD Masking: 여기서는 간단히 생략 (SimCLR 특성상 Noise도 정보가 됨)
+        # 정교하게 하려면 src_key_padding_mask 추가 가능
+        
+        context_out = self.transformer(combined_seq) # (B, 2*F, D)
+        
+        # Mean Pooling (Flatten 대신 사용 -> 필드 수 변화에 강인함)
+        pooled = context_out.mean(dim=1) # (B, D)
+        
+        return self.head(pooled) # (B, 128)
     
-
+    
 # ----------------------------------------------------------------------
 # 4. OptimizedItemTower (Stage 2 Adapter - Triplet Training)
 #    Projection Head --> Contrastive Loss(Opt.z) / Representation(Encoder)
@@ -240,14 +227,8 @@ class OptimizedItemTower(nn.Module):
         x = self.layer(x)
         
         # 정규화 (L2 Normalization)
-        x = F.normalize(x, p=2, dim=1)
-        
-        # [Log 3] 정규화 확인 (Norm이 1.0에 가까운지)
-        if not self.training:
-            norm_check = torch.norm(x, p=2, dim=1).mean().item()
-            print(f"  [Model Internal] Output Normalized Shape: {x.shape} | Avg Norm: {norm_check:.4f} (Expected ~1.0)")
-            
-        return x
+    
+        return F.normalize(x, p=2, dim=1)
 
 
 
@@ -290,7 +271,72 @@ class SimCSEModelWrapper(nn.Module):
         # 2. 그 결과를 projector에게 토스
         return self.projector(enc_out)
 
+class SimCSERecSysDataset(Dataset):
+    def __init__(self, products: List[TrainingItem], dropout_prob: float = 0.2):
+        self.products = products
+        self.dropout_prob = dropout_prob
 
+    def __len__(self):
+        return len(self.products)
+
+    def _apply_dropout_and_convert(self, product: TrainingItem):
+        """
+        1. Feature Dropout 수행
+        2. Dictionary -> Fixed Size Tensor 변환 (Hashing 포함)
+        """
+        # (1) Dropout Logic
+        # 원본 데이터 보호 (Shallow copy of dict structure is enough usually, but deep for safety)
+        feat_data = copy.deepcopy(product.feature_data)
+        
+        clothes = feat_data.get("clothes", {})
+        reinforced = feat_data.get("reinforced_feature_value", {})
+        
+        # Random Dropout (Key 삭제)
+        if self.dropout_prob > 0:
+            for k in list(clothes.keys()):
+                if random.random() < self.dropout_prob:
+                    del clothes[k]
+            for k in list(reinforced.keys()):
+                if random.random() < self.dropout_prob:
+                    del reinforced[k]
+
+        # (2) Tensor Conversion Logic (Alignment)
+        std_ids = []
+        re_ids = []
+        
+        # 미리 정의된 ALL_FIELD_KEYS 순서대로 순회하며 ID 추출
+        for key in ALL_FIELD_KEYS:
+            # A. STD ID 추출
+            std_val = clothes.get(key) # 없으면 None
+            # None이면 MockVocab 내부에서 PAD_ID(0) 반환
+            s_id = vocab.get_std_id(key, std_val) 
+            std_ids.append(s_id)
+            
+            # B. RE ID 추출 (Hashing)
+            # RE 데이터는 리스트 형태일 수 있음 (["Matte Black"]) -> 첫번째 값 사용
+            re_val_list = reinforced.get(key)
+            re_val = None
+            if re_val_list and isinstance(re_val_list, list) and len(re_val_list) > 0:
+                re_val = re_val_list[0]
+            elif isinstance(re_val_list, str):
+                re_val = re_val_list
+            
+            # Hashing 함수 호출 (저장 X)
+            r_id = vocab.get_re_hash_id(re_val)
+            re_ids.append(r_id)
+            
+        return torch.tensor(std_ids, dtype=torch.long), torch.tensor(re_ids, dtype=torch.long)
+
+    def __getitem__(self, idx):
+        item = self.products[idx]
+        
+        # Contrastive Learning을 위한 2개의 View 생성
+        # 각각 서로 다른 Dropout이 적용됨
+        v1_std, v1_re = self._apply_dropout_and_convert(item)
+        v2_std, v2_re = self._apply_dropout_and_convert(item)
+        
+        return (v1_std, v1_re), (v2_std, v2_re)
+''' 
 class SimCSERecSysDataset(Dataset):
     def __init__(self, products: List[TrainingItem], dropout_prob: float = 0.2):
         self.products = products
@@ -337,7 +383,7 @@ class SimCSERecSysDataset(Dataset):
         view2 = self.input_feature_dropout(raw_product)
         
         return view1, view2
-
+'''
 
 
     

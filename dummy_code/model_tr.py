@@ -1,5 +1,123 @@
 
+
+
 """
+class CoarseToFineItemTower(nn.Module):
+
+    def __init__(self, embed_dim=EMBED_DIM_CAT, nhead=4, output_dim=OUTPUT_DIM_ITEM_TOWER):
+        super().__init__()
+        
+        # 1. vocab.py에서 STD와 RE의 분리된 어휘 크기 import (re_vocab은 나중에 fix하거나, 변경될떄 변수로)
+        std_vocab_size, re_vocab_size = vocab.get_vocab_sizes()
+        
+        # A. Dual Embedding (64d)
+        # 아마 Re_vocab에 데이터 좀 넣어놓자. 오류난다면?
+        # 단일 임베딩 대신, 분리된 어휘 크기를 사용
+        self.std_embedding = nn.Embedding(std_vocab_size, embed_dim, padding_idx=vocab.PAD_ID)
+        self.re_embedding = nn.Embedding(RE_MAX_CAPACITY, embed_dim, padding_idx=vocab.PAD_ID)
+        # B. Self-Attention Encoders (d_model=64)
+        encoder_layer = nn.TransformerEncoderLayer(d_model=embed_dim, nhead=nhead, batch_first=True)
+        self.std_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
+        self.re_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
+
+        # [고려중] Title Embedding (Tokenizer의 Vocab Size 사용)
+        '''
+        self.title_vocab_size = TOKENIZER.vocab_size
+        self.title_embedding = nn.Embedding(self.title_vocab_size, embed_dim, padding_idx=vocab.PAD_ID)
+        self.title_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
+        '''
+
+        
+        # C. Cross-Attention (d_model=64, nhead=4)
+        # 이 레이어는 Q=STD, K/V=RE로 사용
+        # (수정됨) Shape Vector (128d)가 제거되어 입력은 64d가 됨.
+        self.cross_attn = nn.MultiheadAttention(embed_dim, nhead, batch_first=True)
+        self.layer_norm = nn.LayerNorm(embed_dim)
+        
+        # D. Deep Residual Head (입력 차원: embed_dim = 64)
+        head_input_dim = embed_dim
+        self.head = DeepResidualHead(input_dim=head_input_dim, output_dim=output_dim)
+
+    def forward(self, std_input: torch.Tensor, re_input: torch.Tensor ) -> torch.Tensor:
+        # 1. 임베딩 (STD와 RE 분리 처리)
+        std_embed = self.std_embedding(std_input)
+        re_embed = self.re_embedding(re_input)
+        
+        # 2. Self-Attention Encoders
+        std_output = self.std_encoder(std_embed) # Shape: (B, L_std, D)
+        re_output = self.re_encoder(re_embed)   # Shape: (B, L_re, D)
+        
+        ### ---------------
+        #    제목에 대한 LLM 기반 slicing이 된다면, 제목을 Re attention에 concat하여 진행
+        #    학습데이터셋은 reinforced에 text_align 붙여놓고, 그거 여기애서 cross atten (eng)
+        ### ---------------
+
+        ''' 
+        title_embed = self.title_embedding(title_input)
+        title_output = self.title_encoder(title_embed)
+        re_context_output = torch.cat([re_output, title_output], dim=1)
+        re_mask = (re_input == vocab.PAD_ID)
+        title_mask = (title_input == vocab.PAD_ID)
+        combined_key_padding_mask = torch.cat([re_mask, title_mask], dim=1)
+        
+        '''
+        
+        ### 배치환경에서 no data re_input attn 배제 
+        re_padding_mask = (re_input == vocab.PAD_ID)
+        
+        is_all_padding = re_padding_mask.all(dim=1)
+        
+        # 곱셈을 위한 게이트 생성 (정보가 없으면 0.0, 있으면 1.0)
+        valid_gate = (~is_all_padding).float().view(-1, 1, 1)
+        
+    
+    
+    
+        
+        # 3. Cross-Attention (STD(Q)가 RE(K/V)를 참조)
+        # Query: STD (우리가 더 중요하다고 가정하는 기본적인 상품 정보)
+        # Key/Value: RE (선택적으로 보강할 세부 정보)
+        
+        # query, key, value 인자를 명시적으로 사용합니다.
+        attn_output, _ = self.cross_attn(
+            query=std_output,  
+            key=re_output,     
+            value=re_output,   
+            need_weights=False
+        )
+        
+        # re_input이 all zero 일 경우(batch 연산 특성 고려)
+        attn_output = attn_output * valid_gate
+        
+        
+        # 4. 잔차 연결(Residual Connection) 및 Layer Normalization
+        # STD의 원본 정보에 RE로부터 추출된 강화 정보(attn_output)를 더합니다.
+        fused_output = self.layer_norm(std_output + attn_output)
+        
+        # 5. 풀링 (Sequence -> Vector)
+        # 최종적으로 Item 임베딩을 얻기 위해 평균 풀링을 수행합니다.
+        # Shape: (B, D)
+
+        
+        pooled_output = fused_output.mean(dim=1) 
+
+        ## 5. Shape Fusion Logic (제거됨)
+        # v_fused = torch.cat([v_final, shape_vecs], dim=1) # 이 코드가 제거됨.
+        
+        # 6. Deep Residual Head
+        # Deep Head Pass (I : 64 -> O : 128)
+        final_vector = self.head(pooled_output)
+
+        return final_vector
+    
+
+
+
+
+
+
+
+
 class RichAttributeDataset(Dataset):
     
     #Stage 2 학습을 위한 데이터셋. 입력은 Stage 1의 128 pre-vector
