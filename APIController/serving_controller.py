@@ -91,7 +91,7 @@ def preprocess_batch_input(products: List[ProductInput]) -> Tuple[torch.Tensor, 
     # Shape: (Batch_Size, Num_Fields)
     t_std_batch = torch.tensor(batch_std_ids, dtype=torch.long, device=DEVICE)
     t_re_batch = torch.tensor(batch_re_ids, dtype=torch.long, device=DEVICE)
-    print("✅ t_std, t_re converted successfully.")
+
     return t_std_batch, t_re_batch
 
 
