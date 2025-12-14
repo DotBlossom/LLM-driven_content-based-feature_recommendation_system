@@ -1,5 +1,5 @@
 from fastapi import BackgroundTasks, FastAPI, Depends, HTTPException, APIRouter
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy import JSON, create_engine, Column, Integer,String, select
 from sqlalchemy.orm import sessionmaker, Session, DeclarativeBase, mapped_column
 from sqlalchemy.dialects.postgresql import insert as pg_insert
@@ -180,6 +180,91 @@ def ingest_products(payload: List[ProductCreateRequest], db: Session = Depends(g
         
         db.commit()
         return {"status": "success", "message": f"Saved {saved_count} items."}
+        
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+    
+    
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from database import get_db
+from database import UserProfile, UserInteraction
+
+class InteractionItem(BaseModel):
+    product_id: int
+    interaction_type: str = "view" # 기본값
+
+class UserDataInput(BaseModel):
+    """
+    API 요청 바디: 유저 1명의 정보와 구매 이력 리스트
+    """
+    user_id: int
+    gender: int = Field(..., description="0:Unk, 1:M, 2:F")
+    age_level: int = Field(..., description="0:Unk, 1:10s, 2:20s...")
+    
+    # 한 번에 여러 상품 이력을 올릴 수 있도록 리스트로 받음
+    history: List[InteractionItem] 
+
+class BatchUserUploadRequest(BaseModel):
+    """
+    N명의 유저 데이터를 한 번에 업로드
+    """
+    users: List[UserDataInput]
+
+router = APIRouter(prefix="/api/data/users", tags=["User Data Management"])
+
+@router.post("/batch-upload")
+def upload_user_batch_data(
+    payload: BatchUserUploadRequest, 
+    db: Session = Depends(get_db)
+):
+    """
+    [데이터 적재 API]
+    N명의 유저 프로필과 상품 상호작용(구매/클릭) 이력을 DB에 저장합니다.
+    이미 존재하는 유저는 프로필을 업데이트하고, 이력은 추가합니다.
+    """
+    try:
+        total_interactions = 0
+        
+        for user_data in payload.users:
+            # 1. UserProfile 조회 또는 생성 (Upsert)
+            user = db.query(UserProfile).filter(UserProfile.user_id == user_data.user_id).first()
+            
+            if not user:
+                user = UserProfile(
+                    user_id=user_data.user_id,
+                    gender=user_data.gender,
+                    age_level=user_data.age_level
+                )
+                db.add(user)
+            else:
+                # 이미 있으면 정보 업데이트
+                user.gender = user_data.gender
+                user.age_level = user_data.age_level
+            
+            db.flush() # user_id 확보를 위해 flush
+
+            # 2. Interactions 추가 (Bulk Insert 준비)
+            new_interactions = []
+            for item in user_data.history:
+                interaction = UserInteraction(
+                    user_id=user.user_id,
+                    product_id=item.product_id,
+                    interaction_type=item.interaction_type
+                )
+                new_interactions.append(interaction)
+            
+            if new_interactions:
+                db.add_all(new_interactions)
+                total_interactions += len(new_interactions)
+
+        db.commit()
+        
+        return {
+            "status": "success", 
+            "message": f"Saved {len(payload.users)} users and {total_interactions} interactions."
+        }
         
     except Exception as e:
         db.rollback()

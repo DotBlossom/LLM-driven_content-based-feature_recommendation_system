@@ -6,7 +6,7 @@ from requests import Session
 from sqlalchemy import select
 import torch
 from tqdm import tqdm
-from APIController.serving_controller import load_pretrained_vectors_from_db
+from APIController.serving_controller import fetch_training_data_from_db, load_pretrained_vectors_from_db
 from database import ProductInferenceInput, ProductInput, SessionLocal, get_db
 from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
 from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper, SimCSERecSysDataset
@@ -254,13 +254,16 @@ def train_user_tower_task(
     # 3. 데이터셋 준비 (Dummy Logic - 실제로는 DB User Log 테이블에서 쿼리해야 함)
     # TODO: 실제 DB에서 유저 로그(UserInteraction)를 긁어오는 로직으로 대체 필요
     print("📊 Fetching user interaction data...")
-    dummy_user_data = [
-        # 예시 데이터
-        {'history': [1001, 1002], 'target': 1003, 'gender': 1, 'age': 2} 
-        for _ in range(1000) # 1000개 더미 데이터
-    ]
     
-    dataset = UserTowerTrainDataset(dummy_user_data, product_id_map)
+    train_data = fetch_training_data_from_db(db_session, min_interactions=2)
+    
+    # 데이터가 너무 적으면 학습 중단 (Safety Check)
+    if len(train_data) < batch_size:
+        print("⚠️ Warning: Not enough data to train. At least one batch needed.")
+       
+    
+    
+    dataset = UserTowerTrainDataset(train_data, product_id_map)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
     
     # 4. Optimizer & Loss

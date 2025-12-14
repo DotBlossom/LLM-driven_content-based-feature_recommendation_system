@@ -1,3 +1,18 @@
+
+{
+  "users": [
+    {
+      "user_id": 101,
+      "gender": 1,
+      "age_level": 2,
+      "history": [
+        {"product_id": 5001, "interaction_type": "view"},
+        {"product_id": 5003, "interaction_type": "purchase"}
+      ]
+    }
+  ]
+}
+
 [
   {
     "product_id": 1,

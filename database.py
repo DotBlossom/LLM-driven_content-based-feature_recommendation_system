@@ -146,6 +146,88 @@ class BatchVectorOutput(BaseModel):
 
 
 
+
+
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, func, Index
+from sqlalchemy.orm import relationship, mapped_column
+from database import Base # 사용자의 database.py에서 Base를 가져옴
+
+class UserProfile(Base):
+    """
+    [유저 프로필 테이블]
+    User Tower의 [User Token] 생성을 위한 정적 메타데이터 저장
+    """
+    __tablename__ = "user_profiles"
+
+    user_id = Column(Integer, primary_key=True, index=True) # 실제 서비스의 User ID
+    
+    # 메타데이터 (User Tower 입력용)
+    # 예: gender (0:Unk, 1:M, 2:F), age (0:Unk, 1:10대, 2:20대...)
+    gender = Column(Integer, default=0) 
+    age_level = Column(Integer, default=0)
+    
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    
+    # 관계 설정 (1:N)
+    interactions = relationship("UserInteraction", back_populates="user")
+
+
+class UserInteraction(Base):
+    """
+    [유저 행동 로그 테이블]
+    User Tower의 [History Sequence] 생성을 위한 시계열 데이터
+    """
+    __tablename__ = "user_interactions"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    
+    user_id = Column(Integer, ForeignKey("user_profiles.user_id"), index=True)
+    
+    # 상품 ID (ProductInferenceVectors 테이블의 ID와 매핑됨)
+    product_id = Column(Integer, nullable=False, index=True)
+    
+    # 행동 타입 (purchase, view, cart 등 - 나중에 가중치 줄 때 사용 가능)
+    interaction_type = Column(String, default="view") 
+    
+    timestamp = Column(DateTime(timezone=True), server_default=func.now())
+
+    # 관계 설정
+    user = relationship("UserProfile", back_populates="interactions")
+
+    # 복합 인덱스 (쿼리 성능 최적화: 특정 유저의 이력을 시간순 조회)
+    __table_args__ = (
+        Index('idx_user_timestamp', "user_id", "timestamp"),
+    )
+
+
+
+from pydantic import BaseModel, Field
+from typing import List, Optional
+
+class InteractionItem(BaseModel):
+    product_id: int
+    interaction_type: str = "view" # 기본값
+
+class UserDataInput(BaseModel):
+    """
+    API 요청 바디: 유저 1명의 정보와 구매 이력 리스트
+    """
+    user_id: int
+    gender: int = Field(..., description="0:Unk, 1:M, 2:F")
+    age_level: int = Field(..., description="0:Unk, 1:10s, 2:20s...")
+    
+    # 한 번에 여러 상품 이력을 올릴 수 있도록 리스트로 받음
+    history: List[InteractionItem] 
+
+class BatchUserUploadRequest(BaseModel):
+    """
+    N명의 유저 데이터를 한 번에 업로드
+    """
+    users: List[UserDataInput]
+
+
+
+
 """
 class DBDataLoader:
     def __init__(self):
