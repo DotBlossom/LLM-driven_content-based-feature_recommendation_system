@@ -43,7 +43,7 @@ def collate_simcse(batch):
 def train_simcse_from_db(    
     encoder: nn.Module,       
     projector: nn.Module,
-    batch_size: int = Depends(get_global_batch_size),
+    batch_size: int,
     epochs: int = 5,
     lr: float = 1e-4
 ):

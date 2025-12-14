@@ -7,7 +7,6 @@ import uvicorn
 from pytorch_metric_learning import losses, miners, distances
 from utils.dependencies import initialize_global_models
 from utils.embed_items import embed_items_router
-from routers.gpu_test import gpu_test_router
 from APIController.controller import controller_router
 from database import engine, Base
 from APIController.serving_controller import serving_controller_router
@@ -63,7 +62,6 @@ app.add_middleware(
 
 #router
 api_router = APIRouter(prefix="/ai-api")
-api_router.include_router(gpu_test_router, prefix="/test")
 api_router.include_router(embed_items_router, prefix="/item")
 api_router.include_router(serving_controller_router, prefix="/serving")
 api_router.include_router(train_router, prefix="/train")

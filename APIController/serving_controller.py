@@ -218,14 +218,16 @@ def run_pipeline_and_save(
 @serving_controller_router.post("/train/start")
 async def start_training(background_tasks: BackgroundTasks,
                          encoder_instance: CoarseToFineItemTower = Depends(get_global_encoder), 
-                         projector_instance: OptimizedItemTower = Depends(get_global_projector)):
+                         projector_instance: OptimizedItemTower = Depends(get_global_projector),
+                         g_batch_size: int = Depends(get_global_batch_size)):
     """
     [API 2] DB에 있는 데이터로 SimCSE 학습을 시작합니다. (비동기 실행)
     """
     # 백그라운드에서 실행되도록 넘김 (API는 즉시 응답)
     background_tasks.add_task(train_simcse_from_db,
         encoder=encoder_instance,
-        projector=projector_instance
+        projector=projector_instance,
+        batch_size = g_batch_size
     )
     
     return {"message": "Training started in the background.", "status": "processing"}

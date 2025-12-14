@@ -108,6 +108,10 @@ class DeepResidualHead(nn.Module):
         x = self.expand(x)      # 64 -> 256
         x = self.res_blocks(x)  # 256 -> 256 (Deep Feature Extraction)
         x = self.project(x)     # 256 -> 128 (Final Output)
+        if not self.training:
+            # (B, 128)
+            final_sample = x[0, :6].detach().cpu().numpy()
+            print(f"[Head DEBUG] D. Final Output (B, {x.shape[1]}): {final_sample}")
         return x
  
 # ----------------------------------------------------------------------
@@ -197,6 +201,11 @@ class CoarseToFineItemTower(nn.Module):
         
         # Mean Pooling (Flatten 대신 사용 -> 필드 수 변화에 강인함)
         pooled = context_out.mean(dim=1) # (B, D)
+    
+        if not self.training:
+            # 첫 번째 샘플의 처음 6개 값만 출력
+            pooled_sample = pooled[0, :6].detach().cpu().numpy()
+            print(f"DEBUG: Pooled Vector (h) Sample (1st 6 values): {pooled_sample}")
         
         return self.head(pooled) # (B, 128)
     
@@ -305,9 +314,9 @@ class SimCSERecSysDataset(Dataset):
         # (2) Tensor Conversion Logic (Alignment)
         std_ids = []
         re_ids = []
-        
+        debug_output = {}
         # 미리 정의된 ALL_FIELD_KEYS 순서대로 순회하며 ID 추출
-        for key in ALL_FIELD_KEYS:
+        for idx, key in enumerate(ALL_FIELD_KEYS):
             # A. STD ID 추출
             std_val = clothes.get(key) # 없으면 None
             # None이면 MockVocab 내부에서 PAD_ID(0) 반환
@@ -327,6 +336,23 @@ class SimCSERecSysDataset(Dataset):
             r_id = vocab.get_re_hash_id(re_val)
             re_ids.append(r_id)
             
+            # --- 디버그 로그 기록 ---
+            if idx < 3: # 처음 3개 필드만 기록
+                debug_output[key] = {
+                    "STD_Val": std_val,
+                    "STD_ID": s_id,
+                    "RE_Val": re_val,
+                    "RE_ID_Hash": r_id
+                }
+
+        # --- 디버그 로그 출력 (배치에서 첫 번째 아이템만 가정하고 출력) ---
+        if product.product_id == self.products[0].product_id: # 첫 번째 상품에 대해서만 출력 (전체 상품 출력하면 너무 길어짐)
+            print("\n[DATASET DEBUG] Feature Extraction & Hashing Check:")
+            for k, v in debug_output.items():
+                print(f"  > Key: {k.upper()} | STD Val: '{v['STD_Val']}' -> ID {v['STD_ID']} | RE Val: '{v['RE_Val']}' -> ID {v['RE_ID_Hash']}")
+            print(f"  > Final Tensors Length: STD={len(std_ids)}, RE={len(re_ids)} (Should be {len(ALL_FIELD_KEYS)})")
+        # -------------------------------------------------------------
+            
         return torch.tensor(std_ids, dtype=torch.long), torch.tensor(re_ids, dtype=torch.long)
 
     def __getitem__(self, idx):
@@ -338,6 +364,12 @@ class SimCSERecSysDataset(Dataset):
         v2_std, v2_re = self._apply_dropout_and_convert(item)
         
         return (v1_std, v1_re), (v2_std, v2_re)
+
+
+
+
+
+
 ''' 
 class SimCSERecSysDataset(Dataset):
     def __init__(self, products: List[TrainingItem], dropout_prob: float = 0.2):
