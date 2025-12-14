@@ -7,7 +7,7 @@ import torch
 from torch.nn.utils.rnn import pad_sequence
 from typing import Any, Dict, List, Tuple
 from database import ProductInferenceInput, ProductInferenceVectors, ProductInput, Vectors, get_db
-from train import train_simcse_from_db
+from train import train_simcse_from_db, train_user_tower_task
 from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
 import utils.vocab as vocab 
 import numpy as np
@@ -288,6 +288,106 @@ def process_vectors_by_ids(
         "processed_count": processed_count, 
         "message": "On-demand processing completed."
     }
+
+
+
+# ------------------------------------------------------------------
+# API 4. User Tower Train
+# ------------------------------------------------------------------
+
+
+
+def load_pretrained_vectors_from_db(db_session: Session) -> Tuple[torch.Tensor, Dict[int, int]]:
+    """
+    [Stage 0] 데이터 준비
+    DB의 ProductInferenceVectors 테이블에서 (ID, Vector)를 로드하여
+    모델 초기화용 Matrix와 ID Mapping을 생성합니다.
+    """
+    print("⏳ [DB Loader] Fetching product vectors from DB...")
+    
+    # 1. DB Query: ID와 Serving용 벡터(128d)만 가져옴
+    results = db_session.query(
+        ProductInferenceVectors.id, 
+        ProductInferenceVectors.vector_serving
+    ).filter(
+        ProductInferenceVectors.vector_serving.isnot(None)
+    ).all()
+    
+    if not results:
+        raise ValueError("❌ DB에 저장된 아이템 벡터가 없습니다! Item Tower 추론을 먼저 수행하세요.")
+
+    # 2. 메타데이터 설정
+    num_products = len(results)
+    vector_dim = 128  # Item Tower Output Dimension
+    
+    # 0번 인덱스는 Padding을 위해 비워둠 (Index 1부터 시작)
+    # Shape: (전체상품수 + 1, 128)
+    embedding_matrix = torch.zeros((num_products + 1, vector_dim), dtype=torch.float32)
+    
+    id_map = {} # Real DB ID -> Model Index (0, 1, 2...)
+    
+    # 3. 매트릭스 채우기
+    print(f"📦 [DB Loader] Processing {num_products} items...")
+    
+    for idx, (real_id, vector_list) in enumerate(results, start=1):
+        # vector_list가 문자열이나 리스트로 올 수 있으므로 변환 처리 필요할 수 있음
+        # 여기서는 List[float]라고 가정
+        
+        # ID 매핑 (DB ID 1050 -> Model Index 1)
+        id_map[real_id] = idx 
+        
+        # 텐서 할당
+        embedding_matrix[idx] = torch.tensor(vector_list, dtype=torch.float32)
+        
+    print(f"✅ [DB Loader] Matrix Created. Shape: {embedding_matrix.shape}")
+    
+    return embedding_matrix, id_map
+
+
+
+
+@serving_controller_router.post("/train/user-tower/start")
+async def start_user_tower_training(
+    background_tasks: BackgroundTasks,
+    epochs: int = 10,
+    batch_size: int = 512,
+    lr: float = 1e-4,
+    db: Session = Depends(get_db)
+):
+    """
+    [User Tower Training API]
+    1. DB에서 학습된 Item Vector를 로딩합니다.
+    2. 유저 로그 데이터를 사용하여 User Tower를 학습시킵니다. (백그라운드)
+    """
+    
+    # 백그라운드 태스크 등록
+    # 주의: db 세션은 백그라운드 태스크가 끝날 때까지 살아있어야 하거나,
+    # 태스크 내부에서 새로 생성하는 것이 안전할 수 있습니다. 
+    # 여기서는 간단히 전달하지만, 실제로는 scoped_session 사용 권장.
+    background_tasks.add_task(
+        train_user_tower_task,
+        db_session=db,
+        epochs=epochs,
+        batch_size=batch_size,
+        lr=lr
+    )
+    
+    return {
+        "status": "success",
+        "message": "User Tower training started in background.",
+        "config": {
+            "epochs": epochs,
+            "batch_size": batch_size,
+            "lr": lr
+        }
+    }
+
+
+
+
+
+
+
 
 
 

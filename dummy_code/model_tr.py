@@ -2,6 +2,114 @@
 
 
 """
+class UserTower(nn.Module):
+    def __init__(
+        self, 
+        pretrained_item_matrix: torch.Tensor, # SimCSE로 학습된 아이템 벡터 (Freeze)
+        token_vocab_size: int,                # Tokenizer Vocab Size (for Concept)
+        output_dim=128,                       # 최종 출력 차원
+        history_max_len=50,
+        nhead=4,
+        dropout=0.2
+    ):
+        super().__init__()
+        
+        # 임베딩 차원 자동 감지 (보통 64 or 128)
+        self.embed_dim = pretrained_item_matrix.shape[1] 
+        
+        # -------------------------------------------------------
+        # 1. Item History Encoder (Behavior)
+        # -------------------------------------------------------
+        self.item_embedding = nn.Embedding.from_pretrained(
+            pretrained_item_matrix, 
+            freeze=True, 
+            padding_idx=0
+        )
+        self.pos_embedding = nn.Embedding(history_max_len, self.embed_dim)
+        
+        encoder_layer = nn.TransformerEncoderLayer(d_model=self.embed_dim, nhead=nhead, batch_first=True)
+        self.history_encoder = nn.TransformerEncoder(encoder_layer, num_layers=2)
+        
+        # -------------------------------------------------------
+        # 2. Cart Concept Encoder (Context)
+        # -------------------------------------------------------
+        self.concept_embedding = nn.Embedding(token_vocab_size, self.embed_dim, padding_idx=0)
+        self.concept_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
+        
+        # -------------------------------------------------------
+        # 3. Physical Profile Encoder 
+        # -------------------------------------------------------
+        # 키, 몸무게 2개의 수치를 받아서 embed_dim 크기로 확장합니다.
+        # Input: (B, 2) -> Output: (B, embed_dim)
+        self.profile_projector = nn.Sequential(
+            nn.Linear(2, self.embed_dim),       # 2개(키, 체중)를 벡터 공간으로 투영
+            nn.BatchNorm1d(self.embed_dim),     # 수치 스케일 보정
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(self.embed_dim, self.embed_dim) # 한 번 더 정제
+        )
+
+        # -------------------------------------------------------
+        # 4. Fusion & Output
+        # -------------------------------------------------------
+        # (History + Concept + Profile) = 3 * D
+        fusion_input_dim = self.embed_dim * 3 
+        
+        self.fusion_mlp = nn.Sequential(
+            nn.Linear(fusion_input_dim, fusion_input_dim),
+            nn.BatchNorm1d(fusion_input_dim),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(fusion_input_dim, output_dim) # 최종 차원 (Item Tower와 동일하게)
+        )
+
+    def forward(self, history_ids, concept_input, profile_features):
+
+        #Args:
+        #    history_ids (Tensor): (B, L_hist) - 아이템 ID 시퀀스
+        #    concept_input (Tensor): (B, L_txt) - 장바구니 컨셉 텍스트 토큰
+        #    profile_features (Tensor): (B, 2) - [Normalized Height, Normalized Weight]
+        #                              예: [[1.2, -0.5], [0.0, 0.8], ...] (Z-score 권장)
+
+        # --- A. Process History (Behavior) ---
+        hist_embed = self.item_embedding(history_ids)
+        B, L, _ = hist_embed.shape
+        
+        positions = torch.arange(L, device=history_ids.device).unsqueeze(0)
+        hist_embed = hist_embed + self.pos_embedding(positions)
+        
+        src_key_padding_mask = (history_ids == 0)
+        hist_output = self.history_encoder(hist_embed, src_key_padding_mask=src_key_padding_mask)
+        
+        # Mean Pooling
+        mask_expanded = (~src_key_padding_mask).unsqueeze(-1).float()
+        user_history_vec = (hist_output * mask_expanded).sum(dim=1) / mask_expanded.sum(dim=1).clamp(min=1e-9)
+
+        
+        # --- B. Process Cart Concept (Context) ---
+        concept_embed = self.concept_embedding(concept_input)
+        concept_mask = (concept_input == 0)
+        
+        concept_output = self.concept_encoder(concept_embed, src_key_padding_mask=concept_mask)
+        
+        # Mean Pooling
+        c_mask_expanded = (~concept_mask).unsqueeze(-1).float()
+        user_concept_vec = (concept_output * c_mask_expanded).sum(dim=1) / c_mask_expanded.sum(dim=1).clamp(min=1e-9)
+
+
+        # --- C. Process Physical Profile (Demographics) [NEW!] ---
+        # profile_features: (B, 2) -> (B, D)
+        user_profile_vec = self.profile_projector(profile_features)
+
+
+        # --- D. Final Fusion ---
+        # 3가지 벡터를 Concat: (B, D) + (B, D) + (B, D) -> (B, 3D)
+        combined = torch.cat([user_history_vec, user_concept_vec, user_profile_vec], dim=1)
+        
+        final_user_vector = self.fusion_mlp(combined)
+        
+        return final_user_vector
+
 class CoarseToFineItemTower(nn.Module):
 
     def __init__(self, embed_dim=EMBED_DIM_CAT, nhead=4, output_dim=OUTPUT_DIM_ITEM_TOWER):

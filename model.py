@@ -15,7 +15,7 @@ import numpy as np
 import math
 
 import utils.vocab as vocab
-from database import SessionLocal
+from database import ProductInferenceVectors, SessionLocal
 
 from sqlalchemy.orm import Session
 import copy
@@ -422,118 +422,187 @@ class SimCSERecSysDataset(Dataset):
 
     
 # ----------------------------------------------------------------------
-# 6. userTowerClass 
+# 6. userTowerClass
+#     
 # ----------------------------------------------------------------------
 
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
+import numpy as np
+from sqlalchemy.orm import Session
+from typing import Dict, Tuple
 
-class UserTower(nn.Module):
-    def __init__(
-        self, 
-        pretrained_item_matrix: torch.Tensor, # SimCSE로 학습된 아이템 벡터 (Freeze)
-        token_vocab_size: int,                # Tokenizer Vocab Size (for Concept)
-        output_dim=128,                       # 최종 출력 차원
-        history_max_len=50,
-        nhead=4,
-        dropout=0.2
-    ):
+# DB 모델 참조 (사용자 코드 기반)
+# from my_db_models import ProductInferenceVectors 
+
+def load_pretrained_vectors_from_db(db_session: Session) -> Tuple[torch.Tensor, Dict[int, int]]:
+    """
+    [기능]
+    1. DB에서 (product_id, vector) 쌍을 모두 가져옵니다.
+    2. DB ID -> Model Index 매핑을 생성합니다.
+    3. User Tower의 Embedding Layer에 넣을 Weight Matrix를 만듭니다.
+    
+    [Return]
+    - embedding_matrix: (Num_Products + 1, 128) - 0번은 Padding
+    - id_map: {real_db_id: model_index}
+    """
+    print("⏳ Fetching product vectors from DB...")
+    
+    # 1. DB Query (ID와 Serving Vector만 가져옴)
+    # vector_serving이 우리가 사용할 최종 아이템 벡터라고 가정
+    results = db_session.query(
+        ProductInferenceVectors.id, 
+        ProductInferenceVectors.vector_serving
+    ).filter(
+        ProductInferenceVectors.vector_serving.isnot(None)
+    ).all()
+    
+    if not results:
+        raise ValueError("DB에 저장된 아이템 벡터가 없습니다!")
+
+    # 2. 메타데이터 설정
+    num_products = len(results)
+    vector_dim = 128 # 고정 차원
+    
+    # 0번 인덱스는 Padding을 위해 비워둠 (Index 1부터 시작)
+    embedding_matrix = torch.zeros((num_products + 1, vector_dim), dtype=torch.float32)
+    id_map = {} # Real ID -> Model Index
+
+    # 3. 매핑 및 매트릭스 채우기
+    print(f"📦 Processing {num_products} items...")
+    
+    for idx, (real_id, vector_list) in enumerate(results, start=1):
+        # vector_list는 DB에서 List[float] 형태로 온다고 가정
+        if vector_list is None: continue
+            
+        # 매핑 저장
+        id_map[real_id] = idx 
+        
+        # 텐서에 값 할당
+        embedding_matrix[idx] = torch.tensor(vector_list, dtype=torch.float32)
+        
+    print("✅ Pretrained Embedding Matrix Created.")
+    print(f"   Shape: {embedding_matrix.shape}")
+    
+    return embedding_matrix, id_map
+
+class SymmetricUserTower(nn.Module):
+    def __init__(self, 
+                 num_total_products: int,    # DB에 있는 총 상품 개수 (Padding 제외)
+                 max_seq_len: int = 50,
+                 input_dim: int = 128,       # Item Vector 차원
+                 d_model: int = 128,
+                 nhead: int = 4,
+                 num_layers: int = 2,
+                 dropout: float = 0.1):
         super().__init__()
         
-        # 임베딩 차원 자동 감지 (보통 64 or 128)
-        self.embed_dim = pretrained_item_matrix.shape[1] 
+        self.max_seq_len = max_seq_len
         
-        # -------------------------------------------------------
-        # 1. Item History Encoder (Behavior)
-        # -------------------------------------------------------
-        self.item_embedding = nn.Embedding.from_pretrained(
-            pretrained_item_matrix, 
-            freeze=True, 
-            padding_idx=0
-        )
-        self.pos_embedding = nn.Embedding(history_max_len, self.embed_dim)
+        # --- 1. Embeddings ---
         
-        encoder_layer = nn.TransformerEncoderLayer(d_model=self.embed_dim, nhead=nhead, batch_first=True)
-        self.history_encoder = nn.TransformerEncoder(encoder_layer, num_layers=2)
+        # (A) Item Lookup Table (Pre-trained)
+        # num_embeddings = 상품개수 + 1 (for Padding Index 0)
+        self.item_embedding = nn.Embedding(num_total_products + 1, input_dim, padding_idx=0)
         
-        # -------------------------------------------------------
-        # 2. Cart Concept Encoder (Context)
-        # -------------------------------------------------------
-        self.concept_embedding = nn.Embedding(token_vocab_size, self.embed_dim, padding_idx=0)
-        self.concept_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
+        # (B) Positional Embedding
+        self.position_embedding = nn.Embedding(max_seq_len + 1, d_model)
         
-        # -------------------------------------------------------
-        # 3. Physical Profile Encoder 
-        # -------------------------------------------------------
-        # 키, 몸무게 2개의 수치를 받아서 embed_dim 크기로 확장합니다.
-        # Input: (B, 2) -> Output: (B, embed_dim)
+        # (C) User Profile (예시)
+        self.gender_emb = nn.Embedding(3, 16, padding_idx=0)
+        self.age_emb = nn.Embedding(10, 16, padding_idx=0)
         self.profile_projector = nn.Sequential(
-            nn.Linear(2, self.embed_dim),       # 2개(키, 체중)를 벡터 공간으로 투영
-            nn.BatchNorm1d(self.embed_dim),     # 수치 스케일 보정
-            nn.ReLU(),
-            nn.Dropout(dropout),
-            nn.Linear(self.embed_dim, self.embed_dim) # 한 번 더 정제
+            nn.Linear(16 + 16, d_model),
+            nn.LayerNorm(d_model),
+            nn.GELU()
         )
 
-        # -------------------------------------------------------
-        # 4. Fusion & Output
-        # -------------------------------------------------------
-        # (History + Concept + Profile) = 3 * D
-        fusion_input_dim = self.embed_dim * 3 
-        
-        self.fusion_mlp = nn.Sequential(
-            nn.Linear(fusion_input_dim, fusion_input_dim),
-            nn.BatchNorm1d(fusion_input_dim),
-            nn.ReLU(),
-            nn.Dropout(dropout),
-            nn.Linear(fusion_input_dim, output_dim) # 최종 차원 (Item Tower와 동일하게)
+        # --- 2. Encoder ---
+        encoder_layer = nn.TransformerEncoderLayer(
+            d_model=d_model, nhead=nhead, dim_feedforward=d_model*4,
+            batch_first=True, dropout=dropout, activation='gelu'
         )
+        self.transformer = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
+        
+        # --- 3. Head ---
+        self.head = DeepResidualHead(input_dim=d_model, output_dim=d_model)
 
-    def forward(self, history_ids, concept_input, profile_features):
+    def load_pretrained_weights(self, pretrained_matrix: torch.Tensor, freeze: bool = True):
         """
-        Args:
-            history_ids (Tensor): (B, L_hist) - 아이템 ID 시퀀스
-            concept_input (Tensor): (B, L_txt) - 장바구니 컨셉 텍스트 토큰
-            profile_features (Tensor): (B, 2) - [Normalized Height, Normalized Weight]
-                                      예: [[1.2, -0.5], [0.0, 0.8], ...] (Z-score 권장)
+        [핵심 로직] DB에서 가져온 벡터를 임베딩 레이어에 덮어씌웁니다.
         """
+        # 차원 검사
+        if self.item_embedding.weight.shape != pretrained_matrix.shape:
+            raise ValueError(f"Shape Mismatch! Model: {self.item_embedding.weight.shape}, DB: {pretrained_matrix.shape}")
+            
+        # 1. 가중치 복사 (Copy)
+        self.item_embedding.weight.data.copy_(pretrained_matrix)
+        print("✅ Pretrained Item Vectors Loaded into User Tower.")
         
-        # --- A. Process History (Behavior) ---
-        hist_embed = self.item_embedding(history_ids)
-        B, L, _ = hist_embed.shape
-        
-        positions = torch.arange(L, device=history_ids.device).unsqueeze(0)
-        hist_embed = hist_embed + self.pos_embedding(positions)
-        
-        src_key_padding_mask = (history_ids == 0)
-        hist_output = self.history_encoder(hist_embed, src_key_padding_mask=src_key_padding_mask)
-        
-        # Mean Pooling
-        mask_expanded = (~src_key_padding_mask).unsqueeze(-1).float()
-        user_history_vec = (hist_output * mask_expanded).sum(dim=1) / mask_expanded.sum(dim=1).clamp(min=1e-9)
+        # 2. 가중치 동결 (Freeze) - 아이템 벡터는 더 이상 학습되지 않음 (일반적)
+        if freeze:
+            self.item_embedding.weight.requires_grad = False
+            print("❄️ Item Embeddings are FROZEN (Not trainable).")
+        else:
+            print("🔥 Item Embeddings are TRAINABLE (Fine-tuning mode).")
 
+    def forward(self, history_ids, profile_data):
+        # ... (이전 코드와 동일: history_ids는 매핑된 Model Index여야 함) ...
+        B, L = history_ids.shape
+        device = history_ids.device
         
-        # --- B. Process Cart Concept (Context) ---
-        concept_embed = self.concept_embedding(concept_input)
-        concept_mask = (concept_input == 0)
+        # (A) Lookup -> (B, L, 128) : 여기서 DB 벡터가 튀어나옴
+        seq_emb = self.item_embedding(history_ids)
         
-        concept_output = self.concept_encoder(concept_embed, src_key_padding_mask=concept_mask)
+        # ... (이하 동일: Positional 더하고 Transformer 통과) ...
+        positions = torch.arange(L, device=device).unsqueeze(0).expand(B, L)
+        pos_emb = self.position_embedding(positions)
+        seq_emb = seq_emb + pos_emb
         
-        # Mean Pooling
-        c_mask_expanded = (~concept_mask).unsqueeze(-1).float()
-        user_concept_vec = (concept_output * c_mask_expanded).sum(dim=1) / c_mask_expanded.sum(dim=1).clamp(min=1e-9)
+        # Profile
+        g_emb = self.gender_emb(profile_data.get('gender', torch.zeros(B, dtype=torch.long, device=device)))
+        a_emb = self.age_emb(profile_data.get('age', torch.zeros(B, dtype=torch.long, device=device)))
+        profile_feat = torch.cat([g_emb, a_emb], dim=1)
+        user_token = self.profile_projector(profile_feat).unsqueeze(1)
+        
+        combined_seq = torch.cat([user_token, seq_emb], dim=1)
+        
+        key_padding_mask = (history_ids == 0)
+        user_token_mask = torch.zeros((B, 1), dtype=torch.bool, device=device)
+        combined_mask = torch.cat([user_token_mask, key_padding_mask], dim=1)
+        
+        output = self.transformer(combined_seq, src_key_padding_mask=combined_mask)
+        user_vector = output[:, 0, :]
+        
+        return self.head(user_vector)
 
-
-        # --- C. Process Physical Profile (Demographics) [NEW!] ---
-        # profile_features: (B, 2) -> (B, D)
-        user_profile_vec = self.profile_projector(profile_features)
-
-
-        # --- D. Final Fusion ---
-        # 3가지 벡터를 Concat: (B, D) + (B, D) + (B, D) -> (B, 3D)
-        combined = torch.cat([user_history_vec, user_concept_vec, user_profile_vec], dim=1)
+class TwoTowerRecSys(nn.Module):
+    """
+    [User Tower + Item Tower]
+    실제 서비스(Retrieval)를 위한 완전체 모델
+    """
+    def __init__(self, 
+                 item_tower: CoarseToFineItemTower, 
+                 user_tower: SymmetricUserTower):
+        super().__init__()
+        self.item_tower = item_tower
+        self.user_tower = user_tower
         
-        final_user_vector = self.fusion_mlp(combined)
+    def forward(self, 
+                # Item Inputs
+                std_input, re_input, 
+                # User Inputs
+                history_ids, profile_data):
         
-        return final_user_vector
+        # 1. Item Vector 생성 (Target Item)
+        # (B, 128)
+        target_item_vec = self.item_tower(std_input, re_input)
+        
+        # 2. User Vector 생성
+        # (B, 128)
+        user_vec = self.user_tower(history_ids, profile_data)
+        
+        # 3. Score Calculation (Dot Product)
+        # (B, 128) * (B, 128) -> (B,) sum
+        # 학습 시에는 보통 In-batch Negative 등을 사용하므로
+        # 여기서는 단순히 두 벡터를 리턴하거나, 유사도를 리턴
+        return user_vec, target_item_vec
