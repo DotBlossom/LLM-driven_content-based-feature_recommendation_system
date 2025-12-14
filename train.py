@@ -5,14 +5,15 @@ from pydantic import BaseModel
 from sqlalchemy import select
 import torch
 from tqdm import tqdm
-from database import ProductInput, SessionLocal
-from utils.dependencies import get_global_encoder, get_global_projector
+from database import ProductInferenceInput, ProductInput, SessionLocal
+from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
 from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper, SimCSERecSysDataset
 import torch.nn as nn
 import torch.nn.functional as F
 from pytorch_metric_learning import losses
 from torch.utils.data import DataLoader
 import os
+
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 train_router = APIRouter()
@@ -42,7 +43,7 @@ def collate_simcse(batch):
 def train_simcse_from_db(    
     encoder: nn.Module,       
     projector: nn.Module,
-    batch_size: int = 16, 
+    batch_size: int = Depends(get_global_batch_size),
     epochs: int = 5,
     lr: float = 1e-4
 ):
@@ -52,7 +53,7 @@ def train_simcse_from_db(
     db_session = SessionLocal()
     
     
-    stmt = select(ProductInput.product_id, ProductInput.feature_data)
+    stmt = select(ProductInferenceInput.product_id, ProductInferenceInput.feature_data)
     result = db_session.execute(stmt).mappings().all()
     
     if not result:

@@ -8,10 +8,10 @@ from torch.nn.utils.rnn import pad_sequence
 from typing import Any, Dict, List, Tuple
 from database import ProductInferenceInput, ProductInferenceVectors, ProductInput, Vectors, get_db
 from train import train_simcse_from_db
-from utils.dependencies import get_global_encoder, get_global_projector
+from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
 import utils.vocab as vocab 
 import numpy as np
-from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper
+from model import ALL_FIELD_KEYS, CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper
 from sqlalchemy.orm import Session
 from sqlalchemy.dialects.postgresql import insert  
 import torch.nn as nn
@@ -25,64 +25,81 @@ class ProductIdListSchema(BaseModel):
     product_ids: List[int]
 
 
-# func
+import torch
+from typing import List, Tuple, Dict, Any
+
+# 전역 변수 ALL_FIELD_KEYS가 정의되어 있어야 합니다.
+# 예: ALL_FIELD_KEYS = ["category", "season", "color", ...] 
+
 def preprocess_batch_input(products: List[ProductInput]) -> Tuple[torch.Tensor, torch.Tensor]:
-    batch_std_tokens = []
-    batch_re_tokens = []
+    """
+    [Residual Field Embedding용 전처리]
+    딕셔너리를 순회하는 것이 아니라, 고정된 'ALL_FIELD_KEYS'를 순회하여
+    Tensor의 각 인덱스가 항상 특정 필드(속성)를 가리키도록 정렬합니다.
+    """
+    batch_std_ids = []
+    batch_re_ids = []
     
     for product in products:
-        std_tokens = []
-        re_tokens = []
-        
-
+        # 1. 데이터 추출
         feature_data: Dict[str, Any] = getattr(product, 'feature_data', {})
-        
         clothes_data = feature_data.get("clothes", {})
         re_data = feature_data.get("reinforced_feature_value", {})
         
-        # 1. Standard Features 처리
-        if clothes_data:
-            # 딕셔너리 구조: {'key_name': ['value1', 'value2']}
-            for key, values in clothes_data.items():
-                if isinstance(values, list): # 값이 리스트인지 확인
-                    for v in values:
-                        tid = vocab.get_std_id(v)
-                        if tid > 0:
-                            std_tokens.append(tid)
-        
-        # 2. Reinforced Features 처리
-        if re_data:
-            for key, values in re_data.items():
-                if isinstance(values, list): # 값이 리스트인지 확인 (이전 대화에서 리스트 형태였음)
-                    for v in values:
-                        tid = vocab.get_re_id(v)
-                        if tid > 0:
-                            re_tokens.append(tid)
-        
-        # 예외 처리: 데이터가 비어있으면 [0] (PAD) 넣기
-        # (빈 리스트는 텐서 변환 시 문제를 일으킬 수 있음)
-        if not std_tokens: std_tokens = [0]
-        if not re_tokens: re_tokens = [0]
-        
-        # 리스트를 텐서로 변환하여 배치 리스트에 추가
-        batch_std_tokens.append(torch.tensor(std_tokens, dtype=torch.long))
-        batch_re_tokens.append(torch.tensor(re_tokens, dtype=torch.long))
-    
-    # 3. Padding 처리 및 Batch Tensor 생성
-    # batch_first=True -> 결과 모양이 (Batch_Size, Max_Seq_Len)이 됨
-    # padding_value=0 -> 빈 공간을 0으로 채움
-    t_std_batch = pad_sequence(batch_std_tokens, batch_first=True, padding_value=0).to(DEVICE)
-    t_re_batch = pad_sequence(batch_re_tokens, batch_first=True, padding_value=0).to(DEVICE)
-    
-    return t_std_batch, t_re_batch
+        row_std_ids = []
+        row_re_ids = []
 
+        # 2. [핵심] 고정된 Key 리스트를 순회 (순서 및 위치 보장)
+        for key in ALL_FIELD_KEYS:
+            
+            # --- A. STD ID 추출 ---
+            std_val = clothes_data.get(key)
+            
+            # 리스트로 들어오는 경우 첫 번째 값 사용 (단일 라벨 가정)
+            if isinstance(std_val, list) and len(std_val) > 0:
+                std_val = std_val[0]
+            elif isinstance(std_val, list) and len(std_val) == 0:
+                std_val = None
+                
+            # vocab.py의 함수 호출 (Key 정보도 함께 전달하여 확장성 확보)
+            # 값이 없으면(None) 내부에서 0(PAD) 반환
+            s_id = vocab.get_std_id(key, std_val)
+            row_std_ids.append(s_id)
+            
+            
+            # --- B. RE ID 추출 (Hashing) ---
+            re_val_list = re_data.get(key)
+            re_val = None
+            
+            # RE 데이터는 보통 List 형태이므로 첫 번째 값 추출
+            if re_val_list and isinstance(re_val_list, list) and len(re_val_list) > 0:
+                re_val = re_val_list[0]
+            elif isinstance(re_val_list, str):
+                re_val = re_val_list
+            
+            # Hashing 함수 호출 (저장 X, 즉시 변환)
+            # 값이 없으면(None) 내부에서 0(PAD) 반환
+            r_id = vocab.get_re_hash_id(re_val)
+            row_re_ids.append(r_id)
+
+        # 3. 행 단위 추가
+        # 이제 row_std_ids의 길이는 항상 len(ALL_FIELD_KEYS)로 고정됨
+        batch_std_ids.append(row_std_ids)
+        batch_re_ids.append(row_re_ids)
+    
+    # 4. 텐서 변환 (pad_sequence 불필요 -> torch.tensor로 직변환)
+    # Shape: (Batch_Size, Num_Fields)
+    t_std_batch = torch.tensor(batch_std_ids, dtype=torch.long, device=DEVICE)
+    t_re_batch = torch.tensor(batch_re_ids, dtype=torch.long, device=DEVICE)
+    print("✅ t_std, t_re converted successfully.")
+    return t_std_batch, t_re_batch
 
 
 
 def generate_item_vectors(
     products: List[ProductInput], 
     encoder: nn.Module 
-    #projector:nn.Module
+    
 ) -> Dict[int, List[float]]:
     """
     [Core Inference Logic]
@@ -125,7 +142,7 @@ def run_pipeline_and_save(
     db_session: Session, 
     products: List[ProductInferenceInput],
     encoder: nn.Module     
-    #projector: nn.Module,     
+    
 ):
     """
     [공통 로직] 
@@ -190,6 +207,7 @@ def run_pipeline_and_save(
         p.is_vectorized = True
     
     db_session.commit()
+    print("✅ Saved Item Vectors (by encoder) successfully.")
     return len(vector_map)
 
 
@@ -198,20 +216,25 @@ def run_pipeline_and_save(
 
 # --- API 2. 학습 요청 (Background Task) ---
 @serving_controller_router.post("/train/start")
-async def start_training(background_tasks: BackgroundTasks):
+async def start_training(background_tasks: BackgroundTasks,
+                         encoder_instance: CoarseToFineItemTower = Depends(get_global_encoder), 
+                         projector_instance: OptimizedItemTower = Depends(get_global_projector)):
     """
     [API 2] DB에 있는 데이터로 SimCSE 학습을 시작합니다. (비동기 실행)
     """
     # 백그라운드에서 실행되도록 넘김 (API는 즉시 응답)
-    background_tasks.add_task(train_simcse_from_db)
+    background_tasks.add_task(train_simcse_from_db,
+        encoder=encoder_instance,
+        projector=projector_instance
+    )
     
     return {"message": "Training started in the background.", "status": "processing"}
 
 
-
+# batch size 맞춰야함
 @serving_controller_router.post("/vectors/process-pending")
 def process_pending_vectors(
-    batch_size: int = 100, 
+    batch_size: int = Depends(get_global_batch_size),
     db: Session = Depends(get_db),
     # [수정] 모델 인스턴스 주입
     encoder: CoarseToFineItemTower = Depends(get_global_encoder),
@@ -227,7 +250,7 @@ def process_pending_vectors(
         return {"status": "success", "message": "No pending products to process."}
 
     # 2. 공통 파이프라인 실행 (모델 전달)
-    processed_count = run_pipeline_and_save(db, pending_products, encoder, projector)
+    processed_count = run_pipeline_and_save(db, pending_products, encoder)
     
     return {
         "status": "success", 

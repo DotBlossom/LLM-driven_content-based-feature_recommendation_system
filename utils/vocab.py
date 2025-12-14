@@ -81,17 +81,21 @@ STD_VOCAB_SIZE = len(STD_TOKEN_TO_ID) + 1  # (STD 토큰 개수) + PAD(1)
 
 
 
-
-def get_std_id(value: str) -> int:
+def get_std_id(key: str, value: str) -> int:
     """
     STD 토큰에 대한 정수 ID (1부터 시작)를 반환합니다.
-    STD에 없는 값은 0 (PAD)을 반환합니다.
+    
+    [수정 사항]
+    Dataset 코드와의 호환성을 위해 `key` 인자를 받도록 서명을 변경했습니다.
+    현재 로직에서는 Global Unique Value를 가정하므로 `key`는 사용하지 않지만,
+    호출 측(Dataset)에서 (key, value)를 넘겨주므로 이를 받아줘야 TypeError가 발생하지 않습니다.
     """
-    if value is None:
+    if not value:
         return PAD_ID
+    
+    # 입력값이 config에 정의된 문자열과 정확히 일치해야 함
+    # key는 현재 로직에서 참조하지 않음 (값 자체가 유니크하므로)
     return STD_TOKEN_TO_ID.get(str(value), PAD_ID)
-
-
 def get_re_hash_id(value: str) -> int:
     """
     [Stateless Hashing]

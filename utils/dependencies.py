@@ -28,6 +28,10 @@ def initialize_global_models():
     global_projector = OptimizedItemTower(input_dim=128, output_dim=128)
     print("✅ OptimizedItemTower 로드 완료.")
 
+    global global_batch_size
+    global_batch_size = 64
+    print(f"✅ Global Batch Size set to: {global_batch_size}")
+    
 
 # 3. 의존성 주입(DI) 제공자 함수
 def get_global_encoder() -> CoarseToFineItemTower:
@@ -43,3 +47,8 @@ def get_global_projector() -> OptimizedItemTower:
         raise Exception("Projector model has not been loaded yet. Check application startup events.")
     return global_projector
 
+def get_global_batch_size() -> int:
+    
+    if global_batch_size is None:
+        raise Exception("global batch size has not been defined")
+    return global_batch_size

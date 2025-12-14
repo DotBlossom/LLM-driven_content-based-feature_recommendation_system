@@ -32,7 +32,9 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # key 순서 == 오는 json 데이타Load 순서
 ALL_FIELD_KEYS = [
     "category", "season", "fiber_composition", "elasticity", "transparency", 
-    "isfleece", "color", "gender", "category_specification", 
+    "isfleece", "color", "gender", "category_specification", "top.length_type", "top.sleeve_length_type",
+    "top.neck_color_design","top.sleeve_design","pant.silhouette", "skirt.design",
+    "specification.metadata"
     # 필요한 만큼 추가...
 ]
 FIELD_TO_IDX = {k: i for i, k in enumerate(ALL_FIELD_KEYS)}
