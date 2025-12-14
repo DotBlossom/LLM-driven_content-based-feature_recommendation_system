@@ -10,6 +10,13 @@ API_CONN_ID = "fastapi_server"  # Airflow Connection ID (Admin -> Connections에
 DAG_ID = "product_embedding_pipeline"
 BATCH_SIZE = 100  # 한 번 요청 시 처리할 배치 사이즈 (FastAPI 설정과 맞춤)
 
+try:
+    from temp_data import TEST_PRODUCT_DATA
+except ImportError:
+    # 파일이 없는 경우를 대비한 안전 장치 (실제 데이터는 비어있음)
+    TEST_PRODUCT_DATA = []
+
+
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
@@ -31,10 +38,9 @@ def _preprocess_data(**context):
     logger.info("Starting Preprocessing...")
     
     # 예시: 전처리된 데이터를 생성 (실제로는 파일 로드 등 수행)
-    processed_data = [
-        {"product_id": 101, "feature_data": {"clothes": {"category": "shirt"}, "reinforced_feature_value": {"category": "hash_1"}}},
-        {"product_id": 102, "feature_data": {"clothes": {"category": "pants"}, "reinforced_feature_value": {"category": "hash_2"}}}
-    ]
+    processed_data = TEST_PRODUCT_DATA
+    if not processed_data:
+        logger.warning("TEST_PRODUCT_DATA is empty. Check temp_data.py.")
     
     # 다음 Task(Ingest)에서 사용할 수 있도록 XCom에 Push
     context['ti'].xcom_push(key='clean_data', value=processed_data)
