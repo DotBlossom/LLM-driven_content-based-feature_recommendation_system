@@ -1,0 +1,7 @@
+gitignore 했으나, 이미 특정 폴더/파일 올라간 경우
+
+
+git rm -r --cached [directory] 
+commit -> push 동일로직 
+
+git status -> 방금 액션 확인
