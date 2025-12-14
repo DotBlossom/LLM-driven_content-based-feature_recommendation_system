@@ -3,3 +3,5 @@ __pycache__/
 .env
 .vscode/
 airflow/.env
+airflow/airflow_data/
+airflow/dags/__pycache__
