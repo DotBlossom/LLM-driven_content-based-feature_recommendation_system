@@ -1,0 +1,169 @@
+[2025-12-14T05:59:53.810+0000] {processor.py:186} INFO - Started process (PID=59) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T05:59:53.811+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T05:59:53.813+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:53.813+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T05:59:53.840+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T05:59:54.010+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:54.010+0000] {override.py:1911} INFO - Created Permission View: can edit on DAG:product_training_weekly
+[2025-12-14T05:59:54.085+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:54.084+0000] {override.py:1911} INFO - Created Permission View: can delete on DAG:product_training_weekly
+[2025-12-14T05:59:54.140+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:54.139+0000] {override.py:1911} INFO - Created Permission View: can read on DAG:product_training_weekly
+[2025-12-14T05:59:54.200+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:54.199+0000] {override.py:1911} INFO - Created Permission View: menu access on DAG Run:product_training_weekly
+[2025-12-14T05:59:54.251+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:54.251+0000] {override.py:1911} INFO - Created Permission View: can delete on DAG Run:product_training_weekly
+[2025-12-14T05:59:54.287+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:54.287+0000] {override.py:1911} INFO - Created Permission View: can create on DAG Run:product_training_weekly
+[2025-12-14T05:59:54.328+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:54.328+0000] {override.py:1911} INFO - Created Permission View: can read on DAG Run:product_training_weekly
+[2025-12-14T05:59:54.329+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:54.329+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T05:59:54.367+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:54.367+0000] {dag.py:3262} INFO - Creating ORM DAG for product_training_weekly
+[2025-12-14T05:59:54.383+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:54.383+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T05:59:54.446+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.643 seconds
+[2025-12-14T06:00:24.764+0000] {processor.py:186} INFO - Started process (PID=715) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:00:24.765+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:00:24.767+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:00:24.767+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:00:24.793+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:00:24.826+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:00:24.826+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:00:24.860+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:00:24.860+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:00:24.917+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.159 seconds
+[2025-12-14T06:03:22.546+0000] {processor.py:186} INFO - Started process (PID=20) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:03:22.546+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:03:22.548+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:22.548+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:03:22.564+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:03:22.585+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:22.585+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:03:22.607+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:22.607+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:03:22.645+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.104 seconds
+[2025-12-14T06:03:52.770+0000] {processor.py:186} INFO - Started process (PID=31) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:03:52.771+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:03:52.773+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:52.772+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:03:52.789+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:03:52.809+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:52.809+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:03:52.829+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:52.829+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:03:52.868+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.103 seconds
+[2025-12-14T06:04:07.643+0000] {processor.py:186} INFO - Started process (PID=20) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:04:07.645+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:04:07.648+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:07.647+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:04:07.678+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:04:07.700+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:07.700+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:04:07.721+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:07.721+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:04:07.757+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.124 seconds
+[2025-12-14T06:04:38.897+0000] {processor.py:186} INFO - Started process (PID=32) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:04:38.897+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:04:38.899+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:38.899+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:04:38.916+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:04:38.940+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:38.940+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:04:38.963+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:38.963+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:04:39.020+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.129 seconds
+[2025-12-14T06:05:09.664+0000] {processor.py:186} INFO - Started process (PID=34) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:05:09.665+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:05:09.666+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:09.666+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:05:09.682+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:05:09.702+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:09.702+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:05:09.723+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:09.723+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:05:09.760+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.100 seconds
+[2025-12-14T06:05:40.231+0000] {processor.py:186} INFO - Started process (PID=36) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:05:40.232+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:05:40.234+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:40.234+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:05:40.253+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:05:40.274+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:40.274+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:05:40.293+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:40.293+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:05:40.333+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.110 seconds
+[2025-12-14T06:07:41.526+0000] {processor.py:186} INFO - Started process (PID=20) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:07:41.526+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:07:41.528+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:07:41.528+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:07:41.544+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:07:41.566+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:07:41.566+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:07:41.588+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:07:41.588+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:07:41.628+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.108 seconds
+[2025-12-14T06:08:12.644+0000] {processor.py:186} INFO - Started process (PID=31) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:08:12.645+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:08:12.646+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:12.646+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:08:12.663+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:08:12.684+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:12.684+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:08:12.707+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:12.707+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:08:12.748+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.110 seconds
+[2025-12-14T06:08:43.213+0000] {processor.py:186} INFO - Started process (PID=33) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:08:43.214+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:08:43.217+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:43.216+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:08:43.233+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:08:43.253+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:43.253+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:08:43.272+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:43.272+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:08:43.312+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.103 seconds
+[2025-12-14T06:09:13.762+0000] {processor.py:186} INFO - Started process (PID=35) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:09:13.763+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:09:13.764+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:13.764+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:09:13.779+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:09:13.801+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:13.801+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:09:13.821+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:13.821+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:09:13.857+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.099 seconds
+[2025-12-14T06:09:45.008+0000] {processor.py:186} INFO - Started process (PID=45) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:09:45.009+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:09:45.011+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:45.011+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:09:45.029+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:09:45.051+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:45.051+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:09:45.074+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:45.073+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:09:45.117+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.116 seconds
+[2025-12-14T06:10:15.720+0000] {processor.py:186} INFO - Started process (PID=47) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:10:15.721+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:10:15.724+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:15.723+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:10:15.742+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:10:15.765+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:15.765+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:10:15.789+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:15.789+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:10:15.832+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.117 seconds
+[2025-12-14T06:10:46.324+0000] {processor.py:186} INFO - Started process (PID=49) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:10:46.325+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:10:46.326+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:46.326+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:10:46.342+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:10:46.361+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:46.361+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:10:46.382+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:46.382+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:10:46.421+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.102 seconds
+[2025-12-14T06:11:17.104+0000] {processor.py:186} INFO - Started process (PID=51) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:11:17.105+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:11:17.107+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:17.106+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:11:17.123+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:11:17.148+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:17.148+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:11:17.174+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:17.174+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:11:17.220+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.121 seconds
+[2025-12-14T06:11:47.635+0000] {processor.py:186} INFO - Started process (PID=53) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:11:47.635+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:11:47.637+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:47.637+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:11:47.654+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:11:47.675+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:47.675+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:11:47.698+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:47.698+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:11:47.746+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.116 seconds
+[2025-12-14T06:12:18.351+0000] {processor.py:186} INFO - Started process (PID=56) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:12:18.352+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:12:18.354+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:18.354+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:12:18.369+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:12:18.388+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:18.388+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:12:18.408+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:18.408+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:12:18.462+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.115 seconds
+[2025-12-14T06:12:49.023+0000] {processor.py:186} INFO - Started process (PID=58) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:12:49.024+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:12:49.026+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:49.025+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:12:49.042+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:12:49.062+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:49.062+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:12:49.083+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:49.082+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:12:49.136+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.117 seconds
+[2025-12-14T06:13:19.715+0000] {processor.py:186} INFO - Started process (PID=60) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:13:19.716+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:13:19.718+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:19.718+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:13:19.733+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:13:19.753+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:19.753+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:13:19.778+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:19.778+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:13:19.829+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.118 seconds
+[2025-12-14T06:13:50.458+0000] {processor.py:186} INFO - Started process (PID=62) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:13:50.459+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:13:50.461+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:50.460+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:13:50.477+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:13:50.498+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:50.498+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:13:50.520+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:50.518+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:13:50.572+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.119 seconds
+[2025-12-14T06:14:21.168+0000] {processor.py:186} INFO - Started process (PID=64) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:14:21.169+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:14:21.170+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:21.170+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:14:21.187+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:14:21.207+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:21.207+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:14:21.247+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:21.247+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:14:21.286+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.123 seconds
+[2025-12-14T06:14:51.834+0000] {processor.py:186} INFO - Started process (PID=66) to work on /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:14:51.835+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_training_weekly.py for tasks to queue
+[2025-12-14T06:14:51.837+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:51.836+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:14:51.854+0000] {processor.py:925} INFO - DAG(s) 'product_training_weekly' retrieved from /usr/local/airflow/dags/product_training_weekly.py
+[2025-12-14T06:14:51.874+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:51.874+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:14:51.896+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:51.896+0000] {dag.py:4180} INFO - Setting next_dagrun for product_training_weekly to 2025-12-01 03:00:00+00:00, run_after=2025-12-08 03:00:00+00:00
+[2025-12-14T06:14:51.940+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_training_weekly.py took 0.110 seconds

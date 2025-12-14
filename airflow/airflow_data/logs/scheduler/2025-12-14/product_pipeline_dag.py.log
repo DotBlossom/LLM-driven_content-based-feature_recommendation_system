@@ -1,0 +1,169 @@
+[2025-12-14T05:59:51.983+0000] {processor.py:186} INFO - Started process (PID=21) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T05:59:51.985+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T05:59:51.986+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:51.986+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T05:59:52.011+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T05:59:52.166+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:52.166+0000] {override.py:1911} INFO - Created Permission View: can edit on DAG:product_embedding_pipeline
+[2025-12-14T05:59:52.208+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:52.208+0000] {override.py:1911} INFO - Created Permission View: can delete on DAG:product_embedding_pipeline
+[2025-12-14T05:59:52.260+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:52.260+0000] {override.py:1911} INFO - Created Permission View: can read on DAG:product_embedding_pipeline
+[2025-12-14T05:59:52.322+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:52.322+0000] {override.py:1911} INFO - Created Permission View: menu access on DAG Run:product_embedding_pipeline
+[2025-12-14T05:59:52.354+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:52.354+0000] {override.py:1911} INFO - Created Permission View: can delete on DAG Run:product_embedding_pipeline
+[2025-12-14T05:59:52.405+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:52.405+0000] {override.py:1911} INFO - Created Permission View: can create on DAG Run:product_embedding_pipeline
+[2025-12-14T05:59:52.438+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:52.438+0000] {override.py:1911} INFO - Created Permission View: can read on DAG Run:product_embedding_pipeline
+[2025-12-14T05:59:52.439+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:52.439+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T05:59:52.455+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:52.455+0000] {dag.py:3262} INFO - Creating ORM DAG for product_embedding_pipeline
+[2025-12-14T05:59:52.468+0000] {logging_mixin.py:190} INFO - [2025-12-14T05:59:52.468+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 04:00:00+00:00, run_after=2025-12-14 05:00:00+00:00
+[2025-12-14T05:59:52.532+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.554 seconds
+[2025-12-14T06:00:23.347+0000] {processor.py:186} INFO - Started process (PID=680) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:00:23.348+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:00:23.352+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:00:23.351+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:00:23.373+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:00:23.413+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:00:23.413+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:00:23.457+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:00:23.457+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 05:00:00+00:00, run_after=2025-12-14 06:00:00+00:00
+[2025-12-14T06:00:23.538+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.198 seconds
+[2025-12-14T06:03:21.178+0000] {processor.py:186} INFO - Started process (PID=16) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:03:21.179+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:03:21.181+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:21.181+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:03:21.201+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:03:21.226+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:21.226+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:03:21.252+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:21.252+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 05:00:00+00:00, run_after=2025-12-14 06:00:00+00:00
+[2025-12-14T06:03:21.292+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.143 seconds
+[2025-12-14T06:03:51.458+0000] {processor.py:186} INFO - Started process (PID=30) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:03:51.459+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:03:51.461+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:51.461+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:03:51.478+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:03:51.501+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:51.501+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:03:51.522+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:03:51.522+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 05:00:00+00:00, run_after=2025-12-14 06:00:00+00:00
+[2025-12-14T06:03:51.561+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.107 seconds
+[2025-12-14T06:04:06.266+0000] {processor.py:186} INFO - Started process (PID=16) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:04:06.268+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:04:06.270+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:06.269+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:04:06.292+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:04:06.315+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:06.315+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:04:06.336+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:06.336+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 05:00:00+00:00, run_after=2025-12-14 06:00:00+00:00
+[2025-12-14T06:04:06.382+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.123 seconds
+[2025-12-14T06:04:36.503+0000] {processor.py:186} INFO - Started process (PID=30) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:04:36.504+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:04:36.506+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:36.506+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:04:36.523+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:04:36.545+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:36.545+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:04:36.568+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:04:36.568+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 05:00:00+00:00, run_after=2025-12-14 06:00:00+00:00
+[2025-12-14T06:04:36.606+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.108 seconds
+[2025-12-14T06:05:07.291+0000] {processor.py:186} INFO - Started process (PID=33) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:05:07.291+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:05:07.293+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:07.293+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:05:07.310+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:05:07.332+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:07.332+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:05:07.353+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:07.353+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 05:00:00+00:00, run_after=2025-12-14 06:00:00+00:00
+[2025-12-14T06:05:07.390+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.105 seconds
+[2025-12-14T06:05:37.553+0000] {processor.py:186} INFO - Started process (PID=35) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:05:37.553+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:05:37.555+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:37.555+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:05:37.571+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:05:37.592+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:37.592+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:05:37.614+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:05:37.614+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 05:00:00+00:00, run_after=2025-12-14 06:00:00+00:00
+[2025-12-14T06:05:37.651+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.103 seconds
+[2025-12-14T06:07:40.163+0000] {processor.py:186} INFO - Started process (PID=17) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:07:40.164+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:07:40.165+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:07:40.165+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:07:40.184+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:07:40.210+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:07:40.210+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:07:40.232+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:07:40.232+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 05:00:00+00:00, run_after=2025-12-14 06:00:00+00:00
+[2025-12-14T06:07:40.274+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.115 seconds
+[2025-12-14T06:08:11.366+0000] {processor.py:186} INFO - Started process (PID=30) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:08:11.367+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:08:11.370+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:11.369+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:08:11.389+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:08:11.414+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:11.414+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:08:11.435+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:11.435+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 05:00:00+00:00, run_after=2025-12-14 06:00:00+00:00
+[2025-12-14T06:08:11.473+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.114 seconds
+[2025-12-14T06:08:41.940+0000] {processor.py:186} INFO - Started process (PID=32) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:08:41.942+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:08:41.946+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:41.945+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:08:41.967+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:08:41.990+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:41.990+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:08:42.012+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:08:42.011+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 05:00:00+00:00, run_after=2025-12-14 06:00:00+00:00
+[2025-12-14T06:08:42.051+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.118 seconds
+[2025-12-14T06:09:12.486+0000] {processor.py:186} INFO - Started process (PID=34) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:09:12.487+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:09:12.489+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:12.489+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:09:12.507+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:09:12.530+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:12.530+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:09:12.551+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:12.551+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 05:00:00+00:00, run_after=2025-12-14 06:00:00+00:00
+[2025-12-14T06:09:12.588+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.106 seconds
+[2025-12-14T06:09:43.696+0000] {processor.py:186} INFO - Started process (PID=44) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:09:43.697+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:09:43.699+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:43.699+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:09:43.715+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:09:43.736+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:43.736+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:09:43.758+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:09:43.758+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 06:00:00+00:00, run_after=2025-12-14 07:00:00+00:00
+[2025-12-14T06:09:43.797+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.105 seconds
+[2025-12-14T06:10:14.416+0000] {processor.py:186} INFO - Started process (PID=46) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:10:14.418+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:10:14.419+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:14.419+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:10:14.441+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:10:14.466+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:14.466+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:10:14.489+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:14.489+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 06:00:00+00:00, run_after=2025-12-14 07:00:00+00:00
+[2025-12-14T06:10:14.527+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.116 seconds
+[2025-12-14T06:10:45.027+0000] {processor.py:186} INFO - Started process (PID=48) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:10:45.028+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:10:45.030+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:45.030+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:10:45.048+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:10:45.070+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:45.070+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:10:45.093+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:10:45.093+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 06:00:00+00:00, run_after=2025-12-14 07:00:00+00:00
+[2025-12-14T06:10:45.131+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.109 seconds
+[2025-12-14T06:11:15.800+0000] {processor.py:186} INFO - Started process (PID=50) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:11:15.801+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:11:15.803+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:15.803+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:11:15.827+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:11:15.857+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:15.856+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:11:15.880+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:15.880+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 06:00:00+00:00, run_after=2025-12-14 07:00:00+00:00
+[2025-12-14T06:11:15.918+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.126 seconds
+[2025-12-14T06:11:46.332+0000] {processor.py:186} INFO - Started process (PID=52) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:11:46.333+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:11:46.334+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:46.334+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:11:46.351+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:11:46.371+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:46.371+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:11:46.394+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:11:46.394+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 06:00:00+00:00, run_after=2025-12-14 07:00:00+00:00
+[2025-12-14T06:11:46.437+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.109 seconds
+[2025-12-14T06:12:17.051+0000] {processor.py:186} INFO - Started process (PID=55) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:12:17.052+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:12:17.054+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:17.054+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:12:17.074+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:12:17.102+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:17.102+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:12:17.124+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:17.123+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 06:00:00+00:00, run_after=2025-12-14 07:00:00+00:00
+[2025-12-14T06:12:17.171+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.124 seconds
+[2025-12-14T06:12:47.722+0000] {processor.py:186} INFO - Started process (PID=57) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:12:47.723+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:12:47.725+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:47.725+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:12:47.742+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:12:47.764+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:47.764+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:12:47.787+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:12:47.786+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 06:00:00+00:00, run_after=2025-12-14 07:00:00+00:00
+[2025-12-14T06:12:47.834+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.118 seconds
+[2025-12-14T06:13:18.398+0000] {processor.py:186} INFO - Started process (PID=59) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:13:18.399+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:13:18.400+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:18.400+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:13:18.417+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:13:18.438+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:18.438+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:13:18.460+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:18.460+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 06:00:00+00:00, run_after=2025-12-14 07:00:00+00:00
+[2025-12-14T06:13:18.498+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.104 seconds
+[2025-12-14T06:13:49.159+0000] {processor.py:186} INFO - Started process (PID=61) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:13:49.160+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:13:49.162+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:49.162+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:13:49.180+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:13:49.205+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:49.205+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:13:49.227+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:13:49.226+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 06:00:00+00:00, run_after=2025-12-14 07:00:00+00:00
+[2025-12-14T06:13:49.265+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.110 seconds
+[2025-12-14T06:14:19.887+0000] {processor.py:186} INFO - Started process (PID=63) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:14:19.887+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:14:19.889+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:19.889+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:14:19.906+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:14:19.927+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:19.927+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:14:19.949+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:19.949+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 06:00:00+00:00, run_after=2025-12-14 07:00:00+00:00
+[2025-12-14T06:14:20.007+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.125 seconds
+[2025-12-14T06:14:50.545+0000] {processor.py:186} INFO - Started process (PID=65) to work on /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:14:50.546+0000] {processor.py:914} INFO - Processing file /usr/local/airflow/dags/product_pipeline_dag.py for tasks to queue
+[2025-12-14T06:14:50.548+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:50.548+0000] {dagbag.py:588} INFO - Filling up the DagBag from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:14:50.567+0000] {processor.py:925} INFO - DAG(s) 'product_embedding_pipeline' retrieved from /usr/local/airflow/dags/product_pipeline_dag.py
+[2025-12-14T06:14:50.593+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:50.593+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-12-14T06:14:50.617+0000] {logging_mixin.py:190} INFO - [2025-12-14T06:14:50.617+0000] {dag.py:4180} INFO - Setting next_dagrun for product_embedding_pipeline to 2025-12-14 06:00:00+00:00, run_after=2025-12-14 07:00:00+00:00
+[2025-12-14T06:14:50.661+0000] {processor.py:208} INFO - Processing /usr/local/airflow/dags/product_pipeline_dag.py took 0.122 seconds
