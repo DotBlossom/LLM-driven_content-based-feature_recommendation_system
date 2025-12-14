@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Tuple, Union
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from sqlalchemy import Column, select
@@ -10,9 +10,7 @@ from torch.utils.data import Dataset, DataLoader, Sampler
 from pytorch_metric_learning import losses, miners, distances
 from collections import defaultdict
 import random
-import os
 import numpy as np
-import math
 
 import utils.vocab as vocab
 from database import ProductInferenceVectors, SessionLocal
@@ -426,13 +424,6 @@ class SimCSERecSysDataset(Dataset):
 #     
 # ----------------------------------------------------------------------
 
-import torch
-import numpy as np
-from sqlalchemy.orm import Session
-from typing import Dict, Tuple
-
-# DB 모델 참조 (사용자 코드 기반)
-# from my_db_models import ProductInferenceVectors 
 
 def load_pretrained_vectors_from_db(db_session: Session) -> Tuple[torch.Tensor, Dict[int, int]]:
     """

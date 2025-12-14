@@ -7,20 +7,29 @@ from sqlalchemy import select
 import torch
 from tqdm import tqdm
 from APIController.serving_controller import fetch_training_data_from_db, load_pretrained_vectors_from_db
-from database import ProductInferenceInput, ProductInput, SessionLocal, get_db
-from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
+from database import ProductInferenceInput, SessionLocal, get_db
+from utils.dependencies import get_global_encoder, get_global_projector
 from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper, SimCSERecSysDataset
 import torch.nn as nn
 import torch.nn.functional as F
 from pytorch_metric_learning import losses
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset
 import os
+from models import SymmetricUserTower # 이전에 작성한 모델 클래스 import
+import torch.optim as optim
+
 
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 train_router = APIRouter()
 MODEL_DIR = "models"
 os.makedirs(MODEL_DIR, exist_ok=True)
+
+
+
+# ------------------------------------------------------
+# Item Tower Training Task
+# ------------------------------------------------------
 
 class TrainingItem(BaseModel):
 
@@ -163,21 +172,11 @@ def test_line(
     return {"message": "SimCSE training task initiated and completed."}
 
 
-# real inference(new)
-# ProductItem(DB) 받아서 아이템타워로직 거침 -> 최적화 행렬로 값 재정렬 -> 실제 itemtensor 확보
 
 
-
-
-
-
-
-
-import torch.optim as optim
-import torch.nn as nn
-from models import SymmetricUserTower # 이전에 작성한 모델 클래스 import
-
-from torch.utils.data import Dataset, DataLoader
+# ------------------------------------------------------
+# User Tower Training Task
+# ------------------------------------------------------
 
 
 class UserTowerTrainDataset(Dataset):
