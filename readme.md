@@ -11,14 +11,14 @@
 
 이후, 이들을 **단일 시퀀스(Single Sequence)로 결합하여 Unified Transformer 내에서 속성 간의 상호작용(Self-Attention)을 학습하고, 최종적으로 Deep Residual MLP Layer로 압축하여** 정교한 벡터 공간을 구축합니다.
 
-이를 바탕으로 **Two-Tower 구조의 Retrieval(후보 추출)** 과 **DeepFM 기반의 Reranking(정밀 정렬)** 파이프라인을 통해 유저의 신체 정보와 맥락까지 고려한 초개인화 추천을 제공합니다.
+이를 바탕으로 **Two-Tower 구조의 Retrieval(후보 추출)** 과 ** Reranking(정밀 정렬)** 파이프라인을 통해 유저의 신체 정보와 맥락까지 고려한 초개인화 추천을 제공합니다.
 
 
 ## Data Strategy & Processing Pipeline Overview
 
 본 프로젝트의 데이터 아키텍처는 **"LLM을 활용한 표현력 증강(Representation Enrichment)"** 을 기반으로 설계되었습니다.
 
-여기에 **AI Hub 패션 상품 데이터셋**과 호환 가능한 표준 스키마를 적용하여, 학습 데이터와 실제 서비스 데이터 간의 정합성을 보장하고 **Reranker(DeepFM, DLRM)** 등 고도화된 모듈로 즉시 확장 가능한 **범용적이고 유기적인 시스템**을 구축했습니다.
+여기에 **AI Hub 패션 상품 데이터셋**과 호환 가능한 표준 스키마를 적용하여, 학습 데이터와 실제 서비스 데이터 간의 정합성을 보장하고 **Reranker** 등 고도화된 모듈로 즉시 확장 가능한 **범용적이고 유기적인 시스템**을 구축했습니다.
 
 ---
 
@@ -71,37 +71,48 @@ graph LR
 ### 2. Stage 1: Item Tower (Coarse-to-Fine Representation)
 
 상품의 본질적인 의미(Semantic)를 벡터화하는 단계로, **TabTransformer** 구조를 응용하여 설계되었습니다.
+* **Backbone:** `Transformer Encoder` (Feature 간의 상호작용 및 문맥 파악)
+* **Optimization Target:** **Contrastive Learning (SimCSE)**
+    * **Feature Dropout:** 입력 피처 일부를 랜덤하게 마스킹하여 Augmentation 수행.
+    * 동일 아이템의 서로 다른 View를 Positive Pair로 학습하여 강건한 임베딩 생성.
+* **Key Technical Decisions:**
+    1.  **Advanced Deep Head (Progressive Expansion):**
+        * `64 -> 128 -> 256 -> 128`의 점진적 차원 확장/축소 구조.
+        * 정보 손실을 최소화하고 Gradient Flow를 안정화.
+    2.  **SE-Attention Block (Squeeze-and-Excitation):**
+        * 아이템마다 중요한 속성(예: 색상이 중요한 옷 vs 브랜드가 중요한 옷)을 모델이 스스로 판단하여 가중치를 부여.
+        * CNN/ResNet의 개념을 추천 시스템의 Feature Importance 로직으로 이식.
+    3.  **Optimization Tower (Projection Head):**
+        * `Linear -> LayerNorm -> GELU -> Linear`
+        * Representation(표현)과 Metric(거리) 학습을 분리하여 학습 안정성 확보.
 
-* **Architecture**
-    * **Unified Transformer Encoder** + **Deep Residual Head (MLP)**
-* **Hierarchical Residual Input (Core Logic)**
-    * **단일 시퀀스(Single Sequence)** 내에서 위계 구조를 수식적으로 강제합니다.
-    * **STD Token:** $Base\_Value + Field\_Key$
-    * **RE Token:** $RE\_Delta + \text{StopGrad}(STD\_Base) + Field\_Key$
-    * **Effect:** RE 피처는 독립적으로 존재하지 않고 STD를 **상속(Inheritance)** 받습니다. 이를 통해 데이터 희소성(Sparsity) 문제를 해결하고, 모델은 RE를 "STD와의 미세한 차이(Delta)"로 인식하여 학습 효율이 급증합니다.
-* **Training Objective (SimCSE)**
-    * **Augmentation:** 계층적 구조를 활용한 **Complementary Masking** (STD 위주 vs RE 위주) 및 Feature Dropout.
-    * **Loss:** `NTXentLoss` (InfoNCE). 모델은 같은 상품의 뼈대(STD)와 살(RE)이 본질적으로 같음을 학습합니다.
+### 2.2 Stage 2: User Tower (The Context Engine)
+유저의 시퀀스 데이터를 분석하여 '다음 클릭'을 예측합니다.
+
+* **Backbone:** `Transformer Encoder` (유저 행동의 시간적 흐름/맥락 파악)
+* **Symmetric Architecture:**
+    * Item Tower와 대칭되는 **Projection Head**를 도입.
+    * 유저의 시퀀스 정보를 아이템 벡터 공간(Manifold)으로 정밀하게 매핑.
+* **Output Normalization:**
+    * 최종 출력단에 `L2 Normalization` 필수 적용.
+    * 학습 시 **Temperature Scaling**을 도입하여 Cosine Similarity 학습의 수렴 속도 및 성능 극대화.
+* **Inference Strategy:**
+    * **User Vector Caching:** Redis를 활용한 Event-Driven 캐싱 전략으로 추론 Latency 최소화.
 
 ---
 
-### 3. Stage 2: User Tower (Multi-modal Retrieval)
-유저의 행동, 현재 의도(Context), 신체 정보를 결합하여 선호 아이템을 탐색합니다.
-* **3-Way Multi-modal Fusion:**
-    1.  **Behavior:** 과거 구매/클릭 이력 Sequence (Pre-trained Item Vector Lookup + Transformer).
-    2.  **Context:** 장바구니 컨셉 텍스트 (Transformer Encoder).
-    3.  **Profile:** 키(Height), 몸무게(Weight) 등 수치형 데이터 (Linear Projection & Z-score Norm).
-* **Strategy:** Item Tower의 가중치는 **Freeze(고정)**하고, 유저 타워만 학습하여 유저 벡터를 아이템 벡터 공간에 정렬(Alignment)시킵니다.
+## 3. Re-Ranking System: DCN-V2 (Deep & Cross Network)
+Retrieval 단계에서 추출된 Top-N 후보군을 대상으로, 유저-아이템-컨텍스트의 복합적인 상호작용을 계산하여 최종 순위를 결정합니다.
 
-### 4. Stage 3: Reranker (Fine-grained Ranking)
-Retrieval 단계에서 추려진 후보군을 정밀하게 재정렬합니다.
-* **Model:** **DeepFM (Deep Factorization Machine)**
-* **Weight Transfer:**
-    * SimCSE로 학습된 **STD/RE 임베딩 가중치**를 DeepFM의 Sparse Feature Embedding으로 **이식(Transfer)**하여 초기 학습 성능을 극대화합니다.
-* **Feature Interaction:**
-    * **Sparse Feat:** 카테고리, 브랜드, RE 속성 (Shared Embeddings).
-    * **Dense Feat:** 유저 키, 몸무게.
-    * **Implicit Interaction:** DNN을 통해 고차원 상호작용 모델링.
+### 3.1 Why DCN-V2?
+Two-Tower(내적 기반)가 놓치는 **"Feature 간의 비선형적/고차원적 결합"**을 포착하기 위함입니다.
+
+* **Cross Network:** 명시적인 Feature Interaction 학습 (예: `여름` $\times$ `린넨` $\times$ `유저선호_시원함`)
+* **Deep Network:** 암시적인 비선형 패턴 학습.
+* **Hybrid Output:** Cross와 Deep의 출력을 결합(Stack)하여 클릭 확률(CTR) 예측.
+
+### 3.2 Real-time Context Engineering
+정적인 벡터 매칭을 넘어, **"context_아마 custom 장바구니 및 기본 요소들"**을 반영하는 Dynamic Feature를 주입합니다.
 
 ---
 
