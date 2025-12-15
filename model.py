@@ -61,11 +61,11 @@ class ResidualBlock(nn.Module):
         # 블록 내에서 차원을 유지하는 2개의 Linear Layer (Skip Connection 전 처리)
         self.block = nn.Sequential(
             nn.Linear(dim, dim),
-            nn.BatchNorm1d(dim),
+            nn.LayerNorm(dim),
             nn.ReLU(),
             nn.Dropout(dropout),
             nn.Linear(dim, dim),
-            nn.BatchNorm1d(dim),
+            nn.LayerNorm(dim),
         )
         self.relu = nn.ReLU()
 
@@ -88,7 +88,7 @@ class DeepResidualHead(nn.Module):
         
         self.expand = nn.Sequential(
             nn.Linear(input_dim, hidden_dim),
-            nn.BatchNorm1d(hidden_dim),
+            nn.LayerNorm(hidden_dim),
             nn.ReLU(),
             nn.Dropout(0.1)
         )

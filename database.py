@@ -1,12 +1,13 @@
 import os
 from dotenv import load_dotenv
 from sqlalchemy import Boolean, create_engine,select, Column, Integer , String
-from sqlalchemy.orm import sessionmaker, DeclarativeBase, mapped_column
 from typing import List, Dict, Any, Optional
 from sqlalchemy.dialects.postgresql import JSONB
 from pgvector.sqlalchemy import Vector
 from pydantic import BaseModel, Field
 
+from sqlalchemy.orm import sessionmaker, mapped_column
+from sqlalchemy.orm import DeclarativeBase # 이 줄을 추가하여 임포트합니다.
 
 '''
 /stage1/batch-embed: Stage 1 모델을 사용하여 Raw Data -> DB(vector_pre) 파이프라인 수행.

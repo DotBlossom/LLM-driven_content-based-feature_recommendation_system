@@ -1,17 +1,12 @@
 from fastapi import BackgroundTasks, FastAPI, Depends, HTTPException, APIRouter
 from pydantic import BaseModel, Field
-from sqlalchemy import JSON, create_engine, Column, Integer,String, select
-from sqlalchemy.orm import sessionmaker, Session, DeclarativeBase, mapped_column
+
+from sqlalchemy.orm import Session
 from sqlalchemy.dialects.postgresql import insert as pg_insert
-from pgvector.sqlalchemy import Vector
+
 from database import ProductInferenceInput, get_db, Base
-from database import  ProductInput
-from train import  train_simcse_from_db
 from typing import List, Dict, Any, Optional
 
-import os
-import torch
-import numpy as np
 
 controller_router = APIRouter()
 
@@ -212,9 +207,8 @@ class BatchUserUploadRequest(BaseModel):
     """
     users: List[UserDataInput]
 
-router = APIRouter(prefix="/api/data/users", tags=["User Data Management"])
 
-@router.post("/batch-upload")
+@controller_router.post("/user/batch-upload")
 def upload_user_batch_data(
     payload: BatchUserUploadRequest, 
     db: Session = Depends(get_db)
@@ -269,3 +263,6 @@ def upload_user_batch_data(
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=str(e))
+    
+    
+    

@@ -6,7 +6,7 @@ from requests import Session
 from sqlalchemy import select
 import torch
 from tqdm import tqdm
-from APIController.serving_controller import fetch_training_data_from_db, load_pretrained_vectors_from_db
+from utils.util import fetch_training_data_from_db, load_pretrained_vectors_from_db
 from database import ProductInferenceInput, SessionLocal, get_db
 from utils.dependencies import get_global_encoder, get_global_projector
 from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper, SimCSERecSysDataset
@@ -15,7 +15,7 @@ import torch.nn.functional as F
 from pytorch_metric_learning import losses
 from torch.utils.data import DataLoader, Dataset
 import os
-from models import SymmetricUserTower # 이전에 작성한 모델 클래스 import
+from model import SymmetricUserTower 
 import torch.optim as optim
 
 
@@ -54,7 +54,7 @@ def collate_simcse(batch):
 def train_simcse_from_db(    
     encoder: nn.Module,       
     projector: nn.Module,
-    batch_size: int,
+    batch_size: int = 4,
     epochs: int = 5,
     lr: float = 1e-4
 ):
@@ -229,7 +229,7 @@ class UserTowerTrainDataset(Dataset):
 def train_user_tower_task(
     db_session: Session = Depends(get_db), 
     epochs: int = 5, 
-    batch_size: int = 512, 
+    batch_size: int = 4, 
     lr: float = 1e-4
 ):
     print("\n🚀 [Task Started] User Tower Training...")
@@ -255,7 +255,7 @@ def train_user_tower_task(
     print("📊 Fetching user interaction data...")
     
     train_data = fetch_training_data_from_db(db_session, min_interactions=2)
-    
+    print(f" 데이터 개수 확인: {len(train_data)}개")
     # 데이터가 너무 적으면 학습 중단 (Safety Check)
     if len(train_data) < batch_size:
         print("⚠️ Warning: Not enough data to train. At least one batch needed.")
@@ -263,7 +263,12 @@ def train_user_tower_task(
     
     
     dataset = UserTowerTrainDataset(train_data, product_id_map)
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+    dataloader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=True,
+        drop_last=True
+        )
     
     # 4. Optimizer & Loss
     optimizer = optim.AdamW(model.parameters(), lr=lr)
@@ -273,7 +278,7 @@ def train_user_tower_task(
     criterion = nn.CrossEntropyLoss()
 
     # 5. Training Loop
-    print(f"🔥 Start Training for {epochs} epochs...")
+    print(f"🔥 Start user Tower Training for {epochs} epochs...")
     
     for epoch in range(epochs):
         total_loss = 0
