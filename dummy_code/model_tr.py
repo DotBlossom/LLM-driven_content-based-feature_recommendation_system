@@ -2,6 +2,92 @@
 
 
 """
+
+class ResidualBlock(nn.Module):
+
+    def __init__(self, dim, dropout=0.2):
+        super().__init__()
+        # 블록 내에서 차원을 유지하는 2개의 Linear Layer (Skip Connection 전 처리)
+        self.block = nn.Sequential(
+            nn.Linear(dim, dim),
+            nn.LayerNorm(dim),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(dim, dim),
+            nn.LayerNorm(dim),
+        )
+        self.GELU = nn.GELU()
+
+    def forward(self, x):
+        residual = x
+        out = self.block(x)
+        # x + block(x) -> 잔차 연결 (핵심!)
+        return self.GELU(residual + out)
+
+# --- Deep Residual Head (Pyramid Funnel) ---
+class DeepResidualHead(nn.Module):
+
+    def __init__(self, input_dim, output_dim=OUTPUT_DIM_ITEM_TOWER):
+        super().__init__()
+        
+        # 1. 내부 확장 (Expansion): 표현력을 위해 4배 확장은 유지 (64 -> 256)
+        hidden_dim = input_dim * 4 
+        
+        self.expand = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.LayerNorm(hidden_dim),
+            nn.GELU(),
+            nn.Dropout(0.1)
+        )
+        
+        # 2. Deep Interaction (ResBlocks): 256차원에서 특징 추출
+        self.res_blocks = nn.Sequential(
+            ResidualBlock(hidden_dim), # 256 유지
+            ResidualBlock(hidden_dim)  # 256 유지
+        )
+        
+        # 3. Projection (Compression): 바로 목표 차원(128)으로 압축
+        self.project = nn.Linear(hidden_dim, output_dim) 
+        
+    def forward(self, x):
+        x = self.expand(x)      # 64 -> 256
+        x = self.res_blocks(x)  # 256 -> 256 (Deep Feature Extraction)
+        x = self.project(x)     # 256 -> 128 (Final Output)
+        if not self.training:
+            # (B, 128)
+            final_sample = x[0, :6].detach().cpu().numpy()
+            print(f"[Head DEBUG] D. Final Output (B, {x.shape[1]}): {final_sample}")
+        return x
+
+
+
+
+
+
+
+
+
+        # [STD_1, STD_2, ..., RE_1, RE_2, ...]
+        combined_seq = torch.cat([std_token, re_token], dim=1) # (B, 2*F, D)
+        
+        # --- [Logic 3] Transformer & Pooling ---
+        # PAD Masking: 여기서는 간단히 생략 (SimCLR 특성상 Noise도 정보가 됨)
+        # 정교하게 하려면 src_key_padding_mask 추가 가능
+        
+        context_out = self.transformer(combined_seq) # (B, 2*F, D)
+        
+        # Mean Pooling (Flatten 대신 사용 -> 필드 수 변화에 강인함)
+        pooled = context_out.mean(dim=1) # (B, D)
+    
+        if not self.training:
+            # 첫 번째 샘플의 처음 6개 값만 출력
+            pooled_sample = pooled[0, :6].detach().cpu().numpy()
+            print(f"DEBUG: Pooled Vector (h) Sample (1st 6 values): {pooled_sample}")
+        
+        return self.head(pooled) # (B, 128)
+    
+
+
 class UserTower(nn.Module):
     def __init__(
         self, 

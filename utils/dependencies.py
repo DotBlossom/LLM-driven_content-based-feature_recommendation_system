@@ -26,7 +26,7 @@ def initialize_rec_service():
     try:
         # RecommendationService 초기화
         # model_path는 'models/user_tower_latest.pth'와 같이 상대 경로를 권장합니다.
-        model_path = "models/user_tower_latest.pth" 
+        model_path = "models/user_tower_symmetric_final.pth" 
         rec_service = RecommendationService(db_session=db, model_path=model_path)
     except Exception as e:
         print(f"❌ Recommendation Service 초기화 중 오류 발생: {e}")

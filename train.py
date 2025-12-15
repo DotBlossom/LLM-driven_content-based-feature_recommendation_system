@@ -230,7 +230,8 @@ def train_user_tower_task(
     db_session: Session = Depends(get_db), 
     epochs: int = 5, 
     batch_size: int = 4, 
-    lr: float = 1e-4
+    lr: float = 1e-4,
+    temperature: float = 0.075 # Loss dx 낮음 : low , Loss div : High
 ):
     print("\n🚀 [Task Started] User Tower Training...")
     
@@ -278,15 +279,18 @@ def train_user_tower_task(
     criterion = nn.CrossEntropyLoss()
 
     # 5. Training Loop
-    print(f"🔥 Start user Tower Training for {epochs} epochs...")
+    print(f"🔥 Start Training for {epochs} epochs (Temp={temperature})...")
     
     for epoch in range(epochs):
         total_loss = 0
         steps = 0
         
-        for batch in dataloader:
+        
+        progress = tqdm(dataloader, desc=f"Epoch {epoch+1}/{epochs}")
+        
+        for batch in progress:
             history = batch['history'].to(DEVICE)     # (B, L)
-            target_idx = batch['target_idx'].to(DEVICE) # (B,) - 정답 아이템의 Index
+            target_idx = batch['target_idx'].to(DEVICE) # (B,)
             gender = batch['gender'].to(DEVICE)
             age = batch['age'].to(DEVICE)
             
@@ -294,39 +298,55 @@ def train_user_tower_task(
             
             optimizer.zero_grad()
             
+            # -----------------------------------------------------------
             # (A) User Vector 생성 (B, 128)
+            # -> 이미 모델 내부에서 F.normalize 되어서 나옴 (길이=1)
+            # -----------------------------------------------------------
             user_vectors = model(history, profile_data)
             
+            # -----------------------------------------------------------
             # (B) Target Item Vector 조회 (B, 128)
-            # User Tower가 품고 있는 Lookup Table(Frozen)을 그대로 사용해서 정답 벡터를 가져옴
+            # -> DB에서 온 벡터이므로 이미 정규화 되어 있음 (길이=1)
+            # -----------------------------------------------------------
             target_item_vectors = model.item_embedding(target_idx)
             
-            # (C) In-batch Negative Similarity Calculation (Logits)
-            # (B, 128) @ (128, B) -> (B, B) Matrix
-            # [i, j]는 i번째 유저와 j번째 아이템(Target)의 유사도
-            logits = torch.matmul(user_vectors, target_item_vectors.T)
+            # -----------------------------------------------------------
+            # (C) Similarity (Logits) Calculation & Scaling [핵심!]
+            # -----------------------------------------------------------
+            # 내적(Dot Product) 수행 -> 정규화된 벡터끼리의 내적이므로 코사인 유사도임 (-1.0 ~ 1.0)
+            # (B, 128) x (128, B) = (B, B) Matrix
+            sim_matrix = torch.matmul(user_vectors, target_item_vectors.T)
             
-            # Temperature Scaling (Optional, SimCSE처럼 0.05 등으로 나누기도 함)
-            logits = logits / 0.1 
+            # [Temperature Scaling]
+            # 값의 범위를 -1~1에서 -10~10 (temp=0.1 기준)으로 뻥튀기해줌.
+            # 그래야 Softmax가 뾰족해지고(Sharpening), Gradient가 잘 흐름.
+            logits = sim_matrix / temperature 
             
-            # (D) Labels
-            # i번째 유저는 i번째 아이템이 정답임 -> labels = [0, 1, 2, ..., B-1]
-            labels = torch.arange(logits.size(0)).to(DEVICE)
+            # -----------------------------------------------------------
+            # (D) Labeling (In-batch Negative)
+            # -----------------------------------------------------------
+            # i번째 유저는 i번째 아이템(대각선)이 정답.
+            # 나머지는 전부 Negative Sample로 간주.
+            labels = torch.arange(batch_size).to(DEVICE)
             
-            # (E) Loss & Backprop
+            # -----------------------------------------------------------
+            # (E) Loss & Update
+            # -----------------------------------------------------------
             loss = criterion(logits, labels)
+            
             loss.backward()
             optimizer.step()
             
             total_loss += loss.item()
             steps += 1
             
+            # 진행바에 현재 Loss 표시
+            progress.set_postfix({"loss": f"{loss.item():.4f}"})
+            
         avg_loss = total_loss / steps if steps > 0 else 0
-        print(f"   Shape: Epoch {epoch+1}/{epochs} | Avg Loss: {avg_loss:.4f}")
+        print(f"   Epoch {epoch+1} Summary | Avg Loss: {avg_loss:.4f}")
 
-    # 6. Save Model
-    save_path = "user_tower_latest.pth"
- 
-    torch.save(model.state_dict(),os.path.join(MODEL_DIR, save_path))
-    print(f"💾 Model saved to {MODEL_DIR}/{save_path}")
-    print("✅ User Tower Training Finished.")
+    # 5. Save Model
+    save_path = os.path.join(MODEL_DIR, "user_tower_symmetric_final.pth")
+    torch.save(model.state_dict(), save_path)
+    print(f"✅ Training Complete. Model saved to {save_path}")

@@ -47,64 +47,113 @@ RE_MAX_CAPACITY = 500 # <<<<<<<<<<<< RE 토큰의 최대 개수를 미리 할당
 # ----------------------------------------------------------------------
 
 # --- Residual Block (Corrected for Skip Connection) ---
-class ResidualBlock(nn.Module):
+class SEResidualBlock(nn.Module):
 
-    def __init__(self, dim, dropout=0.2):
+    def __init__(self, dim, dropout=0.2, expansion_factor=4):
         super().__init__()
-        # 블록 내에서 차원을 유지하는 2개의 Linear Layer (Skip Connection 전 처리)
+        
+        # 1. Feature Transformation (기존과 동일하되, SwiGLU 스타일로 확장 제안)
+        # 여기서는 안정적인 기존 Linear 방식을 유지하되 SE를 추가함
         self.block = nn.Sequential(
-            nn.Linear(dim, dim),
-            nn.LayerNorm(dim),
-            nn.ReLU(),
+            nn.Linear(dim, dim * expansion_factor), # 내부 확장
+            nn.LayerNorm(dim * expansion_factor),
+            nn.GELU(),
             nn.Dropout(dropout),
-            nn.Linear(dim, dim),
+            nn.Linear(dim * expansion_factor, dim), # 다시 압축
             nn.LayerNorm(dim),
         )
-        self.relu = nn.ReLU()
+        
+        # 2. SE-Block (Channel Attention, SE-Net 구조 반영, Gating=Relu 파트)
+        # 입력 벡터의 각 차원(feature)에 대해 중요도(0~1)를 계산
+        self.se_block = nn.Sequential(
+            nn.Linear(dim, dim // 4),  # Squeeze (정보 압축)
+            nn.ReLU(),
+            nn.Linear(dim // 4, dim),  # Excitation (중요도 복원)
+            nn.Sigmoid()               # 0~1 사이의 가중치로 변환
+        )
 
+        self.act = nn.GELU()
+    
     def forward(self, x):
         residual = x
+        
+        # (A) Main Path
         out = self.block(x)
-        # x + block(x) -> 잔차 연결 (핵심!)
-        return self.relu(residual + out)
+        
+        # (B) SE-Attention Path
+        # 벡터의 글로벌 정보를 보고, 어떤 차원을 강조할지 결정
+        # MLP 출력값(out)에 중요도(weight)를 곱함
+        weight = self.se_block(out)
+        out = out * weight 
+        
+        # (C) Residual Connection
+        return self.act(residual + out)
+
+
+
 
 # --- Deep Residual Head (Pyramid Funnel) ---
 class DeepResidualHead(nn.Module):
     """
-    Categorical Vector(64d) -> 256 -> 128
+    [Architecture]
+    Input(64) -> [Expand 2x] -> 128 -> [Expand 2x] -> 256 
+    -> [Deep Interaction (SE-ResBlock)] -> 256 
+    -> [Compression] -> Output(128)
+    + Global Skip Connection
     """
-    def __init__(self, input_dim, output_dim=OUTPUT_DIM_ITEM_TOWER):
+    def __init__(self, input_dim, output_dim=128):
         super().__init__()
         
-        # 1. 내부 확장 (Expansion): 표현력을 위해 4배 확장은 유지 (64 -> 256)
-        hidden_dim = input_dim * 4 
+        # 차원 정의 (64 -> 128 -> 256)
+        mid_dim = input_dim * 2      # 128
+        hidden_dim = input_dim * 4   # 256
         
-        self.expand = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim),
-            nn.LayerNorm(hidden_dim),
-            nn.ReLU(),
+        # 1. Progressive Expansion 
+        self.expand_layer1 = nn.Sequential(
+            nn.Linear(input_dim, mid_dim),  # 64 -> 128
+            nn.LayerNorm(mid_dim),
+            nn.GELU(),
             nn.Dropout(0.1)
         )
         
-        # 2. Deep Interaction (ResBlocks): 256차원에서 특징 추출
-        self.res_blocks = nn.Sequential(
-            ResidualBlock(hidden_dim), # 256 유지
-            ResidualBlock(hidden_dim)  # 256 유지
+        self.expand_layer2 = nn.Sequential(
+            nn.Linear(mid_dim, hidden_dim), # 128 -> 256
+            nn.LayerNorm(hidden_dim),
+            nn.GELU(),
+            nn.Dropout(0.1)
         )
         
-        # 3. Projection (Compression): 바로 목표 차원(128)으로 압축
-        self.project = nn.Linear(hidden_dim, output_dim) 
+        # 2. Deep Interaction (Peak Dimension에서 수행)
+        # 가장 차원이 높은 256 상태에서 SE-Block으로 정밀한 특징 추출 수행
+        self.res_blocks = nn.Sequential(
+            SEResidualBlock(hidden_dim, dropout=0.2), # 256 유지
+            SEResidualBlock(hidden_dim, dropout=0.2)  # 256 유지
+        )
         
+        # 3. Final Projection (Compression)
+        # 256 -> 128 로 압축하여 최종 임베딩 생성
+        self.final_proj = nn.Linear(hidden_dim, output_dim)
+        
+        # 4. Global Skip Connection (Input Shortcut) ResNet 잔차
+        self.input_skip = nn.Linear(input_dim, output_dim)
+
     def forward(self, x):
-        x = self.expand(x)      # 64 -> 256
-        x = self.res_blocks(x)  # 256 -> 256 (Deep Feature Extraction)
-        x = self.project(x)     # 256 -> 128 (Final Output)
-        if not self.training:
-            # (B, 128)
-            final_sample = x[0, :6].detach().cpu().numpy()
-            print(f"[Head DEBUG] D. Final Output (B, {x.shape[1]}): {final_sample}")
-        return x
- 
+        # --- [Step 1] Progressive Expansion ---
+        m = self.expand_layer1(x)  # 64 -> 128
+        h = self.expand_layer2(m)  # 128 -> 256
+        
+        # --- [Step 2] Feature Interaction (SE-Attention) ---
+        h = self.res_blocks(h)     # 256 -> 256
+        
+        # --- [Step 3] Compression ---
+        main_out = self.final_proj(h) # 256 -> 128
+        
+        # --- [Step 4] Global Shortcut ---
+        skip_out = self.input_skip(x) # 64 -> 128
+        
+        return main_out + skip_out
+    
+    
 # ----------------------------------------------------------------------
 # 3. Main Model: CoarseToFineItemTower (Stage 1)
 # ----------------------------------------------------------------------
@@ -181,25 +230,25 @@ class CoarseToFineItemTower(nn.Module):
         re_token = re_delta + std_val.detach() + field_emb
         
         # --- [Logic 2] Unified Sequence ---
-        # [STD_1, STD_2, ..., RE_1, RE_2, ...]
-        combined_seq = torch.cat([std_token, re_token], dim=1) # (B, 2*F, D)
+        combined_seq = torch.cat([std_token, re_token], dim=1)
         
-        # --- [Logic 3] Transformer & Pooling ---
-        # PAD Masking: 여기서는 간단히 생략 (SimCLR 특성상 Noise도 정보가 됨)
-        # 정교하게 하려면 src_key_padding_mask 추가 가능
+        # Mask 생성 (std_input이 0인 곳이 패딩이라고 가정)
+        # RE는 0이어도 std가 살아있으므로, STD 기준으로 마스크를 만드는 것이 안전
+        # (std_input이 PAD이면 해당 위치는 무효)
+        mask = (std_input != vocab.PAD_ID) # (B, F)
+        # std와 re를 concat했으므로 마스크도 두 배로 확장
+        mask = torch.cat([mask, mask], dim=1) # (B, 2*F)
         
-        context_out = self.transformer(combined_seq) # (B, 2*F, D)
+        context_out = self.transformer(combined_seq, src_key_padding_mask=~mask) 
         
-        # Mean Pooling (Flatten 대신 사용 -> 필드 수 변화에 강인함)
-        pooled = context_out.mean(dim=1) # (B, D)
-    
-        if not self.training:
-            # 첫 번째 샘플의 처음 6개 값만 출력
-            pooled_sample = pooled[0, :6].detach().cpu().numpy()
-            print(f"DEBUG: Pooled Vector (h) Sample (1st 6 values): {pooled_sample}")
+        # [Smart Pooling] 패딩 제외 평균
+        mask_expanded = mask.unsqueeze(-1).float() # (B, 2*F, 1)
+        sum_embeddings = torch.sum(context_out * mask_expanded, dim=1)
+        sum_mask = torch.clamp(mask_expanded.sum(dim=1), min=1e-9) # 0으로 나누기 방지
         
-        return self.head(pooled) # (B, 128)
-    
+        pooled = sum_embeddings / sum_mask
+        
+        return self.head(pooled)
     
 # ----------------------------------------------------------------------
 # 4. OptimizedItemTower (Stage 2 Adapter - Triplet Training)
@@ -208,20 +257,20 @@ class CoarseToFineItemTower(nn.Module):
 
 class OptimizedItemTower(nn.Module):
     """
-    [Optimization Tower]: Stage 1의 vector non-liner
+    [Optimization Tower]: Projection Head, Distance/metric Learning용
     """
     def __init__(self, input_dim=OUTPUT_DIM_ITEM_TOWER, output_dim=OUTPUT_DIM_TRIPLET):
         super().__init__()
         self.layer = nn.Sequential(
             nn.Linear(input_dim, input_dim),
             nn.LayerNorm(input_dim),
-            nn.GELU(), #nn.ReLU(), 
+            nn.GELU(), #nn.GELU(), 
             nn.Linear(input_dim, output_dim),
         )
         
     def forward(self, x):
         # [Log 1] 입력 데이터 확인
-        if not self.training: # 추론(eval) 모드일 때만 로그 출력 (학습 땐 너무 많음)
+        if not self.training: 
             print(f"\n  [Model Internal] Input Vector Shape: {x.shape}")
             print(f"  [Model Internal] Input Sample (First 5): {x[0, :5].detach().cpu().numpy()}")
 
@@ -508,7 +557,16 @@ class SymmetricUserTower(nn.Module):
         self.transformer = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
         
         # --- 3. Head ---
-        self.head = DeepResidualHead(input_dim=d_model, output_dim=d_model)
+        self.encoder_head = DeepResidualHead(input_dim=d_model, output_dim=d_model)
+        
+        # [Stage 2 영역: Projection & Matching]
+
+        self.projector = nn.Sequential(
+            nn.Linear(128, 128),
+            nn.LayerNorm(128),
+            nn.GELU(),
+            nn.Linear(128, 128)
+        )
 
     def load_pretrained_weights(self, pretrained_matrix: torch.Tensor, freeze: bool = True):
         """
@@ -557,7 +615,11 @@ class SymmetricUserTower(nn.Module):
         output = self.transformer(combined_seq, src_key_padding_mask=combined_mask)
         user_vector = output[:, 0, :]
         
-        return self.head(user_vector)
+        user_rep = self.encoder_head(user_vector)
+        user_final = self.projector(user_rep)
+        
+        # cos 하려면 load한 아이템 벡터(v=1)이랑 맞춰야하니까. 이거기준으로 tower 학습?
+        return F.normalize(user_final, p=2, dim=1)
 
 class TwoTowerRecSys(nn.Module):
     """

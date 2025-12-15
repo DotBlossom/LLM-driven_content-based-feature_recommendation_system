@@ -59,7 +59,7 @@ def _ingest_products(**context):
 
     # 2. HTTP Hook을 사용해 API 호출
     http = HttpHook(method='POST', http_conn_id=API_CONN_ID)
-    endpoint = "/products/ingest"
+    endpoint = "/api/controller/products/ingest"
     
     headers = {"Content-Type": "application/json"}
     response = http.run(endpoint, json=clean_data, headers=headers)
@@ -75,7 +75,7 @@ def _trigger_vectorization(**context):
     API가 한 번에 batch_size만큼만 처리하므로, 'processed_count'가 0이 될 때까지 반복 호출합니다.
     """
     http = HttpHook(method='POST', http_conn_id=API_CONN_ID)
-    endpoint = "/vectors/process-pending"
+    endpoint = "/ai-api/serving/vectors/process-pending"
     
     total_processed = 0
     loop_limit = 100 # 무한 루프 방지용 안전 장치
