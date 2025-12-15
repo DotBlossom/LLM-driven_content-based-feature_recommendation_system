@@ -7,14 +7,16 @@ import torch
 from torch.nn.utils.rnn import pad_sequence
 from typing import Any, Dict, List, Tuple
 from database import ProductInferenceInput, ProductInferenceVectors, ProductInput, UserProfile, Vectors, get_db
+from inference import RecommendationService
 from train import train_simcse_from_db, train_user_tower_task
-from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
+from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector, get_global_rec_service
 import utils.vocab as vocab 
 import numpy as np
 from model import ALL_FIELD_KEYS, CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper
 from sqlalchemy.orm import Session
 from sqlalchemy.dialects.postgresql import insert  
 import torch.nn as nn
+
 
 serving_controller_router = APIRouter()
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -334,7 +336,47 @@ async def start_user_tower_training(
 
 
 
+@serving_controller_router.get("/recommend/{user_id}")
+def recommend_products_to_user(
+    user_id: int, 
+    top_k: int = 5,
+    db: Session = Depends(get_db),
+    rec_service: RecommendationService = Depends(get_global_rec_service)
+):
+    """
+    [User-to-Item 추천]
+    1. 유저의 현재 상태(이력)를 기반으로 User Vector 추론
+    2. DB에서 유사한 상품 검색
+    """
 
+    if rec_service is None:
+        raise HTTPException(status_code=503, detail="Recommendation Service not ready")
+    
+    try:
+        # 1. User Vector 추론
+        user_vector = rec_service.get_user_vector(db, user_id)
+        
+        # 2. 유사 상품 검색 (Retrieval)
+        candidates = rec_service.retrieve_similar_items(db, user_vector, top_k=top_k)
+        
+        # 3. 결과 포맷팅
+        response = []
+        for pid, category, dist in candidates:
+            response.append({
+                "product_id": pid,
+                "category": category,
+                "score": 1 - dist # Cosine Distance는 0에 가까울수록 좋으므로 Score로 변환 (1에 가까울수록 좋음)
+            })
+            
+        return {
+            "user_id": user_id,
+            "recommendations": response
+        }
+        
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 
