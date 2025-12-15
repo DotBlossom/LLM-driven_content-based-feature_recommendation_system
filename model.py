@@ -1,24 +1,17 @@
-from typing import Any, Dict, List, Tuple, Union
-from fastapi import APIRouter, Depends
+from typing import Any, Dict, List, Tuple
+from fastapi import APIRouter
 from pydantic import BaseModel
-from sqlalchemy import Column, select
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader, Sampler
-from pytorch_metric_learning import losses, miners, distances
-from collections import defaultdict
+from torch.utils.data import Dataset
 import random
-import numpy as np
-
 import utils.vocab as vocab
-from database import ProductInferenceVectors, SessionLocal
-
+from database import ProductInferenceVectors
 from sqlalchemy.orm import Session
 import copy
 import random
-from tqdm import tqdm
+
 
 # ItemTowerEmbedding(S1) * N -> save..DB -> stage2 (optimizer pass -> triplet)  
 

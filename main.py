@@ -4,12 +4,11 @@ from fastapi.concurrency import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 import torch
 import uvicorn
-from pytorch_metric_learning import losses, miners, distances
-from inference import RecommendationService
+
 from utils.dependencies import initialize_global_models, initialize_rec_service
 from utils.embed_items import embed_items_router
 from APIController.controller import controller_router
-from database import SessionLocal, engine, Base
+from database import engine, Base
 from APIController.serving_controller import serving_controller_router
 
 from train import train_router
