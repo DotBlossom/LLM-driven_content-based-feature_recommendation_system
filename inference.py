@@ -117,6 +117,8 @@ class RecommendationService:
             "distance" # 거리 오름차순 (가까운 순)
         ).limit(top_k).all()
         
+        
+        
         print(f"[RETRIEVAL DEBUG] Found {len(results)} candidates from DB.")
         
         return results

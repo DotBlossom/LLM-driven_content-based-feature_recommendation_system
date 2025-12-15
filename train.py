@@ -350,3 +350,92 @@ def train_user_tower_task(
     save_path = os.path.join(MODEL_DIR, "user_tower_symmetric_final.pth")
     torch.save(model.state_dict(), save_path)
     print(f"✅ Training Complete. Model saved to {save_path}")
+    
+    
+    
+# ------------------------------------------------------
+# Ranker (DCN V2)Task
+# ------------------------------------------------------
+
+from torch.utils.data import Dataset, DataLoader
+
+class RankingDataset(Dataset):
+    def __init__(self, 
+                 interaction_logs,       # [user_id, item_id, label, context] 리스트
+                 user_vector_store,      # {user_id: vector(128)} (Redis/Memory)
+                 item_vector_store):     # {item_id: vector(128)} (DB/Memory)
+        self.logs = interaction_logs
+        self.u_store = user_vector_store
+        self.i_store = item_vector_store
+        
+        # OOV(Out of Vocabulary) 방지용 랜덤 벡터 (혹은 평균 벡터)
+        self.default_vec = torch.zeros(128) 
+
+    def __len__(self):
+        return len(self.logs)
+
+    def __getitem__(self, idx):
+        uid, iid, label, context = self.logs[idx]
+        
+        # 1. Feature Fetching 
+        u_vec = self.u_store.get(uid, self.default_vec)
+        i_vec = self.i_store.get(iid, self.default_vec)
+        
+        # Tensor 변환
+        u_tensor = torch.tensor(u_vec, dtype=torch.float32)
+        i_tensor = torch.tensor(i_vec, dtype=torch.float32)
+        c_tensor = torch.tensor(context, dtype=torch.float32) # 예: 시간 정보 등
+        
+        # Label (0 or 1)
+        label_tensor = torch.tensor(label, dtype=torch.float32)
+        
+        return u_tensor, i_tensor, c_tensor, label_tensor
+
+def train_ranking_model(
+    ranking_model, 
+    train_loader, 
+    epochs=5, 
+    lr=0.001
+):
+    # 1. Setup
+    ranking_model.to(DEVICE)
+    optimizer = torch.optim.AdamW(ranking_model.parameters(), lr=lr)
+    criterion = nn.BCELoss() # Binary Cross Entropy (출력이 Sigmoid여야 함)
+    
+    print("🔥 Start Ranking Model Training...")
+    
+    for epoch in range(epochs):
+        total_loss = 0
+        correct = 0
+        total_samples = 0
+        
+        for u_emb, i_emb, c_emb, labels in tqdm(train_loader):
+            u_emb = u_emb.to(DEVICE)
+            i_emb = i_emb.to(DEVICE)
+            c_emb = c_emb.to(DEVICE)
+            labels = labels.to(DEVICE).unsqueeze(1) # (B,) -> (B, 1) 차원 맞춤
+            
+            # 2. Forward
+            optimizer.zero_grad()
+            
+            # Ranking Model은 (0~1) 사이의 확률값을 뱉음
+            preds = ranking_model(u_emb, i_emb, c_emb) 
+            
+            # 3. Loss Calculation
+            loss = criterion(preds, labels)
+            
+            # 4. Backward
+            loss.backward()
+            optimizer.step()
+            
+            # 5. Accuracy Check (0.5 기준)
+            total_loss += loss.item()
+            predicted_labels = (preds > 0.5).float()
+            correct += (predicted_labels == labels).sum().item()
+            total_samples += labels.size(0)
+            
+        avg_loss = total_loss / len(train_loader)
+        accuracy = correct / total_samples
+        print(f"Epoch {epoch+1} | Loss: {avg_loss:.4f} | Acc: {accuracy*100:.2f}%")
+        
+    print("✅ Ranking Training Finished.")

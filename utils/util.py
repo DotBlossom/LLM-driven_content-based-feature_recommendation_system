@@ -101,3 +101,99 @@ def fetch_training_data_from_db(db: Session, min_interactions: int = 2):
             
     print(f"✅ Generated {len(training_samples)} real training samples from DB.")
     return training_samples
+
+## example usage: context vector support
+## context -> ranker context feature vector input
+
+import torch
+import math
+import numpy as np
+
+class ContextFeatureEngineer:
+    def __init__(self, output_dim=20):
+        self.output_dim = output_dim
+        
+    def _encode_cyclical_time(self, value, max_val):
+        """
+        [핵심 기법 1] 시간의 연속성 보존 (Cyclical Encoding)
+        23시와 0시는 숫자로는 멀지만(23 차이), 실제로는 1시간 차이입니다.
+        이를 Sin/Cos 좌표로 변환하여 원형 시계처럼 표현합니다.
+        """
+        sin_val = math.sin(2 * math.pi * value / max_val)
+        cos_val = math.cos(2 * math.pi * value / max_val)
+        return [sin_val, cos_val]
+
+    def _log_scale(self, value):
+        """
+        [핵심 기법 2] 값의 스케일 압축 (Log Transformation)
+        조회수 같은 데이터는 롱테일(Long-tail) 분포를 가집니다. (0 ~ 100만)
+        로그를 취해 격차를 줄여야 모델이 학습하기 좋습니다.
+        log(x + 1) : 0일 때 에러 방지
+        """
+        return math.log1p(max(0, value))
+
+    def _one_hot(self, value, num_classes):
+        """범주형 데이터 변환"""
+        vec = [0] * num_classes
+        if 0 <= value < num_classes:
+            vec[value] = 1
+        return vec
+
+    def process(self, raw_context: dict) -> torch.Tensor:
+        """
+        raw_context = {
+            'hour': 14,             # 0-23
+            'weekday': 0,           # 0(Mon)-6(Sun)
+            'view_count_1h': 150,   # 최근 1시간 조회수
+            'item_ctr': 0.05,       # 최근 CTR
+            'last_visit_min': 30,   # 마지막 접속 후 흐른 시간(분)
+            'device_type': 0        # 0:Mobile, 1:PC, 2:Tablet
+        }
+        """
+        features = []
+        
+        # 1. Time (Hour) -> 2 dims
+        features.extend(self._encode_cyclical_time(raw_context.get('hour', 0), 24))
+        
+        # 2. Weekday -> 7 dims
+        features.extend(self._one_hot(raw_context.get('weekday', 0), 7))
+        
+        # 3. Real-time Stats -> 2 dims
+        # 조회수는 로그 스케일링
+        features.append(self._log_scale(raw_context.get('view_count_1h', 0)))
+        # CTR은 이미 0~1이므로 그대로 (혹은 스케일링)
+        features.append(raw_context.get('item_ctr', 0.0))
+        
+        # 4. User Freshness -> 1 dim
+        # 10분 전 접속과 1000분 전 접속의 차이를 로그로 표현
+        features.append(self._log_scale(raw_context.get('last_visit_min', 0)))
+        
+        # 5. Device -> 3 dims
+        features.extend(self._one_hot(raw_context.get('device_type', 0), 3))
+        
+        # 현재까지 차원 수 계산: 2 + 7 + 1 + 1 + 1 + 3 = 15차원
+        
+        # 6. Padding (남은 5차원 0으로 채우기)
+        current_dim = len(features)
+        if current_dim < self.output_dim:
+            features.extend([0.0] * (self.output_dim - current_dim))
+        
+        return torch.tensor(features, dtype=torch.float32)
+
+# --- 사용 예시 ---
+engineer = ContextFeatureEngineer(output_dim=20)
+
+# 현재 상황 (오후 2시, 월요일, 모바일 접속, 인기있는 상품)
+current_ctx = {
+    'hour': 14,
+    'weekday': 0,
+    'view_count_1h': 1205, # 조회수 높음
+    'item_ctr': 0.12,
+    'last_visit_min': 5,   # 방금 전 접속
+    'device_type': 0       # 모바일
+}
+
+context_tensor = engineer.process(current_ctx)
+
+print(f"Context Vector Shape: {context_tensor.shape}")
+print(f"Context Vector Data: {context_tensor}")
