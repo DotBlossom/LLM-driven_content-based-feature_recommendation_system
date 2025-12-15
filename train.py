@@ -326,6 +326,7 @@ def train_user_tower_task(
 
     # 6. Save Model
     save_path = "user_tower_latest.pth"
-    torch.save(model.state_dict(), save_path)
-    print(f"💾 Model saved to {save_path}")
+ 
+    torch.save(model.state_dict(),os.path.join(MODEL_DIR, save_path))
+    print(f"💾 Model saved to {MODEL_DIR}/{save_path}")
     print("✅ User Tower Training Finished.")
