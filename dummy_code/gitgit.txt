@@ -5,3 +5,18 @@ git rm -r --cached [directory]
 commit -> push 동일로직 
 
 git status -> 방금 액션 확인
+
+
+
+
+모델 설계 흐름
+
+1. 어떠한 형태의 real 상품 data가 들어와도, std 도메인 한정 + re 도메인 유사 데이터 fluent 보장 구조를 이용 => 어찌보면 text tabular 데이터
+
+2. 그래서 추천모델 적용하기위해 찾다보니 데이터 특성 고려해보니 Resnet 기반 MLP를 도입했다.
+
+3. 그리고 마침 re, std 모델을 transfomer로 인코딩해서 피쳐를 맥락 부분에서 적절히 섞어주었다.
+
+4. 그래서 현재구조가 FT-Transfomer 부터 시작한 tabular 로직 기반으로하여 확장되었다 -> retriver
+
+5. ranker 도입할떄, dcn v2 도입해서, 트랜스포머로 피쳐 인코딩한거보다 더 명시적인 fcn으로 다 곱해서 연산하는 구조로 context까지 반영한다
