@@ -1,0 +1,4 @@
+Kaggle H&M Competition Data
+
+articles.csv
+transactions_train.csv (XGBoost Label)

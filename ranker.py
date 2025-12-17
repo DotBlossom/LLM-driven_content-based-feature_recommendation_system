@@ -1,8 +1,91 @@
+from catboost import CatBoostRanker, Pool
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+class GBDTRankingModel:
+    """
+    [CatBoost Re-ranker]
+    유저 벡터와 아이템 벡터를 결합하여 클릭 확률(Rank)을 예측합니다.
+    Low Data 환경에서 DCN보다 강건합니다.
+    """
+    def __init__(self, model_path="catboost_ranker.cbm"):
+        self.model_path = model_path
+        self.model = CatBoostRanker(
+            iterations=1000,          # 트리 개수 (학습량)
+            learning_rate=0.03,       # 학습률
+            depth=6,                  # 트리의 깊이 (피처 크로싱 복잡도)
+            loss_function='YetiRank', # 랭킹 전용 손실함수 (NDCG 최적화)
+            eval_metric='NDCG',
+            verbose=100,
+            task_type="GPU"           # GPU가 있다면 "GPU"로 변경 가능
+        )
+        self.is_fitted = False
 
+    def train(self, user_vectors, item_vectors, labels, group_ids):
+        """
+        Args:
+            user_vectors: (N, 128) numpy array
+            item_vectors: (N, 128) numpy array
+            labels: (N,) 0 or 1 (클릭 여부)
+            group_ids: (N,) 유저 ID (쿼리 단위 그룹핑을 위해 필수)
+        """
+        # 1. Feature Engineering
+        # 유저 벡터와 아이템 벡터를 옆으로 붙입니다. (Concatenation)
+        # 추가로 '내적값(유사도)'을 피처로 
+        dot_product = np.sum(user_vectors * item_vectors, axis=1, keepdims=True)
+        X = np.hstack([user_vectors, item_vectors, dot_product])
+        
+        # 2. CatBoost Pool 생성
+        train_pool = Pool(
+            data=X,
+            label=labels,
+            group_id=group_ids # "이 유저 안에서 순서를 맞춰라"라는 뜻
+        )
+        
+        # 3. 학습
+        print("🌲 Start Training CatBoost Ranker...")
+        self.model.fit(train_pool)
+        self.is_fitted = True
+        
+        # 4. 저장
+        self.model.save_model(self.model_path)
+        print(f"✅ Model saved to {self.model_path}")
+
+    def predict(self, user_vec, item_vecs):
+        """
+        [Inference]
+        user_vec: (128,)
+        item_vecs: (K, 128) - 후보 아이템 K개
+        Returns: (K,) scores
+        """
+        if not self.is_fitted:
+            # 모델 파일이 있으면 로드
+            try:
+                self.model.load_model(self.model_path)
+                self.is_fitted = True
+            except:
+                # 학습된 적 없으면 랜덤 점수 반환 (Cold Start 방어)
+                return np.random.rand(len(item_vecs))
+
+        # 1. User Vector 확장 (Broadcasting)
+        # (128,) -> (K, 128)
+        K = len(item_vecs)
+        user_batch = np.tile(user_vec, (K, 1))
+        
+        # 2. Feature 생성 (Train과 동일해야 함)
+        dot_product = np.sum(user_batch * item_vecs, axis=1, keepdims=True)
+        X_test = np.hstack([user_batch, item_vecs, dot_product])
+        
+        # 3. 예측
+        return self.model.predict(X_test)
+
+
+
+
+
+'''
 class CrossNet(nn.Module):
     """
     [Cross Network]
@@ -121,4 +204,6 @@ class RankingModel(nn.Module):
         # 이제 user_batch와 item_vecs의 크기가 (N, 128)로 같으므로 forward 사용 가능
         scores = self.forward(user_batch, item_vecs, context_batch)
         
-        return scores.squeeze() # (N, 1) -> (N,) 형태로 반환
+        return scores.squeeze() # (N, 1) -> (N,) 형태로 
+        
+'''

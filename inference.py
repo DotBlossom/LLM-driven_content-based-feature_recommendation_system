@@ -1,3 +1,4 @@
+import numpy as np
 import torch
 import torch.nn.functional as F
 from sqlalchemy.orm import Session
@@ -8,6 +9,7 @@ from typing import List, Dict, Tuple
 from model import SymmetricUserTower
 from database import UserProfile, UserInteraction
 from database import ProductInferenceVectors # 아이템 벡터 테이블
+from ranker import GBDTRankingModel
 from utils.util import load_pretrained_vectors_from_db
 import os
 
@@ -47,6 +49,8 @@ class RecommendationService:
         
         self.model.to(DEVICE)
         self.model.eval() # 추론 모드 (Dropout Off, LayerNorm 통계 고정)
+        
+        self.ranking_model = GBDTRankingModel(model_path="catboost_ranker.cbm")
         print("✅ Recommendation Service Ready.")
 
     def _prepare_user_input(self, user: UserProfile) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
@@ -159,3 +163,43 @@ class RecommendationService:
                 item_vectors[pid] = vec_list
 
         return item_vectors
+    
+    
+    def train_ranking_pipeline(self, db, params):
+        """
+        [GBDT Training Pipeline]
+        로그 수집 -> Numpy 변환 -> CatBoost 학습
+        """
+        # 1. 로그 수집 
+        logs = self.fetch_interaction_logs(db, params.log_limit)
+        if not logs: return
+
+        # 2. 데이터셋 구성 (List -> Numpy)
+        user_vecs_list = []
+        item_vecs_list = []
+        labels_list = []
+        groups_list = [] # 유저 ID (랭킹 그룹)
+
+        # DB에서 벡터 미리 가져오기 (User/Item Store)
+        # ... (기존 코드의 user_vector_store, item_vector_store 생성 로직 활용) ...
+        user_vector_store = {}
+        item_vector_store = {}
+        for uid, pid, label, _ in logs:
+            u_vec = user_vector_store.get(uid, np.zeros(128))
+            i_vec = item_vector_store.get(pid, np.zeros(128))
+            
+            user_vecs_list.append(u_vec)
+            item_vecs_list.append(i_vec)
+            labels_list.append(label)
+            groups_list.append(uid) # 중요: 유저 ID를 그룹 ID로 사용
+
+        # 3. Numpy 변환
+        X_user = np.array(user_vecs_list)
+        X_item = np.array(item_vecs_list)
+        y = np.array(labels_list)
+        groups = np.array(groups_list)
+
+        # 4. CatBoost 학습 호출
+        self.ranking_model.train(X_user, X_item, y, groups)
+        
+        return {"status": "success", "model": "CatBoost"}
