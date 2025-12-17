@@ -342,17 +342,16 @@ class SimCSERecSysDataset(Dataset):
     def _apply_dropout_and_convert(self, product: TrainingItem):
         """
         1. Feature Dropout 수행
-        2. Dictionary -> Fixed Size Tensor 변환 (Hashing 포함)
         """
-        # (1) Dropout Logic
-        # 원본 데이터 보호 (Shallow copy of dict structure is enough usually, but deep for safety)
+        # 1. Deep Copy (원본 보존)
         feat_data = copy.deepcopy(product.feature_data)
         
         clothes = feat_data.get("clothes", {})
         reinforced = feat_data.get("reinforced_feature_value", {})
         
-        # Random Dropout (Key 삭제)
+        # 2. Random Dropout (Key 삭제) - 여기가 데이터 증강(Augmentation) 핵심
         if self.dropout_prob > 0:
+            # list(...)로 감싸야 삭제 중 딕셔너리 크기 변경 에러 방지
             for k in list(clothes.keys()):
                 if random.random() < self.dropout_prob:
                     del clothes[k]
@@ -360,62 +359,23 @@ class SimCSERecSysDataset(Dataset):
                 if random.random() < self.dropout_prob:
                     del reinforced[k]
 
-        # (2) Tensor Conversion Logic (Alignment)
-        std_ids = []
-        re_ids = []
-        debug_output = {}
-        # 미리 정의된 ALL_FIELD_KEYS 순서대로 순회하며 ID 추출
-        for idx, key in enumerate(ALL_FIELD_KEYS):
-            # A. STD ID 추출
-            std_val = clothes.get(key) # 없으면 None
-            # None이면 MockVocab 내부에서 PAD_ID(0) 반환
-            s_id = vocab.get_std_id(key, std_val) 
-            std_ids.append(s_id)
-            
-            # B. RE ID 추출 (Hashing)
-            # RE 데이터는 리스트 형태일 수 있음 (["Matte Black"]) -> 첫번째 값 사용
-            re_val_list = reinforced.get(key)
-            re_val = None
-            if re_val_list and isinstance(re_val_list, list) and len(re_val_list) > 0:
-                re_val = re_val_list[0]
-            elif isinstance(re_val_list, str):
-                re_val = re_val_list
-            
-            # Hashing 함수 호출 (저장 X)
-            r_id = vocab.get_re_hash_id(re_val)
-            re_ids.append(r_id)
-            
-            # --- 디버그 로그 기록 ---
-            if idx < 3: # 처음 3개 필드만 기록
-                debug_output[key] = {
-                    "STD_Val": std_val,
-                    "STD_ID": s_id,
-                    "RE_Val": re_val,
-                    "RE_ID_Hash": r_id
-                }
-
-        # --- 디버그 로그 출력 (배치에서 첫 번째 아이템만 가정하고 출력) ---
-        if product.product_id == self.products[0].product_id: # 첫 번째 상품에 대해서만 출력 (전체 상품 출력하면 너무 길어짐)
-            print("\n[DATASET DEBUG] Feature Extraction & Hashing Check:")
-            for k, v in debug_output.items():
-                print(f"  > Key: {k.upper()} | STD Val: '{v['STD_Val']}' -> ID {v['STD_ID']} | RE Val: '{v['RE_Val']}' -> ID {v['RE_ID_Hash']}")
-            print(f"  > Final Tensors Length: STD={len(std_ids)}, RE={len(re_ids)} (Should be {len(ALL_FIELD_KEYS)})")
-        # -------------------------------------------------------------
-            
-        return torch.tensor(std_ids, dtype=torch.long), torch.tensor(re_ids, dtype=torch.long)
+        
+        # 3.preprocess_batch_input이 'feature_data' 속성을 참조하므로 그 형태를 맞춰줌.
+        return TrainingItem(
+            product_id=product.product_id,
+            feature_data=feat_data # 드랍아웃 적용된 데이터
+        )
 
     def __getitem__(self, idx):
         item = self.products[idx]
         
-        # Contrastive Learning을 위한 2개의 View 생성
-        # 각각 서로 다른 Dropout이 적용됨
-        v1_std, v1_re = self._apply_dropout_and_convert(item)
-        v2_std, v2_re = self._apply_dropout_and_convert(item)
+        # 뷰 1 생성 (드랍아웃 A 적용)
+        view1_obj = self._apply_dropout_and_convert(item)
         
-        return (v1_std, v1_re), (v2_std, v2_re)
-
-
-
+        # 뷰 2 생성 (드랍아웃 B 적용)
+        view2_obj = self._apply_dropout_and_convert(item)
+        
+        return view1_obj, view2_obj
 
 
 

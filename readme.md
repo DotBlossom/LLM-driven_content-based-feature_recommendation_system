@@ -187,7 +187,6 @@ LLM을 통해 구조화된 상품 데이터(JSON) 예시입니다. 데이터는 
       "isfleece": ["fleece_none"],
       "color": ["Beige"],
       "gender": ["both"],
-      "category_specification": ["outer"],
       "top.length_type": ["long"],
       "top.sleeve_length_type": ["long sleeves"],
       "top.neck_color_design": ["tailored collar"],
@@ -196,10 +195,19 @@ LLM을 통해 구조화된 상품 데이터(JSON) 예시입니다. 데이터는 
     "reinforced_feature_value": {
       "__description__": "Reinforced (RE) Features - LLM Augmented & Dynamic",
       "category": [""],
+      "season" : ["옷 질감이나 context 기반해서 더 세분화된 온도 범위 분류"],
       "fiber_composition": ["Cotton blend"],
       "color": [""],
-      "category_specification": ["trench coat"],
-      "specification.metadata": ["long", "winter wear"]
+      "same.metadata" : [""],
+
+      "fit.vibe": ["non image, only int ratio(key A size / Key B size) "],
+      "silhouette.shape": [],
+      "length.feeling": [],
+      "fabric.texture": [],
+      "fabric.weight": [],
+      "style.mood": [],
+      "tpo.occasion": []
+ 
     },
     "일반 서비스 산출 데이터" : ["가격, categorical features .. "]
   }

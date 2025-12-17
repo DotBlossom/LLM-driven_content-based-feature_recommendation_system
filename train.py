@@ -112,13 +112,14 @@ def train_simcse_from_db(
         
         progress = tqdm(dataloader, desc=f"Epoch {epoch+1}/{epochs}")
         for t_std1, t_re1, t_std2, t_re2 in progress:
+
             t_std1, t_re1 = t_std1.to(DEVICE), t_re1.to(DEVICE)
             t_std2, t_re2 = t_std2.to(DEVICE), t_re2.to(DEVICE)
             
             optimizer.zero_grad()
             
             
-            # Forward (Cross-Attention)
+            # Forward 
             emb1 = model(t_std1, t_re1)
             emb2 = model(t_std2, t_re2)
             

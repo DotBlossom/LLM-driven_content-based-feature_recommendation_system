@@ -7,8 +7,7 @@ import torch.nn.functional as F
 class GBDTRankingModel:
     """
     [CatBoost Re-ranker]
-    유저 벡터와 아이템 벡터를 결합하여 클릭 확률(Rank)을 예측합니다.
-    Low Data 환경에서 DCN보다 강건합니다.
+    유저 벡터와 아이템 벡터를 결합하여 클릭 확률(Rank)을 예측
     """
     def __init__(self, model_path="catboost_ranker.cbm"):
         self.model_path = model_path

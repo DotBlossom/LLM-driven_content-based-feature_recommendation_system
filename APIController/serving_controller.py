@@ -41,7 +41,8 @@ def preprocess_batch_input(products: List[Any]) -> Tuple[torch.Tensor, torch.Ten
     1. 개별 토크나이징 호출(N*M번)을 제거하고,
     2. 유효한 텍스트만 모아서 단 한 번의 Batch Tokenizing 수행
     """
-    
+
+            
     # 배치 크기 및 필드 수 계산
     B = len(products)
     F = len(ALL_FIELD_KEYS)

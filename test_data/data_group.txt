@@ -1,4 +1,17 @@
+Real data 2 (needed LLM convertings)
+
 Kaggle H&M Competition Data
 
 articles.csv
 transactions_train.csv (XGBoost Label)
+
+
+
+OR
+
+Real data 1 and Valid Data
+
+In batch Negative -> (XGBoost Label)
+
+LLM Persona Picks : Positive , others -> Negative
+Noise Products (init context, but metadata allowed)
