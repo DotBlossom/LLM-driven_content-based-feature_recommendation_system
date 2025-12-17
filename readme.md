@@ -258,6 +258,7 @@ RQ4: Data가 결국 LLM based reinfoece -> weight의 분포를 어떻게 고려�
 
 RQ5: Residual 구조 여러곳에서 사용 (Encoder + ) -> concat vector가 정말 차원상에서 orth 비스무리 하게 가는지 ?
 
+RQ6: regional data props + Multimedia(raw text, contextual text, image, specification props OCR) -> LLM Converter -> same JSON
 
 
 

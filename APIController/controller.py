@@ -265,4 +265,68 @@ def upload_user_batch_data(
         raise HTTPException(status_code=500, detail=str(e))
     
     
+
+
+
+# 제외할 필드 목록 (metadata.clothes. 뒷부분 기준)
+EXCLUDE_FIELDS = {
+    "washing_method",
+    "bleach",
+    "ironing",
+    "drycleaning",
+    "wringing",
+    "drying"
+}
+
+def transform_item(item: Dict[str, Any]) -> Dict[str, Any]:
+    """단일 아이템을 요구사항에 맞춰 변환하는 함수"""
     
+    # 1. dataset.id 추출
+    dataset_info = item.get("dataset", {})
+    product_id = dataset_info.get("dataset.id")
+
+    # metadata.clothes 추출
+    clothes_raw = item.get("metadata.clothes", {})
+    
+    transformed_clothes = {}
+
+    for key, value in clothes_raw.items():
+        # 2. value가 null 또는 문자열 "null"인 행 제거
+        if value is None or value == "null":
+            continue
+
+        # 키 처리: "metadata.clothes.type" -> "type"
+        # prefix("metadata.clothes.") 제거
+        clean_key = key.replace("metadata.clothes.", "")
+
+        # 4. washing_method ~ drying 제거 확인
+        if clean_key in EXCLUDE_FIELDS:
+            continue
+
+        # 5. type -> category 로 키 변경
+        if clean_key == "type":
+            clean_key = "category"
+
+        transformed_clothes[clean_key] = value
+
+    # 5. Output Json 형태 구성
+    return {
+        "product_id": product_id,
+        "feature_data": {
+            "clothes": transformed_clothes,
+            "reinforced_feature_value": {}
+        }
+    }
+
+
+@controller_router.post("/transform", response_model=List[Dict[str, Any]])
+def transform_dataset(data: List[Dict[str, Any]]):
+    """
+    N개의 JSON 리스트를 받아 요구사항에 맞게 변환하여 반환합니다.
+    """
+    try:
+        results = [transform_item(item) for item in data]
+        return results
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
