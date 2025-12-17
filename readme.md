@@ -248,7 +248,7 @@ RQ3: STD , RE 구조에서 field 기반 Transformer Encoder를 사용 ~ -> 강�
 
 RQ4: Data가 결국 LLM based reinfoece -> weight의 분포를 어떻게 고려해서 Regulation 함?
 
-RQ5: Residual 구조 여러곳에서 사용 (Encoder + ) -> concat vector가 정말 차원상에서 orth 하게 가는지 ?
+RQ5: Residual 구조 여러곳에서 사용 (Encoder + ) -> concat vector가 정말 차원상에서 orth 비스무리 하게 가는지 ?
 
 
 
