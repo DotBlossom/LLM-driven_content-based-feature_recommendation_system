@@ -10,8 +10,9 @@ from transformers import AutoTokenizer
 
 # 1. 가볍고 성능 좋은 Tokenizer 로드 (한 번만 로드)
 # 한국어/영어 혼합이라면 'bert-base-multilingual-cased' 또는 경량화된 모델 추천
-TOKENIZER = AutoTokenizer.from_pretrained("distilbert-base-multilingual-cased")
-TITLE_MAX_LEN = 32  # 제목은 핵심만 남겼으므로 길지 않게 설정
+RE_TOKENIZER = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+RE_VOCAB_SIZE = RE_TOKENIZER.vocab_size  # 약 30,522개
+RE_MAX_TOKEN_LEN = 12
 
 # Disentangled Representation 위한거임../ 그리고 cross attention으로 qyery 강화
 
@@ -37,7 +38,6 @@ STD_VOCAB_CONFIG = {
         "Black", "White", "Gray", "Red", "Orange", "Pink", "Yellow", "Brown", "Green", "Blue", "Purple", "Beige", "Mixed"
     ],
     "gender": ["male", "female", "both"],
-    "category_specification": ["outer", "top", "onepiece", "bottom"],
     
     # --- Detailed Attributes ---
     "top.length_type": ["crop", "nomal", "long", "midi", "short"],
@@ -54,18 +54,21 @@ STD_VOCAB_CONFIG = {
     "pant.silhouette": ["skinny", "normal", "wide", "loose", "bell-bottom", "Others"],
     "skirt.design": ["A-line and bell line", "mermaid line", "Others"],
     
-    # --- Metadata (Optional) ---
+    # --- Re Attributes ---
+    "fit.vibe": [],
+    "silhouette.shape": [],
+    "length.feeling": [],
+    "fabric.texture": [],
+    "fabric.weight": [],
+    "style.mood": [],
+    "tpo.occasion": []
+    
 
-    "metadata_keywords": [] 
 }
 
-# 추가 dummy 필요 1개씩 or zero, key는 있어야지.
-GENERATED_METADATA = {
-    "category" : [],
-    "fiber_composition":[],
-    "color": []
 
-}
+# Exports
+ORDERED_FEATURE_KEYS = list(STD_VOCAB_CONFIG.keys())
 
 # --- A. STD Vocabulary 구축 (정적) ---
 

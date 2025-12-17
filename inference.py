@@ -122,3 +122,40 @@ class RecommendationService:
         print(f"[RETRIEVAL DEBUG] Found {len(results)} candidates from DB.")
         
         return results
+    
+    
+    
+    def get_item_vectors_by_ids(self, db: Session, product_ids: List[int]) -> Dict[int, List[float]]:
+        """
+        [Helper] 제품 ID 리스트를 받아 해당 제품들의 임베딩 벡터를 조회
+        SQLAlchemy의 IN 절을 사용하여 배치 조회 (Batch Retrieval)
+        """
+        # 1. 빈 리스트 예외 처리 (불필요한 DB 호출 방지)
+        if not product_ids:
+            return {}
+
+        # 2. 쿼리 작성 (필요한 컬럼만 선택하여 최적화)
+        # SELECT id, vector_embedding FROM product_inference_vectors WHERE id IN (...)
+        results = db.query(
+            ProductInferenceVectors.id, 
+            ProductInferenceVectors.vector_embedding
+        ).filter(
+            ProductInferenceVectors.id.in_(product_ids)
+        ).all()
+
+        # 3. 딕셔너리 매핑 (Ranking 로직에서 O(1) 조회를 위함)
+        item_vectors = {}
+        
+        for pid, embedding in results:
+            if embedding is not None:
+                # pgvector는 설정에 따라 numpy array나 문자열로 반환될 수 있으므로
+                # 확실하게 list[float] 형태로 변환하여 저장합니다.
+                
+                if hasattr(embedding, 'tolist'): # numpy array인 경우
+                    vec_list = embedding.tolist()
+                else: # 이미 리스트인 경우
+                    vec_list = embedding
+                
+                item_vectors[pid] = vec_list
+
+        return item_vectors

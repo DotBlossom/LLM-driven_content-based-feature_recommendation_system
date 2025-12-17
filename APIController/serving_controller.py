@@ -33,66 +33,89 @@ from typing import List, Tuple, Dict, Any
 # 전역 변수 ALL_FIELD_KEYS가 정의되어 있어야 합니다.
 # 예: ALL_FIELD_KEYS = ["category", "season", "color", ...] 
 
-def preprocess_batch_input(products: List[ProductInput]) -> Tuple[torch.Tensor, torch.Tensor]:
+def preprocess_batch_input(products: List[Any]) -> Tuple[torch.Tensor, torch.Tensor]:
     """
-    [Residual Field Embedding용 전처리]
-    딕셔너리를 순회하는 것이 아니라, 고정된 'ALL_FIELD_KEYS'를 순회하여
-    Tensor의 각 인덱스가 항상 특정 필드(속성)를 가리키도록 정렬합니다.
-    """
-    batch_std_ids = []
-    batch_re_ids = []
+    [Residual Field Embedding용 전처리 - Batch Optimization Ver.]
     
-    for product in products:
-        # 1. 데이터 추출
+    최적화 원리:
+    1. 개별 토크나이징 호출(N*M번)을 제거하고,
+    2. 유효한 텍스트만 모아서 단 한 번의 Batch Tokenizing 수행
+    """
+    
+    # 배치 크기 및 필드 수 계산
+    B = len(products)
+    F = len(ALL_FIELD_KEYS)
+    S = vocab.RE_MAX_TOKEN_LEN
+    
+    # 1. 결과 텐서 미리 초기화 (전부 PAD로 채움)
+    # 이렇게 하면 데이터가 없는 곳(None/Empty)은 건드릴 필요가 없어짐 (자동 패딩 효과)
+    # Shape: (Batch, Num_Fields, Seq_Len)
+    t_re_batch = torch.full((B, F, S), vocab.RE_TOKENIZER.pad_token_id, dtype=torch.long, device=DEVICE)
+    
+    batch_std_ids = []
+    
+    # [Batch Tokenizing을 위한 수집통]
+    flat_texts = []      # 토크나이징 할 텍스트들
+    flat_indices = []    # 그 텍스트가 들어갈 위치 (batch_idx, field_idx)
+    
+    for i, product in enumerate(products):
         feature_data: Dict[str, Any] = getattr(product, 'feature_data', {})
         clothes_data = feature_data.get("clothes", {})
         re_data = feature_data.get("reinforced_feature_value", {})
         
         row_std_ids = []
-        row_re_ids = []
-
-        # 2. [핵심] 고정된 Key 리스트를 순회 (순서 및 위치 보장)
-        for key in ALL_FIELD_KEYS:
+        
+        for j, key in enumerate(ALL_FIELD_KEYS):
             
-            # --- A. STD ID 추출 ---
+            # --- A. STD ID (Lookup은 빠르므로 루프 유지) ---
             std_val = clothes_data.get(key)
+            if isinstance(std_val, list):
+                std_val = std_val[0] if std_val else None
             
-            # 리스트로 들어오는 경우 첫 번째 값 사용 (단일 라벨 가정)
-            if isinstance(std_val, list) and len(std_val) > 0:
-                std_val = std_val[0]
-            elif isinstance(std_val, list) and len(std_val) == 0:
-                std_val = None
-                
-            # vocab.py의 함수 호출 (Key 정보도 함께 전달하여 확장성 확보)
-            # 값이 없으면(None) 내부에서 0(PAD) 반환
             s_id = vocab.get_std_id(key, std_val)
             row_std_ids.append(s_id)
             
-            
-            # --- B. RE ID 추출 (Hashing) ---
+            # --- B. RE Text 수집 (토크나이징 X) ---
             re_val_list = re_data.get(key)
-            re_val = None
+            re_text = None
             
-            # RE 데이터는 보통 List 형태이므로 첫 번째 값 추출
-            if re_val_list and isinstance(re_val_list, list) and len(re_val_list) > 0:
-                re_val = re_val_list[0]
-            elif isinstance(re_val_list, str):
-                re_val = re_val_list
+            if re_val_list:
+                if isinstance(re_val_list, list) and len(re_val_list) > 0:
+                    re_text = str(re_val_list[0])
+                elif isinstance(re_val_list, str):
+                    re_text = re_val_list
             
-            # Hashing 함수 호출 (저장 X, 즉시 변환)
-            # 값이 없으면(None) 내부에서 0(PAD) 반환
-            r_id = vocab.get_re_hash_id(re_val)
-            row_re_ids.append(r_id)
-
-        # 3. 행 단위 추가
-        # 이제 row_std_ids의 길이는 항상 len(ALL_FIELD_KEYS)로 고정됨
+            # 유효한 텍스트가 있는 경우에만 수집 리스트에 추가
+            if re_text and re_text.strip():
+                flat_texts.append(re_text)
+                flat_indices.append((i, j)) # 좌표 기억 (i번째 상품, j번째 필드)
+        
         batch_std_ids.append(row_std_ids)
-        batch_re_ids.append(row_re_ids)
-    
-    # 4. 텐서 변환 (pad_sequence 불필요 -> torch.tensor로 직변환)
-    # Shape: (Batch_Size, Num_Fields)
+
+    # 2. [핵심] Batch Tokenization (단 1회 호출)
+    if flat_texts:
+        # Rust 기반의 고속 병렬 처리 수행
+        encoded = vocab.RE_TOKENIZER(
+            flat_texts,
+            padding='max_length',
+            max_length=S,
+            truncation=True,
+            return_tensors='pt'
+        )
+        
+        # encoded['input_ids'] shape: (N_valid_texts, Seq_Len)
+        valid_tokens = encoded['input_ids'].to(DEVICE)
+        
+        # 3. [Scatter] 결과 텐서에 제자리 찾아 넣기 (Fancy Indexing)
+        # rows: 배치 인덱스들, cols: 필드 인덱스들
+        rows = [idx[0] for idx in flat_indices]
+        cols = [idx[1] for idx in flat_indices]
+        
+        # 한 번에 할당 (for문 없이 텐서 연산으로 처리)
+        t_re_batch[rows, cols] = valid_tokens
+
+    # 4. STD 텐서 변환
     t_std_batch = torch.tensor(batch_std_ids, dtype=torch.long, device=DEVICE)
-    t_re_batch = torch.tensor(batch_re_ids, dtype=torch.long, device=DEVICE)
 
     return t_std_batch, t_re_batch
 
@@ -381,7 +404,110 @@ def recommend_products_to_user(
 
 
 
+@serving_controller_router.get("/recommend/ranker/{user_id}")
+def recommend_products_to_user_ranker(
+    user_id: int, 
+    top_k: int = 5, # 최종적으로 보여줄 개수 (예: 10개)
+    db: Session = Depends(get_db),
+    rec_service: RecommendationService = Depends(get_global_rec_service)
+):
+    """
+    [2-Stage Recommendation Pipeline]
+    Stage 1. Retrieval: User Vector와 유사한 후보군을 넉넉하게 검색 (Top-K * 5)
+    Stage 2. Ranking: DCN 모델을 사용하여 후보군을 정밀 재정렬
+    """
 
+    if rec_service is None:
+        raise HTTPException(status_code=503, detail="Recommendation Service not ready")
+    
+    try:
+        # ==========================================
+        # [Stage 1] Retrieval (Candidate Generation)
+        # ==========================================
+        
+        # 1. User Vector 추론 (기존 로직)
+        user_vector_np = rec_service.get_user_vector(db, user_id)
+        
+        # 2. 후보군 검색 (Retrieval)
+        # 랭킹 모델이 재정렬할 여지를 주기 위해, 요청된 top_k보다 더 많이(예: 5배) 검색합니다.
+        candidate_k = top_k * 2
+        # candidates 구조: [(pid, category, dist), ...]
+        candidates = rec_service.retrieve_similar_items(db, user_vector_np, top_k=candidate_k)
+        
+        if not candidates:
+            return {"user_id": user_id, "recommendations": []}
+
+        # ==========================================
+        # [Stage 2] Ranking (Re-ranking)
+        # ==========================================
+        
+        # 3. 랭킹 모델 입력을 위한 데이터 준비
+        candidate_pids = [c[0] for c in candidates]
+        
+        # 3-1. 후보 아이템들의 벡터 조회 (DB Query)
+        # {pid: vector_list} 형태의 딕셔너리 반환 가정
+        item_vector_map = rec_service.get_item_vectors_by_ids(db, candidate_pids)
+        
+        # 3-2. Tensor 변환 준비
+        valid_candidates = [] # 벡터가 존재하는 유효한 후보만 필터링
+        item_vectors_list = []
+        
+        for pid, category, dist in candidates:
+            if pid in item_vector_map:
+                valid_candidates.append({
+                    "product_id": pid,
+                    "category": category,
+                    "base_score": 1 - dist # Retrieval 점수 (참고용)
+                })
+                item_vectors_list.append(item_vector_map[pid])
+        
+        if not valid_candidates:
+             raise HTTPException(status_code=404, detail="Candidate vectors not found")
+
+        # Tensor 변환
+        user_tensor = torch.tensor(user_vector_np, dtype=torch.float32).to(DEVICE) # (128,)
+        item_tensor = torch.tensor(item_vectors_list, dtype=torch.float32).to(DEVICE) # (N, 128)
+        
+        # Context Vector (선택 사항)
+        # 만약 시간대, 요일 등의 컨텍스트 피처를 쓴다면 여기서 생성
+        # 현재는 사용하지 않는다고 가정 (None 전달) 또는 0 벡터
+        context_tensor = None 
+        # context_tensor = torch.zeros(20, dtype=torch.float32).to(DEVICE) 
+
+        # 4. 랭킹 모델 예측 (Inference)
+        # rec_service 내부에 로드된 ranking_model 사용
+        # predict_for_user는 (N,) 형태의 확률값(Score)을 반환
+        ranking_scores = rec_service.ranking_model.predict_for_user(
+            user_vec=user_tensor,
+            item_vecs=item_tensor,
+            context_vec=context_tensor
+        )
+        
+        # 5. 점수 할당 및 정렬
+        # Tensor를 리스트로 변환
+        scores_list = ranking_scores.tolist()
+        
+        for i, candidate in enumerate(valid_candidates):
+            candidate["ranking_score"] = scores_list[i]
+            
+        # 랭킹 점수(ranking_score) 기준 내림차순 정렬
+        valid_candidates.sort(key=lambda x: x["ranking_score"], reverse=True)
+        
+        # 6. 최종 Top-K 자르기
+        final_recommendations = valid_candidates[:top_k]
+        
+        return {
+            "user_id": user_id,
+            "count": len(final_recommendations),
+            "recommendations": final_recommendations
+        }
+        
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        # 로그 기록 필요
+        print(f"Error in recommendation: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
 

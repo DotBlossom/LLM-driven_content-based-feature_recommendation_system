@@ -21,13 +21,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # 필드 순서 정의 (Field Embedding), 임시, data 보고 결정
 # key 순서 == 오는 json 데이타Load 순서
-ALL_FIELD_KEYS = [
-    "category", "season", "fiber_composition", "elasticity", "transparency", 
-    "isfleece", "color", "gender", "category_specification", "top.length_type", "top.sleeve_length_type",
-    "top.neck_color_design","top.sleeve_design","pant.silhouette", "skirt.design",
-    "specification.metadata"
-    # 필요한 만큼 추가...
-]
+ALL_FIELD_KEYS = vocab.ORDERED_FEATURE_KEYS 
 FIELD_TO_IDX = {k: i for i, k in enumerate(ALL_FIELD_KEYS)}
 NUM_TOTAL_FIELDS = len(ALL_FIELD_KEYS)
 
@@ -177,17 +171,17 @@ class CoarseToFineItemTower(nn.Module):
         # 2. Embeddings
         # A. STD Value Embedding (Base) , RE Value Embedding (Delta / Child)
         self.std_embedding = nn.Embedding(std_vocab_size, embed_dim, padding_idx=vocab.PAD_ID)
-        self.re_embedding = nn.Embedding(RE_MAX_CAPACITY, embed_dim, padding_idx=vocab.PAD_ID)
-        
+        # self.re_embedding = nn.Embedding(RE_MAX_CAPACITY, embed_dim, padding_idx=vocab.PAD_ID)
+        self.re_token_embedding = nn.Embedding(vocab.RE_VOCAB_SIZE, embed_dim, padding_idx=vocab.RE_TOKENIZER.pad_token_id)
         # RE는 Delta(차이점)만 학습하므로 0 근처 초기화 (학습 초기 안정성)
-        nn.init.normal_(self.re_embedding.weight, mean=0.0, std=0.01)
+        nn.init.normal_(self.re_token_embedding.weight, mean=0.0, std=0.01)
 
         # C. Field Embedding (Shared Key)
         # 각 컬럼(Color, Brand 등)의 역할을 나타내는 임베딩
         self.field_embedding = nn.Parameter(torch.randn(1, max_fields, embed_dim))
         
         # 3. Unified Transformer Encoder
-        # STD와 RE가 한 공간에서 상호작용 (Cross-Attn 대신 Self-Attn 사용)
+        # STD와 RE가 한 공간에서 상호작용 (Self-Attn 사용)
         encoder_layer = nn.TransformerEncoderLayer(
             d_model=embed_dim, 
             nhead=nhead, 
@@ -203,7 +197,7 @@ class CoarseToFineItemTower(nn.Module):
         # 입력 차원: (STD필드수 + RE필드수) * embed_dim -> Flatten 후 압축
         self.head = DeepResidualHead(input_dim=embed_dim, output_dim=output_dim) 
         
-
+    # $$Input Sequence = [\underbrace{Token_A}_{STD자리}, \underbrace{Token_B}_{RE(잔차)자리}]$$
 
     def forward(self, std_input: torch.Tensor, re_input: torch.Tensor) -> torch.Tensor:
         """
@@ -222,8 +216,19 @@ class CoarseToFineItemTower(nn.Module):
         std_val = self.std_embedding(std_input) # (B, F, D)
         std_token = std_val + field_emb
         
+        re_tokens = self.re_token_embedding(re_input)
+        re_mask = (re_input != vocab.RE_TOKENIZER.pad_token_id).float().unsqueeze(-1) # (B, F, S, 1)
+        
+        # 3. Sum / Count (유효 토큰 개수로 나누기)
+        sum_re = torch.sum(re_tokens * re_mask, dim=2) # (B, F, D)
+        count_re = torch.clamp(re_mask.sum(dim=2), min=1e-9) # (B, F, 1)
+        
+    
         # (C) RE (Child = Delta + Parent + Field)
-        re_delta = self.re_embedding(re_input) # (B, F, D)
+        re_delta = sum_re / count_re # (B, F, D) -> 하나의 벡터로 압축됨!
+        
+    
+        # re_delta = self.re_embedding(re_input) # (B, F, D)
         
         # * 핵심: RE가 0(PAD)이어도 std_val + field_emb가 남아서 'Parent' 역할을 수행함
         # * detach(): RE의 그래디언트가 STD 임베딩을 망가뜨리지 않도록 차단
@@ -232,17 +237,21 @@ class CoarseToFineItemTower(nn.Module):
         # --- [Logic 2] Unified Sequence ---
         combined_seq = torch.cat([std_token, re_token], dim=1)
         
-        # Mask 생성 (std_input이 0인 곳이 패딩이라고 가정)
-        # RE는 0이어도 std가 살아있으므로, STD 기준으로 마스크를 만드는 것이 안전
-        # (std_input이 PAD이면 해당 위치는 무효)
-        mask = (std_input != vocab.PAD_ID) # (B, F)
-        # std와 re를 concat했으므로 마스크도 두 배로 확장
-        mask = torch.cat([mask, mask], dim=1) # (B, 2*F)
-        
-        context_out = self.transformer(combined_seq, src_key_padding_mask=~mask) 
-        
+        # Mask 생성
+        # 1. STD, RE가 유효한가?
+        std_valid = (std_input != vocab.PAD_ID)
+        re_valid = (re_input != vocab.RE_TOKENIZER.pad_token_id).any(dim=2)
+
+        mask_part_std = std_valid
+        mask_part_re = re_valid | std_valid
+
+        full_mask = torch.cat([mask_part_std, mask_part_re], dim=1) # (B, 2*F)
+
+        # 이후 Transformer에 전달
+        context_out = self.transformer(combined_seq, src_key_padding_mask=~full_mask)
+
         # [Smart Pooling] 패딩 제외 평균
-        mask_expanded = mask.unsqueeze(-1).float() # (B, 2*F, 1)
+        mask_expanded = full_mask.unsqueeze(-1).float() # (B, 2*F, 1)
         sum_embeddings = torch.sum(context_out * mask_expanded, dim=1)
         sum_mask = torch.clamp(mask_expanded.sum(dim=1), min=1e-9) # 0으로 나누기 방지
         

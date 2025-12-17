@@ -9,6 +9,83 @@ git status -> 방금 액션 확인
 
 
 
+Cross-feature Analysis
+
+
+"metadata.model.usually_size": "M",
+
+		"metadata.jumpsuit.front_length": "null",
+		"metadata.jumpsuit.inner_seam_length": "null",
+		"metadata.jumpsuit.chest_size": "null",
+		"metadata.jumpsuit.waist_size": "null",
+		"metadata.jumpsuit.hip_size": "null",
+		"metadata.jumpsuit.shoulder_width": "null",
+		"metadata.jumpsuit.sleeve_length": "null",
+		"metadata.jumpsuit.cuffs_size": "null",
+		"metadata.jumpsuit.front_rise_length": "null",
+		"metadata.jumpsuit.back_rise_length": "null",
+		"metadata.jumpsuit.pants_waist_size": "null"
+
+        -> shape, rec size
+
+
+->
+1. 신축성(Elasticity) + 어깨너비(34.0)의 결합
+수치만 봤을 때: 어깨 34cm는 성인 여성복 치고는 꽤 작습니다. 만약 신축성 정보가 없었다면 "매우 작은 사이즈(XS)" 혹은 "아동복"으로 오분류될 수도 있습니다.
+
+메타데이터 결합 (elasticity: contain): "신축성이 있다"는 정보를 확인했기 때문에, 작게 나온 옷이 늘어나서 몸에 맞게 되는 Tight Fit 또는 **Slim Silhouette**이라고 확정 지을 수 있었습니다.
+
+2. 소재(Polyester) + 비침(Transparency) + 가슴/허리 차이
+수치만 봤을 때: 가슴(80)에서 허리(60)로 줄어드는 낙차가 큽니다.
+
+메타데이터 결합 (fiber: Polyester, transparency: contain): 폴리에스터에 비침이 있고 얇은 소재라는 점을 고려할 때, 두꺼운 울 가디건처럼 구조적으로 잡힌 모양이 아니라, 몸의 굴곡을 그대로 드러내는 얇은 소재의 Sheer Texture 옷임을 유추하여 specification.metadata에 반영했습니다.
+
+3. 총장(60.0) + 계절(Spring&Fall)
+
+
+
+
+->
+"narrow_shoulder_fit",
+        "waist_accentuated",
+    "Long Sleeve",
+
+
+
+
+-> eff prom
+
+Role: You are a professional fashion technical designer.
+
+Input Data:
+- Measurements: Chest 102cm, Waist 106cm, Shoulder 39cm, Length 69cm (Category: Jacket)
+- Metadata: Material(Cotton 100%), Season(Spring), Elasticity(None)
+
+Task: Analyze the data step-by-step and generate feature tags.
+
+Step 1 (Ratio Analysis):
+- Compare Chest (102) vs Waist (106). Waist is larger than Chest.
+-> Interpretation: This is an A-line or very boxy silhouette, not a slim fit.
+
+Step 2 (Shoulder Analysis):
+- Shoulder 39cm is relatively narrow for a Men's Jacket (Standard ~44cm).
+-> Interpretation: This might be a Women's oversized jacket or a specific design intention.
+
+Step 3 (Fabric & Season):
+- Cotton + No elasticity + Spring.
+-> Interpretation: Creates a structured, natural silhouette. Not clingy.
+
+Final Output (JSON):
+{
+  "fit_vibe": "Boxy & Relaxed",
+  "silhouette_shape": "A-line Trapeze",
+  "body_type_recommendation": "Ideal for hiding waistline",
+  "fabric_sensation": "Stiff Cotton Touch",
+  "style_keywords": "Japanese City Boy, Minimalist"
+}
+
+
+
 모델 설계 흐름
 
 1. 어떠한 형태의 real 상품 data가 들어와도, std 도메인 한정 + re 도메인 유사 데이터 fluent 보장 구조를 이용 => 어찌보면 text tabular 데이터
