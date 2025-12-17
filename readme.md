@@ -235,6 +235,25 @@ LLM이 마케팅 용어(Noise)를 제거하고 구조화된 데이터로 변환�
 
 ---
 
+
+## Reserch Questions
+RQ1: 데이터파이프라인이 한정 도메인 어쩌구~? 인데, feature의 특성을 이용하여 모델의 어느 부분을 최적화 하고 도입하였나?
+-> MultiModal(...img,, text,,) -> Tabular(finite domains) -> ,,, 
+
+RQ2: 각 part의(구체적..) baseline Model이 어떤 case에서 성능지표를 상정하고, ?
+-> ㅇㅇ
+
+RQ3: STD , RE 구조에서 field 기반 Transformer Encoder를 사용 ~ -> 강건한 STD의 지표에 표현력 유실?
+-> 땅거지라 그냥 unsupervised 기반 찾았음. Triplet --> simCLR Loss (대조학습)해서 , feature form 보고 STD, re Dropout 하는 구조 했다. 그래서 성능이 어쩌구
+
+RQ4: Data가 결국 LLM based reinfoece -> weight의 분포를 어떻게 고려해서 Regulation 함?
+
+RQ5: Residual 구조 여러곳에서 사용 (Encoder + ) -> concat vector가 정말 차원상에서 orth 하게 가는지 ?
+
+
+
+
+
 ## 📂 Project Structure
 
 ```text
