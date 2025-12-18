@@ -1,0 +1,1703 @@
+
+[
+  {
+    "product_id": 372171,
+    "reinforced_feature_value": {
+      "category": "poly_a_line_midi_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 372161,
+    "reinforced_feature_value": {
+      "category": "wool_blend_mini_shift_dress",
+      "season": "Deep Winter",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Heavy Wool",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 372182,
+    "reinforced_feature_value": {
+      "category": "cotton_puff_sleeve_shift_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 372176,
+    "reinforced_feature_value": {
+      "category": "poly_v_neck_a_line_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 372186,
+    "reinforced_feature_value": {
+      "category": "cotton_long_puff_sleeve_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 304231,
+    "reinforced_feature_value": {
+      "category": "cotton_v_neck_shift_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 372152,
+    "reinforced_feature_value": {
+      "category": "poly_long_sleeve_a_line_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Polyester Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 372156,
+    "reinforced_feature_value": {
+      "category": "poly_full_volume_shirred_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 372146,
+    "reinforced_feature_value": {
+      "category": "wool_silk_midi_shift_dress",
+      "season": "Deep Winter",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Heavy Wool Silk Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 58356,
+    "reinforced_feature_value": {
+      "category": "synthetic_long_puff_sleeve_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard Synthetic Fabric",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 30006,
+    "reinforced_feature_value": {
+      "category": "cotton_blend_long_t_shirt_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Cotton Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 57976,
+    "reinforced_feature_value": {
+      "category": "synthetic_long_shirtdress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard Synthetic Fabric",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 58461,
+    "reinforced_feature_value": {
+      "category": "cotton_long_puff_sleeve_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard Cotton Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 15081,
+    "reinforced_feature_value": {
+      "category": "synthetic_midi_cape_sleeve_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "Tapered / Skinny",
+      "length.feeling": "Midi",
+      "fabric.feature": "Thin Synthetic Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 42871,
+    "reinforced_feature_value": {
+      "category": "fleece_lined_cotton_midi_dress",
+      "season": "Deep Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Fleece Lined Cotton Poly Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 5061,
+    "reinforced_feature_value": {
+      "category": "cotton_shirtdress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 50861,
+    "reinforced_feature_value": {
+      "category": "nylon_poly_midi_shirtdress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Polyester Nylon Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 30001,
+    "reinforced_feature_value": {
+      "category": "poly_v_neck_a_line_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 57881,
+    "reinforced_feature_value": {
+      "category": "viscose_blend_v_neck_dress",
+      "season": "Winter",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Heavy Viscose Poly Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 43286,
+    "reinforced_feature_value": {
+      "category": "hemp_sheer_maxi_v_neck_dress",
+      "season": "High Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Thin Hemp",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 5226,
+    "reinforced_feature_value": {
+      "category": "cotton_sleeveless_t_shirt_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 57906,
+    "reinforced_feature_value": {
+      "category": "hemp_sleeveless_shirtdress",
+      "season": "Early Summer",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Hemp Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 29176,
+    "reinforced_feature_value": {
+      "category": "cotton_peter_pan_collar_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard Cotton Poly Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 57801,
+    "reinforced_feature_value": {
+      "category": "cotton_polo_collar_a_line_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Cotton Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 58126,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_shirtdress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Shorts",
+      "fabric.feature": "Standard Cotton Poly Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 15166,
+    "reinforced_feature_value": {
+      "category": "poly_v_neck_a_line_maxi_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Thin High Stretch Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 29827,
+    "reinforced_feature_value": {
+      "category": "poly_mini_a_line_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Mini",
+      "fabric.feature": "Standard Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 83756,
+    "reinforced_feature_value": {
+      "category": "viscose_sleeveless_midi_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Shorts",
+      "fabric.feature": "Thin Viscose Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 58222,
+    "reinforced_feature_value": {
+      "category": "cotton_puff_sleeve_shirtdress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 58161,
+    "reinforced_feature_value": {
+      "category": "synthetic_sleeveless_a_line_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Synthetic Fabric",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 5516,
+    "reinforced_feature_value": {
+      "category": "cotton_long_sleeve_shift_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Cotton Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 58257,
+    "reinforced_feature_value": {
+      "category": "poly_long_sleeve_shift_dress",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Heavy Polyester Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 69217,
+    "reinforced_feature_value": {
+      "category": "cotton_v_neck_a_line_maxi_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 14992,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_a_line_dress",
+      "season": "Winter",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Shorts",
+      "fabric.feature": "Heavy Synthetic Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 58377,
+    "reinforced_feature_value": {
+      "category": "cotton_polo_collar_sheer_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Thin Cotton Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 43126,
+    "reinforced_feature_value": {
+      "category": "cotton_long_sleeve_shift_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Cotton Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 83801,
+    "reinforced_feature_value": {
+      "category": "synthetic_long_t_shirt_dress",
+      "season": "Winter",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "Tapered / Skinny",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Heavy Synthetic Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 30076,
+    "reinforced_feature_value": {
+      "category": "poly_midi_cape_sleeve_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Polyester Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 5421,
+    "reinforced_feature_value": {
+      "category": "viscose_maxi_cape_sleeve_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Viscose Rayon",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 69226,
+    "reinforced_feature_value": {
+      "category": "poly_sleeveless_shift_dress",
+      "season": "Winter",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Heavy Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 50912,
+    "reinforced_feature_value": {
+      "category": "hemp_midi_cape_sleeve_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Weight Hemp",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 68971,
+    "reinforced_feature_value": {
+      "category": "poly_shirtdress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard Polyester Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 69001,
+    "reinforced_feature_value": {
+      "category": "cotton_long_t_shirt_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light High Stretch Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 14816,
+    "reinforced_feature_value": {
+      "category": "poly_sleeveless_sheer_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Thin Poly Viscose",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 29196,
+    "reinforced_feature_value": {
+      "category": "cotton_poly_mini_t_shirt_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Shorts",
+      "fabric.feature": "Light Cotton Poly Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 29156,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_shirtdress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Cotton Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 30021,
+    "reinforced_feature_value": {
+      "category": "wool_turtleneck_puff_sleeve_dress",
+      "season": "Winter",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Heavy High Stretch Wool",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 58121,
+    "reinforced_feature_value": {
+      "category": "hemp_cotton_a_line_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Hemp Cotton Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 69236,
+    "reinforced_feature_value": {
+      "category": "poly_turtleneck_shift_dress",
+      "season": "Winter",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Heavy Polyester Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 83711,
+    "reinforced_feature_value": {
+      "category": "cotton_long_sleeve_shift_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Cotton Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 5171,
+    "reinforced_feature_value": {
+      "category": "nylon_poly_stretch_mini_dress",
+      "season": "Winter",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "Tapered / Skinny",
+      "length.feeling": "Shorts",
+      "fabric.feature": "Heavy High Stretch Nylon Poly",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 57956,
+    "reinforced_feature_value": {
+      "category": "hemp_peter_pan_collar_shirtdress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Weight Hemp",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 29287,
+    "reinforced_feature_value": {
+      "category": "poly_v_neck_a_line_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Thin Polyester Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 68996,
+    "reinforced_feature_value": {
+      "category": "viscose_long_sleeve_shift_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard High Stretch Viscose",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 29632,
+    "reinforced_feature_value": {
+      "category": "poly_tailored_slim_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "Tapered / Skinny",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Polyester Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 43081,
+    "reinforced_feature_value": {
+      "category": "cotton_tailored_a_line_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Cotton Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 30231,
+    "reinforced_feature_value": {
+      "category": "cotton_long_sleeve_shirtdress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 69621,
+    "reinforced_feature_value": {
+      "category": "cotton_t_shirt_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Cotton Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 69319,
+    "reinforced_feature_value": {
+      "category": "cotton_sleeveless_a_line_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 29131,
+    "reinforced_feature_value": {
+      "category": "cotton_stretch_mini_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "Tapered / Skinny",
+      "length.feeling": "Shorts",
+      "fabric.feature": "Thin Cotton Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 68786,
+    "reinforced_feature_value": {
+      "category": "cotton_t_shirt_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Shorts",
+      "fabric.feature": "Light Cotton Poly Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 29421,
+    "reinforced_feature_value": {
+      "category": "nylon_sleeveless_maxi_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Thin Nylon",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 15011,
+    "reinforced_feature_value": {
+      "category": "poly_sheer_a_line_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Thin High Stretch Poly Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 4846,
+    "reinforced_feature_value": {
+      "category": "viscose_blend_sleeveless_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard Poly Viscose Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 15006,
+    "reinforced_feature_value": {
+      "category": "nylon_full_volume_maxi_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Nylon",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 29436,
+    "reinforced_feature_value": {
+      "category": "poly_v_neck_a_line_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Thin Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 69567,
+    "reinforced_feature_value": {
+      "category": "fleece_lined_poly_v_neck_dress",
+      "season": "Winter",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Shorts",
+      "fabric.feature": "Fleece Lined Poly Nylon Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 68906,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_shift_dress",
+      "season": "Winter",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Shorts",
+      "fabric.feature": "Heavy Synthetic Fabric",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 8256,
+    "reinforced_feature_value": {
+      "category": "poly_v_neck_a_line_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 69611,
+    "reinforced_feature_value": {
+      "category": "viscose_long_sleeve_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Thin Viscose Poly Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 58301,
+    "reinforced_feature_value": {
+      "category": "poly_sleeveless_shift_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "Tapered / Skinny",
+      "length.feeling": "Midi",
+      "fabric.feature": "Thin Polyester Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 29231,
+    "reinforced_feature_value": {
+      "category": "poly_square_neck_a_line_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 29791,
+    "reinforced_feature_value": {
+      "category": "poly_band_collar_shirtdress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Thin Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 58241,
+    "reinforced_feature_value": {
+      "category": "poly_v_neck_shift_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Polyester Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 51151,
+    "reinforced_feature_value": {
+      "category": "poly_bow_collar_full_volume_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Thin Polyester Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 58196,
+    "reinforced_feature_value": {
+      "category": "viscose_t_shirt_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Thin High Stretch Viscose",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 5116,
+    "reinforced_feature_value": {
+      "category": "wool_blend_knit_dress",
+      "season": "Deep Winter",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Heavy Wool Nylon Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 43262,
+    "reinforced_feature_value": {
+      "category": "viscose_long_sleeve_shirtdress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard Weight Viscose Rayon",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 5071,
+    "reinforced_feature_value": {
+      "category": "poly_sheer_slim_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "Tapered / Skinny",
+      "length.feeling": "Midi",
+      "fabric.feature": "Thin Polyester Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 29506,
+    "reinforced_feature_value": {
+      "category": "synthetic_long_sleeve_shift_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Synthetic Fabric",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 29171,
+    "reinforced_feature_value": {
+      "category": "viscose_sleeveless_a_line_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Weight Viscose Rayon",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 29326,
+    "reinforced_feature_value": {
+      "category": "poly_sleeveless_a_line_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 58327,
+    "reinforced_feature_value": {
+      "category": "poly_long_puff_sleeve_dress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Thin Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 5366,
+    "reinforced_feature_value": {
+      "category": "cotton_a_line_midi_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 5191,
+    "reinforced_feature_value": {
+      "category": "poly_v_neck_cape_sleeve_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 14862,
+    "reinforced_feature_value": {
+      "category": "cotton_off_shoulder_mini_dress",
+      "season": "Winter",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "Tapered / Skinny",
+      "length.feeling": "Shorts",
+      "fabric.feature": "Heavy High Stretch Cotton Poly",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 69251,
+    "reinforced_feature_value": {
+      "category": "cotton_long_sleeve_a_line_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 5251,
+    "reinforced_feature_value": {
+      "category": "wool_long_sleeve_knit_dress",
+      "season": "Deep Winter",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "Tapered / Skinny",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Heavy High Stretch Wool",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 83786,
+    "reinforced_feature_value": {
+      "category": "cotton_viscose_a_line_maxi_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare / Full-Volume",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Cotton Viscose Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 83656,
+    "reinforced_feature_value": {
+      "category": "wool_turtleneck_puff_sleeve_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard High Stretch Wool",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 42931,
+    "reinforced_feature_value": {
+      "category": "poly_tailored_a_line_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 30037,
+    "reinforced_feature_value": {
+      "category": "cotton_poly_long_sleeve_a_line_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Cotton Poly Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 57901,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_t_shirt_dress",
+      "season": "Early Summer",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Light Cotton Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 14961,
+    "reinforced_feature_value": {
+      "category": "hemp_cotton_shirtdress",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Thin Hemp Cotton Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 43366,
+    "reinforced_feature_value": {
+      "category": "poly_bow_collar_a_line_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Weight Polyester",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 43156,
+    "reinforced_feature_value": {
+      "category": "nylon_shirtdress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Standard Nylon Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 51241,
+    "reinforced_feature_value": {
+      "category": "poly_stretch_v_neck_shift_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard High Stretch Poly Nylon",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 51057,
+    "reinforced_feature_value": {
+      "category": "cotton_shirtdress",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Wide",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Light Weight Cotton",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 4816,
+    "reinforced_feature_value": {
+      "category": "cotton_poly_stretch_shift_dress",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Regular/Standard",
+      "silhouette.shape": "H-line / Straight",
+      "length.feeling": "Long/Maxi",
+      "fabric.feature": "Standard Cotton Poly Stretch",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 15181,
+    "reinforced_feature_value": {
+      "category": "viscose_blend_slim_dress",
+      "season": "Winter",
+      "fit.vibe": "Skinny/Slim",
+      "silhouette.shape": "Tapered / Skinny",
+      "length.feeling": "Midi",
+      "fabric.feature": "Heavy Viscose Poly Blend",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  }
+]

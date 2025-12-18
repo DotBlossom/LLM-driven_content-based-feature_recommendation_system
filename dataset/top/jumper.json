@@ -1,0 +1,1803 @@
+
+[
+  {
+    "product_id": 100601,
+    "reinforced_feature_value": {
+      "category": "essential_field_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Thin",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 100451,
+    "reinforced_feature_value": {
+      "category": "structured_stand_collar_jacket",
+      "season": "Winter",
+      "fit.vibe": "Structured",
+      "silhouette.shape": "Inverted-Triangle",
+      "length.feeling": "Long",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 61686,
+    "reinforced_feature_value": {
+      "category": "blouson_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Cocoon",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 129081,
+    "reinforced_feature_value": {
+      "category": "fleece_hooded_parka",
+      "season": "Deep Winter",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Fleece",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 61166,
+    "reinforced_feature_value": {
+      "category": "oversized_hoodie_jacket",
+      "season": "Winter",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 130001,
+    "reinforced_feature_value": {
+      "category": "oversized_stand_collar_blouson",
+      "season": "Winter",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Tapered"
+      }
+    }
+  },
+  {
+    "product_id": 101766,
+    "reinforced_feature_value": {
+      "category": "sporty_zip_up",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Thin",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 20021,
+    "reinforced_feature_value": {
+      "category": "long_utility_jacket",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Long",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 20181,
+    "reinforced_feature_value": {
+      "category": "fleece_turtleneck_jacket",
+      "season": "Deep Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Fleece",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 99957,
+    "reinforced_feature_value": {
+      "category": "fleece_hooded_sweatshirt",
+      "season": "Deep Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Long",
+      "fabric.feature": "Cotton_Fleece",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 166146,
+    "reinforced_feature_value": {
+      "category": "structured_stand_collar_jacket",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Long",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Tapered"
+      }
+    }
+  },
+  {
+    "product_id": 74396,
+    "reinforced_feature_value": {
+      "category": "oversized_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Long",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 128781,
+    "reinforced_feature_value": {
+      "category": "longline_track_jacket",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Long",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Tapered"
+      }
+    }
+  },
+  {
+    "product_id": 167011,
+    "reinforced_feature_value": {
+      "category": "blouson_hoodie",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Long",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 167526,
+    "reinforced_feature_value": {
+      "category": "essential_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 73886,
+    "reinforced_feature_value": {
+      "category": "essential_utility_jacket",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Long",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 89041,
+    "reinforced_feature_value": {
+      "category": "longline_zip_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Long",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19912,
+    "reinforced_feature_value": {
+      "category": "oversized_track_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Long",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Wide/Bell"
+      }
+    }
+  },
+  {
+    "product_id": 61436,
+    "reinforced_feature_value": {
+      "category": "fleece_shirts_collar_jacket",
+      "season": "Deep Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Long",
+      "fabric.feature": "Wool_Fleece",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19802,
+    "reinforced_feature_value": {
+      "category": "structured_shirt_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 130456,
+    "reinforced_feature_value": {
+      "category": "oversized_longline_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Long",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 9611,
+    "reinforced_feature_value": {
+      "category": "structured_zip_up_jacket",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Long",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 9441,
+    "reinforced_feature_value": {
+      "category": "oversized_track_jacket",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Long",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 101606,
+    "reinforced_feature_value": {
+      "category": "essential_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 101631,
+    "reinforced_feature_value": {
+      "category": "essential_track_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 101111,
+    "reinforced_feature_value": {
+      "category": "blouson_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 101561,
+    "reinforced_feature_value": {
+      "category": "essential_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 74546,
+    "reinforced_feature_value": {
+      "category": "longline_hooded_parka",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Long",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 74636,
+    "reinforced_feature_value": {
+      "category": "oversized_hooded_parka",
+      "season": "Deep Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Long",
+      "fabric.feature": "synthetic_fiber_Fleece",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 100831,
+    "reinforced_feature_value": {
+      "category": "essential_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Long",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Long",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 9503,
+    "reinforced_feature_value": {
+      "category": "blouson_shirt_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19352,
+    "reinforced_feature_value": {
+      "category": "sporty_track_jacket",
+      "season": "Early Summer",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Thin",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 101771,
+    "reinforced_feature_value": {
+      "category": "structured_bomber_jacket",
+      "season": "Winter",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Tapered"
+      }
+    }
+  },
+  {
+    "product_id": 100212,
+    "reinforced_feature_value": {
+      "category": "oversized_cropped_blouson",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19558,
+    "reinforced_feature_value": {
+      "category": "longline_shirt_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Tunic",
+      "fabric.feature": "synthetic_fiber_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 74181,
+    "reinforced_feature_value": {
+      "category": "fleece_cropped_jacket",
+      "season": "Deep Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Semi-Crop",
+      "fabric.feature": "synthetic_fiber_Fleece",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Semi-Crop",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 99706,
+    "reinforced_feature_value": {
+      "category": "fleece_cropped_bomber",
+      "season": "Deep Winter",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Semi-Crop",
+      "fabric.feature": "Nylon_Fleece",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Semi-Crop",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35856,
+    "reinforced_feature_value": {
+      "category": "crop_hoodie_sweatshirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Micro Crop",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Micro Crop",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35201,
+    "reinforced_feature_value": {
+      "category": "essential_hooded_jacket",
+      "season": "Early Summer",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Thin",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35746,
+    "reinforced_feature_value": {
+      "category": "fleece_hoodie_sweatshirt",
+      "season": "Chilly Spring/Autumn",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Semi-Crop",
+      "fabric.feature": "Cotton_Fleece",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Semi-Crop",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35311,
+    "reinforced_feature_value": {
+      "category": "colorblock_track_jacket",
+      "season": "Chilly Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Fleece",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 436,
+    "reinforced_feature_value": {
+      "category": "fleece_boxy_sweater",
+      "season": "Deep Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Wool_Fleece",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 20107,
+    "reinforced_feature_value": {
+      "category": "sheer_longline_jacket",
+      "season": "Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Nylon_Thin",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19657,
+    "reinforced_feature_value": {
+      "category": "slim_ribbed_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35756,
+    "reinforced_feature_value": {
+      "category": "fleece_hooded_jacket",
+      "season": "Deep Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Tunic",
+      "fabric.feature": "synthetic_fiber_Fleece",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 61561,
+    "reinforced_feature_value": {
+      "category": "fitted_hooded_jacket",
+      "season": "Winter",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "Hourglass",
+      "length.feeling": "Standard",
+      "fabric.feature": "synthetic_fiber_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19967,
+    "reinforced_feature_value": {
+      "category": "a_line_hooded_parka",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 446,
+    "reinforced_feature_value": {
+      "category": "essential_bomber_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35301,
+    "reinforced_feature_value": {
+      "category": "a_line_hooded_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 456,
+    "reinforced_feature_value": {
+      "category": "longline_hooded_parka",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 101686,
+    "reinforced_feature_value": {
+      "category": "oversized_trapeze_hoodie",
+      "season": "Winter",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Standard",
+      "fabric.feature": "Wool_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 9411,
+    "reinforced_feature_value": {
+      "category": "oversized_3_4_sleeve_sweatshirt",
+      "season": "Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 89231,
+    "reinforced_feature_value": {
+      "category": "colorblock_hooded_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 20186,
+    "reinforced_feature_value": {
+      "category": "slim_bomber_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "Hourglass",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 74376,
+    "reinforced_feature_value": {
+      "category": "standard_hoodie_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35607,
+    "reinforced_feature_value": {
+      "category": "longline_shirt_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35166,
+    "reinforced_feature_value": {
+      "category": "a_line_track_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19046,
+    "reinforced_feature_value": {
+      "category": "essential_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19181,
+    "reinforced_feature_value": {
+      "category": "oversized_drop_shoulder_hoodie",
+      "season": "Winter",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 74101,
+    "reinforced_feature_value": {
+      "category": "trapeze_hooded_dress",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "synthetic_fiber_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35326,
+    "reinforced_feature_value": {
+      "category": "essential_hoodie_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35196,
+    "reinforced_feature_value": {
+      "category": "sporty_hooded_jacket",
+      "season": "Early Summer",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Thin",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19216,
+    "reinforced_feature_value": {
+      "category": "oversized_shirt_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 89211,
+    "reinforced_feature_value": {
+      "category": "short_sleeve_athletic_jacket",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Polyester_Thin",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 101166,
+    "reinforced_feature_value": {
+      "category": "fleece_cropped_hoodie",
+      "season": "Deep Winter",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "Hourglass",
+      "length.feeling": "Semi-Crop",
+      "fabric.feature": "Cotton_Fleece",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Semi-Crop",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19511,
+    "reinforced_feature_value": {
+      "category": "oversized_hooded_top",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Thin",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 100566,
+    "reinforced_feature_value": {
+      "category": "slim_blouson_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35456,
+    "reinforced_feature_value": {
+      "category": "longline_track_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 100271,
+    "reinforced_feature_value": {
+      "category": "crop_knit_sweater",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Bodycon",
+      "silhouette.shape": "Hourglass",
+      "length.feeling": "Micro Crop",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Micro Crop",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 7766,
+    "reinforced_feature_value": {
+      "category": "standard_zip_up_jacket",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 89076,
+    "reinforced_feature_value": {
+      "category": "slim_track_jacket",
+      "season": "Summer",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Thin",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 74056,
+    "reinforced_feature_value": {
+      "category": "fleece_short_sleeve_parka",
+      "season": "Deep Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Fleece",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Wide/Bell"
+      }
+    }
+  },
+  {
+    "product_id": 1001,
+    "reinforced_feature_value": {
+      "category": "oversized_crop_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Micro Crop",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Micro Crop",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 100416,
+    "reinforced_feature_value": {
+      "category": "standard_shirt_jacket",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Standard",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19231,
+    "reinforced_feature_value": {
+      "category": "fitted_a_line_jacket",
+      "season": "Early Summer",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Thin",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 9591,
+    "reinforced_feature_value": {
+      "category": "blouson_hoodie",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 46886,
+    "reinforced_feature_value": {
+      "category": "longline_trapeze_hoodie_dress",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19976,
+    "reinforced_feature_value": {
+      "category": "slim_fit_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19466,
+    "reinforced_feature_value": {
+      "category": "oversized_wool_jacket",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Hourglass",
+      "length.feeling": "Standard",
+      "fabric.feature": "Wool_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 9856,
+    "reinforced_feature_value": {
+      "category": "puffer_vest",
+      "season": "Winter",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Semi-Crop",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Semi-Crop",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Sleeveless"
+      }
+    }
+  },
+  {
+    "product_id": 1007,
+    "reinforced_feature_value": {
+      "category": "longline_hoodie_dress",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 19957,
+    "reinforced_feature_value": {
+      "category": "blouson_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 20036,
+    "reinforced_feature_value": {
+      "category": "longline_a_line_jacket",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 74266,
+    "reinforced_feature_value": {
+      "category": "longline_coat_jacket",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 74571,
+    "reinforced_feature_value": {
+      "category": "extreme_oversized_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "synthetic_fiber_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 74071,
+    "reinforced_feature_value": {
+      "category": "fleece_standard_zip_up",
+      "season": "Deep Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Fleece",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 100626,
+    "reinforced_feature_value": {
+      "category": "fitted_fleece_track_jacket",
+      "season": "Chilly Spring/Autumn",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "Tubular",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Fleece",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 89497,
+    "reinforced_feature_value": {
+      "category": "slim_blouson_jacket",
+      "season": "Winter",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Narrow",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 101776,
+    "reinforced_feature_value": {
+      "category": "oversized_blouson_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 801,
+    "reinforced_feature_value": {
+      "category": "fleece_boxy_sweatshirt",
+      "season": "Deep Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Polyester_Fleece",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 9738,
+    "reinforced_feature_value": {
+      "category": "longline_track_jacket",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 46808,
+    "reinforced_feature_value": {
+      "category": "longline_shirt_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35881,
+    "reinforced_feature_value": {
+      "category": "oversized_crop_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Micro Crop",
+      "fabric.feature": "synthetic_fiber_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Micro Crop",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 35701,
+    "reinforced_feature_value": {
+      "category": "cropped_shirt_jacket",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim-fit",
+      "silhouette.shape": "Blouson",
+      "length.feeling": "Micro Crop",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Tapered",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Micro Crop",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Wide/Bell"
+      }
+    }
+  },
+  {
+    "product_id": 19711,
+    "reinforced_feature_value": {
+      "category": "a_line_hooded_parka",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 99741,
+    "reinforced_feature_value": {
+      "category": "puffer_vest",
+      "season": "Winter",
+      "fit.vibe": "Bodycon",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Micro Crop",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Micro Crop",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Sleeveless"
+      }
+    }
+  },
+  {
+    "product_id": 20306,
+    "reinforced_feature_value": {
+      "category": "standard_hoodie_jacket",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Hourglass",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 61706,
+    "reinforced_feature_value": {
+      "category": "standard_zip_up_jacket",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Nylon_Normal",
+      "structural.geometry": {
+        "width_flow": "Straight",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 100351,
+    "reinforced_feature_value": {
+      "category": "essential_hoodie",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Boxy",
+      "length.feeling": "Standard",
+      "fabric.feature": "Cotton_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Tubular",
+        "vertical_balance": "Standard",
+        "shoulder_geometry": "Standard",
+        "sleeve_profile": "Standard"
+      }
+    }
+  },
+  {
+    "product_id": 74518,
+    "reinforced_feature_value": {
+      "category": "oversized_longline_hoodie_dress",
+      "season": "Winter",
+      "fit.vibe": "Oversized",
+      "silhouette.shape": "A-line / Trapeze",
+      "length.feeling": "Tunic",
+      "fabric.feature": "Polyester_Normal",
+      "structural.geometry": {
+        "width_flow": "Expanding",
+        "waist_contour": "Barrel",
+        "vertical_balance": "Tunic",
+        "shoulder_geometry": "Wide/Drop",
+        "sleeve_profile": "Standard"
+      }
+    }
+  }
+]

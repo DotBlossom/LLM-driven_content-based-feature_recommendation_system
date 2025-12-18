@@ -1,0 +1,2699 @@
+[
+    {
+        "product_id": 48541,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "polo collar",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "69.0",
+                "top.chest_size": "94.0",
+                "top.waist_size": "92.0",
+                "top.hem_size": "92.0",
+                "top.shoulder_width": "40.0",
+                "top.sleeve_length": "18.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12717,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "66.0",
+                "top.chest_size": "84.0",
+                "top.waist_size": "88.0",
+                "top.hem_size": "88.0",
+                "top.shoulder_width": "37.0",
+                "top.sleeve_length": "22.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 48517,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "71.0",
+                "top.chest_size": "110.0",
+                "top.waist_size": "110.0",
+                "top.hem_size": "110.0",
+                "top.shoulder_width": "51.0",
+                "top.sleeve_length": "21.0",
+                "top.sleeve_cuff_size": "38.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 48581,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "71.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "46.0",
+                "top.sleeve_length": "62.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 48137,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyurethane",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "hood",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "61.0",
+                "top.chest_size": "104.0",
+                "top.waist_size": "98.0",
+                "top.hem_size": "94.0",
+                "top.shoulder_width": "43.0",
+                "top.sleeve_length": "56.0",
+                "top.sleeve_cuff_size": "22.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 8071,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Viscos rayon,Polyester",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Blue,White",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "polo collar",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "75.0",
+                "top.chest_size": "110.0",
+                "top.waist_size": "110.0",
+                "top.hem_size": "108.0",
+                "top.shoulder_width": "45.0",
+                "top.sleeve_length": "29.0",
+                "top.sleeve_cuff_size": "36.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 48821,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "polo collar",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "72.0",
+                "top.chest_size": "92.0",
+                "top.waist_size": "98.0",
+                "top.hem_size": "102.0",
+                "top.shoulder_width": "46.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "32.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 3451,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "71.0",
+                "top.chest_size": "98.0",
+                "top.waist_size": "96.0",
+                "top.hem_size": "96.0",
+                "top.shoulder_width": "47.0",
+                "top.sleeve_length": "60.0",
+                "top.sleeve_cuff_size": "22.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 23121,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "67.0",
+                "top.chest_size": "84.0",
+                "top.waist_size": "82.0",
+                "top.hem_size": "82.0",
+                "top.shoulder_width": "42.0",
+                "top.sleeve_length": "24.0",
+                "top.sleeve_cuff_size": "38.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 25081,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,synthetic fiber Others",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "hood",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "68.0",
+                "top.chest_size": "94.0",
+                "top.waist_size": "92.0",
+                "top.hem_size": "92.0",
+                "top.shoulder_width": "44.0",
+                "top.sleeve_length": "67.0",
+                "top.sleeve_cuff_size": "14.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 11231,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "70.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "96.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "55.0",
+                "top.sleeve_length": "24.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 3331,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Brown,Orange,Green",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "Chinese collar",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "67.0",
+                "top.chest_size": "112.0",
+                "top.waist_size": "114.0",
+                "top.hem_size": "116.0",
+                "top.shoulder_width": "47.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "36.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 49006,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Viscos rayon,Nylon",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "Chinese collar",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "60.0",
+                "top.chest_size": "84.0",
+                "top.waist_size": "104.0",
+                "top.hem_size": "90.0",
+                "top.shoulder_width": "47.0",
+                "top.sleeve_length": "61.0",
+                "top.sleeve_cuff_size": "22.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 24056,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "70.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "114.0",
+                "top.shoulder_width": "47.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "34.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 36846,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester,Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "72.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "48.0",
+                "top.sleeve_length": "30.0",
+                "top.sleeve_cuff_size": "16.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 25836,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Gray,Yellow,Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "polo collar",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "64.0",
+                "top.chest_size": "94.0",
+                "top.waist_size": "94.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "42.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 49067,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "Chinese collar",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "64.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "104.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "47.0",
+                "top.sleeve_length": "59.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 2151,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Black",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "polo collar",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "65.0",
+                "top.chest_size": "102.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "46.0",
+                "top.sleeve_length": "21.0",
+                "top.sleeve_cuff_size": "36.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 2156,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "polo collar",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "64.0",
+                "top.chest_size": "108.0",
+                "top.waist_size": "106.0",
+                "top.hem_size": "104.0",
+                "top.shoulder_width": "47.0",
+                "top.sleeve_length": "22.0",
+                "top.sleeve_cuff_size": "36.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 25611,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Green",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "70.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "50.0",
+                "top.sleeve_length": "23.0",
+                "top.sleeve_cuff_size": "40.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 24856,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Green,Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "Chinese collar",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "70.0",
+                "top.chest_size": "114.0",
+                "top.waist_size": "106.0",
+                "top.hem_size": "110.0",
+                "top.shoulder_width": "48.0",
+                "top.sleeve_length": "59.0",
+                "top.sleeve_cuff_size": "26.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 22176,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "71.0",
+                "top.chest_size": "122.0",
+                "top.waist_size": "120.0",
+                "top.hem_size": "102.0",
+                "top.shoulder_width": "54.0",
+                "top.sleeve_length": "61.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 48351,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Brown,Yellow",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "68.0",
+                "top.chest_size": "90.0",
+                "top.waist_size": "90.0",
+                "top.hem_size": "94.0",
+                "top.shoulder_width": "40.0",
+                "top.sleeve_length": "60.0",
+                "top.sleeve_cuff_size": "22.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 3666,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "turtle neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "75.0",
+                "top.chest_size": "104.0",
+                "top.waist_size": "102.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "49.0",
+                "top.sleeve_length": "64.0",
+                "top.sleeve_cuff_size": "24.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 21777,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "67.0",
+                "top.chest_size": "98.0",
+                "top.waist_size": "98.0",
+                "top.hem_size": "98.0",
+                "top.shoulder_width": "42.0",
+                "top.sleeve_length": "57.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 48131,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Cotton,Viscos rayon",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "68.0",
+                "top.chest_size": "94.0",
+                "top.waist_size": "86.0",
+                "top.hem_size": "82.0",
+                "top.shoulder_width": "43.0",
+                "top.sleeve_length": "60.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 21796,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "67.0",
+                "top.chest_size": "108.0",
+                "top.waist_size": "104.0",
+                "top.hem_size": "94.0",
+                "top.shoulder_width": "50.0",
+                "top.sleeve_length": "61.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12156,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "65.0",
+                "top.chest_size": "98.0",
+                "top.waist_size": "94.0",
+                "top.hem_size": "98.0",
+                "top.shoulder_width": "40.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 22676,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "75.0",
+                "top.chest_size": "112.0",
+                "top.waist_size": "122.0",
+                "top.hem_size": "126.0",
+                "top.shoulder_width": "57.0",
+                "top.sleeve_length": "21.0",
+                "top.sleeve_cuff_size": "34.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 11441,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "67.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "45.0",
+                "top.sleeve_length": "23.0",
+                "top.sleeve_cuff_size": "32.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 2841,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "64.0",
+                "top.chest_size": "86.0",
+                "top.waist_size": "86.0",
+                "top.hem_size": "86.0",
+                "top.shoulder_width": "35.0",
+                "top.sleeve_length": "54.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 8061,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester,Nylon,Polyurethane",
+                "elasticity": "contain a lot",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "White,Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "59.0",
+                "top.chest_size": "88.0",
+                "top.waist_size": "80.0",
+                "top.hem_size": "92.0",
+                "top.shoulder_width": "38.0",
+                "top.sleeve_length": "15.0",
+                "top.sleeve_cuff_size": "28.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12796,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Viscos rayon",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,White",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "U-neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "54.0",
+                "top.chest_size": "92.0",
+                "top.waist_size": "90.0",
+                "top.hem_size": "90.0",
+                "top.shoulder_width": "42.0",
+                "top.sleeve_length": "18.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 22946,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,synthetic fiber Others",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Yellow",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "U-neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "43.0",
+                "top.chest_size": "68.0",
+                "top.waist_size": "64.0",
+                "top.hem_size": "64.0",
+                "top.shoulder_width": "35.0",
+                "top.sleeve_length": "62.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 11836,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "81.0",
+                "top.chest_size": "98.0",
+                "top.waist_size": "98.0",
+                "top.hem_size": "98.0",
+                "top.shoulder_width": "47.0",
+                "top.sleeve_length": "19.0",
+                "top.sleeve_cuff_size": "34.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 3056,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester,Polyurethane,Nylon",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "57.0",
+                "top.chest_size": "72.0",
+                "top.waist_size": "68.0",
+                "top.hem_size": "82.0",
+                "top.shoulder_width": "30.0",
+                "top.sleeve_length": "23.0",
+                "top.sleeve_cuff_size": "28.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 23616,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Nylon",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Black",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "63.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "47.0",
+                "top.sleeve_length": "30.0",
+                "top.sleeve_cuff_size": "26.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 2711,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "68.0",
+                "top.chest_size": "86.0",
+                "top.waist_size": "88.0",
+                "top.hem_size": "88.0",
+                "top.shoulder_width": "44.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "34.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12931,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester,Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Black",
+                "top_length_type": "crop",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "no neckline",
+                "top.front_length": "45.0",
+                "top.chest_size": "88.0",
+                "top.waist_size": "80.0",
+                "top.hem_size": "76.0",
+                "top.shoulder_width": "38.0",
+                "top.sleeve_length": "0.0",
+                "top.sleeve_cuff_size": "0.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 23286,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester,synthetic fiber Others",
+                "elasticity": "contain a lot",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Purple",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "Others",
+                "topsleeve_design": "others",
+                "top.front_length": "56.0",
+                "top.chest_size": "72.0",
+                "top.waist_size": "68.0",
+                "top.hem_size": "92.0",
+                "top.shoulder_width": "32.0",
+                "top.sleeve_length": "0.0",
+                "top.sleeve_cuff_size": "0.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 22226,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "contain little",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "64.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "94.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "41.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "32.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 24231,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray,Blue,White",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "74.0",
+                "top.chest_size": "78.0",
+                "top.waist_size": "78.0",
+                "top.hem_size": "86.0",
+                "top.shoulder_width": "32.0",
+                "top.sleeve_length": "62.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 23707,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "contain",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Purple",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "59.0",
+                "top.chest_size": "52.0",
+                "top.waist_size": "80.0",
+                "top.hem_size": "86.0",
+                "top.shoulder_width": "40.0",
+                "top.sleeve_length": "22.0",
+                "top.sleeve_cuff_size": "24.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 13038,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "60.0",
+                "top.chest_size": "80.0",
+                "top.waist_size": "82.0",
+                "top.hem_size": "90.0",
+                "top.shoulder_width": "33.0",
+                "top.sleeve_length": "16.0",
+                "top.sleeve_cuff_size": "28.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 11921,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "contain a lot",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black,Pink,Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "boat neck",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "76.0",
+                "top.chest_size": "98.0",
+                "top.waist_size": "98.0",
+                "top.hem_size": "88.0",
+                "top.shoulder_width": "54.0",
+                "top.sleeve_length": "6.0",
+                "top.sleeve_cuff_size": "14.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 22541,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester,Polyurethane",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "polo collar",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "62.0",
+                "top.chest_size": "86.0",
+                "top.waist_size": "92.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "38.0",
+                "top.sleeve_length": "58.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 3303,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black,Red",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "66.0",
+                "top.chest_size": "120.0",
+                "top.waist_size": "120.0",
+                "top.hem_size": "120.0",
+                "top.shoulder_width": "50.0",
+                "top.sleeve_length": "24.0",
+                "top.sleeve_cuff_size": "40.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 1621,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyurethane,Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "69.0",
+                "top.chest_size": "108.0",
+                "top.waist_size": "108.0",
+                "top.hem_size": "108.0",
+                "top.shoulder_width": "40.0",
+                "top.sleeve_length": "22.0",
+                "top.sleeve_cuff_size": "32.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 22346,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "65.0",
+                "top.chest_size": "104.0",
+                "top.waist_size": "104.0",
+                "top.hem_size": "104.0",
+                "top.shoulder_width": "44.0",
+                "top.sleeve_length": "22.0",
+                "top.sleeve_cuff_size": "32.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 1812,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,protein fiber Others",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "60.0",
+                "top.chest_size": "94.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "104.0",
+                "top.shoulder_width": "37.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 2391,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "67.0",
+                "top.chest_size": "94.0",
+                "top.waist_size": "92.0",
+                "top.hem_size": "38.0",
+                "top.shoulder_width": "42.0",
+                "top.sleeve_length": "24.0",
+                "top.sleeve_cuff_size": "36.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 3533,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "74.0",
+                "top.chest_size": "106.0",
+                "top.waist_size": "102.0",
+                "top.hem_size": "108.0",
+                "top.shoulder_width": "60.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "36.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12081,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "60.0",
+                "top.chest_size": "110.0",
+                "top.waist_size": "102.0",
+                "top.hem_size": "86.0",
+                "top.shoulder_width": "56.0",
+                "top.sleeve_length": "53.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 23947,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Orange",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "turtle neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "66.0",
+                "top.chest_size": "94.0",
+                "top.waist_size": "90.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "42.0",
+                "top.sleeve_length": "61.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 13031,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,synthetic fiber Others",
+                "elasticity": "contain a lot",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Black,Yellow",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "55.0",
+                "top.chest_size": "76.0",
+                "top.waist_size": "70.0",
+                "top.hem_size": "78.0",
+                "top.shoulder_width": "27.0",
+                "top.sleeve_length": "17.0",
+                "top.sleeve_cuff_size": "24.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 22466,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "69.0",
+                "top.chest_size": "82.0",
+                "top.waist_size": "90.0",
+                "top.hem_size": "92.0",
+                "top.shoulder_width": "43.0",
+                "top.sleeve_length": "23.0",
+                "top.sleeve_cuff_size": "36.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 21636,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Green,White",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "72.0",
+                "top.chest_size": "112.0",
+                "top.waist_size": "104.0",
+                "top.hem_size": "90.0",
+                "top.shoulder_width": "54.0",
+                "top.sleeve_length": "59.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 13266,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "64.0",
+                "top.chest_size": "84.0",
+                "top.waist_size": "84.0",
+                "top.hem_size": "86.0",
+                "top.shoulder_width": "39.0",
+                "top.sleeve_length": "14.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12286,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "61.0",
+                "top.chest_size": "84.0",
+                "top.waist_size": "84.0",
+                "top.hem_size": "86.0",
+                "top.shoulder_width": "35.0",
+                "top.sleeve_length": "15.0",
+                "top.sleeve_cuff_size": "32.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 24571,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "contain a lot",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "Others",
+                "top.front_length": "50.0",
+                "top.chest_size": "62.0",
+                "top.waist_size": "62.0",
+                "top.hem_size": "50.0",
+                "top.shoulder_width": "30.0",
+                "top.sleeve_length": "0.0",
+                "top.sleeve_cuff_size": "0.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 22861,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "turtle neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "57.0",
+                "top.chest_size": "92.0",
+                "top.waist_size": "92.0",
+                "top.hem_size": "92.0",
+                "top.shoulder_width": "46.0",
+                "top.sleeve_length": "46.0",
+                "top.sleeve_cuff_size": "24.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 10821,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "65.0",
+                "top.chest_size": "78.0",
+                "top.waist_size": "84.0",
+                "top.hem_size": "86.0",
+                "top.shoulder_width": "36.0",
+                "top.sleeve_length": "15.0",
+                "top.sleeve_cuff_size": "28.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 11686,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "55.0",
+                "top.chest_size": "84.0",
+                "top.waist_size": "84.0",
+                "top.hem_size": "86.0",
+                "top.shoulder_width": "35.0",
+                "top.sleeve_length": "19.0",
+                "top.sleeve_cuff_size": "22.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 21971,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Beige,Red,Yellow",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "65.0",
+                "top.chest_size": "108.0",
+                "top.waist_size": "110.0",
+                "top.hem_size": "120.0",
+                "top.shoulder_width": "41.0",
+                "top.sleeve_length": "55.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 23411,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue,Orange",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "70.0",
+                "top.chest_size": "90.0",
+                "top.waist_size": "92.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "38.0",
+                "top.sleeve_length": "27.0",
+                "top.sleeve_cuff_size": "36.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 11426,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "69.0",
+                "top.chest_size": "134.0",
+                "top.waist_size": "132.0",
+                "top.hem_size": "136.0",
+                "top.shoulder_width": "67.0",
+                "top.sleeve_length": "19.0",
+                "top.sleeve_cuff_size": "42.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 2912,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Cotton,Nylon,Polyester,Polyurethane",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "turtle neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "60.0",
+                "top.chest_size": "82.0",
+                "top.waist_size": "78.0",
+                "top.hem_size": "82.0",
+                "top.shoulder_width": "36.0",
+                "top.sleeve_length": "60.0",
+                "top.sleeve_cuff_size": "18.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 21877,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "63.0",
+                "top.chest_size": "84.0",
+                "top.waist_size": "92.0",
+                "top.hem_size": "92.0",
+                "top.shoulder_width": "40.0",
+                "top.sleeve_length": "17.0",
+                "top.sleeve_cuff_size": "28.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 11581,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Viscos rayon,Nylon,Polyurethane,protein fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "55.0",
+                "top.chest_size": "88.0",
+                "top.waist_size": "82.0",
+                "top.hem_size": "72.0",
+                "top.shoulder_width": "35.0",
+                "top.sleeve_length": "54.0",
+                "top.sleeve_cuff_size": "16.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 3796,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "63.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "104.0",
+                "top.shoulder_width": "45.0",
+                "top.sleeve_length": "54.0",
+                "top.sleeve_cuff_size": "22.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 23556,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "62.0",
+                "top.chest_size": "102.0",
+                "top.waist_size": "98.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "44.0",
+                "top.sleeve_length": "31.0",
+                "top.sleeve_cuff_size": "32.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 3281,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "70.0",
+                "top.chest_size": "98.0",
+                "top.waist_size": "92.0",
+                "top.hem_size": "96.0",
+                "top.shoulder_width": "46.0",
+                "top.sleeve_length": "22.0",
+                "top.sleeve_cuff_size": "34.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 3582,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "41.0",
+                "top.chest_size": "60.0",
+                "top.waist_size": "48.0",
+                "top.hem_size": "56.0",
+                "top.shoulder_width": "36.0",
+                "top.sleeve_length": "45.0",
+                "top.sleeve_cuff_size": "14.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12926,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "normal",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "halter neck",
+                "top.front_length": "46.0",
+                "top.chest_size": "62.0",
+                "top.waist_size": "64.0",
+                "top.hem_size": "68.0",
+                "top.shoulder_width": "22.0",
+                "top.sleeve_length": "0.0",
+                "top.sleeve_cuff_size": "0.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 22092,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "contain a lot",
+                "isfleece": "fleece_none",
+                "color": "White,Brown",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "70.0",
+                "top.chest_size": "108.0",
+                "top.waist_size": "104.0",
+                "top.hem_size": "108.0",
+                "top.shoulder_width": "60.0",
+                "top.sleeve_length": "47.0",
+                "top.sleeve_cuff_size": "24.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12376,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "70.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "98.0",
+                "top.hem_size": "98.0",
+                "top.shoulder_width": "48.0",
+                "top.sleeve_length": "21.0",
+                "top.sleeve_cuff_size": "40.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 2346,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "65.0",
+                "top.chest_size": "88.0",
+                "top.waist_size": "88.0",
+                "top.hem_size": "90.0",
+                "top.shoulder_width": "40.0",
+                "top.sleeve_length": "19.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 22236,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Hemp,Viscos rayon,Polyester",
+                "elasticity": "none at all",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "64.0",
+                "top.chest_size": "114.0",
+                "top.waist_size": "98.0",
+                "top.hem_size": "96.0",
+                "top.shoulder_width": "39.0",
+                "top.sleeve_length": "23.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 11963,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,White",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "70.0",
+                "top.chest_size": "124.0",
+                "top.waist_size": "120.0",
+                "top.hem_size": "102.0",
+                "top.shoulder_width": "56.0",
+                "top.sleeve_length": "53.0",
+                "top.sleeve_cuff_size": "22.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 23931,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Red",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "turtle neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "70.0",
+                "top.chest_size": "108.0",
+                "top.waist_size": "98.0",
+                "top.hem_size": "108.0",
+                "top.shoulder_width": "48.0",
+                "top.sleeve_length": "60.0",
+                "top.sleeve_cuff_size": "24.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 24411,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "67.0",
+                "top.chest_size": "104.0",
+                "top.waist_size": "112.0",
+                "top.hem_size": "120.0",
+                "top.shoulder_width": "48.0",
+                "top.sleeve_length": "21.0",
+                "top.sleeve_cuff_size": "32.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12022,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Gray,White,Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "72.0",
+                "top.chest_size": "96.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "112.0",
+                "top.shoulder_width": "37.0",
+                "top.sleeve_length": "54.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 8097,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "58.0",
+                "top.chest_size": "102.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "102.0",
+                "top.shoulder_width": "42.0",
+                "top.sleeve_length": "19.0",
+                "top.sleeve_cuff_size": "26.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 24086,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "crop",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "37.0",
+                "top.chest_size": "118.0",
+                "top.waist_size": "112.0",
+                "top.hem_size": "112.0",
+                "top.shoulder_width": "58.0",
+                "top.sleeve_length": "46.0",
+                "top.sleeve_cuff_size": "26.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 10947,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "72.0",
+                "top.chest_size": "110.0",
+                "top.waist_size": "110.0",
+                "top.hem_size": "110.0",
+                "top.shoulder_width": "47.0",
+                "top.sleeve_length": "21.0",
+                "top.sleeve_cuff_size": "34.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 21946,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "60.0",
+                "top.chest_size": "90.0",
+                "top.waist_size": "86.0",
+                "top.hem_size": "92.0",
+                "top.shoulder_width": "40.0",
+                "top.sleeve_length": "64.0",
+                "top.sleeve_cuff_size": "22.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 22606,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Viscos rayon,Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Red",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "turtle neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "72.0",
+                "top.chest_size": "86.0",
+                "top.waist_size": "90.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "36.0",
+                "top.sleeve_length": "55.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12752,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "61.0",
+                "top.chest_size": "90.0",
+                "top.waist_size": "90.0",
+                "top.hem_size": "90.0",
+                "top.shoulder_width": "46.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "36.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12621,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "crop",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "no neckline",
+                "top.front_length": "37.0",
+                "top.chest_size": "64.0",
+                "top.waist_size": "64.0",
+                "top.hem_size": "64.0",
+                "top.shoulder_width": "32.0",
+                "top.sleeve_length": "0.0",
+                "top.sleeve_cuff_size": "0.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 3493,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "cape sleeve",
+                "top.front_length": "71.0",
+                "top.chest_size": "100.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "100.0",
+                "top.shoulder_width": "52.0",
+                "top.sleeve_length": "25.0",
+                "top.sleeve_cuff_size": "32.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 23966,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "winter",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Red",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "hood",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "53.0",
+                "top.chest_size": "104.0",
+                "top.waist_size": "92.0",
+                "top.hem_size": "76.0",
+                "top.shoulder_width": "54.0",
+                "top.sleeve_length": "54.0",
+                "top.sleeve_cuff_size": "20.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 11621,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Orange",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "68.0",
+                "top.chest_size": "96.0",
+                "top.waist_size": "96.0",
+                "top.hem_size": "96.0",
+                "top.shoulder_width": "41.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "36.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 2421,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "synthetic fiber Others,Nylon",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Gray,Blue",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "63.0",
+                "top.chest_size": "92.0",
+                "top.waist_size": "92.0",
+                "top.hem_size": "94.0",
+                "top.shoulder_width": "37.0",
+                "top.sleeve_length": "17.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 13262,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "65.0",
+                "top.chest_size": "94.0",
+                "top.waist_size": "92.0",
+                "top.hem_size": "94.0",
+                "top.shoulder_width": "42.0",
+                "top.sleeve_length": "18.0",
+                "top.sleeve_cuff_size": "32.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 2446,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "61.0",
+                "top.chest_size": "98.0",
+                "top.waist_size": "98.0",
+                "top.hem_size": "98.0",
+                "top.shoulder_width": "40.0",
+                "top.sleeve_length": "19.0",
+                "top.sleeve_cuff_size": "32.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 13307,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "contain a lot",
+                "isfleece": "fleece_none",
+                "color": "Black,White",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "polo collar",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "63.0",
+                "top.chest_size": "102.0",
+                "top.waist_size": "100.0",
+                "top.hem_size": "102.0",
+                "top.shoulder_width": "47.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "36.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 11842,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain a lot",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "65.0",
+                "top.chest_size": "98.0",
+                "top.waist_size": "98.0",
+                "top.hem_size": "102.0",
+                "top.shoulder_width": "39.0",
+                "top.sleeve_length": "20.0",
+                "top.sleeve_cuff_size": "12.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 21801,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "47.0",
+                "top.chest_size": "74.0",
+                "top.waist_size": "86.0",
+                "top.hem_size": "92.0",
+                "top.shoulder_width": "36.0",
+                "top.sleeve_length": "19.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 2591,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "normal",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "top.front_length": "66.0",
+                "top.chest_size": "92.0",
+                "top.waist_size": "90.0",
+                "top.hem_size": "94.0",
+                "top.shoulder_width": "44.0",
+                "top.sleeve_length": "19.0",
+                "top.sleeve_cuff_size": "30.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    },
+    {
+        "product_id": 12681,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_02t-shirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Black",
+                "top_length_type": "normal",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "hood",
+                "topsleeve_design": "ribbed sleeve",
+                "top.front_length": "71.0",
+                "top.chest_size": "106.0",
+                "top.waist_size": "106.0",
+                "top.hem_size": "98.0",
+                "top.shoulder_width": "48.0",
+                "top.sleeve_length": "61.0",
+                "top.sleeve_cuff_size": "16.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {}
+        }
+    }
+]

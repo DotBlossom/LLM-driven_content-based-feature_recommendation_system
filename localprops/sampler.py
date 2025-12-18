@@ -6,14 +6,14 @@ import random
 # 1. 설정: 입출력 파일 경로
 # ==========================================
 # 원본 데이터가 들어있는 JSON 파일 경로
-INPUT_FILE_PATH = r"C:\Users\candyform\Desktop\inferenceCode\localprops\top\vest.json" 
+INPUT_FILE_PATH = r"C:\Users\candyform\Desktop\inferenceCode\localprops\bottom\jumpsuit.json" 
 
 # 결과를 저장할 JSON 파일 경로
-OUTPUT_FILE_PATH = r"C:\Users\candyform\Desktop\inferenceCode\localprops\sampler\vest_sampled.json"
+OUTPUT_FILE_PATH = r"C:\Users\candyform\Desktop\inferenceCode\localprops\sampler\jumpsuit_sampled2.json"
 
 # 목표 설정
-TARGET_TOTAL = 100
-TARGET_MAN = 30
+TARGET_TOTAL = 50
+TARGET_MAN = 20
 
 
 TARGET_CATEGORIES = {
