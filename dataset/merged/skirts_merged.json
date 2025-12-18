@@ -1,0 +1,3502 @@
+[
+    {
+        "product_id": 195936,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "contain a lot",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "76.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "140.0",
+                "skirt.hem_size": "204.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_sheer_midi_a_line_skirt",
+                "season": "High Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 195941,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "contain a lot",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "77.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "78.0",
+                "skirt.hem_size": "100.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_stretch_midi_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard High Stretch Poly",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 195946,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "77.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "160.0",
+                "skirt.hem_size": "240.0",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_poly_maxi_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Cotton Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33541,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown,White,Gray",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "71.0",
+                "skirt.waist_size": "68.0",
+                "skirt.hip_size": "84.0",
+                "skirt.hem_size": "170.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_midi_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87708,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "71.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "74.0",
+                "skirt.hem_size": "72.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_blend_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Synthetic Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 72401,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Hemp",
+                "elasticity": "none at all",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "80.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "98.0",
+                "skirt.hem_size": "112.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "hemp_maxi_a_line_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Hemp",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33736,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "White,Black",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "41.0",
+                "skirt.waist_size": "70.0",
+                "skirt.hip_size": "94.0",
+                "skirt.hem_size": "104.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_sheer_mini_a_line_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Thin Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124796,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "60.0",
+                "skirt.waist_size": "70.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "104.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_stretch_knee_pencil_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Knee",
+                "fabric.feature": "Light Cotton Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124777,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyurethane",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Red",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "69.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "84.0",
+                "skirt.hem_size": "96.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_midi_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 34041,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "93.0",
+                "skirt.waist_size": "58.0",
+                "skirt.hip_size": "112.0",
+                "skirt.hem_size": "200.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_maxi_a_line_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 72073,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "55.0",
+                "skirt.waist_size": "70.0",
+                "skirt.hip_size": "82.0",
+                "skirt.hem_size": "76.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_knee_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Knee",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 72126,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "short",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "36.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "96.0",
+                "skirt.hem_size": "102.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_mini_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 45651,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Wool,Viscos rayon,Polyester",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "73.0",
+                "skirt.waist_size": "58.0",
+                "skirt.hip_size": "82.0",
+                "skirt.hem_size": "202.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "wool_blend_maxi_a_line_skirt",
+                "season": "Deep Winter",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Heavy Wool Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 53131,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "White,Black",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "82.0",
+                "skirt.waist_size": "62.0",
+                "skirt.hip_size": "84.0",
+                "skirt.hem_size": "240.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_pleated_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Polyester Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124576,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "White,Blue",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "62.0",
+                "skirt.waist_size": "56.0",
+                "skirt.hip_size": "128.0",
+                "skirt.hem_size": "260.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_midi_a_line_skirt",
+                "season": "High Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Knee",
+                "fabric.feature": "Thin Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 96981,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "47.0",
+                "skirt.waist_size": "72.0",
+                "skirt.hip_size": "94.0",
+                "skirt.hem_size": "116.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87432,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige,Green",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "65.0",
+                "skirt.waist_size": "58.0",
+                "skirt.hip_size": "158.0",
+                "skirt.hem_size": "262.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_long_a_line_skirt",
+                "season": "Winter",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Knee",
+                "fabric.feature": "Heavy Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 72011,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Beige",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "78.0",
+                "skirt.waist_size": "62.0",
+                "skirt.hip_size": "80.0",
+                "skirt.hem_size": "114.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fleece_lined_pencil_skirt",
+                "season": "Deep Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Fleece Lined Synthetic Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 45777,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Nylon",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Beige",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "83.0",
+                "skirt.waist_size": "68.0",
+                "skirt.hip_size": "92.0",
+                "skirt.hem_size": "138.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_nylon_long_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Cotton Nylon",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87798,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Yellow",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "59.0",
+                "skirt.waist_size": "70.0",
+                "skirt.hip_size": "110.0",
+                "skirt.hem_size": "200.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_sheer_knee_a_line_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Knee",
+                "fabric.feature": "Thin Cotton Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 96886,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Pink,Red",
+                "top_length_type": "short",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "37.0",
+                "skirt.waist_size": "76.0",
+                "skirt.hip_size": "92.0",
+                "skirt.hem_size": "130.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_mini_a_line_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Light Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 72346,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "synthetic fiber Others,Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "59.0",
+                "skirt.waist_size": "66.0",
+                "skirt.hip_size": "98.0",
+                "skirt.hem_size": "138.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "denim_a_line_midi_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Knee",
+                "fabric.feature": "Light Synthetic Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124766,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "short",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "37.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "100.0",
+                "skirt.hem_size": "108.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_poly_mini_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard Cotton Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 96806,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "cellulose fiber Others",
+                "elasticity": "none at all",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Red",
+                "top_length_type": "midi",
+                "skirt_design": "mermaid line",
+                "skirt.length": "61.0",
+                "skirt.waist_size": "68.0",
+                "skirt.hip_size": "86.0",
+                "skirt.hem_size": "120.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cellulose_midi_mermaid_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "Mermaid / Trumpet",
+                "length.feeling": "Knee",
+                "fabric.feature": "Thin Cellulose Fiber",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33701,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "75.0",
+                "skirt.waist_size": "62.0",
+                "skirt.hip_size": "100.0",
+                "skirt.hem_size": "122.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33496,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Hemp",
+                "elasticity": "none",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "74.0",
+                "skirt.waist_size": "58.0",
+                "skirt.hip_size": "98.0",
+                "skirt.hem_size": "106.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "hemp_sheer_midi_pencil_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Hemp",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 156006,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "70.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "88.0",
+                "skirt.hem_size": "90.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_stretch_midi_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard High Stretch Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 17281,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester,Polyurethane",
+                "elasticity": "contain",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "43.0",
+                "skirt.waist_size": "62.0",
+                "skirt.hip_size": "80.0",
+                "skirt.hem_size": "90.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_poly_stretch_mini_pencil_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Light Cotton Poly Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124526,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "short",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "36.0",
+                "skirt.waist_size": "72.0",
+                "skirt.hip_size": "96.0",
+                "skirt.hem_size": "114.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_mini_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 45626,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Nylon",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "86.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "100.0",
+                "skirt.hem_size": "118.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "nylon_poly_long_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Polyester Nylon",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87606,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Viscos rayon,Polyester",
+                "elasticity": "contain",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Beige,Brown,Green",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "81.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "86.0",
+                "skirt.hem_size": "150.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_blend_long_a_line_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Thin Viscose Poly Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33506,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Nylon,Polyurethane",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "75.0",
+                "skirt.waist_size": "62.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "140.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "nylon_blend_midi_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Nylon Blend Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 72506,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others,Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "80.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "94.0",
+                "skirt.hem_size": "100.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_blend_long_pencil_skirt",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Heavy Synthetic Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124621,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "76.0",
+                "skirt.waist_size": "68.0",
+                "skirt.hip_size": "110.0",
+                "skirt.hem_size": "136.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_stretch_midi_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard High Stretch Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87681,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "69.0",
+                "skirt.waist_size": "58.0",
+                "skirt.hip_size": "84.0",
+                "skirt.hem_size": "152.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_a_line_skirt",
+                "season": "Winter",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Heavy Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 34056,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "protein fiber Others,Wool",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Gray,Black",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "57.0",
+                "skirt.waist_size": "68.0",
+                "skirt.hip_size": "92.0",
+                "skirt.hem_size": "92.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fleece_lined_wool_mini_a_line_skirt",
+                "season": "Deep Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Knee",
+                "fabric.feature": "Fleece Lined Wool Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124106,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "65.0",
+                "skirt.waist_size": "62.0",
+                "skirt.hip_size": "62.0",
+                "skirt.hem_size": "76.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_blend_knee_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Knee",
+                "fabric.feature": "Standard Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124801,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "86.0",
+                "skirt.waist_size": "68.0",
+                "skirt.hip_size": "86.0",
+                "skirt.hem_size": "100.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_stretch_long_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Polyester Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 7347,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Wool",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "68.0",
+                "skirt.waist_size": "58.0",
+                "skirt.hip_size": "78.0",
+                "skirt.hem_size": "84.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "wool_midi_pencil_skirt",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Heavy Wool Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 96961,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "54.0",
+                "skirt.waist_size": "66.0",
+                "skirt.hip_size": "92.0",
+                "skirt.hem_size": "94.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_knee_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Knee",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87456,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "short",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "36.0",
+                "skirt.waist_size": "76.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "98.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_mini_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87647,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Black",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "76.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "180.0",
+                "skirt.hem_size": "226.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_a_line_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Cotton Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33456,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Nylon,Viscos rayon,synthetic fiber Others",
+                "elasticity": "contain a lot",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "short",
+                "skirt_design": "H-line",
+                "skirt.length": "40.0",
+                "skirt.waist_size": "72.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "98.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "nylon_blend_mini_pencil_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Light High Stretch Nylon Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33466,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Hemp",
+                "elasticity": "none",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "76.0",
+                "skirt.waist_size": "56.0",
+                "skirt.hip_size": "94.0",
+                "skirt.hem_size": "112.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "hemp_long_pencil_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Hemp",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 17726,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "contain a lot",
+                "transparency": "contain a lot",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "87.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "76.0",
+                "skirt.hem_size": "88.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_sheer_maxi_pencil_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Thin High Stretch Poly",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33826,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "short",
+                "skirt_design": "H-line",
+                "skirt.length": "36.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "88.0",
+                "skirt.hem_size": "90.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_mini_pencil_skirt",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Heavy Synthetic Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 72339,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyurethane,Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "54.0",
+                "skirt.waist_size": "70.0",
+                "skirt.hip_size": "76.0",
+                "skirt.hem_size": "68.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_stretch_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Knee",
+                "fabric.feature": "Standard High Stretch Poly",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33436,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Viscos rayon,Polyester",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "53.0",
+                "skirt.waist_size": "62.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "122.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_midi_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Knee",
+                "fabric.feature": "Standard Viscose Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124137,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue,White",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "88.0",
+                "skirt.waist_size": "72.0",
+                "skirt.hip_size": "92.0",
+                "skirt.hem_size": "118.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124861,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "38.0",
+                "skirt.waist_size": "72.0",
+                "skirt.hip_size": "84.0",
+                "skirt.hem_size": "92.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_mini_a_line_skirt",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Heavy Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87701,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "72.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "98.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_stretch_long_pencil_skirt",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Heavy Polyester Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 96867,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "76.0",
+                "skirt.waist_size": "70.0",
+                "skirt.hip_size": "88.0",
+                "skirt.hem_size": "86.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 34131,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Black,White",
+                "top_length_type": "short",
+                "skirt_design": "H-line",
+                "skirt.length": "44.0",
+                "skirt.waist_size": "68.0",
+                "skirt.hip_size": "92.0",
+                "skirt.hem_size": "96.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fleece_lined_cotton_mini_pencil_skirt",
+                "season": "Deep Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Fleece Lined Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87631,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,White",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "76.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "120.0",
+                "skirt.hem_size": "240.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_pleated_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33686,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Wool",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Red,Green,White",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "61.0",
+                "skirt.waist_size": "76.0",
+                "skirt.hip_size": "100.0",
+                "skirt.hem_size": "116.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "wool_midi_a_line_skirt",
+                "season": "Deep Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Knee",
+                "fabric.feature": "Heavy Weight Wool",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 123556,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue,Green,White",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "50.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "76.0",
+                "skirt.hem_size": "76.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_stretch_knee_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Knee",
+                "fabric.feature": "Standard Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 17371,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "44.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "76.0",
+                "skirt.hem_size": "78.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_stretch_mini_pencil_skirt",
+                "season": "Winter",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Mini",
+                "fabric.feature": "Heavy High Stretch Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 123796,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Viscos rayon",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "75.0",
+                "skirt.waist_size": "54.0",
+                "skirt.hip_size": "112.0",
+                "skirt.hem_size": "140.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_long_a_line_skirt",
+                "season": "Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Heavy Viscose Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 7526,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester,Wool,synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "82.0",
+                "skirt.waist_size": "70.0",
+                "skirt.hip_size": "92.0",
+                "skirt.hem_size": "102.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_blend_maxi_pencil_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Cotton Wool Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 7321,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "48.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "92.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_stretch_knee_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard High Stretch Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 53146,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "77.0",
+                "skirt.waist_size": "62.0",
+                "skirt.hip_size": "124.0",
+                "skirt.hem_size": "232.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "denim_long_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 7472,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Viscos rayon,Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "skirt_design": "mermaid line",
+                "skirt.length": "60.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "76.0",
+                "skirt.hem_size": "136.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_stretch_midi_mermaid_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Mermaid / Trumpet",
+                "length.feeling": "Knee",
+                "fabric.feature": "Standard High Stretch Viscose Poly",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 17696,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Yellow",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "77.0",
+                "skirt.waist_size": "62.0",
+                "skirt.hip_size": "76.0",
+                "skirt.hem_size": "204.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_pleated_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 17346,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "85.0",
+                "skirt.waist_size": "56.0",
+                "skirt.hip_size": "88.0",
+                "skirt.hem_size": "178.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard High Stretch Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 45731,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Blue,White,Blue",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "76.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "100.0",
+                "skirt.hem_size": "138.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "denim_long_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 72531,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Red,White",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "88.0",
+                "skirt.waist_size": "70.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "190.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_maxi_a_line_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124656,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain a lot",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "short",
+                "skirt_design": "H-line",
+                "skirt.length": "30.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "80.0",
+                "skirt.hem_size": "86.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "denim_stretch_mini_pencil_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Light High Stretch Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 45617,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Nylon",
+                "elasticity": "none at all",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "80.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "230.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "nylon_long_a_line_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Thin Nylon",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87927,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "short",
+                "skirt_design": "H-line",
+                "skirt.length": "46.0",
+                "skirt.waist_size": "68.0",
+                "skirt.hip_size": "88.0",
+                "skirt.hem_size": "92.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_midi_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 17351,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester,Nylon",
+                "elasticity": "none at all",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "74.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "40.0",
+                "skirt.hem_size": "102.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_blend_long_pencil_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Cotton Nylon Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33587,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "76.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "180.0",
+                "skirt.hem_size": "340.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_full_volume_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 7712,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "82.0",
+                "skirt.waist_size": "56.0",
+                "skirt.hip_size": "80.0",
+                "skirt.hem_size": "112.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_long_a_line_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Synthetic Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 53001,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Purple",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "74.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "84.0",
+                "skirt.hem_size": "96.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_midi_pencil_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 72501,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,White,Blue",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "66.0",
+                "skirt.waist_size": "66.0",
+                "skirt.hip_size": "84.0",
+                "skirt.hem_size": "124.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Synthetic Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 123846,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "81.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "84.0",
+                "skirt.hem_size": "104.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_blend_long_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Cotton Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 155696,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "short",
+                "skirt_design": "H-line",
+                "skirt.length": "35.0",
+                "skirt.waist_size": "72.0",
+                "skirt.hip_size": "88.0",
+                "skirt.hem_size": "90.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "denim_mini_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124736,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Polyester,Viscos rayon,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Beige",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "80.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "110.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fleece_lined_poly_long_pencil_skirt",
+                "season": "Deep Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Fleece Lined Poly Viscose Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 72451,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Cotton,Wool,Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Beige",
+                "top_length_type": "long",
+                "skirt_design": "mermaid line",
+                "skirt.length": "80.0",
+                "skirt.waist_size": "50.0",
+                "skirt.hip_size": "64.0",
+                "skirt.hem_size": "166.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "wool_blend_long_mermaid_skirt",
+                "season": "Deep Winter",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Mermaid / Trumpet",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Fleece Lined Cotton Wool Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 17557,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain a lot",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "81.0",
+                "skirt.waist_size": "58.0",
+                "skirt.hip_size": "106.0",
+                "skirt.hem_size": "236.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_full_volume_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light High Stretch Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 72056,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "46.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "144.0",
+                "skirt.hem_size": "184.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "denim_midi_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 34096,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "48.0",
+                "skirt.waist_size": "72.0",
+                "skirt.hip_size": "88.0",
+                "skirt.hem_size": "90.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "denim_knee_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Cotton Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 17496,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,White",
+                "top_length_type": "short",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "36.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "88.0",
+                "skirt.hem_size": "114.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_mini_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 45807,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "81.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "98.0",
+                "skirt.hem_size": "116.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "denim_long_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 96821,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "White,Blue",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "63.0",
+                "skirt.waist_size": "66.0",
+                "skirt.hip_size": "88.0",
+                "skirt.hem_size": "150.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_sheer_midi_a_line_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Knee",
+                "fabric.feature": "Thin Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 96947,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "short",
+                "skirt_design": "H-line",
+                "skirt.length": "42.0",
+                "skirt.waist_size": "70.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "92.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_mini_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87877,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Black",
+                "top_length_type": "short",
+                "skirt_design": "H-line",
+                "skirt.length": "40.0",
+                "skirt.waist_size": "72.0",
+                "skirt.hip_size": "96.0",
+                "skirt.hem_size": "100.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_poly_mini_pencil_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard Cotton Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124361,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Cotton,Polyester,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Red,Yellow,Green",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "85.0",
+                "skirt.waist_size": "58.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "90.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_blend_maxi_pencil_skirt",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Heavy Cotton Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87522,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "synthetic fiber Others,Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Green,Blue",
+                "top_length_type": "short",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "35.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "100.0",
+                "skirt.hem_size": "140.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_blend_mini_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard Synthetic Cotton Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87728,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray,Brown",
+                "top_length_type": "short",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "43.0",
+                "skirt.waist_size": "66.0",
+                "skirt.hip_size": "92.0",
+                "skirt.hem_size": "108.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_mini_a_line_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Light Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87811,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Black",
+                "top_length_type": "long",
+                "skirt_design": "H-line",
+                "skirt.length": "32.0",
+                "skirt.waist_size": "88.0",
+                "skirt.hip_size": "92.0",
+                "skirt.hem_size": "138.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fleece_lined_synthetic_mini_pencil_skirt",
+                "season": "Deep Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Fleece Lined Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124286,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "46.0",
+                "skirt.waist_size": "70.0",
+                "skirt.hip_size": "92.0",
+                "skirt.hem_size": "106.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_midi_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124356,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "short",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "34.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "124.0",
+                "skirt.hem_size": "152.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_mini_a_line_skirt",
+                "season": "Winter",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Heavy Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33576,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "Hemp",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray,Black,Brown",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "69.0",
+                "skirt.waist_size": "66.0",
+                "skirt.hip_size": "86.0",
+                "skirt.hem_size": "94.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "hemp_midi_pencil_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Weight Hemp",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87476,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "62.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "70.0",
+                "skirt.hem_size": "74.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_poly_knee_pencil_skirt",
+                "season": "Winter",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Knee",
+                "fabric.feature": "Heavy High Stretch Cotton Poly",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 87556,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Yellow",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "78.0",
+                "skirt.waist_size": "64.0",
+                "skirt.hip_size": "90.0",
+                "skirt.hem_size": "174.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 7506,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "summer",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "skirt_design": "H-line",
+                "skirt.length": "50.0",
+                "skirt.waist_size": "76.0",
+                "skirt.hip_size": "92.0",
+                "skirt.hem_size": "90.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_knee_pencil_skirt",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Knee",
+                "fabric.feature": "Light Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 33946,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "70.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "104.0",
+                "skirt.hem_size": "160.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_poly_midi_a_line_skirt",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Cotton Poly Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 53061,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,White",
+                "top_length_type": "midi",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "39.0",
+                "skirt.waist_size": "60.0",
+                "skirt.hip_size": "116.0",
+                "skirt.hem_size": "154.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_mini_a_line_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 53136,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "long",
+                "skirt_design": "A-line and bell line",
+                "skirt.length": "76.0",
+                "skirt.waist_size": "58.0",
+                "skirt.hip_size": "106.0",
+                "skirt.hem_size": "206.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_full_volume_skirt",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Polyester Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 124421,
+        "feature_data": {
+            "clothes": {
+                "category": "04bottom_02skirt",
+                "season": "winter",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Blue",
+                "top_length_type": "short",
+                "skirt_design": "H-line",
+                "skirt.length": "36.0",
+                "skirt.waist_size": "74.0",
+                "skirt.hip_size": "86.0",
+                "skirt.hem_size": "88.0",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_poly_mini_pencil_skirt",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Mini",
+                "fabric.feature": "Heavy Cotton Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    }
+]
