@@ -33,6 +33,26 @@ from typing import List, Tuple, Dict, Any
 # 전역 변수 ALL_FIELD_KEYS가 정의되어 있어야 합니다.
 # 예: ALL_FIELD_KEYS = ["category", "season", "color", ...] 
 
+def flatten_geometry_features(feature_data: Dict[str, Any]) -> None:
+    """
+    feature_data 내부의 'structural.geometry'를 찾아서
+    상위 레벨인 'reinforced_feature_value'에 'geo_' 접두어로 풀어냅니다.
+    (In-place modification)
+    """
+    re_data = feature_data.get("reinforced_feature_value", {})
+    if not re_data:
+        return
+
+    # geometry 데이터가 있으면 꺼냄 (Dictionary에서 pop)
+    geometry_data = re_data.pop("structural.geometry", None)
+    
+    # 딕셔너리 형태라면 펼쳐서 상위에 병합
+    if geometry_data and isinstance(geometry_data, dict):
+        for sub_key, sub_val in geometry_data.items():
+            # 예: width_flow -> geo_width_flow
+            new_key = f"geo_{sub_key}"
+            re_data[new_key] = sub_val
+
 def preprocess_batch_input(products: List[Any]) -> Tuple[torch.Tensor, torch.Tensor]:
     """
     [Residual Field Embedding용 전처리 - Batch Optimization Ver.]
@@ -60,9 +80,21 @@ def preprocess_batch_input(products: List[Any]) -> Tuple[torch.Tensor, torch.Ten
     flat_indices = []    # 그 텍스트가 들어갈 위치 (batch_idx, field_idx)
     
     for i, product in enumerate(products):
-        feature_data: Dict[str, Any] = getattr(product, 'feature_data', {})
+        
+        raw_feature_data: Dict[str, Any] = getattr(product, 'feature_data', {})
+        
+        feature_data = raw_feature_data.copy()
+        flatten_geometry_features(feature_data)
+        
         clothes_data = feature_data.get("clothes", {})
         re_data = feature_data.get("reinforced_feature_value", {})
+        
+        # 1-3. 데이터 섹션 분리
+        clothes_data = feature_data.get("clothes", {})
+        re_data = feature_data.get("reinforced_feature_value", {})
+
+
+        # ========================================================
         
         row_std_ids = []
         

@@ -1,0 +1,3287 @@
+[
+    {
+        "product_id": 372171,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Red",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "Others",
+                "topsleeve_design": "basic sleeve",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_a_line_midi_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 372161,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Wool",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "Others",
+                "topsleeve_design": "basic sleeve",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "wool_blend_mini_shift_dress",
+                "season": "Deep Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Heavy Wool",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 372182,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "U-neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_puff_sleeve_shift_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 372176,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Green,Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "Others",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_v_neck_a_line_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 372186,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_puff_sleeve_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 304231,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_v_neck_shift_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 372152,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "Others",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_sleeve_a_line_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 372156,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "Others",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_full_volume_shirred_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 372146,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Wool,Silk",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Yellow",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "wool_silk_midi_shift_dress",
+                "season": "Deep Winter",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Heavy Wool Silk Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58356,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black,Brown",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_long_puff_sleeve_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 30006,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton,synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_blend_long_t_shirt_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 57976,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Brown",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "shirt sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_long_shirtdress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58461,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Beige",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_puff_sleeve_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Cotton Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 15081,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Beige,Purple",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "cape sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_midi_cape_sleeve_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Synthetic Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 42871,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Cotton,Polyurethane,Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Black,Brown,Yellow",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fleece_lined_cotton_midi_dress",
+                "season": "Deep Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Fleece Lined Cotton Poly Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 5061,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue,White",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "shirts collar",
+                "topsleeve_design": "shirt sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_shirtdress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 50861,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Nylon",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,White",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "shirt sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "nylon_poly_midi_shirtdress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Polyester Nylon Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 30001,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "ribbed sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_v_neck_a_line_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 57881,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Viscos rayon,Polyester,Nylon,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_blend_v_neck_dress",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Heavy Viscose Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 43286,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Hemp",
+                "elasticity": "none",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "ribbed sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "hemp_sheer_maxi_v_neck_dress",
+                "season": "High Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Thin Hemp",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 5226,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_sleeveless_t_shirt_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 57906,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Hemp",
+                "elasticity": "none at all",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "shirts collar",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "hemp_sleeveless_shirtdress",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Hemp Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29176,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "Peter Pan collar",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_peter_pan_collar_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Cotton Poly Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 57801,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "polo collar",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_polo_collar_a_line_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58126,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Beige",
+                "top_length_type": "short",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "shirt sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_midi_shirtdress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Standard Cotton Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 15166,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,White",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_v_neck_a_line_maxi_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Thin High Stretch Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29827,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Yellow",
+                "top_length_type": "short",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "petal sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_mini_a_line_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Mini",
+                "fabric.feature": "Standard Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 83756,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Viscos rayon,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "short",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_sleeveless_midi_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Thin Viscose Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58222,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "shirts collar",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_puff_sleeve_shirtdress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58161,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "White,Red,Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_sleeveless_a_line_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 5516,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_sleeve_shift_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58257,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Polyester,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Green,Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_sleeve_shift_dress",
+                "season": "Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Heavy Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 69217,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_v_neck_a_line_maxi_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 14992,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "short",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_mini_a_line_dress",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Heavy Synthetic Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58377,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Black,White",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "polo collar",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_polo_collar_sheer_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 43126,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyurethane",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_sleeve_shift_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 83801,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "ribbed sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_long_t_shirt_dress",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Heavy Synthetic Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 30076,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester,synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "cape sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_midi_cape_sleeve_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 5421,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Viscos rayon",
+                "elasticity": "none at all",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Green,White",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "cape sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_maxi_cape_sleeve_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Viscose Rayon",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 69226,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_sleeveless_shift_dress",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Heavy Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 50912,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Hemp",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "cape sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "hemp_midi_cape_sleeve_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Weight Hemp",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 68971,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "shirts collar",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_shirtdress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 69001,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Black,Brown",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "U-neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_t_shirt_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light High Stretch Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 14816,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester,Viscos rayon",
+                "elasticity": "none at all",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "midi",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_sleeveless_sheer_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Poly Viscose",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29196,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "short",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_poly_mini_t_shirt_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Light Cotton Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29156,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "shirts collar",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_midi_shirtdress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 30021,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Wool",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "turtle neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "wool_turtleneck_puff_sleeve_dress",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Heavy High Stretch Wool",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58121,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Hemp,Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "hemp_cotton_a_line_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Hemp Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 69236,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige,Brown",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "turtle neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_turtleneck_shift_dress",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Heavy Polyester Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 83711,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_sleeve_shift_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Cotton Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 5171,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Nylon,Polyurethane,Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Yellow,White",
+                "top_length_type": "short",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "Chinese collar",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "nylon_poly_stretch_mini_dress",
+                "season": "Winter",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Heavy High Stretch Nylon Poly",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 57956,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Hemp",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "Peter Pan collar",
+                "topsleeve_design": "shirt sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "hemp_peter_pan_collar_shirtdress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Hemp",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29287,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester,synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "White,Red",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_v_neck_a_line_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Thin Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 68996,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Viscos rayon",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_long_sleeve_shift_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard High Stretch Viscose",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29632,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "tailored collar",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_tailored_slim_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Polyester Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 43081,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Orange",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "tailored collar",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_tailored_a_line_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Cotton Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 30231,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "shirts collar",
+                "topsleeve_design": "shirt sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_sleeve_shirtdress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 69621,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "Others",
+                "topsleeve_design": "ribbed sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_t_shirt_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Cotton Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 69319,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "midi",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "sweetheart neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_sleeveless_a_line_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29131,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "short",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_stretch_mini_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Thin Cotton Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 68786,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Pink",
+                "top_length_type": "short",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "Others",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_t_shirt_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Light Cotton Poly Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29421,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Nylon",
+                "elasticity": "none at all",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "no neckline",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "nylon_sleeveless_maxi_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Thin Nylon",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 15011,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester,synthetic fiber Others",
+                "elasticity": "contain a lot",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_sheer_a_line_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin High Stretch Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 4846,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Viscos rayon",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "square neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_blend_sleeveless_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Poly Viscose Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 15006,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Nylon",
+                "elasticity": "none at all",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "White,Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "no neckline",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "nylon_full_volume_maxi_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Nylon",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29436,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Beige,Yellow",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_v_neck_a_line_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Thin Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 69567,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Polyester,Nylon",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Black",
+                "top_length_type": "short",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fleece_lined_poly_v_neck_dress",
+                "season": "Winter",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Fleece Lined Poly Nylon Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 68906,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "short",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_mini_shift_dress",
+                "season": "Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Heavy Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 8256,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Pink,Black,Green",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "cape sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_v_neck_a_line_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 69611,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Viscos rayon,Polyester",
+                "elasticity": "contain",
+                "transparency": "contain a lot",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "Others",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_long_sleeve_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Thin Viscose Poly Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58301,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester,synthetic fiber Others",
+                "elasticity": "contain little",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "no neckline",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_sleeveless_shift_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29231,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "square neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_square_neck_a_line_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29791,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "Chinese collar",
+                "topsleeve_design": "shirt sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_band_collar_shirtdress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58241,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_v_neck_shift_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 51151,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "bow collar",
+                "topsleeve_design": "cape sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_bow_collar_full_volume_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Polyester Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58196,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Viscos rayon",
+                "elasticity": "contain a lot",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_t_shirt_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin High Stretch Viscose",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 5116,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Wool,Nylon,synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "wool_blend_knit_dress",
+                "season": "Deep Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Heavy Wool Nylon Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 43262,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Viscos rayon",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "band collar",
+                "topsleeve_design": "shirt sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_long_sleeve_shirtdress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Weight Viscose Rayon",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 5071,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "none",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_sheer_slim_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Midi",
+                "fabric.feature": "Thin Polyester Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29506,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "synthetic_long_sleeve_shift_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Synthetic Fabric",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29171,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Viscos rayon",
+                "elasticity": "none at all",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "White,Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "U-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_sleeveless_a_line_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Viscose Rayon",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 29326,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black,Blue,White",
+                "top_length_type": "long",
+                "sleeve_length_type": "sleeveless",
+                "topneck_color_design": "U-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_sleeveless_a_line_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 58327,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "Pink,Black,Green",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "Others",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_long_puff_sleeve_dress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Thin Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 5366,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black,Brown",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_a_line_midi_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 5191,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Pink,Green",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "cape sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_v_neck_cape_sleeve_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 14862,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Red",
+                "top_length_type": "short",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "off shoulder",
+                "topsleeve_design": "cape sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_off_shoulder_mini_dress",
+                "season": "Winter",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Shorts",
+                "fabric.feature": "Heavy High Stretch Cotton Poly",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 69251,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_long_sleeve_a_line_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Elastic/Banded",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 5251,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Wool",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray,Blue,Beige",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "ribbed sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "wool_long_sleeve_knit_dress",
+                "season": "Deep Winter",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Heavy High Stretch Wool",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 83786,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton,Viscos rayon",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Beige",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_viscose_a_line_maxi_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "Flare / Full-Volume",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Cotton Viscose Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 83656,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Wool",
+                "elasticity": "contain a lot",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "turtle neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "wool_turtleneck_puff_sleeve_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard High Stretch Wool",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 42931,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Purple,Green",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "tailored collar",
+                "topsleeve_design": "ribbed sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_tailored_a_line_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 30037,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Beige",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_poly_long_sleeve_a_line_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Cotton Poly Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 57901,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_midi_t_shirt_dress",
+                "season": "Early Summer",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Midi",
+                "fabric.feature": "Light Cotton Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 14961,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton,Hemp,Polyester",
+                "elasticity": "none at all",
+                "transparency": "contain little",
+                "isfleece": "fleece_none",
+                "color": "White,Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "shirts collar",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "hemp_cotton_shirtdress",
+                "season": "Warm Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Thin Hemp Cotton Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 43366,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "bow collar",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_bow_collar_a_line_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Voluminous",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Weight Polyester",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Flare",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 43156,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Nylon",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown,White",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "shirts collar",
+                "topsleeve_design": "shirt sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "nylon_shirtdress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Flare",
+                "length.feeling": "Midi",
+                "fabric.feature": "Standard Nylon Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 51241,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Nylon,Polyurethane",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "long",
+                "sleeve_length_type": "short sleeves",
+                "topneck_color_design": "V-neck",
+                "topsleeve_design": "ribbed sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "poly_stretch_v_neck_shift_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard High Stretch Poly Nylon",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 51057,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "shirts collar",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_shirtdress",
+                "season": "Early Summer",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Wide",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Light Weight Cotton",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "A-line/Wide",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Loose"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 4816,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton,Polyurethane,Polyester",
+                "elasticity": "contain",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "puff sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cotton_poly_stretch_shift_dress",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Regular/Standard",
+                "silhouette.shape": "H-line / Straight",
+                "length.feeling": "Long/Maxi",
+                "fabric.feature": "Standard Cotton Poly Stretch",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Straight",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Regular"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 15181,
+        "feature_data": {
+            "clothes": {
+                "category": "03-1onepiece(dress)",
+                "season": "winter",
+                "fiber_composition": "Viscos rayon,Polyester,Polyurethane",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "midi",
+                "sleeve_length_type": "long sleeves",
+                "topneck_color_design": "round neck",
+                "topsleeve_design": "basic sleeve",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "viscose_blend_slim_dress",
+                "season": "Winter",
+                "fit.vibe": "Skinny/Slim",
+                "silhouette.shape": "Tapered / Skinny",
+                "length.feeling": "Midi",
+                "fabric.feature": "Heavy Viscose Poly Blend",
+                "structural.geometry": {
+                    "rise_profile": "None(Dress/Skirt)",
+                    "hip_to_hem_flow": "Tapered",
+                    "waist_type": "Structured",
+                    "volumetric_fit": "Tight"
+                }
+            }
+        }
+    }
+]

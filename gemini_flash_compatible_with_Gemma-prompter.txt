@@ -246,19 +246,19 @@ Return a JSON Array. Each object MUST have `product_id`.
 Flash latest
 
 AVG Token Usage:
-52205 / 1048576
+5xxxx / 1048576
 Input tokens:
-34,676
+34,xxx
 Output tokens:
-17,529
+17,xxx
 Total tokens:
-52,205
+5x,xxx
 Cost Estimation *
 Input token cost:
-$0.010403
+$0.01xx
 Output token cost:
-$0.043823
+$0.04xx
 Total cost:
-$0.054225
+$0.05xx
 
 60 sec upper 

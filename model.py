@@ -12,6 +12,18 @@ from sqlalchemy.orm import Session
 import copy
 import random
 
+#################### !!!!!!!! 카테고리 제외하고 학습하기
+
+def prepare_training_data(raw_json):
+    features = raw_json['feature_data']['clothes']
+    
+    # ✂️ 학습용 텍스트 만들 때는 카테고리 삭제!
+    if 'category' in features:
+        del features['category'] 
+        
+    # 남은 건: "color: black, material: wool..." (순수 특징들)
+    return str(features)
+
 
 # ItemTowerEmbedding(S1) * N -> save..DB -> stage2 (optimizer pass -> triplet)  
 
@@ -19,11 +31,13 @@ model_router = APIRouter()
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
+
 # 필드 순서 정의 (Field Embedding), 임시, data 보고 결정
 # key 순서 == 오는 json 데이타Load 순서
 ALL_FIELD_KEYS = vocab.ORDERED_FEATURE_KEYS 
 FIELD_TO_IDX = {k: i for i, k in enumerate(ALL_FIELD_KEYS)}
 NUM_TOTAL_FIELDS = len(ALL_FIELD_KEYS)
+
 
 
 class TrainingItem(BaseModel):

@@ -1,0 +1,1602 @@
+[
+    {
+        "product_id": 365877,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "White,Green",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "essential_v_neck_vest",
+                "season": "Winter",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "Tubular",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 365861,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black,Gray",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "essential_v_neck_vest",
+                "season": "Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "Tubular",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 115411,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "topneck_color_design": "round neck",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "a_line_round_neck_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Slim-fit",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 368456,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige,Blue,White",
+                "top_length_type": "long",
+                "topneck_color_design": "Chinese collar",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "fitted_stand_collar_vest",
+                "season": "Winter",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "Tapered",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 146191,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "summer",
+                "fiber_composition": "Hemp",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "linen_v_neck_vest",
+                "season": "High Summer",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "Tubular",
+                "length.feeling": "Standard",
+                "fabric.feature": "Hemp_Thin",
+                "structural.geometry": {
+                    "width_flow": "Straight",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 362777,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Green",
+                "top_length_type": "long",
+                "topneck_color_design": "V-neck",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "oversized_v_neck_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "Boxy",
+                "length.feeling": "Standard",
+                "fabric.feature": "synthetic_fiber_Normal",
+                "structural.geometry": {
+                    "width_flow": "Straight",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 240322,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black,Red",
+                "top_length_type": "normal",
+                "topneck_color_design": "Chinese collar",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "fitted_puffer_vest",
+                "season": "Winter",
+                "fit.vibe": "Bodycon",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 146221,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Red",
+                "top_length_type": "normal",
+                "topneck_color_design": "Chinese collar",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "standard_puffer_vest",
+                "season": "Winter",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 241006,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "topneck_color_design": "Chinese collar",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "sheer_fitted_vest",
+                "season": "Winter",
+                "fit.vibe": "Slim-fit",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Thin",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 285156,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Nylon,Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "topneck_color_design": "Chinese collar",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "standard_puffer_vest",
+                "season": "Winter",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Nylon_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 370123,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "topneck_color_design": "Chinese collar",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "slim_fit_stand_collar_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Slim-fit",
+                "silhouette.shape": "Tubular",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 42511,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Black,White",
+                "top_length_type": "normal",
+                "topneck_color_design": "U-neck",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "oversized_cotton_tank_top",
+                "season": "Summer",
+                "fit.vibe": "Bodycon",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Cotton_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 369751,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Green,Blue,Red",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "oversized_v_neck_vest",
+                "season": "Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "Inverted-Triangle",
+                "length.feeling": "Long",
+                "fabric.feature": "synthetic_fiber_Normal",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Long",
+                    "shoulder_geometry": "Wide/Drop",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 145756,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "blouson_v_neck_vest",
+                "season": "Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "Blouson",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Thin",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 94361,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Wool,synthetic fiber Others",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_contain",
+                "color": "Black",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "fitted_wool_vest",
+                "season": "Chilly Spring/Autumn",
+                "fit.vibe": "Bodycon",
+                "silhouette.shape": "Hourglass",
+                "length.feeling": "Standard",
+                "fabric.feature": "Wool_Fleece",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 367266,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "oversized_v_neck_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 364542,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Wool",
+                "elasticity": "contain",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "topneck_color_design": "Chinese collar",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "wool_blouson_vest",
+                "season": "Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "Blouson",
+                "length.feeling": "Standard",
+                "fabric.feature": "Wool_Normal",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 239867,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Nylon,Polyester",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "long",
+                "topneck_color_design": "Chinese collar",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "longline_stand_collar_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Slim-fit",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Long",
+                "fabric.feature": "Nylon_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Long",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 370751,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "topneck_color_design": "Chinese collar",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "sheer_fitted_vest",
+                "season": "Winter",
+                "fit.vibe": "Bodycon",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "synthetic_fiber_Thin",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 145821,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "topneck_color_design": "round neck",
+                "gender": "man"
+            },
+            "reinforced_feature_value": {
+                "category": "standard_round_neck_vest",
+                "season": "Winter",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "Boxy",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Straight",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 146126,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fitted_v_neck_vest",
+                "season": "Winter",
+                "fit.vibe": "Bodycon",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 42548,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain little",
+                "transparency": "contain a lot",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "sheer_v_neck_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Semi-Crop",
+                "fabric.feature": "Polyester_Thin",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Semi-Crop",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 94311,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Beige,Brown",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cropped_v_neck_sweater_vest",
+                "season": "Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "Tubular",
+                "length.feeling": "Micro Crop",
+                "fabric.feature": "Cotton_Normal",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Micro Crop",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 28676,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Nylon",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "long",
+                "topneck_color_design": "Chinese collar",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "longline_puffer_vest",
+                "season": "Winter",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Tunic",
+                "fabric.feature": "Nylon_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Tunic",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 185681,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "normal",
+                "topneck_color_design": "square neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "standard_square_neck_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Semi-Crop",
+                "fabric.feature": "Cotton_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Semi-Crop",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 185371,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "long",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "longline_round_neck_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Tunic",
+                "fabric.feature": "Cotton_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Tunic",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 114987,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "summer",
+                "fiber_composition": "Cotton",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fitted_round_neck_tank",
+                "season": "Summer",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "Tapered",
+                "length.feeling": "Standard",
+                "fabric.feature": "Cotton_Normal",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 188051,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Red",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "slim_v_neck_sweater_vest",
+                "season": "Winter",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "Tubular",
+                "length.feeling": "Standard",
+                "fabric.feature": "synthetic_fiber_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Hourglass",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 83416,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester,Wool",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "normal",
+                "topneck_color_design": "no neckline",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "cropped_wool_vest",
+                "season": "Winter",
+                "fit.vibe": "Bodycon",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Micro Crop",
+                "fabric.feature": "Wool_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Micro Crop",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 185746,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Wool",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "White,Black",
+                "top_length_type": "normal",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "oversized_wool_vest",
+                "season": "Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "Boxy",
+                "length.feeling": "Semi-Crop",
+                "fabric.feature": "Wool_Normal",
+                "structural.geometry": {
+                    "width_flow": "Straight",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Semi-Crop",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 185981,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "a_line_v_neck_tunic_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Tunic",
+                "fabric.feature": "synthetic_fiber_Normal",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Tunic",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 239201,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "White",
+                "top_length_type": "long",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fitted_v_neck_vest",
+                "season": "Winter",
+                "fit.vibe": "Bodycon",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 28737,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "synthetic fiber Others,Wool",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige,Brown",
+                "top_length_type": "long",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "slim_a_line_sweater_vest",
+                "season": "Chilly Spring/Autumn",
+                "fit.vibe": "Slim-fit",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Wool_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 115206,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "topneck_color_design": "Chinese collar",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "stand_collar_fitted_vest",
+                "season": "Winter",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Hourglass",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 4701,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Nylon",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "essential_v_neck_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "Tapered",
+                "length.feeling": "Standard",
+                "fabric.feature": "Nylon_Normal",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 239626,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "crop_v_neck_vest",
+                "season": "Summer",
+                "fit.vibe": "Slim-fit",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Micro Crop",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Micro Crop",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 28561,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "summer",
+                "fiber_composition": "regenerated fiber Others",
+                "elasticity": "contain a lot",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Gray",
+                "top_length_type": "long",
+                "topneck_color_design": "no neckline",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "longline_sleeveless_tunic",
+                "season": "Summer",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Tunic",
+                "fabric.feature": "regenerated_fiber_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Tunic",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 187136,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Nylon",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "long",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "longline_trapeze_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Bodycon",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Tunic",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Tunic",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 188036,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Nylon",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Brown",
+                "top_length_type": "normal",
+                "topneck_color_design": "Chinese collar",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "a_line_puffer_vest",
+                "season": "Winter",
+                "fit.vibe": "Slim-fit",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Nylon_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 145981,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "summer",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none",
+                "isfleece": "fleece_none",
+                "color": "Yellow",
+                "top_length_type": "normal",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fitted_round_neck_vest",
+                "season": "Summer",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Semi-Crop",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Semi-Crop",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 187021,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "summer",
+                "fiber_composition": "synthetic fiber Others",
+                "elasticity": "contain",
+                "transparency": "contain",
+                "isfleece": "fleece_none",
+                "color": "Blue,Beige",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "sheer_a_line_v_neck_vest",
+                "season": "Early Summer",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Semi-Crop",
+                "fabric.feature": "synthetic_fiber_Thin",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Semi-Crop",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 187181,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Polyester,Viscos rayon",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Blue",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "crop_v_neck_vest",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Slim-fit",
+                "silhouette.shape": "Tubular",
+                "length.feeling": "Micro Crop",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Straight",
+                    "waist_contour": "Hourglass",
+                    "vertical_balance": "Micro Crop",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 239296,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Nylon",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "longline_puffer_vest",
+                "season": "Winter",
+                "fit.vibe": "Bodycon",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Tunic",
+                "fabric.feature": "Nylon_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Tunic",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 146361,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Pink",
+                "top_length_type": "normal",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "oversized_round_neck_vest",
+                "season": "Winter",
+                "fit.vibe": "Relaxed",
+                "silhouette.shape": "Boxy",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Straight",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 187526,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_contain",
+                "color": "Orange",
+                "top_length_type": "normal",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fleece_a_line_vest",
+                "season": "Deep Winter",
+                "fit.vibe": "Slim-fit",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Fleece",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 145631,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Nylon",
+                "elasticity": "none at all",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "long",
+                "topneck_color_design": "V-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "longline_v_neck_vest",
+                "season": "Winter",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Nylon_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 83452,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "summer",
+                "fiber_composition": "Polyester,Polyurethane",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fitted_round_neck_tank",
+                "season": "Summer",
+                "fit.vibe": "Slim-fit",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 94241,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "Polyester,Nylon",
+                "elasticity": "none",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Black",
+                "top_length_type": "normal",
+                "topneck_color_design": "Chinese collar",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "fitted_stand_collar_vest",
+                "season": "Winter",
+                "fit.vibe": "Bodycon",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Polyester_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Barrel",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 145456,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "winter",
+                "fiber_composition": "synthetic fiber Others,Wool",
+                "elasticity": "contain little",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "normal",
+                "topneck_color_design": "U-neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "crop_wool_vest",
+                "season": "Winter",
+                "fit.vibe": "Bodycon",
+                "silhouette.shape": "Tapered",
+                "length.feeling": "Semi-Crop",
+                "fabric.feature": "Wool_Normal",
+                "structural.geometry": {
+                    "width_flow": "Tapered",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Semi-Crop",
+                    "shoulder_geometry": "Narrow",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    },
+    {
+        "product_id": 146281,
+        "feature_data": {
+            "clothes": {
+                "category": "02top_05vest",
+                "season": "spring&fall",
+                "fiber_composition": "Cotton",
+                "elasticity": "contain",
+                "transparency": "none at all",
+                "isfleece": "fleece_none",
+                "color": "Beige",
+                "top_length_type": "long",
+                "topneck_color_design": "round neck",
+                "gender": "woman"
+            },
+            "reinforced_feature_value": {
+                "category": "essential_round_neck_tank",
+                "season": "Spring/Autumn",
+                "fit.vibe": "Standard",
+                "silhouette.shape": "A-line / Trapeze",
+                "length.feeling": "Standard",
+                "fabric.feature": "Cotton_Normal",
+                "structural.geometry": {
+                    "width_flow": "Expanding",
+                    "waist_contour": "Tubular",
+                    "vertical_balance": "Standard",
+                    "shoulder_geometry": "Standard",
+                    "sleeve_profile": "Sleeveless"
+                }
+            }
+        }
+    }
+]

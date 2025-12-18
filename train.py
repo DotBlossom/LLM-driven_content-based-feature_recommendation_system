@@ -8,7 +8,7 @@ import torch
 from tqdm import tqdm
 from utils.util import fetch_training_data_from_db, load_pretrained_vectors_from_db
 from database import ProductInferenceInput, SessionLocal, get_db
-from utils.dependencies import get_global_encoder, get_global_projector
+from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
 from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper, SimCSERecSysDataset
 import torch.nn as nn
 import torch.nn.functional as F
@@ -54,8 +54,8 @@ def collate_simcse(batch):
 def train_simcse_from_db(    
     encoder: nn.Module,       
     projector: nn.Module,
-    batch_size: int = 4,
-    epochs: int = 5,
+    batch_size: int = Depends(get_global_batch_size),
+    epochs: int = 30,
     lr: float = 1e-4
 ):
     print("🚀 Fetching data from DB...")
@@ -141,7 +141,8 @@ def train_simcse_from_db(
             step += 1
             progress.set_postfix({"loss": f"{loss.item():.4f}"})
             
-        print(f"Epoch {epoch+1} Avg Loss: {total_loss/step:.4f}")
+        if epochs % 10 == 0:
+            print(f"Epoch {epoch+1} Avg Loss: {total_loss/step:.4f}")
         
     print("Training Finished.")
     
@@ -229,8 +230,8 @@ class UserTowerTrainDataset(Dataset):
 
 def train_user_tower_task(
     db_session: Session = Depends(get_db), 
-    epochs: int = 5, 
-    batch_size: int = 4, 
+    epochs: int = 30, 
+    batch_size: int = Depends(get_global_batch_size), 
     lr: float = 1e-4,
     temperature: float = 0.075 # Loss dx 낮음 : low , Loss div : High
 ):

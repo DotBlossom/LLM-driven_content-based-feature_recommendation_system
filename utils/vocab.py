@@ -55,16 +55,25 @@ STD_VOCAB_CONFIG = {
     "skirt.design": ["A-line and bell line", "mermaid line", "Others"],
     
     # --- Re Attributes ---
-    "fit.vibe": [],
+    # 1. Fit & Feel
+    "fit.vibe": [],          
     "silhouette.shape": [],
     "length.feeling": [],
-    "fabric.texture": [],
-    "fabric.weight": [],
-    "style.mood": [],
-    "tpo.occasion": []
-    
+    "fabric.feature": [],
 
+    # 2. Geometry (Flattened) , but finited domains
+    "geo_width_flow": [],      
+    "geo_waist_contour": [],
+    "geo_vertical_balance": [],
+    "geo_shoulder_geometry": [],
+    "geo_sleeve_profile": [],
+    
+    "geo_rise_profile": [],
+    "geo_hip_to_hem_flow": [],
+    "geo_waist_type": [],
+    "geo_volumetric_fit": []
 }
+
 
 
 # Exports

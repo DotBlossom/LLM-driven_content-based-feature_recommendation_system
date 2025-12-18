@@ -1,10 +1,11 @@
 from fastapi import BackgroundTasks, FastAPI, Depends, HTTPException, APIRouter
 from pydantic import BaseModel, Field
 
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
-from database import ProductInferenceInput, get_db, Base
+from database import ProductInferenceInput, ProductInferenceVectors, get_db, Base
 from typing import List, Dict, Any, Optional
 
 
@@ -330,3 +331,66 @@ def transform_dataset(data: List[Dict[str, Any]]):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
+@controller_router.get("/similarity/pgvector/{item_id}")
+def check_similarity_pgvector(item_id: int, db: Session = Depends(get_db)):
+    """
+    pgvector를 사용하여 DB 내에서 고속 유사도 검색을 수행합니다.
+    """
+    
+    # 1. 타겟 아이템(Query)의 벡터 조회
+    # (이미 DB에 임베딩이 저장되어 있다고 가정)
+    stmt = select(ProductInferenceVectors).where(ProductInferenceVectors.id == item_id)
+    target_item = db.execute(stmt).scalar_one_or_none()
+
+    if not target_item:
+        raise HTTPException(status_code=404, detail=f"Item {item_id} not found in vector table")
+
+    if target_item.vector_embedding is None:
+        raise HTTPException(status_code=400, detail="Target item has no vector embedding yet")
+
+    target_vec = target_item.vector_embedding
+
+    # 2. pgvector 유사도 검색 (Cosine Distance)
+    # 문법: 컬럼명.cosine_distance(비교벡터)
+    # 자기 자신(item_id)은 제외하고 검색
+    
+    similarity_expr = ProductInferenceVectors.vector_embedding.cosine_distance(target_vec)
+    
+    stmt_search = (
+        select(ProductInferenceVectors, similarity_expr.label("distance"))
+        .where(ProductInferenceVectors.id != item_id) # 자기 자신 제외
+        .where(ProductInferenceVectors.vector_embedding.is_not(None)) # 벡터 없는 것 제외
+        .order_by(similarity_expr.asc()) # 거리 짧은 순 (=유사도 높은 순)
+        .limit(20) # Top 5
+    )
+    
+    results = db.execute(stmt_search).all()
+
+    if not results:
+        return {"message": "No similar items found."}
+
+    # 3. 결과 포맷팅
+    response_list = []
+    for row in results:
+        item = row[0]       # ProductInferenceVectors 객체
+        distance = row[1]   # cosine_distance 값 (0~2)
+        
+        # 보기 편하게 Similarity(0~1)로 변환: 1 - distance
+        similarity_score = 1 - distance
+        
+        response_list.append({
+            "rank_score": round(similarity_score, 4), # 유사도 점수
+            "raw_distance": round(distance, 4),       # 거리 점수 (pgvector 원본)
+            "id": item.id,
+            "category": item.category,
+            # "vector": str(item.vector_embedding)[:50] + "..." # 벡터 값은 필요하면 출력
+        })
+
+    return {
+        "query_item": {
+            "id": target_item.id,
+            "category": target_item.category
+        },
+        "top_5_similar": response_list
+    }
