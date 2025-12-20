@@ -22,6 +22,16 @@ serving_controller_router = APIRouter()
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 MODEL_DIR = "models"
 
+
+
+
+
+
+## process-pending -> product_service로 스키마로딩 변경
+
+
+
+
 # API 3 입력용
 class ProductIdListSchema(BaseModel):
     product_ids: List[int]
@@ -297,28 +307,35 @@ def process_pending_vectors(
     batch_size: int = Depends(get_global_batch_size),
     db: Session = Depends(get_db),
     # [수정] 모델 인스턴스 주입
-    encoder: CoarseToFineItemTower = Depends(get_global_encoder),
-    projector: OptimizedItemTower = Depends(get_global_projector)
+    encoder: CoarseToFineItemTower = Depends(get_global_encoder)
+
 ):
-    # 1. 처리되지 않은 데이터 조회
-    pending_products = db.query(ProductInferenceInput)\
-                         .filter(ProductInferenceInput.is_vectorized == False)\
-                         .limit(batch_size)\
-                         .all()
+    total_processed_count = 0
     
-    if not pending_products:
+    while True:
+        # 1. 처리되지 않은 데이터 조회 (batch_size? 일단)
+        pending_products = db.query(ProductInferenceInput)\
+                             .filter(ProductInferenceInput.is_vectorized == False)\
+                             .limit(batch_size)\
+                             .all()
+        
+        if not pending_products:
+            break
+
+        # 2. 공통 파이프라인 실행
+        current_count = run_pipeline_and_save(db, pending_products, encoder)
+        
+        total_processed_count += current_count
+
+    if total_processed_count == 0:
         return {"status": "success", "message": "No pending products to process."}
 
-    # 2. 공통 파이프라인 실행 (모델 전달)
-    processed_count = run_pipeline_and_save(db, pending_products, encoder)
-    
     return {
         "status": "success", 
-        "processed_count": processed_count, 
-        "message": "Batch processing completed."
+        "processed_count": total_processed_count, 
+        "message": f"All pending batches processed successfully. (Total: {total_processed_count})"
     }
-
-
+    
 # ------------------------------------------------------------------
 # API 3. 특정 ID 리스트 기반 벡터화 (On-Demand Processing)
 # ------------------------------------------------------------------

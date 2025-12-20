@@ -6,6 +6,7 @@ from requests import Session
 from sqlalchemy import select
 import torch
 from tqdm import tqdm
+from transformers import get_linear_schedule_with_warmup
 from utils.util import fetch_training_data_from_db, load_pretrained_vectors_from_db
 from database import ProductInferenceInput, SessionLocal, get_db
 from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
@@ -55,7 +56,7 @@ def train_simcse_from_db(
     encoder: nn.Module,       
     projector: nn.Module,
     batch_size: int = Depends(get_global_batch_size),
-    epochs: int = 30,
+    epochs: int = 20,
     lr: float = 1e-4
 ):
     print("🚀 Fetching data from DB...")
@@ -91,6 +92,8 @@ def train_simcse_from_db(
     # Optimizer는 두 모델의 파라미터를 모두 학습해야 함
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
     
+
+    
     # Loss Function (Contrastive Learning)
     loss_func = losses.NTXentLoss(temperature=0.07)
     
@@ -102,6 +105,15 @@ def train_simcse_from_db(
         collate_fn=collate_simcse,
         drop_last=True
     )
+
+    # [추가] 스케줄러 설정 (Warmup 10%)
+    total_steps = len(dataloader) * epochs
+    scheduler = get_linear_schedule_with_warmup(
+        optimizer,
+        num_warmup_steps=int(total_steps * 0.1),
+        num_training_steps=total_steps
+    )
+
     
     print("🔥 Starting Training Loop...")
     
@@ -136,6 +148,7 @@ def train_simcse_from_db(
             
             loss.backward()
             optimizer.step()
+            scheduler.step()
             
             total_loss += loss.item()
             step += 1

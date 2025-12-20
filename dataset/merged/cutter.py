@@ -45,6 +45,7 @@ def clean_measurements(item: Dict[str, Any]) -> tuple[Dict[str, Any], int]:
             # 2. Value가 실제로 숫자인지 확인
             if is_number(value):
                 keys_to_remove.append(key)
+
     
     # 찾은 키 삭제
     for key in keys_to_remove:

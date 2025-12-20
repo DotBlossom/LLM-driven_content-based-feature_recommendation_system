@@ -56,7 +56,7 @@ def initialize_global_models():
     print("✅ OptimizedItemTower 로드 완료.")
 
     global global_batch_size
-    global_batch_size = 64
+    global_batch_size = 128
     print(f"✅ Global Batch Size set to: {global_batch_size}")
     
 

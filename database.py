@@ -59,6 +59,33 @@ class ProductInferenceVectors(Base):
 
 
 
+## real data / valid data
+
+class ProductServiceVectors(Base):
+    __tablename__ = "product_service_vectors"
+
+    id = Column(Integer, primary_key=True, index=True)
+    vector_embedding = mapped_column(Vector(128), nullable=True)
+    category = Column(String, nullable=True, index=True)
+
+
+class ProductServiceInput(Base):
+    __tablename__ = "product_service_input"
+
+    # product_id INTEGER PRIMARY KEY
+    product_id = Column(Integer, primary_key=True)
+    
+    # feature_data JSONB
+    # 이 컬럼 안에 "clothes"와 "reinforced_feature_value"가 들어있음
+    feature_data = Column(JSONB)
+    is_vectorized = Column(Boolean, default=False, index=True)
+
+
+
+
+
+
+
 
 class ProductInput(Base):
     __tablename__ = "product_input"

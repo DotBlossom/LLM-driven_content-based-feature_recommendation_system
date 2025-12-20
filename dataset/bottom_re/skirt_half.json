@@ -1,0 +1,4253 @@
+
+[
+  {
+    "product_id": 87461,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124666,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 33796,
+    "reinforced_feature_value": {
+      "category": "silk_mini_a_line_skirt",
+      "season": "Warm Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Mini",
+      "fabric.feature": "Silk_Viscose_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 7457,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "H-line/Straight",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Poly_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 17792,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 123611,
+    "reinforced_feature_value": {
+      "category": "layered_cotton_maxi_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Poly_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 96676,
+    "reinforced_feature_value": {
+      "category": "synthetic_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Midi",
+      "fabric.feature": "Synthetic_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 72376,
+    "reinforced_feature_value": {
+      "category": "poly_knee_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124771,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Knee",
+      "fabric.feature": "Cotton_Synthetic_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 123741,
+    "reinforced_feature_value": {
+      "category": "wool_midi_full_skirt",
+      "season": "Deep Winter",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Wool_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 33886,
+    "reinforced_feature_value": {
+      "category": "synthetic_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 124086,
+    "reinforced_feature_value": {
+      "category": "elastic_poly_midi_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 87496,
+    "reinforced_feature_value": {
+      "category": "synthetic_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Synthetic_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45562,
+    "reinforced_feature_value": {
+      "category": "wool_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Wool_Synthetic_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45741,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 33476,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124731,
+    "reinforced_feature_value": {
+      "category": "denim_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 45832,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45761,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45546,
+    "reinforced_feature_value": {
+      "category": "denim_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Viscose_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 7286,
+    "reinforced_feature_value": {
+      "category": "poly_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 17586,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 155976,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_maxi_h_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_High_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124692,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 17641,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 123642,
+    "reinforced_feature_value": {
+      "category": "hemp_midi_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Hemp_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124472,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Synthetic_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 124541,
+    "reinforced_feature_value": {
+      "category": "viscose_midi_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Viscose_Poly_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124958,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 33991,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_full_skirt",
+      "season": "Winter",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 33966,
+    "reinforced_feature_value": {
+      "category": "sheer_hemp_maxi_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Hemp_Normal_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 7621,
+    "reinforced_feature_value": {
+      "category": "wool_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Wool_Poly_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124216,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45581,
+    "reinforced_feature_value": {
+      "category": "wool_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Wool_Poly_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 96701,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 88046,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 17746,
+    "reinforced_feature_value": {
+      "category": "poly_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 7676,
+    "reinforced_feature_value": {
+      "category": "poly_midi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Normal_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 155721,
+    "reinforced_feature_value": {
+      "category": "mermaid_midi_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Mermaid",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Poly_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 17481,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Nylon_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124066,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 87676,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 96876,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Nylon_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 87436,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 155741,
+    "reinforced_feature_value": {
+      "category": "poly_mini_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_Nylon_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 52981,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 33606,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 7376,
+    "reinforced_feature_value": {
+      "category": "viscose_mini_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Mini",
+      "fabric.feature": "Viscose_Poly_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 72391,
+    "reinforced_feature_value": {
+      "category": "poly_mini_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Synthetic_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124041,
+    "reinforced_feature_value": {
+      "category": "poly_mini_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Slight_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 72116,
+    "reinforced_feature_value": {
+      "category": "denim_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Viscose_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124267,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Poly_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 72221,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 123786,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 123791,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124247,
+    "reinforced_feature_value": {
+      "category": "sheer_mermaid_maxi_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Mermaid",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Slight_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 33896,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 33922,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124606,
+    "reinforced_feature_value": {
+      "category": "poly_mini_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Nylon_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124061,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Mini",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 123582,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Synthetic_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124961,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Nylon_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 34116,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 33721,
+    "reinforced_feature_value": {
+      "category": "denim_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 123926,
+    "reinforced_feature_value": {
+      "category": "mermaid_midi_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Mermaid",
+      "length.feeling": "Midi",
+      "fabric.feature": "Poly_Nylon_Cotton_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 123816,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyurethane_Cotton_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 155967,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_mini_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_High_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 45911,
+    "reinforced_feature_value": {
+      "category": "poly_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 96997,
+    "reinforced_feature_value": {
+      "category": "full_volume_maxi_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Nylon_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 124161,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 123836,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 87546,
+    "reinforced_feature_value": {
+      "category": "cotton_knee_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Cotton_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 155942,
+    "reinforced_feature_value": {
+      "category": "sheer_cotton_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_High_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 123906,
+    "reinforced_feature_value": {
+      "category": "mermaid_midi_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Mermaid",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Polyurethane_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 72331,
+    "reinforced_feature_value": {
+      "category": "a_line_maxi_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Nylon_Viscose_Cotton_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 7476,
+    "reinforced_feature_value": {
+      "category": "elastic_mermaid_maxi_skirt",
+      "season": "Winter",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Mermaid",
+      "length.feeling": "Mini",
+      "fabric.feature": "Poly_Polyurethane_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 72141,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124882,
+    "reinforced_feature_value": {
+      "category": "poly_midi_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 96636,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Synthetic_Poly_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 88031,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124556,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Polyurethane_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 155776,
+    "reinforced_feature_value": {
+      "category": "poly_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Mini",
+      "fabric.feature": "Poly_Viscose_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 155971,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Normal_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 33932,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Synthetic_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 155706,
+    "reinforced_feature_value": {
+      "category": "denim_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Knee",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124631,
+    "reinforced_feature_value": {
+      "category": "full_volume_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Poly_Viscose_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 33976,
+    "reinforced_feature_value": {
+      "category": "denim_maxi_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 87518,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Synthetic_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45613,
+    "reinforced_feature_value": {
+      "category": "synthetic_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Synthetic_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 96837,
+    "reinforced_feature_value": {
+      "category": "knit_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Protein_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 155931,
+    "reinforced_feature_value": {
+      "category": "sheer_cotton_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Slight_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 87761,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_midi_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Slight_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 87837,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 96856,
+    "reinforced_feature_value": {
+      "category": "poly_mini_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124921,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 87671,
+    "reinforced_feature_value": {
+      "category": "poly_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 124841,
+    "reinforced_feature_value": {
+      "category": "hemp_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Hemp_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 72541,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Cotton_Hemp_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 123961,
+    "reinforced_feature_value": {
+      "category": "poly_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_High_Elasticity_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 17611,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_Polyurethane_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 34156,
+    "reinforced_feature_value": {
+      "category": "brushed_poly_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Fleece_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 87692,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_full_skirt",
+      "season": "Winter",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 45901,
+    "reinforced_feature_value": {
+      "category": "elastic_poly_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 17827,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Poly_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124382,
+    "reinforced_feature_value": {
+      "category": "silk_midi_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Silk_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 123771,
+    "reinforced_feature_value": {
+      "category": "synthetic_maxi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 72211,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 7656,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Synthetic_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 87747,
+    "reinforced_feature_value": {
+      "category": "poly_mini_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 72167,
+    "reinforced_feature_value": {
+      "category": "denim_mini_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45606,
+    "reinforced_feature_value": {
+      "category": "knit_maxi_full_skirt",
+      "season": "Winter",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Poly_Nylon_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 123881,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 87936,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Knee",
+      "fabric.feature": "Cotton_Poly_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 72416,
+    "reinforced_feature_value": {
+      "category": "denim_maxi_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45846,
+    "reinforced_feature_value": {
+      "category": "full_volume_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyurethane_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 45843,
+    "reinforced_feature_value": {
+      "category": "synthetic_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Synthetic_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45681,
+    "reinforced_feature_value": {
+      "category": "nylon_mini_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Nylon_Polyurethane_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 17526,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_maxi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_High_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 124497,
+    "reinforced_feature_value": {
+      "category": "poly_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Nylon_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 17591,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124521,
+    "reinforced_feature_value": {
+      "category": "sheer_synthetic_midi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Knee",
+      "fabric.feature": "Synthetic_Normal_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 96706,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 45891,
+    "reinforced_feature_value": {
+      "category": "elastic_poly_maxi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 124574,
+    "reinforced_feature_value": {
+      "category": "sheer_cotton_midi_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Slight_Elasticity_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 7616,
+    "reinforced_feature_value": {
+      "category": "synthetic_maxi_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Poly_Polyurethane_Synthetic_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 45916,
+    "reinforced_feature_value": {
+      "category": "poly_midi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_Nylon_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 7316,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Poly_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45737,
+    "reinforced_feature_value": {
+      "category": "synthetic_maxi_pencil_skirt",
+      "season": "Deep Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Synthetic_Thick_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 96766,
+    "reinforced_feature_value": {
+      "category": "protein_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Protein_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 155671,
+    "reinforced_feature_value": {
+      "category": "denim_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 34061,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 97006,
+    "reinforced_feature_value": {
+      "category": "synthetic_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Synthetic_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 87996,
+    "reinforced_feature_value": {
+      "category": "sheer_silk_mini_a_line_skirt",
+      "season": "High Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Silk_Thin_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 72316,
+    "reinforced_feature_value": {
+      "category": "elastic_poly_midi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 17311,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Cotton_Cellulose_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 53071,
+    "reinforced_feature_value": {
+      "category": "synthetic_maxi_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 155999,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 123902,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 53076,
+    "reinforced_feature_value": {
+      "category": "poly_mini_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 155666,
+    "reinforced_feature_value": {
+      "category": "brushed_denim_maxi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Fleece_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45856,
+    "reinforced_feature_value": {
+      "category": "sheer_cotton_maxi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Poly_Polyurethane_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 72491,
+    "reinforced_feature_value": {
+      "category": "denim_maxi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Poly_Nylon_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 17456,
+    "reinforced_feature_value": {
+      "category": "poly_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 34171,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 72076,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 34102,
+    "reinforced_feature_value": {
+      "category": "denim_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Poly_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 53046,
+    "reinforced_feature_value": {
+      "category": "brushed_poly_mini_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Fleece_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124877,
+    "reinforced_feature_value": {
+      "category": "poly_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124452,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Poly_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 88026,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 123731,
+    "reinforced_feature_value": {
+      "category": "sheer_cotton_maxi_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Poly_Elastic_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45866,
+    "reinforced_feature_value": {
+      "category": "poly_midi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 123977,
+    "reinforced_feature_value": {
+      "category": "sheer_cotton_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_High_Elasticity_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 72446,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 7517,
+    "reinforced_feature_value": {
+      "category": "poly_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Polyurethane_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45942,
+    "reinforced_feature_value": {
+      "category": "synthetic_maxi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 7561,
+    "reinforced_feature_value": {
+      "category": "poly_mini_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Poly_Viscose_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 96656,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_maxi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Polyurethane_Elastic_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 33481,
+    "reinforced_feature_value": {
+      "category": "polyurethane_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyurethane_Cellulose_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 123681,
+    "reinforced_feature_value": {
+      "category": "synthetic_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Knee",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 72281,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_full_skirt",
+      "season": "Winter",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Cotton_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 72086,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 87776,
+    "reinforced_feature_value": {
+      "category": "synthetic_midi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Knee",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 45586,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 33957,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 34143,
+    "reinforced_feature_value": {
+      "category": "synthetic_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Synthetic_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 123831,
+    "reinforced_feature_value": {
+      "category": "brushed_poly_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Fleece_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 7341,
+    "reinforced_feature_value": {
+      "category": "wool_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Midi",
+      "fabric.feature": "Wool_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124057,
+    "reinforced_feature_value": {
+      "category": "synthetic_micro_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Synthetic_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 123716,
+    "reinforced_feature_value": {
+      "category": "sheer_cotton_maxi_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_Elastic_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 7701,
+    "reinforced_feature_value": {
+      "category": "poly_mermaid_maxi_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Mermaid",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Slight_Sheer_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 96691,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Cotton_Poly_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 88042,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 96896,
+    "reinforced_feature_value": {
+      "category": "cellulose_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cellulose_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 87427,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 155936,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 33441,
+    "reinforced_feature_value": {
+      "category": "wool_midi_full_skirt",
+      "season": "Deep Winter",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Wool_Poly_Nylon_Thick_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 155871,
+    "reinforced_feature_value": {
+      "category": "hemp_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Hemp_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 45881,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 123811,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 72486,
+    "reinforced_feature_value": {
+      "category": "poly_midi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 123566,
+    "reinforced_feature_value": {
+      "category": "denim_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Poly_Polyurethane_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124721,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 72122,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 33511,
+    "reinforced_feature_value": {
+      "category": "full_volume_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Mini",
+      "fabric.feature": "Synthetic_Nylon_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 155726,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124651,
+    "reinforced_feature_value": {
+      "category": "denim_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 96752,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 53036,
+    "reinforced_feature_value": {
+      "category": "synthetic_maxi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 124540,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_maxi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Poly_Synthetic_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 34191,
+    "reinforced_feature_value": {
+      "category": "synthetic_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Synthetic_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 72546,
+    "reinforced_feature_value": {
+      "category": "knit_maxi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Viscose_Poly_Nylon_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 33452,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 17302,
+    "reinforced_feature_value": {
+      "category": "viscose_midi_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Flare",
+      "length.feeling": "Knee",
+      "fabric.feature": "Viscose_Cellulose_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 17671,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 87731,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 123636,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 72232,
+    "reinforced_feature_value": {
+      "category": "poly_mermaid_midi_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Mermaid",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 7683,
+    "reinforced_feature_value": {
+      "category": "poly_midi_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 33671,
+    "reinforced_feature_value": {
+      "category": "sheer_cotton_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Synthetic_Slight_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 7497,
+    "reinforced_feature_value": {
+      "category": "sheer_nylon_midi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Viscose_Nylon_Thin_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 7511,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 123801,
+    "reinforced_feature_value": {
+      "category": "synthetic_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Synthetic_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124081,
+    "reinforced_feature_value": {
+      "category": "synthetic_mini_full_skirt",
+      "season": "Winter",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Mini",
+      "fabric.feature": "Synthetic_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 124751,
+    "reinforced_feature_value": {
+      "category": "poly_mermaid_midi_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Mermaid",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 123966,
+    "reinforced_feature_value": {
+      "category": "sheer_cotton_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_High_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 88056,
+    "reinforced_feature_value": {
+      "category": "knit_mini_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Protein_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124836,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 124786,
+    "reinforced_feature_value": {
+      "category": "sheer_synthetic_maxi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Synthetic_Elastic_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 33551,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_maxi_full_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Nylon_Normal_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 87471,
+    "reinforced_feature_value": {
+      "category": "poly_mini_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Viscose_Poly_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 87886,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 72303,
+    "reinforced_feature_value": {
+      "category": "wool_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Wool_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 96631,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 33811,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Polyurethane_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 96641,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Polyurethane_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 72036,
+    "reinforced_feature_value": {
+      "category": "cotton_maxi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Cotton_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 124936,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124811,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Cotton_Poly_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 155791,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_midi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Poly_Synthetic_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 124007,
+    "reinforced_feature_value": {
+      "category": "sheer_cotton_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Poly_Elastic_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 33831,
+    "reinforced_feature_value": {
+      "category": "brushed_cotton_mini_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "Straight",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Fleece_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Straight",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 87446,
+    "reinforced_feature_value": {
+      "category": "brushed_synthetic_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Polyurethane_Fleece_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 72566,
+    "reinforced_feature_value": {
+      "category": "sheer_poly_maxi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Slight_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 17451,
+    "reinforced_feature_value": {
+      "category": "poly_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Poly_Polyurethane_Synthetic_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 87616,
+    "reinforced_feature_value": {
+      "category": "sheer_viscose_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Viscose_Polyester_Elastic_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 45603,
+    "reinforced_feature_value": {
+      "category": "brushed_poly_midi_a_line_skirt",
+      "season": "Winter",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Fleece_Normal",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 87866,
+    "reinforced_feature_value": {
+      "category": "cotton_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 45826,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 155921,
+    "reinforced_feature_value": {
+      "category": "denim_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 72286,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124176,
+    "reinforced_feature_value": {
+      "category": "denim_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124447,
+    "reinforced_feature_value": {
+      "category": "knit_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Viscose_Poly_Nylon_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 155881,
+    "reinforced_feature_value": {
+      "category": "poly_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Nylon_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124676,
+    "reinforced_feature_value": {
+      "category": "sheer_synthetic_midi_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Synthetic_High_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 96626,
+    "reinforced_feature_value": {
+      "category": "denim_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Standard",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Cotton_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124331,
+    "reinforced_feature_value": {
+      "category": "cotton_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 87951,
+    "reinforced_feature_value": {
+      "category": "denim_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Cotton_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 33561,
+    "reinforced_feature_value": {
+      "category": "nylon_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Nylon_High_Elasticity_Slight_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 87972,
+    "reinforced_feature_value": {
+      "category": "poly_maxi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 96672,
+    "reinforced_feature_value": {
+      "category": "poly_mermaid_midi_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Mermaid",
+      "length.feeling": "Midi",
+      "fabric.feature": "Polyester_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 17633,
+    "reinforced_feature_value": {
+      "category": "polyurethane_mini_a_line_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyurethane_Normal_Elastic",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 17731,
+    "reinforced_feature_value": {
+      "category": "nylon_maxi_full_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Voluminous",
+      "silhouette.shape": "Full-Volume",
+      "length.feeling": "Midi",
+      "fabric.feature": "Nylon_Polyester_Thin",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Elastic/Banded",
+        "volumetric_fit": "Loose"
+      }
+    }
+  },
+  {
+    "product_id": 17366,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Winter",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_High_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 87931,
+    "reinforced_feature_value": {
+      "category": "denim_midi_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Knee",
+      "fabric.feature": "Cotton_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 124756,
+    "reinforced_feature_value": {
+      "category": "denim_midi_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Midi",
+      "fabric.feature": "Cotton_Poly_Slight_Elasticity",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 17736,
+    "reinforced_feature_value": {
+      "category": "poly_mini_a_line_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Mini",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 124661,
+    "reinforced_feature_value": {
+      "category": "sheer_cotton_mini_pencil_skirt",
+      "season": "Early Summer",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "A-line",
+      "length.feeling": "Knee",
+      "fabric.feature": "Cotton_High_Elasticity_Sheer",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "A-line/Wide",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  },
+  {
+    "product_id": 17362,
+    "reinforced_feature_value": {
+      "category": "poly_mermaid_maxi_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Relaxed",
+      "silhouette.shape": "Mermaid",
+      "length.feeling": "Maxi",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Flare",
+        "waist_type": "Structured",
+        "volumetric_fit": "Regular"
+      }
+    }
+  },
+  {
+    "product_id": 34166,
+    "reinforced_feature_value": {
+      "category": "poly_midi_pencil_skirt",
+      "season": "Spring/Autumn",
+      "fit.vibe": "Slim",
+      "silhouette.shape": "Tapered",
+      "length.feeling": "Knee",
+      "fabric.feature": "Polyester_Normal_None",
+      "structural.geometry": {
+        "rise_profile": "None(Dress/Skirt)",
+        "hip_to_hem_flow": "Tapered",
+        "waist_type": "Structured",
+        "volumetric_fit": "Tight"
+      }
+    }
+  }
+]

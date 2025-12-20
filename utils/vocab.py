@@ -14,7 +14,7 @@ RE_TOKENIZER = AutoTokenizer.from_pretrained("distilbert-base-uncased")
 RE_VOCAB_SIZE = RE_TOKENIZER.vocab_size  # 약 30,522개
 RE_MAX_TOKEN_LEN = 12
 
-# Disentangled Representation 위한거임../ 그리고 cross attention으로 qyery 강화
+# Disentangled Representation 위한거임.
 
 
 # 도메인별 유효 값 정의 (Finite Domain)
@@ -54,6 +54,8 @@ STD_VOCAB_CONFIG = {
     "pant.silhouette": ["skinny", "normal", "wide", "loose", "bell-bottom", "Others"],
     "skirt.design": ["A-line and bell line", "mermaid line", "Others"],
     
+    #others, accessory.. key 공유를 옷들과는 다르게 해서, 추후에 따로 쿼터로 뽑게 하는게
+    
     # --- Re Attributes ---
     # 1. Fit & Feel
     "fit.vibe": [],          
@@ -72,6 +74,8 @@ STD_VOCAB_CONFIG = {
     "geo_hip_to_hem_flow": [],
     "geo_waist_type": [],
     "geo_volumetric_fit": []
+    
+    # accessory 는 ?
 }
 
 
