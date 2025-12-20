@@ -6,10 +6,10 @@ import torch.nn.functional as F
 import torch
 from torch.nn.utils.rnn import pad_sequence
 from typing import Any, Dict, List, Tuple
-from database import ProductInferenceInput, ProductInferenceVectors, ProductInput, UserProfile, Vectors, get_db
-from inference import RecommendationService
-from train import train_simcse_from_db, train_user_tower_task
-from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector, get_global_rec_service
+from database import ProductInferenceInput, ProductInferenceVectors, get_db
+#from inference import RecommendationService
+from train import train_simcse_from_db #train_user_tower_task
+from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector #get_global_rec_service
 import utils.vocab as vocab 
 import numpy as np
 from model import ALL_FIELD_KEYS, CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper
@@ -24,7 +24,13 @@ MODEL_DIR = "models"
 
 
 
-
+class ProductInput(BaseModel):
+    """
+    [모델 입력용 Pydantic 스키마]
+    DB ORM 객체에서 변환하여 모델 입력으로 사용
+    """
+    product_id: int
+    feature_data: Dict[str, Any]
 
 
 ## process-pending -> product_service로 스키마로딩 변경
@@ -165,7 +171,7 @@ def preprocess_batch_input(products: List[Any]) -> Tuple[torch.Tensor, torch.Ten
 
 
 def generate_item_vectors(
-    products: List[ProductInput], 
+    products: List[ProductInferenceInput], 
     encoder: nn.Module 
     
 ) -> Dict[int, List[float]]:
@@ -369,7 +375,7 @@ def process_vectors_by_ids(
 # ------------------------------------------------------------------
 # API 4. User Tower Train
 # ------------------------------------------------------------------
-
+'''
 
 @serving_controller_router.post("/train/user-tower/start")
 async def start_user_tower_training(
@@ -406,7 +412,6 @@ async def start_user_tower_training(
             "lr": lr
         }
     }
-
 
 
 @serving_controller_router.get("/recommend/{user_id}")
@@ -653,4 +658,3 @@ def process_and_save_vectors(
 
     print("모든 벡터 저장 완료.")
     
-'''    

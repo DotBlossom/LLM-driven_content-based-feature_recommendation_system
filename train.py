@@ -16,12 +16,12 @@ import torch.nn.functional as F
 from pytorch_metric_learning import losses
 from torch.utils.data import DataLoader, Dataset
 import os
-from model import SymmetricUserTower 
+#from model import SymmetricUserTower 
 import torch.optim as optim
 
 
 
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+DEVICE = torch.DEVICE("cuda" if torch.cuda.is_available() else "cpu")
 train_router = APIRouter()
 MODEL_DIR = "models"
 os.makedirs(MODEL_DIR, exist_ok=True)
@@ -241,216 +241,153 @@ class UserTowerTrainDataset(Dataset):
         }
 
 
-def train_user_tower_task(
-    db_session: Session = Depends(get_db), 
-    epochs: int = 30, 
-    batch_size: int = Depends(get_global_batch_size), 
-    lr: float = 1e-4,
-    temperature: float = 0.075 # Loss dx 낮음 : low , Loss div : High
-):
-    print("\n🚀 [Task Started] User Tower Training...")
-    
-    # 1. Pre-trained Vector 로드 (Lookup Table 준비)
-    pretrained_matrix, product_id_map = load_pretrained_vectors_from_db(db_session)
-    num_total_products = len(product_id_map)
-    
-    # 2. 모델 초기화
-    model = SymmetricUserTower(
-        num_total_products=num_total_products,
-        max_seq_len=50,
-        input_dim=128
-    )
-    
-    # ⭐ 핵심: 학습된 아이템 벡터 주입 및 동결
-    model.load_pretrained_weights(pretrained_matrix, freeze=True)
-    model.to(DEVICE)
-    model.train() # 학습 모드
-    
-    # 3. 데이터셋 준비 (Dummy Logic - 실제로는 DB User Log 테이블에서 쿼리해야 함)
-    # TODO: 실제 DB에서 유저 로그(UserInteraction)를 긁어오는 로직으로 대체 필요
-    print("📊 Fetching user interaction data...")
-    
-    train_data = fetch_training_data_from_db(db_session, min_interactions=2)
-    print(f" 데이터 개수 확인: {len(train_data)}개")
-    # 데이터가 너무 적으면 학습 중단 (Safety Check)
-    if len(train_data) < batch_size:
-        print("⚠️ Warning: Not enough data to train. At least one batch needed.")
-       
-    
-    
-    dataset = UserTowerTrainDataset(train_data, product_id_map)
-    dataloader = DataLoader(
-        dataset,
-        batch_size=batch_size,
-        shuffle=True,
-        drop_last=True
-        )
-    
-    # 4. Optimizer & Loss
-    optimizer = optim.AdamW(model.parameters(), lr=lr)
-    
-    # CrossEntropyLoss를 사용 (In-batch Negative 방식)
-    # 정답 라벨은 항상 대각선(0, 1, 2...)이 됨
-    criterion = nn.CrossEntropyLoss()
-
-    # 5. Training Loop
-    print(f"🔥 Start Training for {epochs} epochs (Temp={temperature})...")
-    
-    for epoch in range(epochs):
-        total_loss = 0
-        steps = 0
-        
-        
-        progress = tqdm(dataloader, desc=f"Epoch {epoch+1}/{epochs}")
-        
-        for batch in progress:
-            history = batch['history'].to(DEVICE)     # (B, L)
-            target_idx = batch['target_idx'].to(DEVICE) # (B,)
-            gender = batch['gender'].to(DEVICE)
-            age = batch['age'].to(DEVICE)
-            
-            profile_data = {'gender': gender, 'age': age}
-            
-            optimizer.zero_grad()
-            
-            # -----------------------------------------------------------
-            # (A) User Vector 생성 (B, 128)
-            # -> 이미 모델 내부에서 F.normalize 되어서 나옴 (길이=1)
-            # -----------------------------------------------------------
-            user_vectors = model(history, profile_data)
-            
-            # -----------------------------------------------------------
-            # (B) Target Item Vector 조회 (B, 128)
-            # -> DB에서 온 벡터이므로 이미 정규화 되어 있음 (길이=1)
-            # -----------------------------------------------------------
-            target_item_vectors = model.item_embedding(target_idx)
-            
-            # -----------------------------------------------------------
-            # (C) Similarity (Logits) Calculation & Scaling [핵심!]
-            # -----------------------------------------------------------
-            # 내적(Dot Product) 수행 -> 정규화된 벡터끼리의 내적이므로 코사인 유사도임 (-1.0 ~ 1.0)
-            # (B, 128) x (128, B) = (B, B) Matrix
-            sim_matrix = torch.matmul(user_vectors, target_item_vectors.T)
-            
-            # [Temperature Scaling]
-            # 값의 범위를 -1~1에서 -10~10 (temp=0.1 기준)으로 뻥튀기해줌.
-            # 그래야 Softmax가 뾰족해지고(Sharpening), Gradient가 잘 흐름.
-            logits = sim_matrix / temperature 
-            
-            # -----------------------------------------------------------
-            # (D) Labeling (In-batch Negative)
-            # -----------------------------------------------------------
-            # i번째 유저는 i번째 아이템(대각선)이 정답.
-            # 나머지는 전부 Negative Sample로 간주.
-            labels = torch.arange(batch_size).to(DEVICE)
-            
-            # -----------------------------------------------------------
-            # (E) Loss & Update
-            # -----------------------------------------------------------
-            loss = criterion(logits, labels)
-            
-            loss.backward()
-            optimizer.step()
-            
-            total_loss += loss.item()
-            steps += 1
-            
-            # 진행바에 현재 Loss 표시
-            progress.set_postfix({"loss": f"{loss.item():.4f}"})
-            
-        avg_loss = total_loss / steps if steps > 0 else 0
-        print(f"   Epoch {epoch+1} Summary | Avg Loss: {avg_loss:.4f}")
-
-    # 5. Save Model
-    save_path = os.path.join(MODEL_DIR, "user_tower_symmetric_final.pth")
-    torch.save(model.state_dict(), save_path)
-    print(f"✅ Training Complete. Model saved to {save_path}")
-    
-    
-    
-# ------------------------------------------------------
-# Ranker (DCN V2)Task
-# ------------------------------------------------------
-
+import torch
+import torch.nn as nn
+import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
+import numpy as np
+from tqdm import tqdm
 
-class RankingDataset(Dataset):
+# ==========================================
+# 1. Dataset 정의
+# ==========================================
+class UserSessionDataset(Dataset):
     def __init__(self, 
-                 interaction_logs,       # [user_id, item_id, label, context] 리스트
-                 user_vector_store,      # {user_id: vector(128)} (Redis/Memory)
-                 item_vector_store):     # {item_id: vector(128)} (DB/Memory)
-        self.logs = interaction_logs
-        self.u_store = user_vector_store
-        self.i_store = item_vector_store
-        
-        # OOV(Out of Vocabulary) 방지용 랜덤 벡터 (혹은 평균 벡터)
-        self.default_vec = torch.zeros(128) 
+                 user_sessions: list,   # [{'history':[], 'season':0, 'gender':0, 'target_item_id':10}, ...]
+                 max_len: int = 50):
+        self.data = user_sessions
+        self.max_len = max_len
 
     def __len__(self):
-        return len(self.logs)
+        return len(self.data)
 
     def __getitem__(self, idx):
-        uid, iid, label, context = self.logs[idx]
+        row = self.data[idx]
         
-        # 1. Feature Fetching 
-        u_vec = self.u_store.get(uid, self.default_vec)
-        i_vec = self.i_store.get(iid, self.default_vec)
-        
-        # Tensor 변환
-        u_tensor = torch.tensor(u_vec, dtype=torch.float32)
-        i_tensor = torch.tensor(i_vec, dtype=torch.float32)
-        c_tensor = torch.tensor(context, dtype=torch.float32) # 예: 시간 정보 등
-        
-        # Label (0 or 1)
-        label_tensor = torch.tensor(label, dtype=torch.float32)
-        
-        return u_tensor, i_tensor, c_tensor, label_tensor
+        # History Padding (Pre-padding or Post-padding)
+        # 보통 Transformer는 Post-padding + Masking을 쓰지만, 여기서는 0이 Pad ID라고 가정
+        history = row['history']
+        if len(history) > self.max_len:
+            history = history[-self.max_len:] # 최근거만
+        else:
+            history = history + [0] * (self.max_len - len(history))
+            
+        return {
+            'history': torch.tensor(history, dtype=torch.long),
+            'season': torch.tensor(row['season'], dtype=torch.long),
+            'gender': torch.tensor(row['gender'], dtype=torch.long),
+            'target_item_id': torch.tensor(row['target_item_id'], dtype=torch.long),
+            # 만약 Item Tower가 Feature를 입력받아야 한다면 여기에 item_features도 포함되어야 함
+            # 여기서는 편의상 ID로 Item Tower에서 벡터를 룩업한다고 가정
+        }
 
-def train_ranking_model(
-    ranking_model, 
-    train_loader, 
-    epochs=5, 
-    lr=0.001
+# ==========================================
+# 2. In-batch Negative Loss (Contrastive)
+# ==========================================
+class InfoNCELoss(nn.Module):
+    """
+    배치 내의 다른 샘플들을 Negative로 활용하는 효율적인 Loss
+    """
+    def __init__(self, temperature=0.1):
+        super().__init__()
+        self.temperature = temperature
+        self.criterion = nn.CrossEntropyLoss()
+
+    def forward(self, user_vectors, item_vectors):
+        """
+        user_vectors: (Batch, Dim)
+        item_vectors: (Batch, Dim) - Positive Pairs
+        """
+        # Similarity Matrix: (Batch, Batch)
+        # (B, D) @ (D, B) -> (B, B)
+        scores = torch.matmul(user_vectors, item_vectors.T)
+        
+        # Scaling
+        scores = scores / self.temperature
+        
+        # Labels: 대각선(Diagonal)이 정답 (0번째 유저는 0번째 아이템이 정답)
+        batch_size = user_vectors.size(0)
+        labels = torch.arange(batch_size).to(user_vectors.DEVICE)
+        
+        loss = self.criterion(scores, labels)
+  
+        return loss
+    
+def train_user_tower(
+    user_tower: nn.Module,
+    item_tower: nn.Module,      # Pre-trained & Frozen
+    train_loader: DataLoader,   # item_feature_db 인자 제거됨
+    epochs: int = 10,
+    lr: float = 1e-4,
+
 ):
     # 1. Setup
-    ranking_model.to(DEVICE)
-    optimizer = torch.optim.AdamW(ranking_model.parameters(), lr=lr)
-    criterion = nn.BCELoss() # Binary Cross Entropy (출력이 Sigmoid여야 함)
+    user_tower.to(DEVICE)
+    item_tower.to(DEVICE)
     
-    print("🔥 Start Ranking Model Training...")
+    # Item Tower Freezing (학습되지 않도록 고정)
+    item_tower.eval()
+    for param in item_tower.parameters():
+        param.requires_grad = False
+        
+    optimizer = optim.AdamW(user_tower.parameters(), lr=lr, weight_decay=1e-4)
+    loss_fn = InfoNCELoss(temperature=0.07)
+    
+    scheduler = optim.lr_scheduler.OneCycleLR(
+        optimizer, max_lr=lr, 
+        steps_per_epoch=len(train_loader), epochs=epochs
+    )
+
+    print("🚀 Start Training User Tower...")
     
     for epoch in range(epochs):
+        user_tower.train()
         total_loss = 0
-        correct = 0
-        total_samples = 0
+        step = 0
         
-        for u_emb, i_emb, c_emb, labels in tqdm(train_loader):
-            u_emb = u_emb.to(DEVICE)
-            i_emb = i_emb.to(DEVICE)
-            c_emb = c_emb.to(DEVICE)
-            labels = labels.to(DEVICE).unsqueeze(1) # (B,) -> (B, 1) 차원 맞춤
+        progress_bar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{epochs}")
+        
+        for batch in progress_bar:
+            # Data to Device
+            history = batch['history'].to(DEVICE)
+            season = batch['season'].to(DEVICE)
+            gender = batch['gender'].to(DEVICE)
+            target_ids = batch['target_item_id'].to(DEVICE) 
             
-            # 2. Forward
+            # -----------------------------------------------------------
+            # A. Generate Ground Truth (Teacher)
+            # -----------------------------------------------------------
+            with torch.no_grad():
+                # Item Tower가 ID를 받아서 Pretrained Vector를 리턴한다고 가정
+                # (User Tower와 Embedding Weight를 공유하거나, 독립적인 Lookup 테이블을 가짐)
+                target_item_vectors = item_tower(target_ids)
+                
+                # [성능 최적화 팁]
+                # 만약 item_tower가 단순히 Embedding Lookup만 수행한다면
+                # item_tower(target_ids) 대신 pretrained_matrix[target_ids] 처럼
+                # 텐서 슬라이싱을 하는 게 속도가 더 빠릅니다.
+                
+            # -----------------------------------------------------------
+            # B. Generate User Vectors (Student)
+            # -----------------------------------------------------------
+            user_vectors = user_tower(history, season, gender)
+            
+            # -----------------------------------------------------------
+            # C. Loss Calculation
+            # -----------------------------------------------------------
+            loss = loss_fn(user_vectors, target_item_vectors)
+            
             optimizer.zero_grad()
-            
-            # Ranking Model은 (0~1) 사이의 확률값을 뱉음
-            preds = ranking_model(u_emb, i_emb, c_emb) 
-            
-            # 3. Loss Calculation
-            loss = criterion(preds, labels)
-            
-            # 4. Backward
             loss.backward()
+            torch.nn.utils.clip_grad_norm_(user_tower.parameters(), max_norm=1.0)
             optimizer.step()
+            scheduler.step()
             
-            # 5. Accuracy Check (0.5 기준)
             total_loss += loss.item()
-            predicted_labels = (preds > 0.5).float()
-            correct += (predicted_labels == labels).sum().item()
-            total_samples += labels.size(0)
+            step += 1
+            progress_bar.set_postfix({'loss': f"{loss.item():.4f}"})
             
-        avg_loss = total_loss / len(train_loader)
-        accuracy = correct / total_samples
-        print(f"Epoch {epoch+1} | Loss: {avg_loss:.4f} | Acc: {accuracy*100:.2f}%")
+        print(f"📊 Epoch {epoch+1} Avg Loss: {total_loss / step:.4f}")
         
-    print("✅ Ranking Training Finished.")
+    print("✅ Training Finished.")
+    return user_tower

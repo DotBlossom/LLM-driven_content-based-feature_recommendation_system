@@ -181,7 +181,7 @@ def ingest_products(payload: List[ProductCreateRequest], db: Session = Depends(g
         db.rollback()
         raise HTTPException(status_code=500, detail=str(e))
     
-    
+'''
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import get_db
@@ -266,7 +266,7 @@ def upload_user_batch_data(
         raise HTTPException(status_code=500, detail=str(e))
     
     
-
+'''
 
 
 # 제외할 필드 목록 (metadata.clothes. 뒷부분 기준)

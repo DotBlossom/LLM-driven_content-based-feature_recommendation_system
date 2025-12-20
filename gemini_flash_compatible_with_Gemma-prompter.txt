@@ -262,3 +262,6 @@ Total cost:
 $0.05xx
 
 60 sec upper 
+
+
+1 cycle : 250 products -> 120s~~ ,limit(output token limitation : 65536) 

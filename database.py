@@ -1,13 +1,12 @@
+from datetime import datetime
 import os
 from dotenv import load_dotenv
-from sqlalchemy import Boolean, create_engine,select, Column, Integer , String
+from sqlalchemy import Boolean, DateTime, Enum, ForeignKey, Index, Text, create_engine, func,select, Column, Integer , String
 from typing import List, Dict, Any, Optional
 from sqlalchemy.dialects.postgresql import JSONB
 from pgvector.sqlalchemy import Vector
 from pydantic import BaseModel, Field
-
-from sqlalchemy.orm import sessionmaker, mapped_column
-from sqlalchemy.orm import DeclarativeBase # 이 줄을 추가하여 임포트합니다.
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship,sessionmaker
 
 '''
 /stage1/batch-embed: Stage 1 모델을 사용하여 Raw Data -> DB(vector_pre) 파이프라인 수행.
@@ -39,287 +38,167 @@ def get_db():
 
 
 
-class Vectors(Base):
-    __tablename__ = "vectors"
-
-    id = Column(Integer, primary_key=True, index=True)
-    vector_embedding = mapped_column(Vector(128), nullable=True)
-    vector_serving = mapped_column(Vector(128), nullable=True)
-    category = Column(String, nullable=True, index=True)
-    # category 추가 필요
-
-class ProductInferenceVectors(Base):
-    __tablename__ = "product_inference_vectors"
-
-    id = Column(Integer, primary_key=True, index=True)
-    vector_embedding = mapped_column(Vector(128), nullable=True)
-    vector_serving = mapped_column(Vector(128), nullable=True)
-    category = Column(String, nullable=True, index=True)
-    # category 추가 필요
 
 
+class Season(str, Enum):
+    SPRING_AUTUMN = "Spring/Autumn"
+    SUMMER = "Summer"
+    WINTER = "Winter"
 
-## real data / valid data
+class ActionType(int, Enum):
+    CLICK = 1       # 가중치 1
+    CART = 3        # 가중치 3
+    PURCHASE = 5    # 가중치 5 (핵심 Positive Sample)
 
-class ProductServiceVectors(Base):
-    __tablename__ = "product_service_vectors"
-
-    id = Column(Integer, primary_key=True, index=True)
-    vector_embedding = mapped_column(Vector(128), nullable=True)
-    category = Column(String, nullable=True, index=True)
-
-
-class ProductServiceInput(Base):
-    __tablename__ = "product_service_input"
-
-    # product_id INTEGER PRIMARY KEY
-    product_id = Column(Integer, primary_key=True)
-    
-    # feature_data JSONB
-    # 이 컬럼 안에 "clothes"와 "reinforced_feature_value"가 들어있음
-    feature_data = Column(JSONB)
-    is_vectorized = Column(Boolean, default=False, index=True)
-
-
-
-
-
-
-
-
-class ProductInput(Base):
-    __tablename__ = "product_input"
-
-    # product_id INTEGER PRIMARY KEY
-    product_id = Column(Integer, primary_key=True)
-    
-    # feature_data JSONB
-    # 이 컬럼 안에 "clothes"와 "reinforced_feature_value"가 들어있음
-    feature_data = Column(JSONB)
-    
-    #추론해야할 실제 데이터임을 구분하는 bool 추가필요
-    
-# dataform
 
 
 class ProductInferenceInput(Base):
+    """
+    [학습/배치용 입력 데이터]
+    Raw Feature를 보관하며, 벡터화 대상인지 관리
+    """
     __tablename__ = "product_inference_input"
 
-    # product_id INTEGER PRIMARY KEY
-    product_id = Column(Integer, primary_key=True)
+    product_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     
-    # feature_data JSONB
-    # 이 컬럼 안에 "clothes"와 "reinforced_feature_value"가 들어있음
-    feature_data = Column(JSONB)
-    is_vectorized = Column(Boolean, default=False, index=True)
-
-    #아이템벡터로 변환된 상품인지 체크하는 flag 필요 스키마
-# dataform
-
-
-
-
-class ProductInputSchema(BaseModel):
-    product_id: int
-    feature_data: Dict[str, Any] # 혹은 json 구조에 맞는 dict
-
-
-"""
-# --- [Triplet: 128차원 전용] ---
-class TripletCreate(BaseModel):
-    id: int
-    vector: List[float] = Field(..., min_items=128, max_items=128, description="128차원 벡터")
-
-class TripletSearch(BaseModel):
-    vector: List[float] = Field(..., min_items=128, max_items=128)
-    top_k: int = 5
-
-# --- [Pre] ---
-class PreCreate(BaseModel):
-    id: int
-    vector: List[float] = Field(..., min_items=512, max_items=512, description="512차원 벡터")
-
-# JSON 데이터 입력용 스키마
-class ProductFeatureCreate(BaseModel):
-    product_id: int
-    feature_data: Dict[str, Any] # 자유로운 JSON 포맷
-
-
-
-# 1-1. Stage 1 입력용 (Raw Product Data)
-class ClothesInfo(BaseModel):
-    category: List[str]
-    # 기타 속성들...
-"""
-
-class BatchProductInput(BaseModel):
-    products: List[ProductInputSchema]
-
-class EmbeddingOutput(BaseModel):
-    processed_count: int
-    failed_ids: List[int]
-
-
-
-# 1-2. Stage 2 입력용 (Pre-computed Vectors)
-class VectorItem(BaseModel):
-    id: Optional[int] = None # 서빙용일 경우 ID가 없을 수도 있음
-    vector: List[float] = Field(..., min_items=128, max_items=128)
-
-class BatchVectorInput(BaseModel):
-    items: List[VectorItem]
-
-class BatchVectorOutput(BaseModel):
-    results: List[Dict[str, Any]] # [{'id': 1, 'vector': [...]}, ...]
-
-
-
-
-
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, func, Index
-from sqlalchemy.orm import relationship, mapped_column
-from database import Base # 사용자의 database.py에서 Base를 가져옴
-
-class UserProfile(Base):
-    """
-    [유저 프로필 테이블]
-    User Tower의 [User Token] 생성을 위한 정적 메타데이터 저장
-    """
-    __tablename__ = "user_profiles"
-
-    user_id = Column(Integer, primary_key=True, index=True) # 실제 서비스의 User ID
+    # JSONB를 사용하면 DB 레벨에서 JSON 내부 필드 검색/인덱싱 가능 (속도 유리)
+    # Python에서는 dict 형태로 사용됨
+    feature_data: Mapped[dict[str, Any]] = mapped_column(JSONB)
     
-    # 메타데이터 (User Tower 입력용)
-    # 예: gender (0:Unk, 1:M, 2:F), age (0:Unk, 1:10대, 2:20대...)
-    gender = Column(Integer, default=0) 
-    age_level = Column(Integer, default=0)
-    
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    
-    # 관계 설정 (1:N)
-    interactions = relationship("UserInteraction", back_populates="user")
+    is_vectorized: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
 
-
-class UserInteraction(Base):
-    """
-    [유저 행동 로그 테이블]
-    User Tower의 [History Sequence] 생성을 위한 시계열 데이터
-    """
-    __tablename__ = "user_interactions"
-
-    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    
-    user_id = Column(Integer, ForeignKey("user_profiles.user_id"), index=True)
-    
-    # 상품 ID (ProductInferenceVectors 테이블의 ID와 매핑됨)
-    product_id = Column(Integer, nullable=False, index=True)
-    
-    # 행동 타입 (purchase, view, cart 등 - 나중에 가중치 줄 때 사용 가능)
-    interaction_type = Column(String, default="view") 
-    
-    timestamp = Column(DateTime(timezone=True), server_default=func.now())
-
-    # 관계 설정
-    user = relationship("UserProfile", back_populates="interactions")
-
-    # 복합 인덱스 (쿼리 성능 최적화: 특정 유저의 이력을 시간순 조회)
     __table_args__ = (
-        Index('idx_user_timestamp', "user_id", "timestamp"),
+        # [최적화] 벡터화 안 된 상품만 골라내는 부분 인덱스
+        Index('idx_inf_not_vectorized', "product_id", postgresql_where=(is_vectorized == False)),
     )
 
 
-
-from pydantic import BaseModel, Field
-from typing import List, Optional
-
-class InteractionItem(BaseModel):
-    product_id: int
-    interaction_type: str = "view" # 기본값
-
-class UserDataInput(BaseModel):
+class ProductInferenceVectors(Base):
     """
-    API 요청 바디: 유저 1명의 정보와 구매 이력 리스트
+    [학습/배치용 벡터 저장소]
+    임베딩 모델이 뱉은 Raw Vector와 서빙용으로 가공된 Vector 모두 저장
     """
-    user_id: int
-    gender: int = Field(..., description="0:Unk, 1:M, 2:F")
-    age_level: int = Field(..., description="0:Unk, 1:10s, 2:20s...")
+    __tablename__ = "product_inference_vectors"
+
+    # 일반적으로 product_id와 1:1 매핑되므로 id를 product_id로 간주하거나 FK 설정 권장
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     
-    # 한 번에 여러 상품 이력을 올릴 수 있도록 리스트로 받음
-    history: List[InteractionItem] 
+    vector_embedding: Mapped[list[float] | None] = mapped_column(Vector(128), nullable=True)
+    vector_serving: Mapped[list[float] | None] = mapped_column(Vector(128), nullable=True)
+    
+    category: Mapped[str | None] = mapped_column(String, nullable=True, index=True)
 
-class BatchUserUploadRequest(BaseModel):
+## real data / valid data
+
+class ProductServiceInput(Base):
     """
-    N명의 유저 데이터를 한 번에 업로드
+    [서빙용 메타 데이터]
+    실제 서비스에 노출될 검증된(Valid) 데이터
     """
-    users: List[UserDataInput]
+    __tablename__ = "product_service_input"
+
+    product_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    
+    feature_data: Mapped[dict[str, Any]] = mapped_column(JSONB)
+    
+    is_vectorized: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
+
+    __table_args__ = (
+        # [최적화] 서빙 파이프라인에서 벡터화 대기중인 상품 추출용
+        Index('idx_svc_not_vectorized', "product_id", postgresql_where=(is_vectorized == False)),
+    )
 
 
+class ProductServiceVectors(Base):
+    """
+    [서빙용 벡터 저장소]
+    검색 엔진(Vector DB) 역할. 실제 유저 쿼리와 내적(Dot Product) 연산 수행
+    """
+    __tablename__ = "product_service_vectors"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    
+    vector_embedding: Mapped[list[float] | None] = mapped_column(Vector(128), nullable=True)
+    
+    category: Mapped[str | None] = mapped_column(String, nullable=True, index=True)
+    
+    
+    
+
+class UserProfile(Base):
+    __tablename__ = "user_profiles"
+
+    user_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    gender: Mapped[str] = mapped_column(String(10))        # 'M', 'F' 등
+    age_group: Mapped[str] = mapped_column(String(20))     # '20s', '30s'
+    style_preference: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    
+    # Vector 저장용 (128차원)
+    user_service_vector: Mapped[list[float] | None] = mapped_column(Vector(128), nullable=True)
+    
+    # 벡터화 여부 플래그
+    is_vectorized: Mapped[bool] = mapped_column(Boolean, default=False)
+
+    # 관계 설정: User -> Sessions (1:N)
+    sessions: Mapped[List["UserSession"]] = relationship("UserSession", back_populates="user", cascade="all, delete-orphan")
+
+    # 인덱스 설정
+    __table_args__ = (
+        # [전략] 벡터화가 아직 안 된(False) 유저만 빠르게 뽑아내기 위한 부분 인덱스
+        Index('idx_not_vectorized_users', "user_id", postgresql_where=(is_vectorized == False)),
+    )
 
 
-"""
-class DBDataLoader:
-    def __init__(self):
-        self.engine = create_engine(DATABASE_URL)
-        self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
+# 3. UserSession (세션 정보)
+class UserSession(Base):
+    __tablename__ = "user_sessions"
 
-    def fetch_training_data(self) -> List[Dict[str, Any]]:
+    session_id: Mapped[str] = mapped_column(String, primary_key=True) # UUID 등을 사용한다면 String
+    
+    # ForeignKey: user_profiles 테이블의 user_id 참조
+    user_id: Mapped[int] = mapped_column(ForeignKey("user_profiles.user_id"), nullable=False)
+    
+    season: Mapped[str] = mapped_column(String(20)) # Season Enum 값 저장
+    timestamp: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    
+    # 요청하신 긴 텍스트 (Nullable)
+    context_cart_description: Mapped[str | None] = mapped_column(Text, nullable=True)
 
-        session = self.SessionLocal()
-        training_data = []
-        
-        try:
-            print("[DB] Fetching vectors and categories (Single Table Scan)...")
-            
-            stmt = (
-                select(Vectors.vector_pre, Vectors.category)
-                .where(
-                    Vectors.vector_pre.is_not(None),  # 벡터가 있고
-                    Vectors.category.is_not(None)     # 카테고리도 있는 데이터만
-                )
-            )
-            
-            # DB 실행 (pgvector가 vector_pre를 자동으로 list/numpy로 변환해줌)
-            results = session.execute(stmt).all()
-            
-            # RichAttributeDataset이 기대하는 포맷으로 변환
-            # (기존 데이터셋 코드와의 호환성을 위해 딕셔너리 구조 유지)
-            for vec_pre, cat_str in results:
-                formatted_item = {
-                    "vector": vec_pre, 
-                    "clothes": {
-                        # DB에 "top/t-shirt"로 저장되어 있다고 가정하고 리스트로 감쌈
-                        "category": [cat_str] 
-                    }
-                }
-                training_data.append(formatted_item)
-                
-            print(f"[DB] Successfully loaded {len(training_data)} items without JOIN.")
-            return training_data
-            
-        except Exception as e:
-            print(f"[Error] Failed to fetch data: {e}")
-            import traceback
-            traceback.print_exc()
-            return []
-        finally:
-            session.close()
+    # 관계 설정: Session -> User (N:1)
+    user: Mapped["UserProfile"] = relationship("UserProfile", back_populates="sessions")
+    
+    # 관계 설정: Session -> InteractionEvents (1:N)
+    # 기존 Pydantic의 List[InteractionEvent]를 대체함
+    events: Mapped[List["InteractionEvent"]] = relationship("InteractionEvent", back_populates="session", cascade="all, delete-orphan")
 
-    def update_triplet_vectors(self, id_vector_map: Dict[int, List[float]]):
+    # 파이썬 로직용 프로퍼티 (DB 컬럼 아님)
+    # 주의: session.events가 로딩된 상태에서만 동작함
+    @property
+    def is_purchase_session(self) -> bool:
+        return any(e.action_type == ActionType.PURCHASE.value for e in self.events)
 
-        session = self.SessionLocal()
-        try:
-            # 대량 업데이트 로직 (mappings 활용 권장)
-            mappings = [
-                {"id": p_id, "vector_triplet": vec} 
-                for p_id, vec in id_vector_map.items()
-            ]
-            session.bulk_update_mappings(Vectors, mappings)
-            session.commit()
-            print(f"[DB] Successfully updated {len(mappings)} triplet vectors.")
-        except Exception as e:
-            session.rollback()
-            print(f"[Error] Update failed: {e}")
-        finally:
-            session.close()
-        
-"""
+    # 인덱스 설정
+    __table_args__ = (
+        # 특정 유저의 세션을 시간순으로 조회
+        Index('idx_user_session_timestamp', "user_id", "timestamp"),
+    )
+
+
+# 4. InteractionEvent (개별 행동 로그 - 별도 테이블로 분리 필수)
+class InteractionEvent(Base):
+    __tablename__ = "interaction_events"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    
+    # 어떤 세션에 속한 이벤트인지 연결
+    session_id: Mapped[str] = mapped_column(ForeignKey("user_sessions.session_id"), nullable=False)
+    
+    product_id: Mapped[int] = mapped_column(Integer, nullable=False)
+    action_type: Mapped[str] = mapped_column(String(20)) # ActionType Enum 값 저장
+    timestamp: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+    # 관계 설정: Event -> Session (N:1)
+    session: Mapped["UserSession"] = relationship("UserSession", back_populates="events")
+
+    # 필요하다면 여기에 상품 벡터 캐싱 컬럼 추가 가능
+    # item_vector_cache = mapped_column(Vector(128), nullable=True)

@@ -1,3 +1,4 @@
+'''
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -203,3 +204,6 @@ class RecommendationService:
         self.ranking_model.train(X_user, X_item, y, groups)
         
         return {"status": "success", "model": "CatBoost"}
+    
+    
+'''

@@ -3,7 +3,7 @@ from typing import Optional
 
 import torch
 from database import SessionLocal
-from inference import RecommendationService
+#from inference import RecommendationService
 from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper
 
 # 1. 모델 인스턴스를 저장할 전역 변수 (State)
@@ -13,11 +13,12 @@ global_projector: Optional[OptimizedItemTower] = None
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-rec_service: RecommendationService = None
+#rec_service: RecommendationService = None
 
 # (사용자 정의 함수라고 가정)
 # 만약 initialize_global_models()가 별도로 필요하다면 이 함수를 재정의하여 사용하세요.
 # 여기서는 rec_service 초기화 로직으로 대체합니다.
+'''
 def initialize_rec_service():
     global rec_service
     
@@ -35,7 +36,7 @@ def initialize_rec_service():
     finally:
         # 모델 로딩 후 DB 세션을 즉시 닫아줍니다.
         db.close()
-        
+'''     
 
 
 # 2. 모델 로딩 함수 (main.py의 startup 이벤트에서 호출됨)
@@ -80,9 +81,10 @@ def get_global_batch_size() -> int:
         raise Exception("global batch size has not been defined")
     return global_batch_size
 
-
+'''
 def get_global_rec_service() -> RecommendationService:
     """저장된 RecommendationService 인스턴스를 반환하는 의존성 주입 함수."""
     if rec_service is None:
         raise Exception("Recommendation Service has not been initialized yet. Check application startup events.")
     return rec_service
+'''

@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import torch
 import uvicorn
 
-from utils.dependencies import initialize_global_models, initialize_rec_service
+from utils.dependencies import initialize_global_models #initialize_rec_service
 from utils.embed_items import embed_items_router
 from APIController.controller import controller_router
 from database import engine, Base
@@ -37,7 +37,7 @@ async def lifespan(app:FastAPI) -> AsyncGenerator[None, None]:
     
     print("✅ 모델 로딩 및 준비 완료.")
     
-    initialize_rec_service()
+    # initialize_rec_service()
     print("✅ 추천시스템 로딩 및 준비 완료.")
     
     # yield 전의 코드는 Startup 시점에 실행됩니다.
