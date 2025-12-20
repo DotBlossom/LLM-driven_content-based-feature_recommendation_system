@@ -1,4 +1,4 @@
-from typing import Dict, Tuple
+from typing import Dict, List, Tuple
 from requests import Session
 import torch
 from database import ProductInferenceVectors, UserProfile
@@ -52,6 +52,23 @@ def load_pretrained_vectors_from_db(db_session: Session) -> Tuple[torch.Tensor, 
 
 # train_service.py 내부에 추가하거나 utils로 분리
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 def fetch_training_data_from_db(db: Session, min_interactions: int = 2):
     """
     [Data Extractor]
@@ -197,3 +214,5 @@ context_tensor = engineer.process(current_ctx)
 
 print(f"Context Vector Shape: {context_tensor.shape}")
 print(f"Context Vector Data: {context_tensor}")
+
+'''

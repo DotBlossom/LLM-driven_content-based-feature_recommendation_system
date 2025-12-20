@@ -7,10 +7,9 @@ from sqlalchemy import select
 import torch
 from tqdm import tqdm
 from transformers import get_linear_schedule_with_warmup
-from utils.util import fetch_training_data_from_db, load_pretrained_vectors_from_db
 from database import ProductInferenceInput, SessionLocal, get_db
 from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
-from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper, SimCSERecSysDataset
+from model import CoarseToFineItemTower, FinalUserTower, OptimizedItemTower, SimCSEModelWrapper, SimCSERecSysDataset
 import torch.nn as nn
 import torch.nn.functional as F
 from pytorch_metric_learning import losses
@@ -21,7 +20,7 @@ import torch.optim as optim
 
 
 
-DEVICE = torch.DEVICE("cuda" if torch.cuda.is_available() else "cpu")
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 train_router = APIRouter()
 MODEL_DIR = "models"
 os.makedirs(MODEL_DIR, exist_ok=True)
@@ -197,7 +196,7 @@ def test_line(
 class UserTowerTrainDataset(Dataset):
     def __init__(self, 
                  user_data_list: List[dict], 
-                 product_id_map: Dict[int, int], 
+                 product_id_map: Dict[int, int],
                  max_seq_len: int = 50):
         """
         user_data_list: [
@@ -205,8 +204,8 @@ class UserTowerTrainDataset(Dataset):
         ]
         """
         self.data = user_data_list
-        self.product_id_map = product_id_map # DB ID -> Model Index 변환기
         self.max_seq_len = max_seq_len
+        self.product_id_map = product_id_map
 
     def __len__(self):
         return len(self.data)
@@ -226,18 +225,21 @@ class UserTowerTrainDataset(Dataset):
             mapped_history = mapped_history + [0] * (self.max_seq_len - seq_len) # 뒤에 0 채움
 
         # 2. Target Item Mapping
-        target_db_id = row['target']
+        target_db_id = row['target_idx'] 
         target_idx = self.product_id_map.get(target_db_id, 0)
         
         # 3. Profile Data
         gender = row.get('gender', 0)
         age = row.get('age', 0)
+        season = row.get('season', 0)
+        
 
         return {
             "history": torch.tensor(mapped_history, dtype=torch.long),
             "target_idx": torch.tensor(target_idx, dtype=torch.long), # 정답 아이템의 Model Index
             "gender": torch.tensor(gender, dtype=torch.long),
-            "age": torch.tensor(age, dtype=torch.long)
+            "age": torch.tensor(age, dtype=torch.long),
+            "season": torch.tensor(season, dtype=torch.long)
         }
 
 
@@ -307,76 +309,79 @@ class InfoNCELoss(nn.Module):
         
         # Labels: 대각선(Diagonal)이 정답 (0번째 유저는 0번째 아이템이 정답)
         batch_size = user_vectors.size(0)
-        labels = torch.arange(batch_size).to(user_vectors.DEVICE)
+        labels = torch.arange(batch_size).to(user_vectors.device)
         
         loss = self.criterion(scores, labels)
   
         return loss
     
-def train_user_tower(
-    user_tower: nn.Module,
-    item_tower: nn.Module,      # Pre-trained & Frozen
-    train_loader: DataLoader,   # item_feature_db 인자 제거됨
+import torch.optim as optim
+from tqdm import tqdm
+from torch.utils.data import DataLoader
+
+
+
+
+
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+def train_final_user_tower(
+    user_tower: FinalUserTower,
+    pretrained_item_matrix: torch.Tensor, # Loss 계산용 (Target/Teacher)
+    train_loader: DataLoader,
     epochs: int = 10,
     lr: float = 1e-4,
-
 ):
     # 1. Setup
     user_tower.to(DEVICE)
-    item_tower.to(DEVICE)
+    pretrained_item_matrix = pretrained_item_matrix.to(DEVICE)
     
-    # Item Tower Freezing (학습되지 않도록 고정)
-    item_tower.eval()
-    for param in item_tower.parameters():
-        param.requires_grad = False
-        
     optimizer = optim.AdamW(user_tower.parameters(), lr=lr, weight_decay=1e-4)
-    loss_fn = InfoNCELoss(temperature=0.07)
+    loss_fn = InfoNCELoss(temperature=0.07).to(DEVICE)
     
     scheduler = optim.lr_scheduler.OneCycleLR(
         optimizer, max_lr=lr, 
         steps_per_epoch=len(train_loader), epochs=epochs
     )
 
-    print("🚀 Start Training User Tower...")
+    print(f"🚀 Start Training FinalUserTower on {DEVICE}...")
+    user_tower.train()
     
     for epoch in range(epochs):
-        user_tower.train()
         total_loss = 0
         step = 0
-        
         progress_bar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{epochs}")
         
         for batch in progress_bar:
-            # Data to Device
-            history = batch['history'].to(DEVICE)
-            season = batch['season'].to(DEVICE)
-            gender = batch['gender'].to(DEVICE)
-            target_ids = batch['target_item_id'].to(DEVICE) 
+            # 2. Input Data Preparation
+            history = batch['history'].to(DEVICE)       # (Batch, Seq)
+            season = batch['season'].to(DEVICE)         # (Batch, )
+            gender = batch['gender'].to(DEVICE)         # (Batch, )
+            
+            target_idx = batch['target_idx'].to(DEVICE) # (Batch, ) - 정답 아이템 Index
             
             # -----------------------------------------------------------
-            # A. Generate Ground Truth (Teacher)
+            # A. Ground Truth (Target Item Vectors)
             # -----------------------------------------------------------
+            # 미리 계산된 아이템 행렬에서 정답 벡터를 직접 가져옴 (Teacher)
+            # pretrained_item_matrix: (Total_Items, 128)
             with torch.no_grad():
-                # Item Tower가 ID를 받아서 Pretrained Vector를 리턴한다고 가정
-                # (User Tower와 Embedding Weight를 공유하거나, 독립적인 Lookup 테이블을 가짐)
-                target_item_vectors = item_tower(target_ids)
-                
-                # [성능 최적화 팁]
-                # 만약 item_tower가 단순히 Embedding Lookup만 수행한다면
-                # item_tower(target_ids) 대신 pretrained_matrix[target_ids] 처럼
-                # 텐서 슬라이싱을 하는 게 속도가 더 빠릅니다.
-                
+                target_item_vectors = pretrained_item_matrix[target_idx]
+                # 타겟 벡터도 정규화되어 있는지 확인 (Model이 Normalize를 쓴다면 여기도 해야 함)
+                target_item_vectors = F.normalize(target_item_vectors, p=2, dim=1)
+
             # -----------------------------------------------------------
-            # B. Generate User Vectors (Student)
+            # B. User Representation (Student)
             # -----------------------------------------------------------
+            # [Call] FinalUserTower.forward(history_ids, season_idx, gender_idx)
             user_vectors = user_tower(history, season, gender)
             
             # -----------------------------------------------------------
-            # C. Loss Calculation
+            # C. Contrastive Loss
             # -----------------------------------------------------------
             loss = loss_fn(user_vectors, target_item_vectors)
             
+            # D. Optimization
             optimizer.zero_grad()
             loss.backward()
             torch.nn.utils.clip_grad_norm_(user_tower.parameters(), max_norm=1.0)
@@ -391,3 +396,4 @@ def train_user_tower(
         
     print("✅ Training Finished.")
     return user_tower
+

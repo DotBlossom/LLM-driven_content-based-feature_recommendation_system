@@ -392,58 +392,6 @@ class SimCSERecSysDataset(Dataset):
         return view1_obj, view2_obj
 
 
-
-''' 
-class SimCSERecSysDataset(Dataset):
-    def __init__(self, products: List[TrainingItem], dropout_prob: float = 0.2):
-        self.products = products
-        self.dropout_prob = dropout_prob
-
-    def __len__(self):
-        return len(self.products)
-
-    def input_feature_dropout(self, product: TrainingItem) -> TrainingItem:
-        """
-        [Augmentation Logic]
-        JSON 구조("clothes", "reinforced_feature_value")에 맞춰
-        랜덤하게 속성(Key-Value)을 제거합니다.
-        """
-        # 원본 데이터 보호를 위해 Deep Copy (매우 중요)
-        aug_p = copy.deepcopy(product)
-        
-        feature_dict = aug_p.feature_data
-        
-        # 1. Standard Features (clothes) Dropout
-   
-        clothes_data = feature_dict.get("clothes")
-        if clothes_data:
-            keys = list(clothes_data.keys())
-            for k in keys:
-                if random.random() < self.dropout_prob:
-                    del clothes_data[k]
-        
-        # 2. Reinforced Features Dropout
-  
-        re_data = feature_dict.get("reinforced_feature_value")
-        if re_data:
-            keys = list(re_data.keys())
-            for k in keys:
-                if random.random() < self.dropout_prob:
-                    del re_data[k]
-                    
-        return aug_p
-    def __getitem__(self, idx):
-        raw_product = self.products[idx]
-        
-        # SimCSE: 같은 상품을 두 번 변형해서 (View1, View2) 생성
-        view1 = self.input_feature_dropout(raw_product)
-        view2 = self.input_feature_dropout(raw_product)
-        
-        return view1, view2
-'''
-
-
-    
 # ----------------------------------------------------------------------
 # 6. userTowerClass
 #     
@@ -507,75 +455,85 @@ class FinalUserTower(nn.Module):
                  num_total_products: int,
                  pretrained_item_matrix: torch.Tensor = None,
                  max_seq_len: int = 50,
-                 d_model: int = 128,      # Transformer 내부 차원
+                 d_model: int = 128,
                  nhead: int = 4,
                  num_layers: int = 2,
-                 output_dim: int = 128):  # 최종 출력 차원
+                 output_dim: int = 128):
         super().__init__()
         
-        # ==========================================
-        # 1. Feature Extraction (Transformer Body)
-        # ==========================================
+        # 1. Embeddings
+        # num_total_products + 1 (Padding=0)
         self.item_embedding = nn.Embedding(num_total_products + 1, d_model, padding_idx=0)
+        
+        # [중요] Pretrained Weight 로드 (User History 입력용)
         if pretrained_item_matrix is not None:
             self.load_pretrained_weights(pretrained_item_matrix)
             
         self.position_embedding = nn.Embedding(max_seq_len, d_model)
-        self.season_embedding = nn.Embedding(4, d_model)
-        self.gender_embedding = nn.Embedding(3, d_model, padding_idx=0)
+        self.season_embedding = nn.Embedding(5, d_model, padding_idx=0) # 0:Pad, 1~4:Seasons
+        self.gender_embedding = nn.Embedding(3, d_model, padding_idx=0) # 0:Unk, 1:M, 2:F
         
-        encoder_layer = nn.TransformerEncoderLayer(d_model=d_model, nhead=nhead, dim_feedforward=d_model*4, batch_first=True, dropout=0.1)
+        # 2. Transformer
+        encoder_layer = nn.TransformerEncoderLayer(
+            d_model=d_model, nhead=nhead, dim_feedforward=d_model*4, 
+            batch_first=True, dropout=0.1
+        )
         self.transformer = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
-        
         self.user_query_token = nn.Parameter(torch.randn(1, 1, d_model)) 
 
-        # ==========================================
-        # 2. Deep Interaction & Mapping (Head) - [추가된 부분]
-        # ==========================================
-        # Transformer의 출력(d_model)을 받아서 심층 가공
-        # DeepResidualHead: Expand -> SE-ResBlock -> Compress
+        # 3. Heads
         self.deep_head = DeepResidualHead(input_dim=d_model, output_dim=output_dim)
-        
-        # ==========================================
-        # 3. Final Projection (OptimizedItemTower와 동일 구조)
-        # ==========================================
-        # Metric Learning을 위한 최종 정규화 및 투영
         self.final_projector = OptimizedItemTower(input_dim=output_dim, output_dim=output_dim)
 
     def load_pretrained_weights(self, matrix):
-        self.item_embedding.weight.data.copy_(matrix)
-        self.item_embedding.weight.requires_grad = False
+        # Matrix Shape Check: (Num_Items + 1, Dim)
+        expected_shape = self.item_embedding.weight.shape
+        if matrix.shape != expected_shape:
+            print(f"⚠️ Shape Mismatch! Model: {expected_shape}, Input: {matrix.shape}")
+            # Shape이 다르면 일부만 로드하거나 에러 처리 (여기서는 단순 경고 후 슬라이싱)
+            min_rows = min(expected_shape[0], matrix.shape[0])
+            self.item_embedding.weight.data[:min_rows] = matrix[:min_rows]
+        else:
+            self.item_embedding.weight.data.copy_(matrix)
+        
+        # Fine-tuning 여부 (True: 학습됨, False: 고정됨)
+        self.item_embedding.weight.requires_grad = False 
 
     def forward(self, history_ids, season_idx, gender_idx):
+        """
+        history_ids: (Batch, Seq_Len)
+        season_idx: (Batch, )
+        gender_idx: (Batch, )
+        """
         B, L = history_ids.shape
         device = history_ids.device
         
-        # --- [Step 1] Transformer Context Encoding ---
-        seq_emb = self.item_embedding(history_ids)
-        pos_emb = self.position_embedding(torch.arange(L, device=device))
-        season_emb = self.season_embedding(season_idx).unsqueeze(1)
-        gender_emb = self.gender_embedding(gender_idx).unsqueeze(1)
+        # [Step 1] Input Embedding & Context Injection
+        seq_emb = self.item_embedding(history_ids) # (B, L, D)
+        pos_emb = self.position_embedding(torch.arange(L, device=device)) # (L, D) -> Broadcasting
         
-        x = seq_emb + pos_emb + season_emb + gender_emb
+        # Global Context (Season, Gender)를 시퀀스 전체에 더함
+        season_emb = self.season_embedding(season_idx).unsqueeze(1) # (B, 1, D)
+        gender_emb = self.gender_embedding(gender_idx).unsqueeze(1) # (B, 1, D)
         
-        cls_token = self.user_query_token.expand(B, -1, -1)
-        x = torch.cat([cls_token, x], dim=1)
+        x = seq_emb + pos_emb + season_emb + gender_emb # (B, L, D)
         
-        padding_mask = (history_ids == 0)
-        cls_mask = torch.zeros((B, 1), dtype=torch.bool, device=device)
-        full_mask = torch.cat([cls_mask, padding_mask], dim=1)
+        # [Step 2] Append CLS Token & Masking
+        cls_token = self.user_query_token.expand(B, -1, -1) # (B, 1, D)
+        x = torch.cat([cls_token, x], dim=1) # (B, L+1, D)
         
+        # Padding Mask (True가 마스킹됨)
+        # 0은 Padding ID
+        padding_mask = (history_ids == 0) # (B, L)
+        cls_mask = torch.zeros((B, 1), dtype=torch.bool, device=device) # CLS 토큰은 마스킹 안함
+        full_mask = torch.cat([cls_mask, padding_mask], dim=1) # (B, L+1)
+        
+        # [Step 3] Transformer Encoding
         out = self.transformer(x, src_key_padding_mask=full_mask)
         
-        # 유저 토큰 추출 (Transformer가 요약한 1차 정보)
-        raw_user_vector = out[:, 0, :] # (B, d_model)
-        
-        # --- [Step 2] Deep Residual Interaction (SE-Block) ---
-        # "시간축"이 요약된 정보에서 "특성축" 중요도를 다시 계산하고 비선형 변환
-        deep_feat = self.deep_head(raw_user_vector) # (B, output_dim)
-        
-        # --- [Step 3] Final Projection & Normalize ---
-        # Item Tower와 동일한 위상 공간으로 매핑
-        final_vector = self.final_projector(deep_feat) # (B, output_dim)
+        # [Step 4] Extract CLS & Projection
+        raw_user_vector = out[:, 0, :] # (B, d_model) -> 0번째 토큰(CLS)만 사용
+        deep_feat = self.deep_head(raw_user_vector) 
+        final_vector = self.final_projector(deep_feat)
         
         return final_vector

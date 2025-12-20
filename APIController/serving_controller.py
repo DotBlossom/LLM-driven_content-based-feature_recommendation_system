@@ -1,4 +1,5 @@
 
+import logging
 import os
 from fastapi import BackgroundTasks, FastAPI, Depends, HTTPException, APIRouter
 from pydantic import BaseModel
@@ -6,13 +7,13 @@ import torch.nn.functional as F
 import torch
 from torch.nn.utils.rnn import pad_sequence
 from typing import Any, Dict, List, Tuple
-from database import ProductInferenceInput, ProductInferenceVectors, get_db
+from database import ProductInferenceInput, ProductInferenceVectors, UserSession, get_db
 #from inference import RecommendationService
-from train import train_simcse_from_db #train_user_tower_task
+from train import UserTowerTrainDataset, train_final_user_tower, train_simcse_from_db #train_user_tower_task
 from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector #get_global_rec_service
 import utils.vocab as vocab 
 import numpy as np
-from model import ALL_FIELD_KEYS, CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper
+from model import ALL_FIELD_KEYS, CoarseToFineItemTower, FinalUserTower, OptimizedItemTower, SimCSEModelWrapper, load_pretrained_vectors_from_db
 from sqlalchemy.orm import Session
 from sqlalchemy.dialects.postgresql import insert  
 import torch.nn as nn
@@ -372,10 +373,151 @@ def process_vectors_by_ids(
 
 
 
+
 # ------------------------------------------------------------------
 # API 4. User Tower Train
 # ------------------------------------------------------------------
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+
+class TrainRequest(BaseModel):
+    epochs: int = 5
+    batch_size: int = 1
+    learning_rate: float = 1e-4
+    max_seq_len: int = 50
+    
+    # 모델 저장 경로 (옵션)
+    save_path: str = "./user_tower_latest.pth"
+
+class TrainResponse(BaseModel):
+    status: str
+    final_avg_loss: float
+    trained_epochs: int
+    model_save_path: str
+    message: str
+
+# ==========================================
+# 2. Service Layer (Pipeline Logic)
+# ==========================================
+def preprocess_db_sessions(sessions: list, product_id_map: dict, max_seq_len: int) -> List[dict]:
+    """DB 세션 데이터를 학습용 데이터(Dict)로 변환"""
+    data = []
+    
+    # 매핑 테이블
+    GENDER_MAP = {'M': 1, 'F': 2, 'UNKNOWN': 0}
+    SEASON_MAP = {'SPRING_AUTUMN': 1, 'SUMMER': 2, 'WINTER': 3, 'UNKNOWN': 0}
+    
+    for sess in sessions:
+        if not sess.events: continue
+        
+        # 1. Sort Events
+        events = sorted(sess.events, key=lambda e: e.timestamp)
+        if len(events) < 2: continue # 최소 2개 (History 1 + Target 1)
+        
+        # 2. Map Product IDs
+        seq_indices = [product_id_map.get(e.product_id, 0) for e in events]
+        
+        # 3. Create Row
+        # 마지막 아이템 = Target, 그 이전 = History
+        data.append({
+            'history': seq_indices[:-1], 
+            'target_idx': seq_indices[-1],
+            'gender': GENDER_MAP.get(sess.user.gender, 0),
+            'season': SEASON_MAP.get(sess.season, 0),
+            'age': 0 # 필요시 추가 구현
+        })
+        
+    return data
+
+def run_training_pipeline(db: Session, config: TrainRequest) -> TrainResponse:
+    logger.info("🚀 Starting Training Pipeline via API...")
+
+    # 1. Load Pretrained Item Vectors (Fixed)
+    # item_matrix: (Num_Total_Items + 1, 128)
+    item_matrix, id_map = load_pretrained_vectors_from_db(db)
+    logger.info(f"✅ Loaded {len(id_map)} item vectors from DB.")
+
+    # 2. Fetch User Sessions (Training Data)
+    # 실제로는 기간 쿼리 등을 추가해야 함
+    sessions = db.query(UserSession).join(UserSession.user).join(UserSession.events).limit(5000).all()
+    
+    if not sessions:
+        raise HTTPException(status_code=400, detail="No session data found in DB.")
+
+    # 3. Preprocessing
+    training_data = preprocess_db_sessions(sessions, id_map, config.max_seq_len)
+    logger.info(f"✅ Prepared {len(training_data)} training samples.")
+    
+    if len(training_data) == 0:
+        raise HTTPException(status_code=400, detail="Valid training data is empty after preprocessing.")
+
+    # 4. DataLoader Setup
+    dataset = UserTowerTrainDataset(training_data, id_map, max_seq_len=config.max_seq_len)
+    train_loader = torch.utils.data.DataLoader(
+        dataset, batch_size=config.batch_size, shuffle=True
+    )
+
+    # 5. Initialize Final Use
+    #r Tower
+    num_total_items = item_matrix.size(0)
+    user_tower = FinalUserTower(
+        num_total_products=num_total_items - 1,
+        pretrained_item_matrix=item_matrix, # Weight 초기화용
+        max_seq_len=config.max_seq_len
+    )
+
+    # 6. Execute Training Loop
+    # train_final_user_tower 함수가 학습된 모델을 반환한다고 가정
+    trained_model = train_final_user_tower(
+        user_tower=user_tower,
+        pretrained_item_matrix=item_matrix, # Loss 계산용
+        train_loader=train_loader,
+        epochs=config.epochs,
+        lr=config.learning_rate
+    )
+
+    # 7. Save Model
+    torch.save(trained_model.state_dict(), config.save_path)
+    logger.info(f"💾 Model saved to {config.save_path}")
+
+    return TrainResponse(
+        status="success",
+        final_avg_loss=0.0, # Loop에서 마지막 Loss를 리턴받도록 수정 필요 (여기선 Dummy)
+        trained_epochs=config.epochs,
+        model_save_path=config.save_path,
+        message=f"Training completed with {len(training_data)} samples."
+    )
+
+# ==========================================
+# 3. API Endpoints
+# ==========================================
+@serving_controller_router.post("/train/user-tower", response_model=TrainResponse)
+def trigger_training_job(req: TrainRequest, db: Session = Depends(get_db)):
+    """
+    유저 타워 학습을 실행합니다. (Synchronous for Demo)
+    실제 운영 환경에서는 BackgroundTasks 또는 Celery를 권장합니다.
+    """
+    try:
+        result = run_training_pipeline(db, req)
+        return result
+    except Exception as e:
+        logger.error(f"Training Failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
+
+
+
+
+
+
+
 '''
+
 
 @serving_controller_router.post("/train/user-tower/start")
 async def start_user_tower_training(
@@ -576,7 +718,7 @@ def recommend_products_to_user_ranker(
 
 
 ## Batch API Layer
-'''
+
 class EmbeddingRequestItem(BaseModel):
 
     product_id: int
@@ -658,3 +800,4 @@ def process_and_save_vectors(
 
     print("모든 벡터 저장 완료.")
     
+'''
