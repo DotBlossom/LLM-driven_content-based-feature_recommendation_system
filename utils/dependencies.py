@@ -6,8 +6,7 @@ from database import SessionLocal
 #from inference import RecommendationService
 from model import CoarseToFineItemTower, OptimizedItemTower, SimCSEModelWrapper
 
-# 1. 모델 인스턴스를 저장할 전역 변수 (State)
-# Optional을 사용하여 초기에는 None임을 명시합니다.
+# 1. 모델 인스턴스를 저장할 전역 변수
 global_encoder: Optional[CoarseToFineItemTower] = None
 global_projector: Optional[OptimizedItemTower] = None
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -15,9 +14,6 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 #rec_service: RecommendationService = None
 
-# (사용자 정의 함수라고 가정)
-# 만약 initialize_global_models()가 별도로 필요하다면 이 함수를 재정의하여 사용하세요.
-# 여기서는 rec_service 초기화 로직으로 대체합니다.
 '''
 def initialize_rec_service():
     global rec_service
@@ -43,7 +39,7 @@ def initialize_rec_service():
 def initialize_global_models():
     """
     모델 인스턴스를 로드하고 전역 변수에 저장합니다.
-    (FastAPI의 startup 이벤트 핸들러에서 호출됩니다.)
+    FastAPI의 startup 이벤트 핸들러에서 호출
     """
     global global_encoder
     global global_projector
@@ -65,7 +61,7 @@ def initialize_global_models():
 def get_global_encoder() -> CoarseToFineItemTower:
     """저장된 CoarseToFineItemTower 인스턴스를 반환하는 의존성 주입 함수."""
     if global_encoder is None:
-        # 이 예외는 startup 이벤트가 실행되지 않았을 때만 발생해야 합니다.
+        # 이 예외는 startup 이벤트가 실행되지 않았을 때만 발생
         raise Exception("Encoder model has not been loaded yet. Check application startup events.")
     return global_encoder
 

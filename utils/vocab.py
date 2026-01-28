@@ -1,4 +1,69 @@
-# vocab.py
+
+
+from typing import Any, Dict, List
+# H&M 데이터셋 기준 유의미한 STD 필드 / 값 실제로 다 추가
+STD_VOCAB_CONFIG = {
+    "product_type_name": [
+        "T-shirt", "Trousers", "Dress", "Sweater", "Shirt", "Shorts", "Top", "Blouse", 
+        "Jacket", "Vest top", "Hoodie", "Skirt", "Coat", "Cardigan", "Blazer", "Leggings/Tights",
+        "Jumpsuit/Playsuit", "Bodysuit", "Polo shirt", "Sneakers", "Boots", "Sandals", "Bag"
+    ],
+    "colour_group_name": [ # [NEW] 색상 정보 추가
+        "Black", "White", "Dark Blue", "Light Beige", "Blue", "Grey", "Light Blue", "Light Pink",
+        "Red", "Beige", "Green", "Pink", "Yellow", "Gold", "Silver", "Orange", "Dark Green",
+        "Dark Grey", "Multi-coloured"
+    ],
+    "graphical_appearance_name": [
+        "Solid", "Stripe", "All over pattern", "Melange", "Check", "Denim", "Front print", 
+        "Lace", "Embroidery", "Jacquard", "Mesh", "Glittering/Metallic", "Sequin"
+    ],
+    "department_name": [
+        "Jersey", "Knitwear", "Woven", "Trousers", "Blouse", "Dress", "Outwear", "Skirt", 
+        "Denim", "Sport", "Divided", "Menswear", "Ladieswear", "Baby/Children"
+    ],
+    "section_name": [
+        "Womens Casual", "Womens Everyday Collection", "Womens Trend", "H&M+", "Mama", 
+        "Divided Collection", "Men Underwear", "Men Suits & Tailoring", "Men H&M Sport"
+    ],
+    "index_group_name": [
+        "Ladieswear", "Menswear", "Divided", "Sport", "Baby/Children"
+    ]
+}
+
+# RE Feature Keys (9 fields)
+RE_FEATURE_KEYS = [
+    "[CAT]", "[MAT]", "[DET]", "[FIT]", "[FNC]", 
+    "[SPC]", "[COL]", "[CTX]", "[LOC]"
+]
+
+# --- Vocab Helper Functions ---
+PAD_ID = 0
+UNK_ID = 1
+
+# 모든 STD Value를 하나의 Vocab으로 통합
+ALL_STD_TOKENS = sorted(list(set(
+    token for values in STD_VOCAB_CONFIG.values() for token in values
+)))
+STD_TOKEN_TO_ID = {token: i + 2 for i, token in enumerate(ALL_STD_TOKENS)}
+
+def get_std_vocab_size():
+    return len(STD_TOKEN_TO_ID) + 2
+
+def get_std_id(value: str) -> int:
+    if not value: return PAD_ID
+    return STD_TOKEN_TO_ID.get(str(value), UNK_ID)
+
+def get_std_field_keys() -> List[str]:
+    return list(STD_VOCAB_CONFIG.keys())
+
+
+
+
+
+
+
+
+'''# vocab.py
 import threading
 import zlib
 # 0번은 Padding/Unknown 용도로 예약
@@ -135,6 +200,7 @@ def get_vocab_sizes() -> tuple[int, int]:
     return STD_VOCAB_SIZE, RE_MAX_CAPACITY
 
 
+'''
 
 
 

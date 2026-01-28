@@ -46,10 +46,9 @@ class Season(str, Enum):
     WINTER = "Winter"
 
 class ActionType(int, Enum):
-    CLICK = 1       # 가중치 1
-    CART = 3        # 가중치 3
-    PURCHASE = 5    # 가중치 5 (핵심 Positive Sample)
-
+    CLICK = 1       
+    CART = 3        
+    PURCHASE = 5    
 
 
 class ProductInferenceInput(Base):
@@ -80,7 +79,7 @@ class ProductInferenceVectors(Base):
     """
     __tablename__ = "product_inference_vectors"
 
-    # 일반적으로 product_id와 1:1 매핑되므로 id를 product_id로 간주하거나 FK 설정 권장
+    
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     
     vector_embedding: Mapped[list[float] | None] = mapped_column(Vector(128), nullable=True)
@@ -200,5 +199,4 @@ class InteractionEvent(Base):
     # 관계 설정: Event -> Session (N:1)
     session: Mapped["UserSession"] = relationship("UserSession", back_populates="events")
 
-    # 필요하다면 여기에 상품 벡터 캐싱 컬럼 추가 가능
     # item_vector_cache = mapped_column(Vector(128), nullable=True)

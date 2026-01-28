@@ -185,7 +185,163 @@ def test_line(
     
     return {"message": "SimCSE training task initiated and completed."}
 
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader, Dataset
+from typing import List, Tuple
+from tqdm import tqdm
 
+# [가정] 앞서 정의한 HybridGNNUserTower 클래스와 데이터 모델이 있다고 가정
+# from user_model import HybridGNNUserTower
+# from pytorch_metric_learning import losses  # 혹은 기존 losses 사용
+
+# ------------------------------------------------------
+# 1. Dataset & Collate (User Views Preparation)
+# ------------------------------------------------------
+
+class UserTrainingItem(BaseModel):
+    user_id: int
+    history_ids: List[int]  # [101, 202, 505, ...]
+
+class UserContrastiveDataset(Dataset):
+    def __init__(self, users_list: List[UserTrainingItem], max_len=50):
+        self.users = users_list
+        self.max_len = max_len
+
+    def __len__(self):
+        return len(self.users)
+
+    def __getitem__(self, idx):
+        user = self.users[idx]
+        # View 1: User ID (for GNN)
+        uid = user.user_id
+        
+        # View 2: History Sequence (for Transformer)
+        seq = user.history_ids
+        
+        # Padding Logic (Simple version)
+        seq = seq[-self.max_len:] # Truncate
+        pad_len = self.max_len - len(seq)
+        seq_padded = seq + [0] * pad_len # 0 is PAD ID
+        
+        return uid, torch.tensor(seq_padded, dtype=torch.long)
+
+def collate_user_cl(batch):
+    """
+    UserCL은 증강(Augmentation)이 필요 없습니다.
+    모델 자체가 두 개의 서로 다른 View (GNN vs Seq)를 가지고 있기 때문입니다.
+    """
+    user_ids = [item[0] for item in batch]
+    history_seqs = [item[1] for item in batch]
+    
+    # Tensor Stack
+    user_ids_tensor = torch.tensor(user_ids, dtype=torch.long)
+    history_tensor = torch.stack(history_seqs)
+    
+    return user_ids_tensor, history_tensor
+
+# ------------------------------------------------------
+# 2. User Tower Training Logic (Cross-View CL)
+# ------------------------------------------------------
+
+def train_user_tower_contrastive(
+    user_tower: nn.Module,   # HybridGNNUserTower Instance
+    adj_matrix: torch.Tensor, # Pre-computed Graph Adjacency Matrix
+    batch_size: int = 256,
+    epochs: int = 10,
+    lr: float = 1e-4
+):
+    print("🚀 [UserTower] Fetching User Data...")
+    
+    # DB Load Logic (Mock)
+    # db_session = SessionLocal()
+    # users_data = db_session.query(User).all() ...
+    
+    # 예시 데이터 생성
+    train_users_list = [
+        UserTrainingItem(user_id=i, history_ids=[1, 2, 3]) for i in range(1000)
+    ]
+    print(f"✅ Loaded {len(train_users_list)} users.")
+
+    # Model Setup
+    model = user_tower.to(DEVICE)
+    model.train()
+    
+    # Optimizer
+    optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
+    
+    # Loss Function (NTXentLoss)
+    # GNN 벡터와 Seq 벡터를 Positive Pair로 봅니다.
+    loss_func = losses.NTXentLoss(temperature=0.1) 
+
+    dataset = UserContrastiveDataset(train_users_list)
+    dataloader = DataLoader(
+        dataset, 
+        batch_size=batch_size, 
+        shuffle=True, 
+        collate_fn=collate_user_cl,
+        drop_last=True
+    )
+    
+    # Scheduler
+    total_steps = len(dataloader) * epochs
+    scheduler = get_linear_schedule_with_warmup(
+        optimizer, num_warmup_steps=int(total_steps * 0.1), num_training_steps=total_steps
+    )
+
+    print("🔥 [UserTower] Starting Contrastive Training...")
+    
+    adj_matrix = adj_matrix.to(DEVICE) # GNN용 그래프 행렬
+
+    for epoch in range(epochs):
+        total_loss = 0
+        step = 0
+        
+        progress = tqdm(dataloader, desc=f"Epoch {epoch+1}/{epochs}")
+        for user_ids, history_seqs in progress:
+            
+            user_ids = user_ids.to(DEVICE)
+            history_seqs = history_seqs.to(DEVICE)
+            
+            optimizer.zero_grad()
+            
+            # --- [Core Logic: Get Two Views] ---
+            
+            # View 1: GNN Representation (Long-term)
+            # forward 전체를 부르는게 아니라, 내부 인코더만 따로 호출해야 함
+            all_gnn_embs, _ = model.gnn_encoder(adj_matrix)
+            view_gnn = all_gnn_embs[user_ids] # (Batch, Dim)
+            
+            # View 2: Sequential Representation (Short-term)
+            view_seq = model.seq_encoder(history_seqs) # (Batch, Dim)
+            
+            # --- [Projection Head] ---
+            # Contrastive Learning은 보통 별도의 Projection Head를 태워서 계산함
+            # (학습 후에는 버리거나, Fusion Head로 사용)
+            # 여기서는 모델의 fusion_head를 공유해서 쓰거나, 
+            # 단순히 벡터 자체를 비교해도 됨. (여기선 간단히 벡터 비교)
+            
+            # Contrastive Loss Calculation
+            # (Batch, Dim) vs (Batch, Dim)
+            embeddings = torch.cat([view_gnn, view_seq], dim=0)
+            
+            # Labels: (0, 1, ... B-1, 0, 1, ... B-1)
+            batch_curr = view_gnn.size(0)
+            labels = torch.arange(batch_curr).to(DEVICE)
+            labels = torch.cat([labels, labels], dim=0)
+            
+            loss = loss_func(embeddings, labels)
+            
+            loss.backward()
+            optimizer.step()
+            scheduler.step()
+            
+            total_loss += loss.item()
+            step += 1
+            progress.set_postfix({"loss": f"{loss.item():.4f}"})
+            
+    print("💾 Saving User Tower...")
+    torch.save(model.state_dict(), "user_tower_contrastive.pth")
 
 
 # ------------------------------------------------------

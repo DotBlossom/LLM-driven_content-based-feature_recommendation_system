@@ -4,7 +4,7 @@ import math
 import os
 
 # 1. 파일 경로 설정
-input_path = r"C:\Users\candyform\Desktop\inferenceCode\localprops\articles.json"      
+input_path = r"D:\trainDataset\localprops\articles.json"      
 output_data_path = r"C:\Users\candyform\Desktop\inferenceCode\localprops\filtered_data.json" # 저장할 파일 경로
 output_stats_path = r"C:\Users\candyform\Desktop\inferenceCode\localprops\unique_stats.json"  # 통계 저장 경로
 # 삭제하지 않고 남겨둘 숫자형 ID 키
@@ -15,10 +15,15 @@ COLLECT_FIELDS = [
     "product_type_name",
     "product_group_name",
     "graphical_appearance_name",
+    "colour_group_name",
+    "perceived_colour_value_name",
+    "perceived_colour_master_name",
+    "department_name",
     "index_name",
     "index_group_name",
-    "department_name",
     "section_name",
+    "garment_group_name"
+    
 ]
 
 if not os.path.exists(input_path):
@@ -289,7 +294,7 @@ def split_json_file():
     except Exception as e:
         print(f"예상치 못한 오류가 발생했습니다: {e}")
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     #count_product_groups_fixed_path()
     #visualize_product_counts()
-    split_json_file()
+    #split_json_file()

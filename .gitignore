@@ -5,3 +5,8 @@ __pycache__/
 airflow/.env
 airflow/airflow_data/
 airflow/dags/__pycache__
+item_map.json
+user_map.json
+localprops/results/
+localprops/split_files/
+models/
