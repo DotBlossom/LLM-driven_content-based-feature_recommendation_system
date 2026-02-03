@@ -3,7 +3,7 @@ import datetime
 from fastapi import BackgroundTasks, FastAPI, Depends, HTTPException, APIRouter
 from pydantic import BaseModel, Field
 
-from sqlalchemy import select
+from sqlalchemy import select, text
 from sqlalchemy.orm import Session
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
@@ -19,6 +19,7 @@ controller_router = APIRouter()
 
 class ProductCreateRequest(BaseModel):
     product_id: int
+    product_name : Optional[str] = None
     feature_data: Dict[str, Any]  # JSONB 컬럼에 매핑될 딕셔너리
 
 
@@ -42,6 +43,7 @@ def ingest_products(payload: List[ProductCreateRequest], db: Session = Depends(g
                 new_product = ProductInferenceInput(
                     product_id=item.product_id,
                     feature_data=item.feature_data,
+                    product_name = item.product_name,
                     is_vectorized=False
                 )
                 db.add(new_product)
@@ -79,14 +81,16 @@ def check_similarity_pgvector(item_id: int, db: Session = Depends(get_db)):
     # 문법: 컬럼명.cosine_distance(비교벡터)
     # 자기 자신(item_id)은 제외하고 검색
     
+    db.execute(text("SET hnsw.ef_search = 100"))
+
+    # 3. 유사도 검색 (기존 로직 유지)
     similarity_expr = ProductInferenceVectors.vector_embedding.cosine_distance(target_vec)
     
     stmt_search = (
         select(ProductInferenceVectors, similarity_expr.label("distance"))
-        .where(ProductInferenceVectors.id != item_id) # 자기 자신 제외
-        .where(ProductInferenceVectors.vector_embedding.is_not(None)) # 벡터 없는 것 제외
-        .order_by(similarity_expr.asc()) # 거리 짧은 순 (=유사도 높은 순)
-        .limit(20) # Top 5
+        .where(ProductInferenceVectors.id != item_id) # 51 pick 후 버리기가 나을듯 
+        .order_by(similarity_expr.asc()) # 인덱스가 있으면 자동으로 인덱스 스캔을 탐
+        .limit(50) 
     )
     
     results = db.execute(stmt_search).all()

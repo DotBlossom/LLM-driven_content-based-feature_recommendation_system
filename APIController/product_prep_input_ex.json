@@ -1,0 +1,26 @@
+
+
+[
+    {
+        "product_id": 108775015,
+        "feature_data": {
+            "prod_name": "Strap top",
+            "product_type_name": "Vest top",
+            "graphical_appearance_name": "Solid",
+            "perceived_colour_value_name": "Dark",
+            "department_name": "Jersey Basic",
+            "section_name": "Womens Everyday Basics",
+            "reinforced_feature": {
+                "MAT": [
+                    "Jersey"
+                ],
+                "CAT": [
+                    "top"
+                ],
+                "DET": [
+                    "narrow shoulder straps"
+                ]
+            }
+        }
+    }
+]

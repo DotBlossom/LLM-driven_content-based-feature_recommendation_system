@@ -11,7 +11,7 @@ from APIController.controller import controller_router
 from database import engine, Base
 from APIController.serving_controller import serving_controller_router
 
-from train import train_router
+# from train import train_router
 
 
 
@@ -24,6 +24,7 @@ async def lifespan(app:FastAPI) -> AsyncGenerator[None, None]:
     print("✨ Lifespan 시작: DB conn ...")
     #Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
+    print("등록된 테이블 목록:", Base.metadata.tables.keys())
     print("✨ Lifespan 시작: DB conn 완료...")
     
     print("✨ Lifespan 시작: 모델 로딩 중...")
@@ -69,7 +70,7 @@ app.add_middleware(
 #router
 api_router = APIRouter(prefix="/ai-api")
 api_router.include_router(serving_controller_router, prefix="/serving")
-api_router.include_router(train_router, prefix="/train")
+#api_router.include_router(train_router, prefix="/train")
 app.include_router(api_router)
 
 #separatable Instance

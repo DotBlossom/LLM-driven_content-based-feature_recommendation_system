@@ -3,7 +3,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Optional, Tuple
 import torch
-import model
+import dummy_code.model as model
 import utils.vocab as vocab # 이전에 만든 vocab.py (토큰 매핑용)
 
 app = FastAPI(title="Coarse-to-Fine Item Tower")

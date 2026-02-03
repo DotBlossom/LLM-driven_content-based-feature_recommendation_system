@@ -38,8 +38,6 @@ def get_db():
 
 
 
-
-
 class Season(str, Enum):
     SPRING_AUTUMN = "Spring/Autumn"
     SUMMER = "Summer"
@@ -63,7 +61,7 @@ class ProductInferenceInput(Base):
     # JSONB를 사용하면 DB 레벨에서 JSON 내부 필드 검색/인덱싱 가능 (속도 유리)
     # Python에서는 dict 형태로 사용됨
     feature_data: Mapped[dict[str, Any]] = mapped_column(JSONB)
-    
+    product_name: Mapped[str | None] = mapped_column(String, nullable=True)
     is_vectorized: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
 
     __table_args__ = (
@@ -72,21 +70,42 @@ class ProductInferenceInput(Base):
     )
 
 
+
+
 class ProductInferenceVectors(Base):
     """
     [학습/배치용 벡터 저장소]
-    임베딩 모델이 뱉은 Raw Vector와 서빙용으로 가공된 Vector 모두 저장
+    HNSW 인덱스를 적용하여 고속 검색 지원
     """
     __tablename__ = "product_inference_vectors"
 
-    
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     
+    # 벡터 차원 128 (예시)
     vector_embedding: Mapped[list[float] | None] = mapped_column(Vector(128), nullable=True)
-    vector_serving: Mapped[list[float] | None] = mapped_column(Vector(128), nullable=True)
-    
-    category: Mapped[str | None] = mapped_column(String, nullable=True, index=True)
 
+    __table_args__ = (
+        # -------------------------------------------------------
+        # [HNSW 인덱스 정의]
+        # postgresql_using='hnsw': 알고리즘 선택
+        # postgresql_ops: 거리 측정 방식 지정 (매우 중요)
+        #   - vector_cosine_ops: 코사인 거리 (<=>)
+        #   - vector_l2_ops: 유클리드 거리 (<->)
+        #   - vector_ip_ops: 내적 (<#>)
+        # -------------------------------------------------------
+        Index(
+            'idx_vectors_embedding_hnsw',  # 인덱스 이름
+            'vector_embedding',            # 컬럼 이름
+            postgresql_using='hnsw',     # HNSW 알고리즘 사용
+            postgresql_with={
+                'm': 24,                 # 노드 당 연결 수 (보통 16~64)
+                'ef_construction': 200    # 인덱스 생성 시 탐색 깊이 (보통 64~200, 높을수록 생성 느림/정확도 높음)
+            },
+            postgresql_ops={
+                'vector_embedding': 'vector_cosine_ops' # 코사인 거리 기준 인덱싱
+            }
+        ),
+    )
 ## real data / valid data
 
 class ProductServiceInput(Base):

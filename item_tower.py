@@ -1,3 +1,4 @@
+from sqlalchemy import select
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -9,26 +10,32 @@ from typing import Any, Dict, List
 import copy
 import random
 from tqdm import tqdm
-
+from torch.amp import autocast, GradScaler
+from database import ProductInferenceInput
 from utils import vocab
 
+import os
 
 
 # --- Global Configuration ---
 EMBED_DIM = 128
 OUTPUT_DIM_ENCODER = 128       # Encoder(Representation) 출력
 OUTPUT_DIM_PROJECTOR = 128     # Projector(SimCSE Loss용) 출력
-FASHION_BERT_MODEL = "bert-base-uncased" # 학습하면서 같이 tune됨
+FASHION_BERT_MODEL = "bert-base-uncased" 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 PAD_ID = vocab.PAD_ID
 UNK_ID = vocab.UNK_ID
 
+MODEL_DIR = "models"
+os.makedirs(MODEL_DIR, exist_ok=True)
+
+
 # ----------------------------------------------------------------------
 # 1. Models: Encoder + Projector + Wrapper
 # ----------------------------------------------------------------------
 
-# (A) Encoder: HM_HybridItemTower 
+# (A) Encoder: HybridItemTower 
 class SEResidualBlock(nn.Module):
     """ Squeeze-and-Excitation Residual Block """
     def __init__(self, dim, dropout=0.2, expansion_factor=4):
@@ -66,17 +73,11 @@ class SEResidualBlock(nn.Module):
         return self.act(residual + out)
 
 class DeepResidualHead(nn.Module):
-    """
-    [Architecture]
-    Input(64) -> [Expand 2x] -> 128 -> [Expand 2x] -> 256 
-    -> [Deep Interaction (SE-ResBlock)] -> 256 
-    -> [Compression] -> Output(128)
-    + Global Skip Connection
-    """
+
     def __init__(self, input_dim, output_dim=128):
         super().__init__()
         
-        # 차원 정의 (64 -> 128 -> 256)
+        # 차원 정의 
         mid_dim = input_dim * 2      # 256
         hidden_dim = input_dim * 4   # 512
         
@@ -102,7 +103,7 @@ class DeepResidualHead(nn.Module):
         )
         
         # 3. Final Projection (Compression)s
-        # 256 -> 128 로 압축하여 최종 임베딩 생성
+
         self.final_proj = nn.Linear(hidden_dim, output_dim)
         
         # 4. Global Skip Connection (Input Shortcut) ResNet 잔차
@@ -125,11 +126,11 @@ class DeepResidualHead(nn.Module):
         return main_out + skip_out
     
 
-class HM_HybridItemTower(nn.Module):
+class HybridItemTower(nn.Module):
     def __init__(self,
                  std_vocab_size: int,
                  num_std_fields: int,
-                 embed_dim: int = 128,  # [Update] Default to 128
+                 embed_dim: int = 128, 
                  output_dim: int = 128):
         super().__init__()
 
@@ -168,9 +169,56 @@ class HM_HybridItemTower(nn.Module):
             activation='gelu',
             norm_first=True
         )
-        self.transformer = nn.TransformerEncoder(encoder_layer, num_layers=2)
+        self.transformer = nn.TransformerEncoder(
+            encoder_layer,
+            num_layers=2,
+            enable_nested_tensor=False
+            )
         self.head = DeepResidualHead(input_dim=embed_dim, output_dim=output_dim)
 
+        self._debug_logged = False
+    def _debug_log(self, stage: int, title: str, tensors: Dict[str, torch.Tensor]):
+        """
+        [내부 함수] 스테이지별로 텐서 정보를 깔끔하게 출력합니다.
+        """
+        if self._debug_logged:
+            return
+
+        # 헤더 출력 (Stage 0일 때)
+        if stage == 0:
+            print("\n" + "="*60)
+            print(f"🧩 [HybridItemTower] Forward Flow Debugging Start")
+            print("="*60)
+
+        # 스테이지 타이틀
+        print(f"🔹 [Stage {stage}] {title}")
+
+        # 텐서 정보 분석 및 출력
+        if tensors:
+            for name, tensor in tensors.items():
+                if isinstance(tensor, torch.Tensor):
+                    shape_str = str(tuple(tensor.shape))
+                    
+                    # 값이 실수형이면 통계(평균, 표준편차)도 출력
+                    if tensor.dtype in [torch.float32, torch.float16, torch.float64]:
+                        mean_val = tensor.mean().item()
+                        std_val = tensor.std().item()
+                        info = f"Shape: {shape_str} | Mean: {mean_val:.4f} | Std: {std_val:.4f}"
+                    else:
+                        info = f"Shape: {shape_str} (Type: {tensor.dtype})"
+                        
+                    print(f"   - {name:<15}: {info}")
+                else:
+                    print(f"   - {name:<15}: {tensor} (Not a Tensor)")
+        
+        print("-" * 40)
+
+        # 종료 처리 (Stage 99일 때)
+        if stage == 99:
+            print("✅ Debugging Log Finished.")
+            print("="*60 + "\n")
+            self._debug_logged = True
+            
     def forward(self, 
                 std_input: torch.Tensor,       
                 re_input_ids: torch.Tensor,    
@@ -180,9 +228,13 @@ class HM_HybridItemTower(nn.Module):
         
         B = std_input.shape[0]
 
+
         # 1. STD
         std_emb = self.std_embedding(std_input) 
         std_emb = std_emb + self.std_field_emb  
+
+        self._debug_log(1, "STD Embedding", {"std_emb": std_emb})
+
 
         # 2. RE (Using Fashion-BERT Word Embeddings Only)
         flat_re_ids = re_input_ids.view(-1, re_input_ids.size(-1))
@@ -199,18 +251,32 @@ class HM_HybridItemTower(nn.Module):
         
         re_vectors = re_vectors.view(B, 9, -1) 
         re_vectors = re_vectors + self.re_field_position
+        
+        # [Log] Stage 2: RE Encoding
+        self._debug_log(2, "RE Process", {
+            "BERT Word Emb": word_embs,
+            "Pooled RE Vec": re_vectors
+        })
 
         # 3. Text (Product Name) -> Full BERT Context
         bert_out = self.bert_model(input_ids=text_input_ids, attention_mask=text_attn_mask)
         cls_token = bert_out.last_hidden_state[:, 0, :] # [CLS]
         text_vec = self.text_proj(cls_token).unsqueeze(1) 
 
+        self._debug_log(3, "Text Encoder", {"CLS Vector": text_vec})
+        
         # 4. Fusion
+    
         combined_seq = torch.cat([std_emb, re_vectors, text_vec], dim=1) 
+        self._debug_log(4, "Fusion Prep", {"Combined Seq": combined_seq})
+        
         context_out = self.transformer(combined_seq) 
         final_vec = context_out.mean(dim=1) 
-
-        return self.head(final_vec)
+        out = self.head(final_vec)
+        self._debug_log(99, "Final Projection", {"Output": out})
+        
+        return out
+    
 # (B) Projector: OptimizedItemTower for SimCSE
 class OptimizedItemTower(nn.Module):
     """
@@ -257,7 +323,7 @@ class TrainingItem(BaseModel):
     product_name: str            # Text Embedding용
 
 class SimCSERecSysDataset(Dataset):
-    def __init__(self, products: List[TrainingItem], dropout_prob: float = 0.2):
+    def __init__(self, products: List[TrainingItem], dropout_prob: float):
         self.products = products
         self.dropout_prob = dropout_prob
         
@@ -267,6 +333,61 @@ class SimCSERecSysDataset(Dataset):
 
     def __len__(self):
         return len(self.products)
+    
+    def _corrupt_data(self, item: TrainingItem) -> TrainingItem:
+        # 원본 데이터 복사
+        new_feature_data = copy.deepcopy(item.feature_data)
+        new_name = item.product_name
+        
+
+        # 확률 설정
+        KEY_DROP_PROB = self.dropout_prob - 0.1    # 키 자체를 날릴 확률 (통째로 삭제)
+        VALUE_DROP_PROB = self.dropout_prob  # 리스트 내부의 값을 하나씩 날릴 확률 (부분 삭제)
+        
+        all_keys = list(new_feature_data.keys())
+        
+        for k in all_keys:
+            val = new_feature_data[k]
+            
+            # (A) 값이 리스트인 경우 (예: [MAT]: ['Cotton', 'Poly'])
+            if isinstance(val, list):
+                # 1. 먼저 값을 솎아냄 (Value-level)
+                # 살아남은 애들만 필터링
+                surviving_values = [v for v in val if random.random() > VALUE_DROP_PROB]
+                
+                # 2. 만약 다 지워져서 빈 리스트가 되면 -> 키 자체를 삭제
+                if not surviving_values:
+                    del new_feature_data[k]
+                else:
+                    new_feature_data[k] = surviving_values
+                    
+            # (B) 값이 단일 값(문자열 등)인 경우 (예: product_type_name)
+            else:
+                # 그냥 키 자체를 날림 (Key-level)
+                if random.random() < KEY_DROP_PROB:
+                    del new_feature_data[k]
+
+        # =======================================================
+        # 2. Text Deletion (단어 구멍 뚫기)
+        # =======================================================
+        if new_name:
+            words = new_name.split()
+            # 단어가 2개 이상이면 하나를 삭제 (난이도 조절)
+            if len(words) > 1: 
+                if random.random() < 0.5: 
+                    drop_idx = random.randint(0, len(words)-1)
+                    del words[drop_idx]
+                    new_name = " ".join(words)
+            # 단어가 1개뿐이면 가끔 아예 삭제
+            elif len(words) == 1:
+                if random.random() < 0.1:
+                    new_name = ""
+
+        return TrainingItem(
+            product_id=item.product_id,
+            feature_data=new_feature_data,
+            product_name=new_name
+        )
 
     def _apply_dropout(self, item: TrainingItem) -> TrainingItem:
         """
@@ -291,7 +412,7 @@ class SimCSERecSysDataset(Dataset):
                     del new_feature_data[k]
         
         # Text Dropout (Optional): 이름 자체를 지울지 말지 결정. 
-        TEXT_DROPOUT_PROB = 0.5 
+        TEXT_DROPOUT_PROB = 0.5
         
         if random.random() < TEXT_DROPOUT_PROB:
             # 빈 문자열로 만들면 Tokenizer가 [CLS], [SEP] + Padding으로 처리
@@ -306,9 +427,8 @@ class SimCSERecSysDataset(Dataset):
     def __getitem__(self, idx):
         item = self.products[idx]
         
-        # SimCSE: 같은 아이템에 서로 다른 Dropout을 적용하여 View 1, View 2 생성
-        view1 = self._apply_dropout(item)
-        view2 = self._apply_dropout(item)
+        view1 = self._corrupt_data(item)
+        view2 = self._corrupt_data(item)
         
         return view1, view2
 
@@ -318,7 +438,26 @@ class SimCSERecSysDataset(Dataset):
 
 MAX_RE_LEN = 32  
 MAX_TXT_LEN = 32
+FIELD_PROMPT_MAP = {
 
+    "[CAT]": "Clothing Category",   
+
+    "[MAT]": "Fabric Material",     
+    
+    "[DET]": "Garment Detail",      
+    
+    "[FIT]": "Clothing Fit",        
+    
+    "[FNC]": "Apparel Function",    
+    
+    "[SPC]": "Product Specification", 
+    
+    "[COL]": "Garment Color",       
+    
+    "[CTX]": "Occasion",            
+    
+    "[LOC]": "Body Part"            
+}
 class SimCSECollator:
     """
     DataLoader에서 배치를 만들 때 토크나이징 및 텐서화를 수행하는 클래스.
@@ -334,13 +473,15 @@ class SimCSECollator:
         self.max_re_len = MAX_RE_LEN
         self.max_txt_len = MAX_TXT_LEN
         
-    
+
         self.sep = self.tokenizer.sep_token
+        
+        # data flow 초기 check flag
+        self._has_logged_sample = False
     def _serialize_feature_value(self, value: Any) -> str:
         """
-        [LLM preprosess 이어받음] 리스트를 [SEP] 토큰으로 구분하여 '독립적 의미 단위'임을 명시
-        Example: ["elasticated waist", "extra space"] 
-              -> "elasticated waist [SEP] extra space"
+        리스트를 [SEP] 토큰으로 구분
+
         """
         if not value:
             return ""
@@ -354,44 +495,62 @@ class SimCSECollator:
             
         return str(value)
 
-    def process_batch_items(self, items: List[TrainingItem]):
+    def process_batch_items(self, items: List[TrainingItem], is_first_view: bool = False):
         """Raw Items -> Model Input Tensors 변환"""
         
+    def process_batch_items(self, items: List[TrainingItem], is_first_view: bool = False):
         batch_std = []
         batch_re_ids = []
         batch_re_masks = []
         batch_txt = [] 
 
-        for item in items:
-            # 1. STD (기존 동일)
+        # [Log] 첫 배치의 첫 번째 아이템의 모든 RE 필드 수집
+        sample_log_re = [] 
+
+        for idx, item in enumerate(items):
+            # 1. STD
             std_ids = [vocab.get_std_id(item.feature_data.get(k, "")) for k in self.std_keys]
             batch_std.append(std_ids)
 
-            # 2. RE (Multiple Values Handling 적용)
+            # 2. RE 
             re_vals = [self._serialize_feature_value(item.feature_data.get(k)) for k in self.re_keys]
             
             curr_re_ids = []
             curr_re_masks = []
-            
-            for val in re_vals:
-                # [수정 2] max_length=32 적용
+            for i, val in enumerate(re_vals):
+
+                final_text = val
+                if val:
+                    # "[MAT]" -> "Material"
+                    key_code = self.re_keys[i] 
+                    prompt = FIELD_PROMPT_MAP.get(key_code, key_code) 
+                    
+                    # 텍스트 결합: "Material: Jersey"
+                    final_text = f"{prompt}: {val}"
+
                 enc = self.tokenizer(
-                    val, 
+                    final_text, # 👈 수정된 텍스트 입력
                     padding='max_length', 
                     truncation=True, 
-                    max_length=self.max_re_len, # 32
-                    add_special_tokens=True # [CLS], [SEP] 써야됨
+                    max_length=self.max_re_len, 
+                    add_special_tokens=True
                 )
                 curr_re_ids.append(enc['input_ids'])
                 curr_re_masks.append(enc['attention_mask'])
-            
+                
+
+                if idx == 0 and is_first_view and not self._has_logged_sample:
+                    if val:
+                        key_name = self.re_keys[i]
+                        decoded = self.tokenizer.decode(enc['input_ids'], skip_special_tokens=False)
+
+                        sample_log_re.append(f"      - {key_name}: '{final_text}' -> {decoded[:40]}...")
+
             batch_re_ids.append(curr_re_ids)    
             batch_re_masks.append(curr_re_masks) 
-
-            # 3. Text Name
             batch_txt.append(item.product_name)
 
-        # Tensor Stacking (기존 동일)
+        # Tensor Stacking
         tensor_std = torch.tensor(batch_std, dtype=torch.long)
         tensor_re_ids = torch.tensor(batch_re_ids, dtype=torch.long)
         tensor_re_mask = torch.tensor(batch_re_masks, dtype=torch.long)
@@ -404,21 +563,40 @@ class SimCSECollator:
             return_tensors='pt'
         )
         
+        # [Log Print]
+        if not self._has_logged_sample and is_first_view:
+            import sys
+            msg = []
+            msg.append("\n" + "="*60)
+            msg.append(f"🔍 [Data Integrity Check] First Batch Sample")
+            msg.append(f"   1. Product Name: '{items[0].product_name}'")
+            if not items[0].product_name:
+                msg.append(f"      ⚠️ WARNING: Product Name is EMPTY!")
+            
+            msg.append(f"   2. RE Features Found ({len(sample_log_re)} fields):")
+            if sample_log_re:
+                msg.extend(sample_log_re)
+            else:
+                msg.append("      ⚠️ NO RE FEATURES FOUND (Check Key Matching)")
+            
+            msg.append("="*60 + "\n")
+            
+            final_msg = "\n".join(msg)
+            try:
+                from tqdm import tqdm
+                tqdm.write(final_msg)
+            except ImportError:
+                print(final_msg, flush=True)
+
+            self._has_logged_sample = True
+
         return tensor_std, tensor_re_ids, tensor_re_mask, txt_enc['input_ids'], txt_enc['attention_mask']
 
     def __call__(self, batch):
-        # batch: List of (view1, view2)
         view1_list = [item[0] for item in batch]
         view2_list = [item[1] for item in batch]
-
-        # Process View 1
-        v1_inputs = self.process_batch_items(view1_list)
-        # Process View 2
-        v2_inputs = self.process_batch_items(view2_list)
-
-        # Return: (std1, re_id1, re_mask1, txt1, txt_mask1), (std2, ... )
-        return v1_inputs, v2_inputs
-
+        return self.process_batch_items(view1_list, is_first_view=True), self.process_batch_items(view2_list, is_first_view=False)
+    
 # ----------------------------------------------------------------------
 # 4. Training Loop Implementation
 # ----------------------------------------------------------------------
@@ -427,57 +605,119 @@ def train_simcse_from_db(
     encoder: nn.Module,       
     projector: nn.Module,
     db_session, # DB Session 객체 주입 필요
-    batch_size: int = 32,
-    epochs: int = 5,
-    lr: float = 1e-4
+    batch_size: int,
+    epochs: int,
+    lr: float
 ):
     print("🚀 Fetching data from DB...")
-    
-    # [DB Fetch Logic Placeholder]
-    # 실제 환경에서는 SQL Alchemy select 사용
-    # stmt = select(ProductInferenceInput.product_id, ProductInferenceInput.feature_data, ProductInferenceInput.product_name)
-    # result = db_session.execute(stmt).mappings().all()
-    
-    # Dummy Data for Code Validation
-    result = []
-    for i in range(100):
-        result.append({
-            "product_id": str(i),
-            "feature_data": {
-                "product_type_name": "T-shirt",
-                "colour_group_name": "Black" if i % 2 == 0 else "White",
-                "[CAT]": "Top",
-                "[MAT]": "Cotton"
-            },
-            "product_name": f"Basic T-shirt {i}"
-        })
+    stmt = select(
+        ProductInferenceInput.product_id, 
+        ProductInferenceInput.feature_data, 
+        ProductInferenceInput.product_name 
+    )
+    result = db_session.execute(stmt).mappings().all()
 
     if not result:
-        print("❌ No data found.")
+        print("❌ [Error] No data found in DB.")
         return
 
-    # Convert to Pydantic List
-    products_list = [
-        TrainingItem(
-            product_id=row['product_id'], 
-            feature_data=row['feature_data'],
-            product_name=row.get('product_name', "")
-        ) 
-        for row in result
-    ]
+    # load
+    products_list = []
+    
+    for row in result:
+        # DB의 원본 데이터 (수정 불가능하므로 dict로 복사)
+        raw_feats = dict(row['feature_data'])
         
+        # 'reinforced_feature'가 있다면 꺼내서 처리
+        if 'reinforced_feature' in raw_feats:
+            re_dict = raw_feats['reinforced_feature']
+            # mat -> [mat] why? tsf encoder에는 상관없고, 혹시 bert embedding에서 더 잘 쓰일까봐.
+            if isinstance(re_dict, dict):
+                for key, val in re_dict.items():
+   
+                    if key.startswith("[") and key.endswith("]"):
+                        vocab_key = key
+                    else:
+                        vocab_key = f"[{key}]"  # "MAT" -> "[MAT]"
+                    
+
+                    raw_feats[vocab_key] = val
+                    
+        # name tagging 
+        base_name = row['product_name']
+        product_type = raw_feats.get('product_type_name', "").strip() # 예: "Underwear Tights"
+        
+        final_name = ""
+
+        if base_name:
+            # Case A: 이름이 있는 경우 -> "원래이름 (Category: 타입명)"
+            if product_type:
+                final_name = f"{base_name} (Category: {product_type})"
+            else:
+                final_name = base_name
+        else:
+            # Case B: 이름이 없는 경우 (Fallback) -> "타입명 + 외형"
+            appearance = raw_feats.get('graphical_appearance_name', "").strip()
+            final_name = f"{product_type} {appearance}".strip()
+            
+            if not final_name:
+                final_name = "Unknown Product"
+                
+                        
+        item = TrainingItem(
+                product_id=str(row['product_id']), 
+                feature_data=raw_feats, 
+                product_name=row['product_name'] if row['product_name'] else ""
+            )
+        products_list.append(item)
     print(f"✅ Loaded {len(products_list)} items.")
+    # ▼▼▼ 디버깅 코드 
+    print("\n🔎 [DEBUG] Raw DB Data Check (First Item):")
+    first_row = result[0]
+    print(f"   - Keys in feature_data: {list(first_row['feature_data'].keys())}")
+    print(f"   - Full content: {first_row['feature_data']}")
+    print("-" * 50 + "\n")
+    # ▲▲▲ 여기까지 ▲▲▲
+    
     
     # 1. Model Setup
     model = SimCSEModelWrapper(encoder, projector).to(DEVICE)
     model.train()
+    # 🛠️ [AMP] Scaler 초기화 (GPU 사용 시)
+    use_amp = (DEVICE == "cuda")
+    scaler = GradScaler(enabled=use_amp)
+    
+    if use_amp:
+        print("⚡ [AMP] Mixed Precision Training Enabled.")     
+    bert_params = []
+    other_params = []
+    
+    for name, param in model.named_parameters():
+        if not param.requires_grad:
+            continue 
+            
+
+        if "bert_model" in name:
+            bert_params.append(param)
+        else:
+            other_params.append(param)
+    
     
     # 2. Optimization
-    # Fashion-BERT 일부(Embeddings)를 사용하므로 params 확인 필요
-    optimizer = AdamW(model.parameters(), lr=lr)
+
+    optimizer = AdamW([
+        {
+            'params': bert_params, 
+            'lr': 1e-5  
+        },
+        {
+            'params': other_params, 
+            'lr': lr   
+        }
+    ])
     
     # 3. Dataset & DataLoader
-    dataset = SimCSERecSysDataset(products_list, dropout_prob=0.2)
+    dataset = SimCSERecSysDataset(products_list, dropout_prob=0.4)
     collator = SimCSECollator() # Initialize Tokenizer once
     
     dataloader = DataLoader(
@@ -486,7 +726,7 @@ def train_simcse_from_db(
         shuffle=True, 
         collate_fn=collator, # Use the class instance
         drop_last=True,
-        num_workers=0 # 멀티프로세싱 시 Tokenizer 이슈 주의
+        num_workers=0 # win - 멀티프로세싱 시 Tokenizer 이슈 주의
     )
 
     # 4. Scheduler
@@ -518,53 +758,49 @@ def train_simcse_from_db(
             
             optimizer.zero_grad()
             
-            # Forward (SimCSEWrapper takes 5 args)
-            # inputs_v1 = (std, re_ids, re_mask, txt_ids, txt_mask)
-            emb1 = model(*inputs_v1)
-            emb2 = model(*inputs_v2)
             
-            # --- SimCSE Loss Calculation ---
-            # Cosine Similarity Matrix
-            # emb1, emb2 are normalized in Projector
-            # sim_matrix: (Batch, Batch)
-            sim_matrix = torch.matmul(emb1, emb2.T) 
-            
-            # Temperature Scaling
-            temperature = 0.05
-            sim_matrix = sim_matrix / temperature
-            
-            # Labels: 대각선 요소(자기 자신)가 정답
-            labels = torch.arange(batch_size).to(DEVICE)
-            
-            loss = loss_func(sim_matrix, labels)
-            
-            loss.backward()
-            optimizer.step()
+            with autocast(device_type="cuda", dtype=torch.float16, enabled=use_amp):
+                    # Forward
+                emb1 = model(*inputs_v1)
+                emb2 = model(*inputs_v2)
+                    
+                    # Loss Calculation
+                temperature = 0.05
+                sim_matrix = torch.matmul(emb1, emb2.T) / temperature 
+                    
+                labels = torch.arange(emb1.size(0)).to(DEVICE)
+                loss_1 = loss_func(sim_matrix, labels) 
+                loss_2 = loss_func(sim_matrix.T, labels) 
+                    
+                loss = (loss_1 + loss_2) / 2
+                
+            scaler.scale(loss).backward()  # loss scaling
+            scaler.step(optimizer)         # optimizer step with scaler
+            scaler.update()                # update scaler factor
+                    
             scheduler.step()
-            
+                    
             total_loss += loss.item()
             step += 1
             progress.set_postfix({"loss": f"{loss.item():.4f}"})
-            
-        print(f"Epoch {epoch+1} Avg Loss: {total_loss/step:.4f}")
+                
+        if step > 0:
+            avg_loss = total_loss / step
+            print(f"Epoch {epoch+1} Avg Loss: {avg_loss:.4f}")
+        else:
+            print(f"Epoch {epoch+1}: No batches processed.")
         
-    print("Training Finished.")
-    print("💾 Models are ready to save.")
-    # torch.save(encoder.state_dict(), ...)
+        ckpt_name = f"encoder_ep{epoch+1:02d}_loss{avg_loss:.4f}.pth"
+        save_path = os.path.join(MODEL_DIR, ckpt_name)
+        
+        # encoder only 
+        torch.save(encoder.state_dict(), save_path)
+        print(f"✅ Saved Checkpoint: {ckpt_name}")
+        
+  
+        # torch.save(projector.state_dict(), os.path.join(MODEL_DIR, f"projector_ep{epoch+1:02d}.pth"))
+        
+        print("-" * 50)
+        # =========================================================
 
-# ----------------------------------------------------------------------
-# 5. FastAPI Endpoint (Mock)
-# ----------------------------------------------------------------------
-# 실제 앱에서는 router.post 등으로 구현
-if __name__ == "__main__":
-    # Mock Dependency Injection
-    # 1. Vocab Setup (Imported from utils.vocab)
-    std_size = vocab.get_std_vocab_size()
-    num_std = len(vocab.get_std_field_keys())
-    
-    # 2. Instantiate Models
-    encoder = HM_HybridItemTower(std_size, num_std, embed_dim=EMBED_DIM)
-    projector = OptimizedItemTower(input_dim=128, output_dim=128)
-    
-    # 3. Run Train
-    train_simcse_from_db(encoder, projector, db_session=None, batch_size=4, epochs=2)
+    print("Training Finished.")

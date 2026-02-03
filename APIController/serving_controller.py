@@ -9,15 +9,16 @@ from torch.nn.utils.rnn import pad_sequence
 from typing import Any, Dict, List, Tuple
 from database import ProductInferenceInput, ProductInferenceVectors, UserSession, get_db
 #from inference import RecommendationService
-from train import UserTowerTrainDataset, train_final_user_tower, train_simcse_from_db #train_user_tower_task
-from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector #get_global_rec_service
+#from train import UserTowerTrainDataset, train_final_user_tower, train_simcse_from_db #train_user_tower_task
+#from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector #get_global_rec_service
+from item_tower import train_simcse_from_db
+from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
 import utils.vocab as vocab 
 import numpy as np
-from model import ALL_FIELD_KEYS, CoarseToFineItemTower, FinalUserTower, OptimizedItemTower, SimCSEModelWrapper, load_pretrained_vectors_from_db
+# from model import ALL_FIELD_KEYS, CoarseToFineItemTower, FinalUserTower, OptimizedItemTower, SimCSEModelWrapper, load_pretrained_vectors_from_db
 from sqlalchemy.orm import Session
 from sqlalchemy.dialects.postgresql import insert  
 import torch.nn as nn
-
 
 serving_controller_router = APIRouter()
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -44,31 +45,21 @@ class ProductIdListSchema(BaseModel):
     product_ids: List[int]
 
 
-import torch
-from typing import List, Tuple, Dict, Any
 
-# 전역 변수 ALL_FIELD_KEYS가 정의되어 있어야 합니다.
-# 예: ALL_FIELD_KEYS = ["category", "season", "color", ...] 
 
-def flatten_geometry_features(feature_data: Dict[str, Any]) -> None:
-    """
-    feature_data 내부의 'structural.geometry'를 찾아서
-    상위 레벨인 'reinforced_feature_value'에 'geo_' 접두어로 풀어냅니다.
-    (In-place modification)
-    """
-    re_data = feature_data.get("reinforced_feature_value", {})
-    if not re_data:
-        return
 
-    # geometry 데이터가 있으면 꺼냄 (Dictionary에서 pop)
-    geometry_data = re_data.pop("structural.geometry", None)
-    
-    # 딕셔너리 형태라면 펼쳐서 상위에 병합
-    if geometry_data and isinstance(geometry_data, dict):
-        for sub_key, sub_val in geometry_data.items():
-            # 예: width_flow -> geo_width_flow
-            new_key = f"geo_{sub_key}"
-            re_data[new_key] = sub_val
+            
+@serving_controller_router.post("/train/item-tower")
+def train_item_tower(encoder: nn.Module = Depends(get_global_encoder),
+                     projector: nn.Module = Depends(get_global_projector),
+                     db: Session = Depends(get_db),
+                     batch_size: int = Depends(get_global_batch_size),
+                     epochs: int = 5,
+                     lr: float = 1.5e-4):
+            
+    train_simcse_from_db(encoder, projector, db_session=db, batch_size=batch_size, epochs=epochs, lr = lr)
+            
+'''
 
 def preprocess_batch_input(products: List[Any]) -> Tuple[torch.Tensor, torch.Tensor]:
     """
@@ -518,286 +509,3 @@ def trigger_training_job(req: TrainRequest, db: Session = Depends(get_db)):
 
 '''
 
-
-@serving_controller_router.post("/train/user-tower/start")
-async def start_user_tower_training(
-    background_tasks: BackgroundTasks,
-    epochs: int = 5,
-    batch_size: int = 4,
-    lr: float = 1e-4,
-    db: Session = Depends(get_db)
-):
-    """
-    [User Tower Training API]
-    1. DB에서 학습된 Item Vector를 로딩합니다.
-    2. 유저 로그 데이터를 사용하여 User Tower를 학습시킵니다. (백그라운드)
-    """
-    
-    # 백그라운드 태스크 등록
-    # 주의: db 세션은 백그라운드 태스크가 끝날 때까지 살아있어야 하거나,
-    # 태스크 내부에서 새로 생성하는 것이 안전할 수 있습니다. 
-    # 여기서는 간단히 전달하지만, 실제로는 scoped_session 사용 권장.
-    background_tasks.add_task(
-        train_user_tower_task,
-        db_session=db,
-        epochs=epochs,
-        batch_size=batch_size,
-        lr=lr
-    )
-    
-    return {
-        "status": "success",
-        "message": "User Tower training started in background.",
-        "config": {
-            "epochs": epochs,
-            "batch_size": batch_size,
-            "lr": lr
-        }
-    }
-
-
-@serving_controller_router.get("/recommend/{user_id}")
-def recommend_products_to_user(
-    user_id: int, 
-    top_k: int = 5,
-    db: Session = Depends(get_db),
-    rec_service: RecommendationService = Depends(get_global_rec_service)
-):
-    """
-    [User-to-Item 추천]
-    1. 유저의 현재 상태(이력)를 기반으로 User Vector 추론
-    2. DB에서 유사한 상품 검색
-    """
-
-    if rec_service is None:
-        raise HTTPException(status_code=503, detail="Recommendation Service not ready")
-    
-    try:
-        # 1. User Vector 추론
-        user_vector = rec_service.get_user_vector(db, user_id)
-        
-        # 2. 유사 상품 검색 (Retrieval)
-        candidates = rec_service.retrieve_similar_items(db, user_vector, top_k=top_k)
-        
-        # 3. 결과 포맷팅
-        response = []
-        for pid, category, dist in candidates:
-            response.append({
-                "product_id": pid,
-                "category": category,
-                "score": 1 - dist # Cosine Distance는 0에 가까울수록 좋으므로 Score로 변환 (1에 가까울수록 좋음)
-            })
-            
-        return {
-            "user_id": user_id,
-            "recommendations": response
-        }
-        
-    except ValueError as e:
-        raise HTTPException(status_code=404, detail=str(e))
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-
-
-@serving_controller_router.get("/recommend/ranker/{user_id}")
-def recommend_products_to_user_ranker(
-    user_id: int, 
-    top_k: int = 5, # 최종적으로 보여줄 개수 (예: 10개)
-    db: Session = Depends(get_db),
-    rec_service: RecommendationService = Depends(get_global_rec_service)
-):
-    """
-    [2-Stage Recommendation Pipeline]
-    Stage 1. Retrieval: User Vector와 유사한 후보군을 넉넉하게 검색 (Top-K * 5)
-    Stage 2. Ranking: DCN 모델을 사용하여 후보군을 정밀 재정렬
-    """
-
-    if rec_service is None:
-        raise HTTPException(status_code=503, detail="Recommendation Service not ready")
-    
-    try:
-        # ==========================================
-        # [Stage 1] Retrieval (Candidate Generation)
-        # ==========================================
-        
-        # 1. User Vector 추론 (기존 로직)
-        user_vector_np = rec_service.get_user_vector(db, user_id)
-        
-        # 2. 후보군 검색 (Retrieval)
-        # 랭킹 모델이 재정렬할 여지를 주기 위해, 요청된 top_k보다 더 많이(예: 5배) 검색합니다.
-        candidate_k = top_k * 2
-        # candidates 구조: [(pid, category, dist), ...]
-        candidates = rec_service.retrieve_similar_items(db, user_vector_np, top_k=candidate_k)
-        
-        if not candidates:
-            return {"user_id": user_id, "recommendations": []}
-
-        # ==========================================
-        # [Stage 2] Ranking (Re-ranking)
-        # ==========================================
-        
-        # 3. 랭킹 모델 입력을 위한 데이터 준비
-        candidate_pids = [c[0] for c in candidates]
-        
-        # 3-1. 후보 아이템들의 벡터 조회 (DB Query)
-        # {pid: vector_list} 형태의 딕셔너리 반환 가정
-        item_vector_map = rec_service.get_item_vectors_by_ids(db, candidate_pids)
-        
-        # 3-2. Tensor 변환 준비
-        valid_candidates = [] # 벡터가 존재하는 유효한 후보만 필터링
-        item_vectors_list = []
-        
-        for pid, category, dist in candidates:
-            if pid in item_vector_map:
-                valid_candidates.append({
-                    "product_id": pid,
-                    "category": category,
-                    "base_score": 1 - dist # Retrieval 점수 (참고용)
-                })
-                item_vectors_list.append(item_vector_map[pid])
-        
-        if not valid_candidates:
-             raise HTTPException(status_code=404, detail="Candidate vectors not found")
-
-        # Tensor 변환
-        user_tensor = torch.tensor(user_vector_np, dtype=torch.float32).to(DEVICE) # (128,)
-        item_tensor = torch.tensor(item_vectors_list, dtype=torch.float32).to(DEVICE) # (N, 128)
-        
-        # Context Vector (선택 사항)
-        # 만약 시간대, 요일 등의 컨텍스트 피처를 쓴다면 여기서 생성
-        # 현재는 사용하지 않는다고 가정 (None 전달) 또는 0 벡터
-        context_tensor = None 
-        # context_tensor = torch.zeros(20, dtype=torch.float32).to(DEVICE) 
-
-        # 4. 랭킹 모델 예측 (Inference)
-        # rec_service 내부에 로드된 ranking_model 사용
-        # predict_for_user는 (N,) 형태의 확률값(Score)을 반환
-        ranking_scores = rec_service.ranking_model.predict_for_user(
-            user_vec=user_tensor,
-            item_vecs=item_tensor,
-            context_vec=context_tensor
-        )
-        
-        # 5. 점수 할당 및 정렬
-        # Tensor를 리스트로 변환
-        scores_list = ranking_scores.tolist()
-        
-        for i, candidate in enumerate(valid_candidates):
-            candidate["ranking_score"] = scores_list[i]
-            
-        # 랭킹 점수(ranking_score) 기준 내림차순 정렬
-        valid_candidates.sort(key=lambda x: x["ranking_score"], reverse=True)
-        
-        # 6. 최종 Top-K 자르기
-        final_recommendations = valid_candidates[:top_k]
-        
-        return {
-            "user_id": user_id,
-            "count": len(final_recommendations),
-            "recommendations": final_recommendations
-        }
-        
-    except ValueError as e:
-        raise HTTPException(status_code=404, detail=str(e))
-    except Exception as e:
-        # 로그 기록 필요
-        print(f"Error in recommendation: {e}")
-        raise HTTPException(status_code=500, detail="Internal Server Error")
-
-
-
-# productList -> (CoarseToFineItemTower)를 I : N개로 확장?
-# I : productList(featureForm)
-
-
-# 가상의 ProductInput 타입과 vocab 객체 (기존 코드 문맥 따름)
-# DEVICE, vocab 등은 전역 변수 혹은 인자로 관리된다고 가정
-
-
-
-## Batch API Layer
-
-class EmbeddingRequestItem(BaseModel):
-
-    product_id: int
-    feature_data: Dict[str, Any]
-
-    class Config:
-        # Pydantic에게 SQLAlchemy 객체로부터 속성을 읽어오도록 지시합니다. (핵심)
-        from_attributes = True
-
-@serving_controller_router.post("/update-vectors")
-def process_and_save_vectors(
-    products: List[EmbeddingRequestItem], 
-    db: Session = Depends(get_db),
-    batch_size: int = 32
-):
-    
-
-    #1. 데이터를 배치로 잘라 모델에 통과시킴
-    #2. 결과 벡터와 원본 상품의 ID, Category를 매핑
-    #3. DB에 즉시 저장 (Upsert)
-
-    CoarseToFineItemTower.eval()
-    total_count = len(products)
-    print(f"총 {total_count}개의 상품 벡터 생성을 시작합니다.")
-
-    with torch.no_grad():
-        # 1. 배치 단위 루프
-        for i in range(0, total_count, batch_size):
-            # -------------------------------------------------------
-            # A. 데이터 준비 & 모델 Inference
-            # -------------------------------------------------------
-            batch_products = products[i : i + batch_size]
-            
-            # (이전 단계에서 만든 전처리 함수)
-            t_std, t_re = preprocess_batch_input(batch_products)
-            
-            # 모델 실행 -> (Batch_Size, 128)
-            batch_output = CoarseToFineItemTower(t_std, t_re)
-            
-            # CPU로 이동 및 Numpy 변환
-            batch_vectors = batch_output.cpu().numpy()
-
-            # -------------------------------------------------------
-            # B. ID 매핑 및 DB 객체 생성
-            # -------------------------------------------------------
-            # batch_products[k] 와 batch_vectors[k] 는 서로 같은 상품입니다.
-            
-            # DB 작업을 위한 딕셔너리 리스트 생성 (Bulk Insert용)
-            insert_data_list = []
-            
-            for product, vector in zip(batch_products, batch_vectors):
-                insert_data_list.append({
-                    "id": product.product_id,                  # PK
-                    "category": product.feature_data.clothes.category,      # 메타데이터 수정필요!!!!!!!!!!!!
-                    "vector_pre": vector.tolist(),     # numpy array -> list[float]
-                    # "vector_triplet": None           # 필요하다면 null 처리 or 생략
-                })
-
-            # -------------------------------------------------------
-            # C. DB 저장 (Upsert 처리)
-            # -------------------------------------------------------
-            if insert_data_list:
-                # PostgreSQL의 INSERT ... ON CONFLICT DO UPDATE 구문 사용
-                stmt = insert(Vectors).values(insert_data_list)
-                
-                # PK(id)가 이미 존재하면, vector_pre와 category를 업데이트한다.
-                upsert_stmt = stmt.on_conflict_do_update(
-                    index_elements=['id'],  # 충돌 기준 컬럼 (PK)
-                    set_={
-                        "vector_pre": stmt.excluded.vector_pre,
-                        "category": stmt.excluded.category
-                    }
-                )
-                
-                db.execute(upsert_stmt)
-                db.commit() # 배치 단위 커밋 (메모리 절약 및 트랜잭션 관리)
-                
-            print(f"Processing... {min(i + batch_size, total_count)} / {total_count}")
-
-    print("모든 벡터 저장 완료.")
-    
-'''

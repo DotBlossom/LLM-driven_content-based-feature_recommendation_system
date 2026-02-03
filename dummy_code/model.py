@@ -1,3 +1,4 @@
+'''
 from typing import Any, Dict, List, Tuple
 from fastapi import APIRouter
 from pydantic import BaseModel
@@ -309,20 +310,6 @@ class OptimizedItemTower(nn.Module):
 
 # x = F.normalize(x, p=2, dim=1) 실제 추론떄는 h쪽 model load하여 쓰자. (same d)
 
-'''
-
-구조: Encoder -> Embedding(h) -> MLP Layer(Projection Head) -> Output(z) -> Loss
-
-원리: z 공간에서는 Contrastive Loss에 의해 데이터가 구체 표면으로 찌그러지며 정보 손실
-반면 그 전 단계인 h는 데이터의 원본 정보를 상대적 보존
-
-학습할 때: Projection Head를 붙여서 z 값으로 Loss 계산.
-
-서빙할 때: Projection Head를 떼어버리고 h 값을 사용.
-
-효과: 이렇게 하면 Representation Quality가 10~15% 향상 data
-
-'''
 
 
     
@@ -692,3 +679,5 @@ class FinalUserTower(nn.Module):
         final_vector = self.final_projector(deep_feat)
         
         return final_vector
+        
+        '''
