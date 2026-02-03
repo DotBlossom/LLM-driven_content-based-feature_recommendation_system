@@ -13,6 +13,7 @@ from database import ProductInferenceInput, ProductInferenceVectors, UserSession
 #from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector #get_global_rec_service
 from item_tower import train_simcse_from_db
 from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
+from utils.inference_utils import generate_and_save_item_vectors
 import utils.vocab as vocab 
 import numpy as np
 # from model import ALL_FIELD_KEYS, CoarseToFineItemTower, FinalUserTower, OptimizedItemTower, SimCSEModelWrapper, load_pretrained_vectors_from_db
@@ -59,6 +60,24 @@ def train_item_tower(encoder: nn.Module = Depends(get_global_encoder),
             
     train_simcse_from_db(encoder, projector, db_session=db, batch_size=batch_size, epochs=epochs, lr = lr)
             
+
+
+
+
+@serving_controller_router.post("/bg/inference/refresh-item-vectors")
+async def refresh_vectors(background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
+    """
+    [관리자 기능] 현재 로드된 모델로 아이템 벡터를 새로 뽑아서 저장합니다.
+    오래 걸리는 작업이므로 백그라운드에서 실행합니다.
+    """
+    # 백그라운드 태스크로 등록 (응답은 바로 주고, 작업은 뒤에서 돎)
+    background_tasks.add_task(generate_and_save_item_vectors, db)
+    
+    return {"status": "accepted", "message": "Vector generation started in background."}
+
+
+
+
 '''
 
 def preprocess_batch_input(products: List[Any]) -> Tuple[torch.Tensor, torch.Tensor]:
