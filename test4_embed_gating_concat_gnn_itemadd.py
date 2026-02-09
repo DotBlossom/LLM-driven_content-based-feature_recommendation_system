@@ -394,7 +394,6 @@ class ParallelAdapter(nn.Module):
         )
 
     def forward(self, v_content, v_gnn):
-        # [수정] Content Embedding에 Residual Connection 추가 (+ v_content)
         # v_content(원본)가 Adapter를 통과한 결과와 더해짐 -> 원본 정보 보존
         merged = (self.content_proj(v_content) + v_content) + self.gnn_proj(v_gnn)
         return merged
@@ -420,7 +419,7 @@ class HybridUserTower(nn.Module):
             nn.Linear(256, 128), nn.LayerNorm(128)
         )
         
-        # [수정] ParallelAdapter 사용
+        # ParallelAdapter 사용
         self.seq_adapter = ParallelAdapter(
             content_dim=128, 
             gnn_dim=64, 
@@ -479,14 +478,13 @@ class HybridUserTower(nn.Module):
             v_gnn_seq = (v_gnn_seq * mask) / keep_prob
         
         # =========================================================
-        # [수정된 부분] 2. Dual-View Sequence (Parallel Adapter)
+        # 2. Dual-View Sequence (Parallel Adapter)
         # =========================================================
         # (1) 임베딩 꺼내기
         raw_content = self.item_content_emb(seq_ids) # (B, L, 128)
         raw_gnn = self.gnn_item_emb(seq_ids)         # (B, L, 64)
         
-        # (2) Adapter 통과 (인자 2개 전달!)
-        # 기존에는 cat으로 합쳐서 넣었지만, 이제는 따로 넣어야 합니다.
+        # (2) Adapter 통과 
         seq_input = self.seq_adapter(raw_content, raw_gnn) # <--- 여기가 수정됨!
         
         # (3) Time Embedding
@@ -593,7 +591,7 @@ def evaluate_recall_multi_k(model, processor, target_df_path, k_list=[20, 100, 5
     with torch.no_grad():
         all_item_ids = torch.arange(1, len(processor.item_ids)+1).to(DEVICE)
         
-        # 1. 배치 단위로 처리 (아이템이 많으면 OOM 날 수 있으므로)
+        # 1. 배치 단위로 처리 
         all_item_vecs_list = []
         chunk_size = 4096 # GPU 메모리에 맞춰 조절
         
