@@ -36,6 +36,12 @@ def get_db():
 
         db.close()
 
+# body
+class TrainingItem(BaseModel):
+    product_id: str
+    feature_data: Dict[str, Any] # DB에서 긁어온 Raw JSON
+    product_name: str            # Text Embedding용
+ 
 
 
 class Season(str, Enum):

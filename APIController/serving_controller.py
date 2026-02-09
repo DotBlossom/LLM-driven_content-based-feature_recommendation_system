@@ -1,17 +1,17 @@
 
 import logging
 import os
-from fastapi import BackgroundTasks, FastAPI, Depends, HTTPException, APIRouter
-from pydantic import BaseModel
+from fastapi import BackgroundTasks, FastAPI, Depends, HTTPException, APIRouter,status
+from pydantic import BaseModel, Field
 import torch.nn.functional as F
 import torch
 from torch.nn.utils.rnn import pad_sequence
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from database import ProductInferenceInput, ProductInferenceVectors, UserSession, get_db
 #from inference import RecommendationService
 #from train import UserTowerTrainDataset, train_final_user_tower, train_simcse_from_db #train_user_tower_task
 #from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector #get_global_rec_service
-from item_tower import train_simcse_from_db
+from item_tower import HybridItemTower, OptimizedItemTower, train_simcse_from_db
 from utils.dependencies import get_global_batch_size, get_global_encoder, get_global_projector
 from utils.inference_utils import generate_and_save_item_vectors
 import utils.vocab as vocab 
@@ -56,28 +56,128 @@ def train_item_tower(encoder: nn.Module = Depends(get_global_encoder),
                      db: Session = Depends(get_db),
                      batch_size: int = Depends(get_global_batch_size),
                      epochs: int = 5,
-                     lr: float = 1.5e-4):
+                     lr: float = 5e-5,
+                     checkpoint_path : str =None ):
             
-    train_simcse_from_db(encoder, projector, db_session=db, batch_size=batch_size, epochs=epochs, lr = lr)
-            
+    train_simcse_from_db(encoder, projector, db_session=db, batch_size=batch_size, epochs=epochs, lr = lr, checkpoint_path= checkpoint_path)
+'''
+class ItemTowerFineTuneRequest(BaseModel):
+    checkpoint_path: str = Field(..., description="Epoch 3 체크포인트 경로 (예: models/encoder_ep03...pth)")
+    epochs: int = Field(2, description="추가 학습 에포크 (기본 2)")
+    batch_size: int = Field(64, description="배치 사이즈")
+    lr: float = Field(5e-5, description="Fine-tuning 학습률 (기본 5e-5)")
+    dropout_prob: float = Field(0.2, description="Fine-tuning 드롭아웃 (기본 0.2)")
+    temperature: float = Field(0.08, description="Temperature (기본 0.08)")
 
-
-
-
-@serving_controller_router.post("/bg/inference/refresh-item-vectors")
-async def refresh_vectors(background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
+@serving_controller_router.post("/train/item-tower/finetune/sync")
+def start_item_tower_finetune_sync(
+    req: ItemTowerFineTuneRequest,
+    db: Session = Depends(get_db)  # DB 세션 주입
+):
     """
-    [관리자 기능] 현재 로드된 모델로 아이템 벡터를 새로 뽑아서 저장합니다.
-    오래 걸리는 작업이므로 백그라운드에서 실행합니다.
+    [동기 실행] Item Tower Fine-tuning
+    - 요청을 보내면 학습이 완료될 때까지 기다렸다가 응답을 반환합니다.
+    - 클라이언트 Timeout을 매우 길게 설정해야 합니다.
     """
-    # 백그라운드 태스크로 등록 (응답은 바로 주고, 작업은 뒤에서 돎)
-    background_tasks.add_task(generate_and_save_item_vectors, db)
     
-    return {"status": "accepted", "message": "Vector generation started in background."}
+    # 1. 체크포인트 파일 확인
+    if not os.path.exists(req.checkpoint_path):
+        raise HTTPException(status_code=404, detail=f"Checkpoint file not found: {req.checkpoint_path}")
 
+    print(f"⏳ [Sync] Fine-tuning requested. This may take a while...")
 
+    try:
+        # 이 파라미터들은 프로젝트 설정(config)에서 가져오거나 상수로 정의되어 있어야 합니다.
+        encoder = HybridItemTower(
+            std_vocab_size=STD_VOCAB_SIZE,
+            num_std_fields=NUM_STD_FIELDS,
+            embed_dim=EMBED_DIM,
+            output_dim=EMBED_DIM
+        )
+        projector = OptimizedItemTower(
+            input_dim=EMBED_DIM, 
+            output_dim=EMBED_DIM
+        )
+    # 3. 학습 함수 직접 호출 (여기서 시간이 오래 걸림)
+    try:
+        train_simcse_from_db(
+            encoder = Depends(get_global_encoder),
+            projector = Depends(get_global_projector),
+            db_session=db,              # 주입받은 세션 전달
+            batch_size=req.batch_size,
+            epochs=req.epochs,
+            lr=req.lr,
+            checkpoint_path=req.checkpoint_path,  # ✅ 체크포인트 로드
+            dropout_prob=req.dropout_prob,        # ✅ 드롭아웃 적용 (0.2)
+            temperature=req.temperature
+        )
+    except Exception as e:
+        print(f"❌ Training Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Training Failed: {str(e)}")
 
+    # 4. 완료 후 응답 반환
+    return {
+        "status": "success",
+        "message": "Fine-tuning completed successfully.",
+        "details": {
+            "resumed_from": req.checkpoint_path,
+            "trained_epochs": req.epochs,
+            "final_lr": req.lr,
+            "used_dropout": req.dropout_prob
+        }
+    }
 
+'''
+class VectorUpdateResponse(BaseModel):
+    status: str
+    message: str
+    saved_path_matrix: str
+    saved_path_ids: str
+    item_count: int
+    vector_shape: list
+@serving_controller_router.post("/bg/inference/refresh-item-vectors" ,response_model=VectorUpdateResponse)
+def update_item_vectors_api(
+    save_dir: str = "models",  # 저장 경로를 파라미터로 받을 수 있게 함
+    db: Session = Depends(get_db),
+    checkpoint_path : Optional[str] = None
+):
+    """
+    [관리자용] DB의 모든 아이템을 로드하여 Pre-trained Vector Matrix를 생성 및 갱신합니다.
+    - User Tower 학습 전에 반드시 수행되어야 합니다.
+    - 수행 시간이 오래 걸릴 수 있습니다. (대량 데이터 시 BackgroundTasks 권장)
+    """
+    try:
+        print(f"🔄 [API] Request received: Update item vectors in '{save_dir}'")
+        
+        # 1. 벡터 생성 함수 호출 (리팩토링된 함수)
+        # 반환값: (Tensor, List[str])
+        final_tensor, ordered_ids = generate_and_save_item_vectors(db, save_dir,checkpoint_path=checkpoint_path)
+        
+        if final_tensor is None:
+             raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Vector generation returned None. Check server logs."
+            )
+
+        # 2. 결과 응답 생성
+        tensor_path = os.path.join(save_dir, "pretrained_item_matrix.pt")
+        ids_path = os.path.join(save_dir, "item_ids.pt")
+
+        return VectorUpdateResponse(
+            status="success",
+            message="Item vectors successfully updated and aligned.",
+            saved_path_matrix=tensor_path,
+            saved_path_ids=ids_path,
+            item_count=len(ordered_ids),
+            vector_shape=list(final_tensor.shape)
+        )
+
+    except Exception as e:
+        print(f"❌ [API Error] {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to update vectors: {str(e)}"
+        )
 '''
 
 def preprocess_batch_input(products: List[Any]) -> Tuple[torch.Tensor, torch.Tensor]:

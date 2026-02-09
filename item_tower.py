@@ -11,7 +11,7 @@ import copy
 import random
 from tqdm import tqdm
 from torch.amp import autocast, GradScaler
-from database import ProductInferenceInput
+from database import ProductInferenceInput, TrainingItem
 from utils import vocab
 
 import os
@@ -29,6 +29,8 @@ UNK_ID = vocab.UNK_ID
 
 MODEL_DIR = "models"
 os.makedirs(MODEL_DIR, exist_ok=True)
+
+
 
 
 # ----------------------------------------------------------------------
@@ -275,7 +277,7 @@ class HybridItemTower(nn.Module):
         out = self.head(final_vec)
         self._debug_log(99, "Final Projection", {"Output": out})
         
-        return out
+        return F.normalize(out, p=2, dim=1)
     
 # (B) Projector: OptimizedItemTower for SimCSE
 class OptimizedItemTower(nn.Module):
@@ -317,10 +319,6 @@ class SimCSEModelWrapper(nn.Module):
 # 2. Data Structures & Dataset (Augmentation Logic)
 # ----------------------------------------------------------------------
 
-class TrainingItem(BaseModel):
-    product_id: str
-    feature_data: Dict[str, Any] # DB에서 긁어온 Raw JSON
-    product_name: str            # Text Embedding용
 
 class SimCSERecSysDataset(Dataset):
     def __init__(self, products: List[TrainingItem], dropout_prob: float):
@@ -600,6 +598,285 @@ class SimCSECollator:
 # ----------------------------------------------------------------------
 # 4. Training Loop Implementation
 # ----------------------------------------------------------------------
+def calculate_metrics(x, y, t=2):
+    """
+    x: 뷰 1의 임베딩 (L2 정규화 상태)
+    y: 뷰 2의 임베딩 (L2 정규화 상태, x와 같은 아이템의 다른 드롭아웃 버전)
+    t: Uniformity 계산 시 가중치 (보통 2 사용)
+    """
+    # 1. Alignment: Positive Pair 사이의 거리 (작을수록 좋음)
+    # 두 벡터가 완전히 같으면 0, 멀어질수록 커집니다.
+    alignment = (x - y).norm(p=2, dim=1).pow(2).mean()
+
+    # 2. Uniformity: 전체 벡터가 얼마나 퍼져 있는지 (작을수록 좋음 = 더 균일함)
+    # 가우시안 커널을 사용하여 모든 쌍 사이의 거리를 계산합니다.
+    # O(N^2) 연산이므로 메모리 보호를 위해 샘플링된 배치에서만 계산하는 것이 좋습니다.
+    all_embeddings = torch.cat([x, y], dim=0)
+    
+    # Pairwise Squared Euclidean Distance: ||a-b||^2 = ||a||^2 + ||b||^2 - 2*a*b
+    # 정규화 상태이므로 ||a||^2 = 1, ||b||^2 = 1 입니다.
+    dist_sq = 2 - 2 * torch.matmul(all_embeddings, all_embeddings.T)
+    
+    # 지수 함수를 씌워 평균을 내고 로그를 취함
+    uniformity = torch.pdist(all_embeddings, p=2).pow(2).mul(-t).exp().mean().log()
+
+    return alignment.item(), uniformity.item()
+
+
+'''
+
+import os
+import torch
+import torch.nn as nn
+from torch.optim import AdamW
+from torch.cuda.amp import GradScaler, autocast
+from torch.utils.data import DataLoader
+from sqlalchemy import select
+from tqdm import tqdm
+from transformers import get_linear_schedule_with_warmup
+
+# (가정) 필요한 클래스 및 함수들이 이미 import 되어 있다고 가정합니다.
+# from ... import SimCSEModelWrapper, SimCSERecSysDataset, SimCSECollator, TrainingItem, calculate_metrics
+
+def train_simcse_from_db(    
+    encoder: nn.Module,       
+    projector: nn.Module,
+    db_session, 
+    batch_size: int,
+    epochs: int,
+    lr: float,
+    checkpoint_path: str = None,  # [New] 체크포인트 경로 (없으면 None)
+    dropout_prob: float = 0.4,    # [New] 드롭아웃 확률 (기본 0.4, 파인튜닝 시 0.1~0.2 권장)
+    temperature: float = 0.08     # [New] 온도 파라미터 (기본 0.08)
+):
+    print(f"\n🚀 [Training Start] Configuration:")
+    print(f"   - Checkpoint: {checkpoint_path if checkpoint_path else 'None (New Training)'}")
+    print(f"   - Dropout: {dropout_prob}")
+    print(f"   - Learning Rate: {lr}")
+    print(f"   - Temperature: {temperature}")
+    print(f"   - Epochs: {epochs}")
+
+    # -------------------------------------------------------
+    # 0. DB 데이터 로드 (기존 로직 유지)
+    # -------------------------------------------------------
+    print("🚀 Fetching data from DB...")
+    stmt = select(
+        ProductInferenceInput.product_id, 
+        ProductInferenceInput.feature_data, 
+        ProductInferenceInput.product_name 
+    )
+    result = db_session.execute(stmt).mappings().all()
+
+    if not result:
+        print("❌ [Error] No data found in DB.")
+        return
+
+    products_list = []
+    
+    for row in result:
+        raw_feats = dict(row['feature_data'])
+        
+        if 'reinforced_feature' in raw_feats:
+            re_dict = raw_feats['reinforced_feature']
+            if isinstance(re_dict, dict):
+                for key, val in re_dict.items():
+                    if key.startswith("[") and key.endswith("]"):
+                        vocab_key = key
+                    else:
+                        vocab_key = f"[{key}]"
+                    raw_feats[vocab_key] = val
+                    
+        base_name = row['product_name']
+        product_type = raw_feats.get('product_type_name', "").strip()
+        
+        # Name Tagging Logic
+        if base_name:
+            if product_type:
+                final_name = f"{base_name} (Category: {product_type})"
+            else:
+                final_name = base_name
+        else:
+            appearance = raw_feats.get('graphical_appearance_name', "").strip()
+            final_name = f"{product_type} {appearance}".strip()
+            if not final_name:
+                final_name = "Unknown Product"
+                        
+        item = TrainingItem(
+            product_id=str(row['product_id']), 
+            feature_data=raw_feats, 
+            product_name=row['product_name'] if row['product_name'] else ""
+        )
+        products_list.append(item)
+    print(f"✅ Loaded {len(products_list)} items.")
+
+    # -------------------------------------------------------
+    # 1. Model Setup & Checkpoint Loading
+    # -------------------------------------------------------
+    # 모델 래핑
+    model = SimCSEModelWrapper(encoder, projector)
+
+    # [핵심] 체크포인트 로드 로직
+    if checkpoint_path:
+        if os.path.exists(checkpoint_path):
+            print(f"♻️ Loading Checkpoint from: {checkpoint_path}")
+            # CPU로 먼저 로드하여 매핑
+            state_dict = torch.load(checkpoint_path, map_location='cpu')
+            
+            # 우리가 저장한 것은 'encoder.state_dict()'이므로, 
+            # wrapper 모델의 'encoder' 부분에만 로드해야 함
+            try:
+                model.encoder.load_state_dict(state_dict)
+                print("✅ Encoder weights loaded successfully.")
+            except Exception as e:
+                print(f"⚠️ Warning: Failed to load strictly. Error: {e}")
+                # 혹시 키 불일치가 있다면 (유연한 로딩)
+                model.encoder.load_state_dict(state_dict, strict=False)
+        else:
+            print(f"❌ Checkpoint file not found: {checkpoint_path}")
+            return
+
+    model = model.to(DEVICE)
+    model.train()
+
+    # AMP Scaler
+    use_amp = (DEVICE == "cuda")
+    scaler = GradScaler(enabled=use_amp)
+    if use_amp:
+        print("⚡ [AMP] Mixed Precision Training Enabled.")     
+
+    # -------------------------------------------------------
+    # 2. Optimization
+    # -------------------------------------------------------
+    bert_params = []
+    other_params = []
+    
+    for name, param in model.named_parameters():
+        if not param.requires_grad:
+            continue 
+        if "bert_model" in name:
+            bert_params.append(param)
+        else:
+            other_params.append(param)
+    
+    optimizer = AdamW([
+        {'params': bert_params, 'lr': lr * 0.1}, # BERT는 보통 Main LR보다 작게 설정 (10분의 1)
+        {'params': other_params, 'lr': lr}
+    ])
+    
+    # -------------------------------------------------------
+    # 3. Dataset & DataLoader (Dropout 적용)
+    # -------------------------------------------------------
+    # [변경] 인자로 받은 dropout_prob 사용
+    dataset = SimCSERecSysDataset(products_list, dropout_prob=dropout_prob)
+    collator = SimCSECollator()
+    
+    dataloader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=True, 
+        collate_fn=collator,
+        drop_last=True,
+        num_workers=0
+    )
+
+    # 4. Scheduler
+    total_steps = len(dataloader) * epochs
+    scheduler = get_linear_schedule_with_warmup(
+        optimizer,
+        num_warmup_steps=int(total_steps * 0.1),
+        num_training_steps=total_steps
+    )
+
+    from torch.nn import CrossEntropyLoss
+    loss_func = CrossEntropyLoss()
+
+    # -------------------------------------------------------
+    # 5. Training Loop
+    # -------------------------------------------------------
+    print("🔥 Starting Training Loop...")
+    CHECK_INTERVAL = 50  
+    
+    # [수정] 루프 밖에서 초기화하여 set_postfix 에러 방지
+    align_val, uni_val = 0.0, 0.0
+
+    for epoch in range(epochs):
+        total_loss = 0
+        step = 0
+        
+        progress = tqdm(dataloader, desc=f"Epoch {epoch+1}/{epochs}")
+        
+        for inputs_v1, inputs_v2 in progress:
+            inputs_v1 = [t.to(DEVICE) for t in inputs_v1]
+            inputs_v2 = [t.to(DEVICE) for t in inputs_v2]
+            
+            optimizer.zero_grad()
+            
+            with autocast(device_type="cuda", dtype=torch.float16, enabled=use_amp):
+                # Forward
+                emb1 = model(*inputs_v1)
+                emb2 = model(*inputs_v2)
+                    
+                # Loss Calculation (인자로 받은 temperature 사용)
+                sim_matrix = torch.matmul(emb1, emb2.T) / temperature 
+                    
+                labels = torch.arange(emb1.size(0)).to(DEVICE)
+                loss_1 = loss_func(sim_matrix, labels) 
+                loss_2 = loss_func(sim_matrix.T, labels) 
+                    
+                loss = (loss_1 + loss_2) / 2
+                
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            scheduler.step()
+            
+            # 🌟 [Health Check Logic]
+            if step % CHECK_INTERVAL == 0:
+                with torch.no_grad():
+                    # calculate_metrics 함수가 있다고 가정
+                    # float32로 변환하여 정확도 확보
+                    cur_align, cur_uni = calculate_metrics(emb1.float(), emb2.float())
+                    align_val = cur_align # 외부 변수 업데이트
+                    uni_val = cur_uni     # 외부 변수 업데이트
+            
+            # [수정] 업데이트된 외부 변수를 사용하여 항상 표시
+            progress.set_postfix({
+                "loss": f"{loss.item():.4f}",
+                "align": f"{align_val:.4f}", 
+                "uni": f"{uni_val:.4f}"      
+            })
+                    
+            total_loss += loss.item()
+            step += 1
+
+        # Epoch End Summary
+        if step > 0:
+            avg_loss = total_loss / step
+            print(f"Epoch {epoch+1} Avg Loss: {avg_loss:.4f}")
+        else:
+            print(f"Epoch {epoch+1}: No batches processed.")
+            avg_loss = 0.0
+        
+        # 파일명에 dropout 정보 등 포함하면 관리하기 쉬움
+        ckpt_name = f"encoder_ep{epoch+1:02d}_loss{avg_loss:.4f}.pth"
+        if checkpoint_path: # 파인튜닝 중이었다면 표시
+             ckpt_name = f"ft_encoder_ep{epoch+1:02d}_loss{avg_loss:.4f}.pth"
+
+        save_path = os.path.join(MODEL_DIR, ckpt_name)
+        
+        # [중요] encoder만 저장 (기존과 동일)
+        torch.save(encoder.state_dict(), save_path)
+        print(f"✅ Saved Checkpoint: {ckpt_name}")
+        print("-" * 50)
+
+    print("Training Finished.")
+
+
+
+
+'''
+
+
 
 def train_simcse_from_db(    
     encoder: nn.Module,       
@@ -607,7 +884,8 @@ def train_simcse_from_db(
     db_session, # DB Session 객체 주입 필요
     batch_size: int,
     epochs: int,
-    lr: float
+    lr: float,
+    checkpoint_path: str = None,
 ):
     print("🚀 Fetching data from DB...")
     stmt = select(
@@ -682,6 +960,26 @@ def train_simcse_from_db(
     
     # 1. Model Setup
     model = SimCSEModelWrapper(encoder, projector).to(DEVICE)
+        # [핵심] 체크포인트 로드 로직
+    if checkpoint_path:
+        if os.path.exists(checkpoint_path):
+            print(f"♻️ Loading Checkpoint from: {checkpoint_path}")
+            # CPU로 먼저 로드하여 매핑
+            state_dict = torch.load(checkpoint_path, map_location='cpu')
+            
+            # 우리가 저장한 것은 'encoder.state_dict()'이므로, 
+            # wrapper 모델의 'encoder' 부분에만 로드해야 함
+            try:
+                model.encoder.load_state_dict(state_dict)
+                print("✅ Encoder weights loaded successfully.")
+            except Exception as e:
+                print(f"⚠️ Warning: Failed to load strictly. Error: {e}")
+                # 혹시 키 불일치가 있다면 (유연한 로딩)
+                model.encoder.load_state_dict(state_dict, strict=False)
+        else:
+            print(f"❌ Checkpoint file not found: {checkpoint_path}")
+            return
+    model = model.to(DEVICE)
     model.train()
     # 🛠️ [AMP] Scaler 초기화 (GPU 사용 시)
     use_amp = (DEVICE == "cuda")
@@ -712,12 +1010,13 @@ def train_simcse_from_db(
         },
         {
             'params': other_params, 
-            'lr': lr   
+            'lr': lr
+               
         }
     ])
     
     # 3. Dataset & DataLoader
-    dataset = SimCSERecSysDataset(products_list, dropout_prob=0.4)
+    dataset = SimCSERecSysDataset(products_list, dropout_prob=0.2)
     collator = SimCSECollator() # Initialize Tokenizer once
     
     dataloader = DataLoader(
@@ -743,7 +1042,9 @@ def train_simcse_from_db(
     loss_func = CrossEntropyLoss()
 
     print("🔥 Starting Training Loop...")
+    CHECK_INTERVAL = 50  # 100 스텝마다 지표 계산 및 출력
     
+    align_val, uni_val = 0.0, 0.0
     for epoch in range(epochs):
         total_loss = 0
         step = 0
@@ -765,7 +1066,7 @@ def train_simcse_from_db(
                 emb2 = model(*inputs_v2)
                     
                     # Loss Calculation
-                temperature = 0.05
+                temperature = 0.08
                 sim_matrix = torch.matmul(emb1, emb2.T) / temperature 
                     
                 labels = torch.arange(emb1.size(0)).to(DEVICE)
@@ -779,11 +1080,25 @@ def train_simcse_from_db(
             scaler.update()                # update scaler factor
                     
             scheduler.step()
+            
+            # 🌟 [Health Check Logic 추가]
+            if step % CHECK_INTERVAL == 0:
+            # Metric 계산 (검증 시에는 grad 계산 제외)
+                with torch.no_grad():
+                    align, uni = calculate_metrics(emb1.float(), emb2.float())
+            
+                # tqdm 상태창 업데이트 (Loss와 함께 표시)
+            progress.set_postfix({
+                "loss": f"{loss.item():.4f}",
+                "align": f"{align:.4f}",  # 0에 가까울수록 좋음
+                "uni": f"{uni:.4f}"       # 낮을수록(음수값이 클수록) 잘 퍼져 있음
+            })
+
                     
             total_loss += loss.item()
             step += 1
-            progress.set_postfix({"loss": f"{loss.item():.4f}"})
-                
+
+
         if step > 0:
             avg_loss = total_loss / step
             print(f"Epoch {epoch+1} Avg Loss: {avg_loss:.4f}")
