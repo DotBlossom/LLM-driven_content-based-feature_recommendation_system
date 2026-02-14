@@ -10,3 +10,7 @@ user_map.json
 localprops/results/
 localprops/split_files/
 models/
+test.txt
+localprops/
+image/
+dummy_code/
