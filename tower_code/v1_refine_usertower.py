@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
+from tqdm import tqdm
 
 
 
@@ -121,7 +122,7 @@ class FeatureProcessor:
         return torch.tensor(full_log_q, dtype=torch.float32).to(device)
     
 class SASRecDataset(Dataset):
-    def __init__(self, processor: FeatureProcessor, max_len=50, is_train=True):
+    def __init__(self, processor: FeatureProcessor, max_len=30, is_train=True):
         self.processor = processor
         self.max_len = max_len
         self.is_train = is_train
@@ -333,10 +334,9 @@ class SASRecUserTower(nn.Module):
         elif isinstance(module, nn.LayerNorm):
             nn.init.constant_(module.bias, 0)
             nn.init.constant_(module.weight, 1.0)
-
     def get_causal_mask(self, seq_len, device):
-        return torch.triu(torch.ones(seq_len, seq_len, device=device) * float('-inf'), diagonal=1)
-
+        # float('-inf') 대신 dtype=torch.bool을 사용하여 True/False 행렬로 생성
+        return torch.triu(torch.ones(seq_len, seq_len, device=device, dtype=torch.bool), diagonal=1)
     
     def forward(self, 
                 # Sequence Inputs (Batch, Seq)
@@ -433,95 +433,101 @@ class SASRecUserTower(nn.Module):
 # ==========================================
 # 1. Loss Functions (Flatten 지원 수정)
 # ==========================================
-def efficient_corrected_logq_loss(user_emb, item_tower_emb, target_ids, log_q_tensor, temperature=0.1, lambda_logq=1.0):
+# ==========================================
+# 1. Loss Functions (In-Batch Negative + LogQ)
+# ==========================================
+def inbatch_corrected_logq_loss(user_emb, item_tower_emb, target_ids, log_q_tensor, temperature=0.1, lambda_logq=1.0):
     """
-    LogQ 보정이 적용된 효율적인 CrossEntropy Loss
+    In-Batch Negative Sampling과 LogQ 보정이 적용된 효율적인 CrossEntropy Loss
     
     Args:
-        user_emb: (N, Dim) - Batch 단위 유저 벡터 (인텐트 + 프로필)
+        user_emb: (N, Dim) - Batch 단위 유저 벡터 (Flatten 적용됨)
         item_tower_emb: (Num_Items, Dim) - 전체 아이템 임베딩
-        target_ids: (N, ) - 정답 아이템 ID
-        log_q_tensor: (Num_Items, ) - 각 아이템의 등장 확률(Popularity)에 대한 Log 값
-        temperature: (float) - Softmax Temperature 스케일링 값
-        lambda_logq: (float) - 편향 제어 강도 (이론적 최적값은 1.0)
+        target_ids: (N, ) - 정답 아이템 ID (Flatten 적용됨)
+        log_q_tensor: (Num_Items, ) - 전체 아이템의 등장 확률(Log)
+        temperature: (float) - Softmax Temperature
+        lambda_logq: (float) - 편향 제어 강도 (보통 1.0)
     """
-    # 1. Logits 계산 (N, Num_Items)
-    logits = torch.matmul(user_emb, item_tower_emb.T)
+    N = user_emb.size(0)
+    
+    # 1. 배치 내 등장한 정답 아이템들의 임베딩만 추출 (N, Dim)
+    # 전체 47,062개가 아닌 배치 내 N개만 사용하여 메모리를 극도로 절약합니다.
+    batch_item_emb = item_tower_emb[target_ids]
+    
+    # 2. In-Batch Logits 계산 (N, N)
+    # i번째 유저 벡터와 j번째 아이템 벡터의 내적 (대각선 원소가 정답)
+    logits = torch.matmul(user_emb, batch_item_emb.T)
     logits.div_(temperature)
 
+    # 3. LogQ 편향 보정 (Sampling Bias Correction)
     if lambda_logq > 0.0:
-        # 2. 모든 아이템에 대해 LogQ 페널티 일괄 적용 (Broadcasting)
-        # log_q_tensor를 (1, Num_Items)로 펼쳐서 뺌
-        logits = logits - (log_q_tensor.view(1, -1) * lambda_logq)
+        # 배치 내 등장한 아이템들의 LogQ 값 추출 (N,)
+        batch_log_q = log_q_tensor[target_ids]
         
-        # 3.정답 아이템(Positive)에 대해서는 페널티 복구
-        # target_ids에 해당하는 위치의 LogQ 값을 다시 더해주어 정답이 손해 보지 않게 함
-        batch_indices = torch.arange(logits.size(0), device=logits.device)
-        target_log_q = log_q_tensor[target_ids]
-        logits[batch_indices, target_ids] += (target_log_q * lambda_logq)
+        # Google RecSys 논문 수식: s^c(x, y) = s(x, y) - log(P(y))
+        # 정답이든 오답이든 해당 아이템의 인기도(LogQ)만큼 로짓을 깎아줌
+        # Broadcasting: (N, N) 행렬의 각 열(Column)에서 해당 아이템의 LogQ를 뺌
+        logits = logits - (batch_log_q.view(1, -1) * lambda_logq)
 
-    # 4. Label을 이용한 최종 CrossEntropyLoss 계산
-    return F.cross_entropy(logits, target_ids)
+    # 4. 정답 Label 생성 (대각선 인덱스: 0, 1, 2, ..., N-1)
+    # i번째 유저의 정답은 배치 내 i번째 아이템임
+    labels = torch.arange(N, device=user_emb.device)
+    
+    # 5. 최종 CrossEntropyLoss 계산
+    return F.cross_entropy(logits, labels)
+
 
 def duorec_loss_refined(user_emb_1, user_emb_2, target_ids, temperature=0.1, lambda_sup=0.1):
     """
-    Supervised Contrastive Learning (SupCon)이 적용된 DuoRec Loss
-    
-    Args:
-        user_emb_1: (Batch, Dim) - 유저 벡터 (뷰 1)
-        user_emb_2: (Batch, Dim) - 유저 벡터 (뷰 2, ex: Dropout 다르게 적용)
-        target_ids: (Batch, ) - 마지막 시점의 정답 아이템 (Next Item)
+    Supervised Contrastive Learning (SupCon) + NaN 방지 및 패딩 처리 완료
     """
     batch_size = user_emb_1.size(0)
     device = user_emb_1.device
     
-    # 1. 벡터 정규화 (L2 Normalization)
+    # 1. 벡터 정규화
     z_i = F.normalize(user_emb_1, dim=1)
     z_j = F.normalize(user_emb_2, dim=1)
     
-    # 2. Unsupervised Loss (Self-Augmentation)
-    # 동일 유저의 다른 뷰(z_i, z_j)끼리 당기기
+    # 2. Unsupervised Loss (InfoNCE)
     logits_unsup = torch.matmul(z_i, z_j.T) / temperature
     labels = torch.arange(batch_size, device=device)
     loss_unsup = F.cross_entropy(logits_unsup, labels)
     
-    # 3. Supervised Loss (Target-Aware)
+    # 3. Supervised Loss
     loss_sup = torch.tensor(0.0, device=device)
     
     if lambda_sup > 0:
         targets = target_ids.view(-1, 1)
         
-        # 같은 타겟을 공유하는 유저를 찾는 Mask (Batch, Batch)
+        # 같은 타겟을 공유하는 유저 Mask (Batch, Batch)
         mask = torch.eq(targets, targets.T).float()
         
-        # 자기 자신과의 매칭은 Positive에서 제외 (대각선 0)
+        # [Fix 1: Padding 오인 방지] 타겟이 0(Padding)인 유저들은 전부 마스크 0으로 초기화
+        pad_mask = (targets == 0).float()
+        mask = mask * (1 - pad_mask) 
+        
+        # 자기 자신 제외
         mask.fill_diagonal_(0)
         
-        # 타겟을 공유하는 다른 유저가 배치 내에 1명이라도 존재할 경우에만 계산
         if mask.sum() > 0:
-            # z_i 끼리의 유사도 행렬 계산
             logits_sup = torch.matmul(z_i, z_i.T) / temperature
-            
-            # Numerical Stability 위해 행별 Max 값 빼기
-            logits_max, _ = torch.max(logits_sup, dim=1, keepdim=True)
-            logits_sup = logits_sup - logits_max.detach()
-            
-            # 분모(Softmax)에서 자기 자신을 완벽히 배제
-            # 대각선을 -inf로 마스킹하여 exp(-inf) = 0이 되도록 함
             diag_mask = torch.eye(batch_size, device=device).bool()
+            
+            # 대각선을 -inf로 마스킹 (자기 자신 제외)
             logits_sup.masked_fill_(diag_mask, float('-inf'))
             
-            # Log-Softmax 계산
+            # Log Softmax 계산
             log_prob = F.log_softmax(logits_sup, dim=1)
             
-            # Positive Sample이 존재하는 유저(Row)만 필터링
+            # [Fix 2: NaN 폭탄 방지] 대각선의 -inf가 mask(0)와 곱해져 NaN이 되는 것을 막기 위해 0.0으로 덮어씀
+            log_prob = log_prob.masked_fill(diag_mask, 0.0)
+            
+            # Positive Sample이 존재하는 유저만 필터링
             valid_rows = mask.sum(1) > 0
             if valid_rows.sum() > 0:
-                # 당겨야 할 대상(mask == 1)에 대해서만 log_prob을 추출하여 평균
                 loss_sup_batch = -(mask[valid_rows] * log_prob[valid_rows]).sum(1) / mask[valid_rows].sum(1)
                 loss_sup = loss_sup_batch.mean()
                 
-    # 최종 Loss 반환
     return loss_unsup + (lambda_sup * loss_sup)
 
 # ==========================================
@@ -628,7 +634,7 @@ def train_model(dataloader, item_tower, args):
             flat_output = output_1.view(-1, args.d_model)[valid_mask]
             flat_targets = target_ids.view(-1)[valid_mask]
             
-            main_loss = efficient_corrected_logq_loss(
+            main_loss = inbatch_corrected_logq_loss(
                 user_emb=flat_output,
                 item_tower_emb=full_item_embeddings,
                 target_ids=flat_targets,
@@ -812,7 +818,7 @@ def create_dataloaders(processor, cfg: PipelineConfig, aligned_pretrained_vecs=N
         train_dataset, 
         batch_size=cfg.batch_size, 
         shuffle=True, 
-        num_workers=4, 
+        num_workers=0, 
         pin_memory=True,
         drop_last=True
     )
@@ -889,40 +895,34 @@ class DummyItemTower(nn.Module):
     def get_log_q(self): return self.log_q
 
 def setup_models(cfg: PipelineConfig, device):
-    """User Tower 초기화 및 Item Tower 로드"""
+    """User Tower 초기"""
     print("\n🧠 [Phase 4] Initializing Models...")
     
     user_tower = SASRecUserTower(cfg).to(device)
     
-    # model -> pth load 필요
-    item_tower = DummyItemTower(cfg.num_items, cfg.d_model).to(device)
-    item_tower.eval()
-    
+
+
     print("✅ Models initialized and moved to device.")
-    return user_tower, item_tower
+    return user_tower
 
 # =====================================================================
 # Phase 5: Training Loop (1 Epoch Runner)
 # =====================================================================
-def train_one_epoch(epoch, model, item_tower, dataloader, optimizer, scaler, cfg, device):
-    """단일 에포크 훈련 함수 (MLflow 로깅 포인트)"""
+def train_one_epoch(epoch, model, full_item_embeddings, log_q_tensor, dataloader, optimizer, scaler, cfg, device):
+    """단일 에포크 훈련 함수 (실제 Loss 계산 및 로그 모니터링 적용)"""
     model.train()
     total_loss_accum = 0.0
+    main_loss_accum = 0.0
+    cl_loss_accum = 0.0
     
-    with torch.no_grad():
-        full_item_embeddings = item_tower.get_all_embeddings()
-        log_q_tensor = item_tower.get_log_q()
-
-    for batch_idx, batch in enumerate(dataloader):
-        optimizer.zero_grad()
         
+    pbar = tqdm(dataloader, desc=f"Epoch {epoch}", leave=False)
+    for batch_idx, batch in enumerate(pbar):
+        optimizer.zero_grad()
 
         # -------------------------------------------------------
         # 1. Data Unpacking (Dictionary to Device)
         # -------------------------------------------------------
-        # Dataset이 Dictionary를 반환하므로 키값을 통해 안전하게 접근
-
-            
         item_ids = batch['item_ids'].to(device)
         target_ids = batch['target_ids'].to(device)
         padding_mask = batch['padding_mask'].to(device)
@@ -945,71 +945,135 @@ def train_one_epoch(epoch, model, item_tower, dataloader, optimizer, scaler, cfg
         active_ids = batch['active_ids'].to(device)
         
         cont_feats = batch['cont_feats'].to(device)
+        
+        # Pretrained Vector 룩업 처리
         if 'pretrained_vecs' in batch:
             pretrained_vecs = batch['pretrained_vecs'].to(device)
         else:
-            # CPU에 있는 lookup 테이블에서 (Batch, Seq, Dim) 만큼 슬라이싱하여 Device로 이동
             pretrained_vecs = dataloader.dataset.pretrained_lookup[item_ids.cpu()].to(device)
-        
- 
-        # 기타 피처들 (코드 간소화를 위해 주요 피처만 표시)
-        type_ids = batch['type_ids'].to(device)
+            
         forward_kwargs = {
-                'pretrained_vecs': pretrained_vecs,
-                'item_ids': item_ids,
-                'time_bucket_ids': time_bucket_ids,
-                'type_ids': type_ids,
-                'color_ids': color_ids,
-                'graphic_ids': graphic_ids,
-                'section_ids': section_ids,
-                'age_bucket': age_bucket,
-                'price_bucket': price_bucket,
-                'cnt_bucket': cnt_bucket,
-                'recency_bucket': recency_bucket,
-                'channel_ids': channel_ids,
-                'club_status_ids': club_status_ids,
-                'news_freq_ids': news_freq_ids,
-                'fn_ids': fn_ids,
-                'active_ids': active_ids,
-                'cont_feats': cont_feats,
-                'padding_mask': padding_mask,
-                'training_mode': True
-            }
+            'pretrained_vecs': pretrained_vecs,
+            'item_ids': item_ids,
+            'time_bucket_ids': time_bucket_ids,
+            'type_ids': type_ids,
+            'color_ids': color_ids,
+            'graphic_ids': graphic_ids,
+            'section_ids': section_ids,
+            'age_bucket': age_bucket,
+            'price_bucket': price_bucket,
+            'cnt_bucket': cnt_bucket,
+            'recency_bucket': recency_bucket,
+            'channel_ids': channel_ids,
+            'club_status_ids': club_status_ids,
+            'news_freq_ids': news_freq_ids,
+            'fn_ids': fn_ids,
+            'active_ids': active_ids,
+            'cont_feats': cont_feats,
+            'padding_mask': padding_mask,
+            'training_mode': True
+        }
 
-        # 2. Forward & Loss 
+        # =======================================================
+        # [모니터링 로그] 첫 배치에서만 데이터 상태 점검
+        # =======================================================
         if batch_idx == 0:
             print(f"\n📦 [Batch 0 Monitor]")
             print(f"   - Item IDs: Shape {item_ids.shape} | Min {item_ids.min()} | Max {item_ids.max()}")
             print(f"   - Time Buckets: Min {time_bucket_ids.min()} | Max {time_bucket_ids.max()}")
-            
-            # 패딩 마스크 비율 확인 (데이터가 너무 비어있지 않은지)
             pad_ratio = (padding_mask.sum().item() / padding_mask.numel()) * 100
             print(f"   - Padding Ratio: {pad_ratio:.1f}%")
-
-            # 연속형 변수 정규화 상태 확인
             print(f"   - Cont Feats Mean: {cont_feats.mean().item():.3f} | Std: {cont_feats.std().item():.3f}")
+            
+            print("\n🎯 [First User Data State Check]")
+            print("-" * 50)
+            print(f"👤 [User Profile]")
+            print(f"   - Age Bucket ID:    {age_bucket[0].item()} (Target Age Group)")
+            print(f"   - Price Bucket ID:  {price_bucket[0].item()} (Spending Power)")
+            print(f"   - News Freq ID:     {news_freq_ids[0].item()} (Marketing Sensitivity)")
+            
+            valid_indices = torch.where(~padding_mask[0])[0]
+            if len(valid_indices) > 0:
+                print(f"\n🛍️ [Item History - Last 3 Items]")
+                sample_indices = valid_indices[-3:] 
+                sample_types = type_ids[0][sample_indices].tolist()
+                sample_times = time_bucket_ids[0][sample_indices].tolist()
+                for i, (t_id, time_id) in enumerate(zip(sample_types, sample_times)):
+                    print(f"   - Item {i+1}: Type Hash ID [{t_id}] | Time Bucket ID [{time_id}]")
+            else:
+                print("\n⚠️ [Warning] This user has NO valid sequence (All Padded).")
+            print("-" * 50)
+
+        # -------------------------------------------------------
+        # 2. Forward & Real Loss Calculation (AMP)
+        # -------------------------------------------------------
         with torch.amp.autocast(device_type='cuda', dtype=torch.float16, enabled=True):
+            # A. First View
             output_1 = model(**forward_kwargs)
+            # B. Second View (Dropout 마스크가 달라짐)
+            output_2 = model(**forward_kwargs)
+
+            # (1) Main Loss (All Time Steps)
+            valid_mask = ~padding_mask.view(-1)
+            flat_output = output_1.view(-1, cfg.d_model)[valid_mask]
+            flat_targets = target_ids.view(-1)[valid_mask]
             
-            # 아무거나
-            total_loss = output_1.mean()
             
-        # 3. Backward
+
+            main_loss = inbatch_corrected_logq_loss(
+                user_emb=flat_output,
+                item_tower_emb=full_item_embeddings,
+                target_ids=flat_targets,
+                log_q_tensor=log_q_tensor,
+                lambda_logq=cfg.lambda_logq
+            )
+            
+            # (2) DuoRec Loss (Last Time Step Only)
+            last_output_1 = output_1[:, -1, :] 
+            last_output_2 = output_2[:, -1, :]
+            last_targets = target_ids[:, -1]
+
+            cl_loss = duorec_loss_refined(
+                user_emb_1=last_output_1,
+                user_emb_2=last_output_2,
+                target_ids=last_targets,
+                lambda_sup=cfg.lambda_sup
+            )
+
+            # 최종 Loss 조합
+            total_loss = main_loss + (cfg.lambda_cl * cl_loss)
+
+        # -------------------------------------------------------
+        # 3. Backward & Optimizer Step
+        # -------------------------------------------------------
         scaler.scale(total_loss).backward()
         scaler.unscale_(optimizer)
+        # 기울기 폭발 방지를 위한 정규화 (5.0은 트랜스포머에서 많이 쓰이는 여유있는 값)
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=5.0)
         scaler.step(optimizer)
         scaler.update()
 
+        # 누적
         total_loss_accum += total_loss.item()
+        main_loss_accum += main_loss.item()
+        cl_loss_accum += cl_loss.item()
         
+        pbar.set_postfix({
+            'Loss': f"{total_loss.item():.4f}",
+            'Main': f"{main_loss.item():.4f}",
+            'CL': f"{cl_loss.item():.4f}"
+        })
+        
+        # 100배치마다 로깅
         if batch_idx % 100 == 0:
-            print(f"   [Epoch {epoch}] Batch {batch_idx}/{len(dataloader)} | Loss: {total_loss.item():.4f}")
+            print(f"   [Epoch {epoch}] Batch {batch_idx:04d}/{len(dataloader)} | Total Loss: {total_loss.item():.4f} (Main: {main_loss.item():.4f}, CL: {cl_loss.item():.4f})")
 
     avg_loss = total_loss_accum / len(dataloader)
-    print(f"🏁 Epoch {epoch} Completed | Avg Loss: {avg_loss:.4f}")
+    avg_main = main_loss_accum / len(dataloader)
+    avg_cl = cl_loss_accum / len(dataloader)
+    
+    print(f"🏁 Epoch {epoch} Completed | Avg Total: {avg_loss:.4f} (Main: {avg_main:.4f}, CL: {avg_cl:.4f})")
     return avg_loss
-
 # =====================================================================
 # Main Execution Pipeline
 # =====================================================================
@@ -1032,14 +1096,17 @@ def run_pipeline():
 
     aligned_vecs = load_aligned_pretrained_embeddings(processor, cfg.model_dir, cfg.pretrained_dim)
     
+    full_item_embeddings = aligned_vecs.to(device)
+    log_q_tensor = processor.get_logq_probs(device)
+    
+    
     item_metadata_tensor = load_item_metadata_hashed(processor, cfg.base_dir, hash_size=HASH_SIZE)
     processor.i_side_arr = item_metadata_tensor.numpy()
-    
     train_loader = create_dataloaders(processor, cfg, aligned_vecs)
     dataset_peek(train_loader.dataset, processor)
     
     # 3. Models & Optimizer
-    user_tower, item_tower = setup_models(cfg, device)
+    user_tower = setup_models(cfg, device)
     optimizer = torch.optim.AdamW(user_tower.parameters(), lr=cfg.lr, weight_decay=cfg.weight_decay)
     scaler = torch.amp.GradScaler('cuda', enabled=(device.type == 'cuda'))
     
@@ -1049,7 +1116,9 @@ def run_pipeline():
         avg_loss = train_one_epoch(
             epoch=epoch,
             model=user_tower,
-            item_tower=item_tower,
+            full_item_embeddings=full_item_embeddings,
+            log_q_tensor=log_q_tensor,
+
             dataloader=train_loader,
             optimizer=optimizer,
             scaler=scaler,
