@@ -61,7 +61,7 @@ class SEResidualBlock(nn.Module):
             nn.Linear(dim // 4, dim),
             nn.Sigmoid()
         )
-        self.act = nn.GELU()
+        # self.act = nn.GELU()
     
     def forward(self, x):
         residual = x
@@ -72,7 +72,7 @@ class SEResidualBlock(nn.Module):
         weight = self.se_block(out)
         out = out * weight
         
-        return self.act(residual + out)
+        return residual + out  
 
 class DeepResidualHead(nn.Module):
 
@@ -140,6 +140,10 @@ class HybridItemTower(nn.Module):
         self.std_embedding = nn.Embedding(std_vocab_size, embed_dim, padding_idx=PAD_ID)
         self.std_field_emb = nn.Parameter(torch.randn(1, num_std_fields, embed_dim))
 
+        # A-a. 공변량 컨트롤
+        self.std_ln = nn.LayerNorm(embed_dim)
+        self.re_ln = nn.LayerNorm(embed_dim)
+        
         # B. Fashion-BERT Setup
         print(f"Loading {FASHION_BERT_MODEL} ...")
         self.bert_config = AutoConfig.from_pretrained(FASHION_BERT_MODEL)
@@ -234,7 +238,8 @@ class HybridItemTower(nn.Module):
         # 1. STD
         std_emb = self.std_embedding(std_input) 
         std_emb = std_emb + self.std_field_emb  
-
+        std_emb = self.std_ln(std_emb)
+        
         self._debug_log(1, "STD Embedding", {"std_emb": std_emb})
 
 
@@ -253,6 +258,7 @@ class HybridItemTower(nn.Module):
         
         re_vectors = re_vectors.view(B, 9, -1) 
         re_vectors = re_vectors + self.re_field_position
+        re_vectors = self.re_ln(re_vectors)
         
         # [Log] Stage 2: RE Encoding
         self._debug_log(2, "RE Process", {

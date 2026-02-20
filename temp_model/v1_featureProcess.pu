@@ -1,0 +1,106 @@
+import numpy as np
+import pandas as pd
+import gc
+
+# ==========================================
+# 3. User Features (Enhanced)
+# ==========================================
+def make_user_features(train_df):
+    print("\n👤 [User Stats] Calculating Enhanced Features...")
+
+    # ---------------------------------------
+    # 1. Basic Interaction Stats (기존 강화)
+    # ---------------------------------------
+    # 전처리: 날짜 요일 파악 (0:월 ~ 6:일)
+    train_df['day_of_week'] = train_df['t_dat'].dt.dayofweek
+    train_df['is_weekend'] = (train_df['day_of_week'] >= 5).astype(np.int8)
+    
+    # Month 정보 (YYYY-MM)
+    train_df['month_id'] = train_df['t_dat'].dt.to_period('M')
+
+    # Aggregation
+    user_agg = train_df.groupby('customer_id').agg({
+        'price': ['mean', 'std', 'last'],  # 평균, 표준편차, 마지막 구매가
+        'article_id': ['count', 'nunique'], # 총 구매수, 고유 아이템 수
+        't_dat': 'max',                     # 마지막 구매일
+        'sales_channel_id': 'mean',         # 채널 선호도
+        'is_weekend': 'mean',               # 주말 구매 비율
+        'month_id': 'nunique'               # 활동한 달의 수 (Loyalty)
+    })
+    
+    # 컬럼 이름 Flat하게 변경
+    user_agg.columns = [
+        'user_avg_price', 'price_std', 'last_price',
+        'total_cnt', 'unique_item_cnt',
+        'last_purchase_date', 'channel_avg', 
+        'weekend_ratio', 'active_months'
+    ]
+    user_agg = user_agg.reset_index()
+
+    # ---------------------------------------
+    # 2. Derived Features (Log & Ratio)
+    # ---------------------------------------
+    print("   ⚙️ Generating Derived Features...")
+    
+    # (1) Price Related
+    # 가격 분산이 0인 경우(한 번 구매 등) 대비 fillna(0)
+    user_agg['price_std'] = user_agg['price_std'].fillna(0).astype(np.float32)
+    user_agg['user_avg_price_log'] = np.log1p(user_agg['user_avg_price']).astype(np.float32)
+    user_agg['price_std_log'] = np.log1p(user_agg['price_std']).astype(np.float32)
+    
+    # 최근 구매가와 평균 구매가의 차이 (최근 소비 수준 변화)
+    user_agg['last_price_diff'] = (user_agg['last_price'] - user_agg['user_avg_price']).astype(np.float32)
+
+    # (2) Activity Related
+    user_agg['total_cnt_log'] = np.log1p(user_agg['total_cnt']).astype(np.float32)
+    
+    # Repurchase Ratio: (1 - 고유아이템/총구매) -> 높을수록 재구매 성향 강함
+    # total_cnt가 0일 수 없지만 안전장치
+    user_agg['repurchase_ratio'] = (1.0 - (user_agg['unique_item_cnt'] / user_agg['total_cnt'])).astype(np.float32)
+    
+    # Recency
+    max_date = train_df['t_dat'].max()
+    user_agg['recency_days'] = (max_date - user_agg['last_purchase_date']).dt.days
+    user_agg['recency_log'] = np.log1p(user_agg['recency_days']).astype(np.float32)
+
+    # (3) Preference Related
+    # 1.5 기준: 1(온라인), 2(오프라인) 가정 시 평균이 1.5 초과면 오프라인 선호
+    user_agg['preferred_channel'] = np.where(user_agg['channel_avg'] > 1.5, 2, 1).astype(np.int8)
+    
+    # weekend_ratio는 이미 0~1 사이 값 (float32)
+    user_agg['weekend_ratio'] = user_agg['weekend_ratio'].astype(np.float32)
+    user_agg['active_months'] = user_agg['active_months'].astype(np.int16) # 개월 수는 작으므로 int16
+
+    # ---------------------------------------
+    # 3. Dummy Metadata (요청사항)
+    # ---------------------------------------
+    print("   🎭 Injecting Dummy Metadata...")
+    
+    num_users = len(user_agg)
+    
+    # Age Group: 0~6 (10대~70대 가정, 0은 결측치)
+    # 실제로는 customers.csv를 merge 해야 함
+    user_agg['age_group_dummy'] = np.random.randint(1, 7, size=num_users).astype(np.int8)
+    
+    # Gender: 0, 1 (여성/남성 가정)
+    user_agg['gender_dummy'] = np.random.randint(0, 2, size=num_users).astype(np.int8)
+
+    # ---------------------------------------
+    # 4. Final Selection & Save
+    # ---------------------------------------
+    final_cols = [
+        'customer_id', 
+        # --- Continuous (Normalize 필요) ---
+        'user_avg_price_log', 'price_std_log', 'last_price_diff',
+        'total_cnt_log', 'recency_log', 'repurchase_ratio', 'weekend_ratio',
+        # --- Categorical / Ordinal (Embedding 필요) ---
+        'preferred_channel', 'active_months', 
+        'age_group_dummy', 'gender_dummy'
+    ]
+    
+    final_df = user_agg[final_cols].fillna(0)
+    
+    print(f"   ✅ Final User Features Shape: {final_df.shape}")
+    save_dataframe(final_df, USER_FEAT_PATH_PQ, USER_FEAT_PATH_JS)
+    
+    return final_df

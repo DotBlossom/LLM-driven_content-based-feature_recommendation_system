@@ -27,14 +27,15 @@ path_case = {
 }
 # f'path_case["valid"][0].parquet'
 # Output Paths
-USER_FEAT_PATH_PQ = os.path.join(BASE_DIR, "features_user.parquet")
-USER_FEAT_PATH_JS = os.path.join(BASE_DIR, "features_user.json")
+USER_FEAT_PATH_PQ = os.path.join(BASE_DIR, "features_user_w_meta.parquet")
+USER_FEAT_PATH_JS = os.path.join(BASE_DIR, "features_user_w_meta.json")
 ITEM_FEAT_PATH_PQ = os.path.join(BASE_DIR, "features_item.parquet")
 ITEM_FEAT_PATH_JS = os.path.join(BASE_DIR, "features_item.json")
 SEQ_DATA_PATH_PQ = os.path.join(BASE_DIR, "features_sequence.parquet")
 SEQ_DATA_PATH_JS = os.path.join(BASE_DIR, "features_sequence.json")
 WEEKLY_HISTORY_PATH = os.path.join(BASE_DIR, "history_weekly_sales.parquet")
 MONTHLY_HISTORY_PATH = os.path.join(BASE_DIR, "history_monthly_sales.parquet")
+USER_META_PATH = os.path.join(BASE_DIR, "customers.csv")
 
 # Date Config
 TRAIN_START_DATE = pd.to_datetime("2019-09-23")
@@ -235,7 +236,7 @@ def make_item_features(train_df):
     
     save_dataframe(final_df, ITEM_FEAT_PATH_PQ, ITEM_FEAT_PATH_JS)
     return final_df
-
+'''
 # ==========================================
 # 3. User Features (Cleaned)
 # ==========================================
@@ -267,6 +268,123 @@ def make_user_features(train_df):
     save_dataframe(final_df, USER_FEAT_PATH_PQ, USER_FEAT_PATH_JS)
     return final_df
 
+'''
+import os
+import gc
+import numpy as np
+import pandas as pd
+
+def make_user_features(train_df):
+    print("\n👤 [User Stats] Calculating Enhanced Features (with Bucketing & Scaling)...")
+
+    # ==========================================
+    # 1. Basic Interaction Stats
+    # ==========================================
+    train_df['day_of_week'] = train_df['t_dat'].dt.dayofweek
+    train_df['is_weekend'] = (train_df['day_of_week'] >= 5).astype(np.int8)
+    train_df['month_id'] = train_df['t_dat'].dt.to_period('M')
+
+    user_agg = train_df.groupby('customer_id').agg({
+        'price': ['mean', 'std', 'last'],  
+        'article_id': ['count', 'nunique'], 
+        't_dat': 'max',                     
+        'sales_channel_id': 'mean',         
+        'is_weekend': 'mean',               
+        'month_id': 'nunique'               
+    })
+    
+    user_agg.columns = [
+        'user_avg_price', 'price_std', 'last_price',
+        'total_cnt', 'unique_item_cnt',
+        'last_purchase_date', 'channel_avg', 
+        'weekend_ratio', 'active_months'
+    ]
+    user_agg = user_agg.reset_index()
+
+    # ==========================================
+    # 2. Derived Features & Bucketing/Scaling
+    # ==========================================
+    print("   ⚙️ Generating Derived Features & Bucketing...")
+    
+    # (1) 결측치 및 파생 변수 처리
+    user_agg['price_std'] = user_agg['price_std'].fillna(0).astype(np.float32)
+    user_agg['last_price_diff'] = (user_agg['last_price'] - user_agg['user_avg_price']).astype(np.float32)
+    user_agg['repurchase_ratio'] = (1.0 - (user_agg['unique_item_cnt'] / user_agg['total_cnt'])).astype(np.float32)
+    
+    max_date = train_df['t_dat'].max()
+    user_agg['recency_days'] = (max_date - user_agg['last_purchase_date']).dt.days.astype(np.float32)
+    
+    user_agg['preferred_channel'] = np.where(user_agg['channel_avg'] > 1.5, 2, 1).astype(np.int8)
+    user_agg['active_months'] = user_agg['active_months'].astype(np.int16)
+
+    # (2) Bucketing (Quantile 기반 10구간 분할 -> Categorical ID로 변환)
+    # 중복값이 많을 수 있으므로 duplicates='drop' 적용
+    user_agg['user_avg_price_bucket'] = pd.qcut(user_agg['user_avg_price'], q=10, labels=False, duplicates='drop').astype(np.int8) + 1
+    user_agg['total_cnt_bucket'] = pd.qcut(user_agg['total_cnt'], q=10, labels=False, duplicates='drop').astype(np.int8) + 1
+    user_agg['recency_bucket'] = pd.qcut(user_agg['recency_days'], q=10, labels=False, duplicates='drop').astype(np.int8) + 1
+
+    # (3) Continuous Features Scaling (Standardization: 평균 0, 표준편차 1)
+    # 모델의 Continuous MLP에 들어갈 변수들
+    cont_cols = ['price_std', 'last_price_diff', 'repurchase_ratio', 'weekend_ratio']
+    for col in cont_cols:
+        col_mean = user_agg[col].mean()
+        col_std = user_agg[col].std() + 1e-9 # 0으로 나누기 방지
+        user_agg[f'{col}_scaled'] = ((user_agg[col] - col_mean) / col_std).astype(np.float32)
+
+    # ==========================================
+    # 3. Customer Metadata Integration (고객 정보 병합)
+    # ==========================================
+    print("   👥 Loading & Merging Customer Metadata...")
+    customers_df = pd.read_csv(USER_META_PATH)
+    
+    if 'postal_code' in customers_df.columns:
+        customers_df = customers_df.drop(columns=['postal_code'])
+        
+    age_median = customers_df['age'].median()
+    customers_df['age'] = customers_df['age'].fillna(age_median)
+    # Age Bucketing (10구간)
+    customers_df['age_bucket'] = pd.qcut(customers_df['age'], q=10, labels=False, duplicates='drop').astype(np.int8) + 1
+    
+    customers_df['FN'] = customers_df['FN'].fillna(0).astype(np.int8)
+    customers_df['Active'] = customers_df['Active'].fillna(0).astype(np.int8)
+    
+    customers_df['club_member_status'] = customers_df['club_member_status'].fillna('OTHER').astype(str).str.upper()
+    status_map = {'ACTIVE': 1, 'PRE-CREATE': 2}
+    customers_df['club_member_status_idx'] = customers_df['club_member_status'].map(status_map).fillna(0).astype(np.int8)
+    
+    customers_df['fashion_news_frequency'] = customers_df['fashion_news_frequency'].fillna('NONE').astype(str).str.upper()
+    news_map = {'REGULARLY': 1}
+    customers_df['fashion_news_frequency_idx'] = customers_df['fashion_news_frequency'].map(news_map).fillna(0).astype(np.int8)
+
+    meta_cols = ['customer_id', 'age_bucket', 'FN', 'Active', 'club_member_status_idx', 'fashion_news_frequency_idx']
+    customers_meta = customers_df[meta_cols]
+
+    final_df = pd.merge(user_agg, customers_meta, on='customer_id', how='left')
+
+    # 병합 후 결측치 방어
+    final_df['age_bucket'] = final_df['age_bucket'].fillna(0).astype(np.int8)
+    for col in ['FN', 'Active', 'club_member_status_idx', 'fashion_news_frequency_idx']:
+        final_df[col] = final_df[col].fillna(0).astype(np.int8)
+
+    # ==========================================
+    # 4. Final Selection & Save
+    # ==========================================
+    # 저장할 최종 컬럼 (Bucket IDs 4개, Scaled Cont 4개, Categorical IDs 5개)
+    final_cols = [
+        'customer_id', 
+        'user_avg_price_bucket', 'total_cnt_bucket', 'recency_bucket', 'age_bucket', # Bucket IDs
+        'price_std_scaled', 'last_price_diff_scaled', 'repurchase_ratio_scaled', 'weekend_ratio_scaled', # Scaled Cont
+        'preferred_channel', 'active_months', 'FN', 'Active', 'club_member_status_idx', 'fashion_news_frequency_idx' # Categoricals
+    ]
+    
+    final_df = final_df[final_cols].fillna(0)
+    print("\n🔍 [Check] Generated User Features (Top 5):")
+    print(final_df.head(5).T.to_string())
+    save_dataframe(final_df, USER_FEAT_PATH_PQ, USER_FEAT_PATH_JS)
+    del user_agg, customers_df, customers_meta; gc.collect()
+    print("   ✅ User features successfully calculated and saved!")
+    
+    return final_df
 # ==========================================
 # 4. Sequences (Cleaned)
 # ==========================================
@@ -702,7 +820,8 @@ if __name__ == "__main__":
     DATASET_MAX_DATE = pd.to_datetime("2020-09-22")
     TARGET_VAL_PATH = os.path.join(BASE_DIR, "features_target_val.parquet")
 
-    processor = FeatureProcessor(USER_FEAT_PATH_PQ, ITEM_FEAT_PATH_PQ, SEQ_DATA_PATH_PQ)
+
+    #processor = FeatureProcessor(USER_FEAT_PATH_PQ, ITEM_FEAT_PATH_PQ, SEQ_DATA_PATH_PQ)
 
     #CLEANED_SEQ_PATH = os.path.join(BASE_DIR, "features_sequence_cleaned.parquet")
     #new_seq_df = make_cleaned_sequences(full_df, processor, CLEANED_SEQ_PATH)
@@ -713,7 +832,8 @@ if __name__ == "__main__":
 
     #SEQ_VAL_DATA_PATH = os.path.join(BASE_DIR, "features_sequence_val.parquet")
     #make_validation_sequences(full_df, TARGET_VAL_PATH, SEQ_VAL_DATA_PATH)
-    
+    train_only_df = full_df[full_df['t_dat'] < VALID_START_DATE].copy()
+    make_user_features(train_only_df)
     
     
     # 2. Validation용 정답지 먼저 생성 (이건 full_df가 필요함)
@@ -726,7 +846,7 @@ if __name__ == "__main__":
     #val_user_features = make_validation_user_features(train_df, TARGET_VAL_PATH, USER_VAL_FEAT_PATH)
 
     # 4. 🌟 [핵심 수정] Validation용 시퀀스 생성 시에도 'train_df'를 넣으세요!
-    SEQ_VAL_DATA_PATH = os.path.join(BASE_DIR, "features_sequence_val.parquet")
+    #SEQ_VAL_DATA_PATH = os.path.join(BASE_DIR, "features_sequence_val.parquet")
     # full_df 대신 train_df를 넣어야 시퀀스 내에 '미래의 정답'이 포함되지 않습니다.
     #make_validation_sequences(train_df, TARGET_VAL_PATH, SEQ_VAL_DATA_PATH,processor)
     
@@ -735,7 +855,7 @@ if __name__ == "__main__":
 
 
     USER_VAL_FEAT_PATH = "D:/trainDataset/localprops/features_user_val.parquet"
-    analyze_and_visualize_user_stats(USER_FEAT_PATH_PQ)
+    #analyze_and_visualize_user_stats(USER_FEAT_PATH_PQ)
 
 
     #check_sequence_distribution(SEQ_DATA_PATH_PQ, SEQ_VAL_DATA_PATH)
