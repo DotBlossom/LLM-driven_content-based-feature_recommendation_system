@@ -6,6 +6,36 @@ import pandas as pd
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 
+
+
+
+
+def dataset_peek(dataset, processor):
+    """Dataset에서 1개 샘플을 꺼내 로직이 정합한지 검수"""
+    print("\n🧐 [Data Peek] Checking Sequence Integrity...")
+    sample = dataset[0]
+    
+    # 1. 시퀀스 Shift 확인
+    ids = sample['item_ids'].tolist()
+    targets = sample['target_ids'].tolist()
+    
+    # 0이 아닌 첫 번째 실제 데이터 인덱스 찾기
+    first_idx = next((i for i, x in enumerate(ids) if x != 0), None)
+    
+    if first_idx is not None and first_idx < len(ids) - 1:
+        print(f"   - Input Seq  (t):   ... {ids[first_idx:first_idx+3]}")
+        print(f"   - Target Seq (t+1): ... {targets[first_idx:first_idx+3]}")
+        if ids[first_idx+1] == targets[first_idx]:
+            print("   ✅ Shift Logic: OK (Input[t+1] == Target[t])")
+        else:
+            print("   ❌ Shift Logic: ERROR! Target is not shifted correctly.")
+
+    # 2. 유저 스태틱 피처 확인
+    print(f"   - Age Bucket ID: {sample['age_bucket'].item()}")
+    print(f"   - Cont Feats Shape: {sample['cont_feats'].shape}")
+
+
+
 class FeatureProcessor:
     def __init__(self, user_path, item_path, seq_path):
         print("🚀 Loading preprocessed features...")
@@ -790,6 +820,62 @@ def create_dataloaders(processor, cfg: PipelineConfig, aligned_pretrained_vecs=N
     print(f"✅ Train Loader Ready: {len(train_loader)} batches/epoch")
     return train_loader
 
+
+import hashlib
+import json
+
+def get_hash_id(text, hash_size):
+    """문자열을 일관된 정수 ID(1 ~ hash_size)로 해싱 (0은 Padding)"""
+    if not text or str(text).lower() in ['unknown', 'nan', 'none']:
+        return 0
+    # MD5를 사용하여 파이썬 세션이 바뀌어도 항상 동일한 해시값 보장
+    hash_obj = hashlib.md5(str(text).strip().lower().encode('utf-8'))
+    # 16진수를 정수로 변환 후 hash_size로 나눈 나머지 + 1
+    return (int(hash_obj.hexdigest(), 16) % hash_size) + 1
+
+def load_item_metadata_hashed(processor, base_dir, hash_size=1000):
+    """JSON 파일을 읽어 정렬된 메타데이터 해시 텐서(N+1, 4)를 생성"""
+    print("\n🏷️ [Phase 3-2] Loading and Hashing Item Metadata...")
+    json_path = os.path.join(base_dir, "filtered_data_reinforced.json")
+    
+    num_items = processor.num_items + 1
+    # 0번 인덱스는 패딩을 위해 0으로 유지 (N+1, 4차원 배열)
+    item_side_arr = np.zeros((num_items, 4), dtype=np.int64)
+    
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            item_data = json.load(f)
+    except Exception as e:
+        print(f"❌ [Error] Failed to load JSON: {e}")
+        return torch.tensor(item_side_arr, dtype=torch.long)
+    
+    # 빠른 검색을 위해 O(1) Lookup Dictionary 생성
+    # int형 article_id를 string으로 변환하여 매핑
+    metadata_dict = {str(item.get('article_id', '')): item for item in item_data}
+    
+    matched = 0
+    for i, current_id_str in enumerate(processor.item_ids):
+        idx = i + 1 # 1-based indexing
+        
+        if current_id_str in metadata_dict:
+            meta = metadata_dict[current_id_str]
+            
+            # 카테고리 매핑 및 해싱 (해당 키가 없으면 빈 문자열 반환)
+            type_val = meta.get("product_type_name", "")
+            color_val = meta.get("colour_group_name", "")
+            graphic_val = meta.get("graphical_appearance_name", "")
+            section_val = meta.get("section_name", "")
+            
+            item_side_arr[idx, 0] = get_hash_id(type_val, hash_size)
+            item_side_arr[idx, 1] = get_hash_id(color_val, hash_size)
+            item_side_arr[idx, 2] = get_hash_id(graphic_val, hash_size)
+            item_side_arr[idx, 3] = get_hash_id(section_val, hash_size)
+            
+            matched += 1
+
+    print(f"✅ Metadata Matched & Hashed: {matched}/{len(processor.item_ids)} (Hash Size: {hash_size})")
+    
+    return torch.tensor(item_side_arr, dtype=torch.long)
 # =====================================================================
 # Phase 4: Model Setup
 # =====================================================================
@@ -891,6 +977,17 @@ def train_one_epoch(epoch, model, item_tower, dataloader, optimizer, scaler, cfg
             }
 
         # 2. Forward & Loss 
+        if batch_idx == 0:
+            print(f"\n📦 [Batch 0 Monitor]")
+            print(f"   - Item IDs: Shape {item_ids.shape} | Min {item_ids.min()} | Max {item_ids.max()}")
+            print(f"   - Time Buckets: Min {time_bucket_ids.min()} | Max {time_bucket_ids.max()}")
+            
+            # 패딩 마스크 비율 확인 (데이터가 너무 비어있지 않은지)
+            pad_ratio = (padding_mask.sum().item() / padding_mask.numel()) * 100
+            print(f"   - Padding Ratio: {pad_ratio:.1f}%")
+
+            # 연속형 변수 정규화 상태 확인
+            print(f"   - Cont Feats Mean: {cont_feats.mean().item():.3f} | Std: {cont_feats.std().item():.3f}")
         with torch.amp.autocast(device_type='cuda', dtype=torch.float16, enabled=True):
             output_1 = model(**forward_kwargs)
             
@@ -923,11 +1020,23 @@ def run_pipeline():
     # 1. Config & Env
     cfg = PipelineConfig()
     device = setup_environment()
+    processor, cfg = prepare_features(cfg)
+    # item metadata cfg
+    HASH_SIZE = 1000
+    cfg.num_prod_types = HASH_SIZE
+    cfg.num_colors = HASH_SIZE
+    cfg.num_graphics = HASH_SIZE
+    cfg.num_sections = HASH_SIZE
     
     # 2. Data
-    processor, cfg = prepare_features(cfg)
+
     aligned_vecs = load_aligned_pretrained_embeddings(processor, cfg.model_dir, cfg.pretrained_dim)
+    
+    item_metadata_tensor = load_item_metadata_hashed(processor, cfg.base_dir, hash_size=HASH_SIZE)
+    processor.i_side_arr = item_metadata_tensor.numpy()
+    
     train_loader = create_dataloaders(processor, cfg, aligned_vecs)
+    dataset_peek(train_loader.dataset, processor)
     
     # 3. Models & Optimizer
     user_tower, item_tower = setup_models(cfg, device)
