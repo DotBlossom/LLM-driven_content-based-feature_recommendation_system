@@ -14,3 +14,5 @@ test.txt
 localprops/
 image/
 dummy_code/
+tower_code/wandb/
+tower_code/log.txt

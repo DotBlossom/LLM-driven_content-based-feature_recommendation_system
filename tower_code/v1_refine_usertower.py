@@ -38,7 +38,7 @@ def dataset_peek(dataset, processor):
 
 
 class FeatureProcessor:
-    def __init__(self, user_path, item_path, seq_path):
+    def __init__(self, user_path, item_path, seq_path,base_processor=None):
         print("🚀 Loading preprocessed features...")
         self.users = pd.read_parquet(user_path).drop_duplicates(subset=['customer_id']).set_index('customer_id')
         self.items = pd.read_parquet(item_path).drop_duplicates(subset=['article_id']).set_index('article_id')
@@ -54,10 +54,25 @@ class FeatureProcessor:
         # =================================================================
         self.user_ids = self.seqs.index.tolist() # 시퀀스가 존재하는 유저만 대상
         self.user2id = {uid: i + 1 for i, uid in enumerate(self.users.index)}
-        self.item_ids = self.items.index.tolist()
-        self.item2id = {iid: i + 1 for i, iid in enumerate(self.item_ids)}
+
+    
+        
+        
+        if base_processor is None:
+            # Train일 때: 새롭게 아이템 번호표 생성
+            self.item_ids = self.items.index.tolist()
+            self.item2id = {iid: i + 1 for i, iid in enumerate(self.item_ids)}
+            self.num_items = len(self.item_ids)
+        else:
+            # Validation일 때: Train의 번호표를 그대로 물려받음
+            self.item_ids = base_processor.item_ids
+            self.item2id = base_processor.item2id
+            self.num_items = base_processor.num_items
+        
         
         self.num_items = len(self.item_ids)
+        
+        
 
         # =================================================================
         # 2. Fast Lookup Arrays for Dataset (__getitem__ 속도 최적화)
@@ -120,7 +135,62 @@ class FeatureProcessor:
         full_log_q[0] = -20.0 # Padding Index
     
         return torch.tensor(full_log_q, dtype=torch.float32).to(device)
-    
+
+
+    # FeatureProcessor 클래스 내부에 추가할 메서드
+    def analyze_distributions(self):
+        import matplotlib.pyplot as plt
+        import seaborn as sns
+        import numpy as np
+        print("\n📊 [Data Distribution Analysis]")
+        print("-" * 50)
+
+        # 1. 시퀀스 길이 분포 (max_len 결정의 핵심 근거)
+        seq_lengths = self.seqs['sequence_ids'].apply(len)
+        
+        print(f"🔹 Sequence Length Stats:")
+        print(f"   - Mean: {seq_lengths.mean():.2f}")
+        print(f"   - Median: {seq_lengths.median()}")
+        print(f"   - P90: {seq_lengths.quantile(0.9):.1f}")
+        print(f"   - P95: {seq_lengths.quantile(0.95):.1f}")
+        print(f"   - Max: {seq_lengths.max()}")
+
+        plt.figure(figsize=(12, 5))
+        
+        # Left: Sequence Length Histogram
+        plt.subplot(1, 2, 1)
+        sns.histplot(seq_lengths, bins=50, kde=True, color='skyblue')
+        plt.axvline(seq_lengths.quantile(0.95), color='red', linestyle='--', label='P95')
+        plt.title("User Sequence Length Distribution")
+        plt.xlabel("Length")
+        plt.legend()
+
+        # 2. 주요 유저 카테고리 분포 (Age, Price Bucket 등)
+        # u_bucket_arr에서 0번(Age), 1번(Price) 컬럼 추출 (Padding 제외하고 1번 인덱스부터)
+        plt.subplot(1, 2, 2)
+        ages = self.u_bucket_arr[1:, 0]
+        sns.countplot(x=ages, palette='viridis')
+        plt.title("User Age Bucket Distribution")
+        plt.xlabel("Age Bucket ID")
+
+        plt.tight_layout()
+        plt.show()
+
+        # 3. 아이템 등장 빈도 (Long-tail 확인)
+        all_items_in_seqs = [iid for subseq in self.seqs['sequence_ids'] for iid in subseq]
+        item_counts = pd.Series(all_items_in_seqs).value_counts()
+        
+        print(f"\n🔹 Item Interaction Stats:")
+        print(f"   - Total Unique Items in Seqs: {len(item_counts)}")
+        print(f"   - Top 10% items cover {item_counts.iloc[:int(len(item_counts)*0.1)].sum() / len(all_items_in_seqs) * 100:.1f}% of interactions")
+        
+        # 4. ID Mapping Coverage 확인 (디버깅용)
+        missing_items = [iid for iid in item_counts.index if iid not in self.item2id]
+        if missing_items:
+            print(f"⚠️ Warning: {len(missing_items)} items in sequences are NOT in item master!")
+        else:
+            print("✅ Success: All items in sequences are correctly mapped.")
+        
 class SASRecDataset(Dataset):
     def __init__(self, processor: FeatureProcessor, max_len=30, is_train=True):
         self.processor = processor
@@ -204,6 +274,8 @@ class SASRecDataset(Dataset):
         # 6. Return Tensors
         # =========================================================
         return {
+            
+            'user_ids': user_id,
             # Sequence
             'item_ids': torch.tensor(input_padded, dtype=torch.long),
             'target_ids': torch.tensor(target_padded, dtype=torch.long),
@@ -256,7 +328,11 @@ class SASRecUserTower(nn.Module):
         self.section_emb = nn.Embedding(args.num_sections + 1, self.d_model, padding_idx=0)
 
         self.pos_emb = nn.Embedding(self.max_len, self.d_model)
+        # 시퀀스 피처용 (item_id, time, type, color, graphic, section) -> 6개
+        self.seq_gate = nn.Parameter(torch.ones(6)) 
         
+        # 스테틱 피처용 (age, price, cnt, rec, chan, club, news, fn, act, cont) -> 10개
+        self.static_gate = nn.Parameter(torch.ones(10))
         # [업데이트] Time-Aware 버킷 임베딩
         num_time_buckets = 12 
         self.time_emb = nn.Embedding(num_time_buckets, self.d_model, padding_idx=0)
@@ -354,17 +430,27 @@ class SASRecUserTower(nn.Module):
         
         device = item_ids.device
         seq_len = item_ids.size(1)
+        
+        s_g_raw = torch.sigmoid(self.seq_gate) 
+        u_g_raw = torch.sigmoid(self.static_gate)
+        
+        s_mask = torch.tensor([1.0, 1.0, 0.0, 0.0, 0.0, 0.0], device=s_g_raw.device)
+        s_g = s_g_raw * s_mask  # 곱셈 연산은 새로운 텐서를 생성하므로 안전합니다.
 
+        u_mask = torch.ones_like(u_g_raw)
+        # u_mask[6:9] = 0.0 # 필요한 경우 주석 해제
+        u_g = u_g_raw * u_mask
+        
         # -----------------------------------------------------------
         # Phase 1: Sequence Encoding (Short-term)
         # -----------------------------------------------------------
         seq_emb = self.item_proj(pretrained_vecs) 
-        seq_emb += self.item_id_emb(item_ids)
-        seq_emb += self.time_emb(time_bucket_ids) # Time Aware
-        seq_emb += self.type_emb(type_ids)
-        seq_emb += self.color_emb(color_ids)
-        seq_emb += self.graphic_emb(graphic_ids)
-        seq_emb += self.section_emb(section_ids)
+        seq_emb += self.item_id_emb(item_ids) * s_g[0]
+        seq_emb += self.time_emb(time_bucket_ids) * s_g[1]
+        seq_emb += self.type_emb(type_ids) * s_g[2]
+        seq_emb += self.color_emb(color_ids) * s_g[3]
+        seq_emb += self.graphic_emb(graphic_ids) * s_g[4]
+        seq_emb += self.section_emb(section_ids) * s_g[5]
         
         positions = torch.arange(seq_len, device=device).unsqueeze(0)
         seq_emb += self.pos_emb(positions)
@@ -373,7 +459,6 @@ class SASRecUserTower(nn.Module):
         seq_emb = self.emb_dropout(seq_emb)
 
         causal_mask = self.get_causal_mask(seq_len, device)
-        
         output = self.transformer_encoder(
             seq_emb, 
             mask=causal_mask, 
@@ -384,19 +469,19 @@ class SASRecUserTower(nn.Module):
         # Phase 2: Static Encoding (Long-term)
         # -----------------------------------------------------------
         #  Dataset에서 전달받은 모든 피처들을 개별 임베딩
-        emb_age = self.age_emb(age_bucket)
-        emb_price = self.price_emb(price_bucket)
-        emb_cnt = self.cnt_emb(cnt_bucket)
-        emb_rec = self.recency_emb(recency_bucket)
+        emb_age = self.age_emb(age_bucket) * u_g[0]
+        emb_price = self.price_emb(price_bucket) * u_g[1]
+        emb_cnt = self.cnt_emb(cnt_bucket) * u_g[2]
+        emb_rec = self.recency_emb(recency_bucket) * u_g[3]
         
-        emb_chan = self.channel_emb(channel_ids)
-        emb_club = self.club_status_emb(club_status_ids)
-        emb_news = self.news_freq_emb(news_freq_ids)
-        emb_fn = self.fn_emb(fn_ids)
-        emb_act = self.active_emb(active_ids)
+        emb_chan = self.channel_emb(channel_ids) * u_g[4]
+        emb_club = self.club_status_emb(club_status_ids) * u_g[5]
+        emb_news = self.news_freq_emb(news_freq_ids) * u_g[6]
+        emb_fn = self.fn_emb(fn_ids) * u_g[7]
+        emb_act = self.active_emb(active_ids) * u_g[8]
         
-        # 연속형 변수 차원 확대
-        cont_proj_vec = F.relu(self.cont_proj(cont_feats)) 
+        # 연속형 변수에도 게이트 적용 가능
+        cont_proj_vec = F.relu(self.cont_proj(cont_feats)) * u_g[9]
         
         # Concat All Static Features
         static_input = torch.cat([
@@ -467,6 +552,21 @@ def inbatch_corrected_logq_loss(user_emb, item_tower_emb, target_ids, log_q_tens
 
     # 4. 정답 Label 생성 (대각선 인덱스: 0, 1, 2, ..., N-1)
     # i번째 유저의 정답은 배치 내 i번째 아이템임
+    # 1. 배치 내에 동일한 아이템이 있는지 확인하는 (N, N) True/False 마스크
+    same_item_mask = torch.eq(target_ids.unsqueeze(1), target_ids.unsqueeze(0))
+    
+    # 2. 대각선(진짜 자신의 정답)은 유지해야 하므로 제외할 마스크 생성
+    diag_mask = torch.eye(N, dtype=torch.bool, device=user_emb.device)
+    
+    # 3. 진짜 정답이 아니면서 아이템 ID만 겹치는 '억울한 오답(False Negatives)' 추출
+    false_neg_mask = same_item_mask & ~diag_mask
+    
+    # 4. 억울한 오답들의 로짓을 -inf로 덮어씌워 모델이 페널티를 주지 못하게 차단
+    logits.masked_fill_(false_neg_mask, float('-inf'))
+    
+    
+    
+    
     labels = torch.arange(N, device=user_emb.device)
     
     # 5. 최종 CrossEntropyLoss 계산
@@ -526,3 +626,236 @@ def duorec_loss_refined(user_emb_1, user_emb_2, target_ids, temperature=0.1, lam
                 
     return loss_unsup + (lambda_sup * loss_sup)
 
+
+# ======================================================
+
+def inbatch_hnm_corrected_loss_with_stats(
+    user_emb, item_tower_emb, target_ids, log_q_tensor, 
+    top_k_percent=0.01, hnm_threshold=0.90, temperature=0.1, lambda_logq=0.7, lambda_cl=0.2
+):
+    """
+    Refactored HNM: Selection(Mining)과 Correction(LogQ)을 분리하여 '진짜 매운맛' 추출
+    """
+    N = user_emb.size(0)
+    device = user_emb.device
+    
+    # 1. 정규화 및 기본 유사도 계산
+    u_norm = F.normalize(user_emb, p=2, dim=1)
+    i_batch_norm = F.normalize(item_tower_emb[target_ids], p=2, dim=1)
+    
+    # 순수 코사인 유사도 matrix (N, N)
+    cos_sim = torch.matmul(u_norm, i_batch_norm.T) 
+
+    # 2. 마스킹 (False Negative & Too Similar)
+    same_item_mask = torch.eq(target_ids.unsqueeze(1), target_ids.unsqueeze(0))
+    diag_mask = torch.eye(N, dtype=torch.bool, device=device)
+    
+    with torch.no_grad():
+        item_sim = torch.matmul(i_batch_norm, i_batch_norm.T)
+        too_similar_mask = (item_sim > hnm_threshold) & ~diag_mask
+    
+    ignore_mask = same_item_mask | too_similar_mask
+    
+    # 3. [핵심] 하드 네거티브 '선택' (Mining)
+    # LogQ를 배제하고 오직 '유사도'가 높은 순서대로 K개를 뽑습니다.
+    mining_logits = (cos_sim / temperature).detach().clone()
+    mining_logits.masked_fill_(ignore_mask, float('-inf'))
+    
+    # 가용한 네거티브 개수 내에서 K 설정
+    available_negs = (~ignore_mask).sum(dim=1)
+    num_k = max(1, min(int((N - 1) * top_k_percent), available_negs.min().item()))
+    
+    _, top_k_indices = torch.topk(mining_logits, k=num_k, dim=1)
+    
+    # 4. [보정] 최종 로짓 구성 및 LogQ 적용
+    # 선택은 유사도로 했지만, Loss를 계산할 때는 인기도 편향을 제거합니다.
+    logits = cos_sim / temperature
+    if lambda_logq > 0.0:
+        batch_log_q = log_q_tensor[target_ids]
+        # Google 수식: s/temp - lambda * logQ
+        logits = logits - (batch_log_q.view(1, -1) * lambda_logq)
+
+    # 5. 최종 Loss용 로짓 수집
+    pos_logits = torch.diagonal(logits).unsqueeze(1)
+    hard_neg_logits = torch.gather(logits, 1, top_k_indices)
+    
+    final_logits = torch.cat([pos_logits, hard_neg_logits], dim=1)
+    labels = torch.zeros(N, dtype=torch.long, device=device)
+    
+    loss = F.cross_entropy(final_logits, labels)
+    
+    # 6. '매운맛' 통계 (보정 전 순수 유사도 기준)
+    with torch.no_grad():
+        hard_hn_sims = torch.gather(cos_sim, 1, top_k_indices)
+        avg_hn_sim = hard_hn_sims.mean().item()
+
+    return loss, {"avg_hn_similarity": avg_hn_sim, "num_active_hard_negs": num_k}
+
+
+def inbatch_mixed_hnm_loss_with_stats(
+    user_emb, item_tower_emb, target_ids, log_q_tensor, 
+    top_k_percent=0.01, random_sample_size=100, 
+    hnm_threshold=0.90, temperature=0.1, lambda_logq=0.7
+):
+    """
+    Mixed Strategy: Hard Negatives (Top-K) + Random Negatives (M)
+    """
+    N = user_emb.size(0)
+    device = user_emb.device
+    
+    # 1. 정규화 및 유사도 계산
+    u_norm = F.normalize(user_emb, p=2, dim=1)
+    i_batch_norm = F.normalize(item_tower_emb[target_ids], p=2, dim=1)
+    cos_sim = torch.matmul(u_norm, i_batch_norm.T) 
+
+    # 2. 마스킹 (False Negative & Too Similar)
+    same_item_mask = torch.eq(target_ids.unsqueeze(1), target_ids.unsqueeze(0))
+    diag_mask = torch.eye(N, dtype=torch.bool, device=device)
+    
+    with torch.no_grad():
+        item_sim = torch.matmul(i_batch_norm, i_batch_norm.T)
+        too_similar_mask = (item_sim > hnm_threshold) & ~diag_mask
+    
+    ignore_mask = same_item_mask | too_similar_mask
+    
+    # 3. [Mining] Hard Negative Selection (Top-K)
+    mining_logits = (cos_sim / temperature).detach().clone()
+    mining_logits.masked_fill_(ignore_mask, float('-inf'))
+    
+    num_k = max(1, int((N - 1) * top_k_percent))
+    _, top_k_indices = torch.topk(mining_logits, k=num_k, dim=1)
+    
+    # 4. [Mining] Random Negative Selection
+    # 하드 네거티브가 아닌 나머지 중에서 랜덤하게 추출
+    # 구현 편의상 전체 배치에서 무작위로 뽑되, 마스킹된 것들은 이후 Loss에서 제외됨
+    random_indices = torch.randint(0, N, (N, random_sample_size), device=device)
+
+    # 5. [Correction] 최종 로짓 구성 (LogQ 적용)
+    logits = cos_sim / temperature
+    if lambda_logq > 0.0:
+        batch_log_q = log_q_tensor[target_ids]
+        logits = logits - (batch_log_q.view(1, -1) * lambda_logq)
+
+    # 6. 로짓 수집 (Positive + Hard + Random)
+    pos_logits = torch.diagonal(logits).unsqueeze(1)
+    hard_neg_logits = torch.gather(logits, 1, top_k_indices)
+    random_neg_logits = torch.gather(logits, 1, random_indices)
+    
+    # [중요] Random 샘플 중 혹시나 Positive나 Too Similar가 섞였을 경우를 대비해 아주 낮은 값으로 처리
+    # (효율을 위해 완전 제외 대신 페널티 부여)
+    random_mask = torch.gather(ignore_mask, 1, random_indices)
+    random_neg_logits.masked_fill_(random_mask, -1e9)
+
+    final_logits = torch.cat([pos_logits, hard_neg_logits, random_neg_logits], dim=1)
+    labels = torch.zeros(N, dtype=torch.long, device=device)
+    
+    loss = F.cross_entropy(final_logits, labels)
+    
+    # 통계 계산
+    with torch.no_grad():
+        hard_hn_sims = torch.gather(cos_sim, 1, top_k_indices)
+        avg_hn_sim = hard_hn_sims.mean().item()
+
+    return loss, {"avg_hn_similarity": avg_hn_sim, "num_hard": num_k, "num_random": random_sample_size}
+
+
+def full_batch_hard_emphasis_loss(
+    user_emb, item_tower_emb, target_ids, log_q_tensor, 
+    top_k_percent=0.01, hard_margin=0.2, 
+    hnm_threshold=0.90, temperature=0.1, lambda_logq=1.0
+):
+    """
+    Full-Batch HNM: 
+    1) 전체 배치(N-1)를 네거티브로 사용하여 Global Structure 유지
+    2) 하드 네거티브에 Margin을 추가하여 정밀도(Hard Emphasis) 강화
+    """
+    N = user_emb.size(0)
+    device = user_emb.device
+    
+    # 1. 정규화 및 유사도 계산
+    u_norm = F.normalize(user_emb, p=2, dim=1)
+    i_batch_norm = F.normalize(item_tower_emb[target_ids], p=2, dim=1)
+    cos_sim = torch.matmul(u_norm, i_batch_norm.T) 
+
+    # 2. 마스킹 (False Negative & Too Similar)
+    same_item_mask = torch.eq(target_ids.unsqueeze(1), target_ids.unsqueeze(0))
+    diag_mask = torch.eye(N, dtype=torch.bool, device=device)
+    ignore_mask = same_item_mask | ((torch.matmul(i_batch_norm, i_batch_norm.T) > hnm_threshold) & ~diag_mask)
+    
+    # 3. [Mining] 하드 네거티브 위치 찾기 (Top-K)
+    with torch.no_grad():
+        mining_sim = cos_sim.detach().clone()
+        mining_sim.masked_fill_(ignore_mask, float('-inf'))
+        num_k = max(1, int((N - 1) * top_k_percent))
+        # 각 행(유저)별로 하드 네거티브의 '위치(인덱스)'를 확보
+        _, top_k_indices = torch.topk(mining_sim, k=num_k, dim=1)
+
+    # 4. [Correction] 전체 로짓 구성 및 LogQ 적용
+    logits = cos_sim / temperature
+    if lambda_logq > 0.0:
+        batch_log_q = log_q_tensor[target_ids]
+        logits = logits - (batch_log_q.view(1, -1) * lambda_logq)
+
+    # 5. [Hard Emphasis] 하드 네거티브에 Margin 추가
+    # 하드 네거티브들의 로짓에 마진을 더해, 모델이 얘네를 '실제보다 더 가깝다'고 착각하게 만듦
+    # 결과적으로 더 강한 힘으로 밀어내게 됨
+    emphasis_mask = torch.zeros_like(logits, dtype=torch.bool)
+    emphasis_mask.scatter_(1, top_k_indices, True)
+    
+    # 하드 네거티브 위치에만 마진 추가 (이게 '콕 집어 패는' 핵심)
+    logits = logits + (emphasis_mask.float() * (hard_margin / temperature))
+
+    # 6. [Final Masking] 억울한 오답(False Negatives) 차단
+    # 자기 자신(Positive)을 제외한 나머지 겹치는 아이템들 제거
+    false_neg_mask = same_item_mask & ~diag_mask
+    logits.masked_fill_(false_neg_mask, float('-inf'))
+
+    # 7. Loss 계산 (N x N 전체 사용)
+    labels = torch.arange(N, device=device)
+    loss = F.cross_entropy(logits, labels)
+    
+    # 통계
+    with torch.no_grad():
+        hard_hn_sims = torch.gather(cos_sim, 1, top_k_indices)
+        avg_hn_sim = hard_hn_sims.mean().item()
+
+    return loss, {"avg_hn_similarity": avg_hn_sim, "num_hard": num_k}
+
+
+
+def inbatch_corrected_logq_loss(
+    user_emb, item_tower_emb, target_ids, user_ids, log_q_tensor, # 💡 user_ids 추가
+    temperature=0.1, lambda_logq=1.0
+):
+    N = user_emb.size(0)
+    
+    # 1. 배치 내 정답 아이템 임베딩 추출
+    batch_item_emb = item_tower_emb[target_ids]
+    
+    # 2. In-Batch Logits 계산
+    logits = torch.matmul(user_emb, batch_item_emb.T)
+    logits.div_(temperature)
+
+    # 3. LogQ 편향 보정
+    if lambda_logq > 0.0:
+        batch_log_q = log_q_tensor[target_ids]
+        logits = logits - (batch_log_q.view(1, -1) * lambda_logq)
+
+    # 4. 마스킹 (False Negatives 차단)
+    # (A) 아이템 ID가 우연히 같은 경우
+    same_item_mask = torch.eq(target_ids.unsqueeze(1), target_ids.unsqueeze(0))
+    # (B) 💡 [추가] 동일 유저의 다른 타임스텝 타겟인 경우 (A->B 예측할 때, A->C 예측 타겟이 네거티브가 되는 것 방지)
+    same_user_mask = torch.eq(user_ids.unsqueeze(1), user_ids.unsqueeze(0))
+    
+    # 대각선(자신의 진짜 정답)은 유지
+    diag_mask = torch.eye(N, dtype=torch.bool, device=user_emb.device)
+    
+    # 최종적으로 억울한 오답들을 걸러내는 마스크 (같은 아이템이거나 OR 같은 유저이거나)
+    false_neg_mask = (same_item_mask | same_user_mask) & ~diag_mask
+    
+    # -inf로 덮어씌워 네거티브 연산에서 완전히 배제
+    logits.masked_fill_(false_neg_mask, float('-inf'))
+    
+    # 5. 최종 CrossEntropyLoss 계산
+    labels = torch.arange(N, device=user_emb.device)
+    return F.cross_entropy(logits, labels)

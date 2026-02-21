@@ -29,6 +29,8 @@ path_case = {
 # Output Paths
 USER_FEAT_PATH_PQ = os.path.join(BASE_DIR, "features_user_w_meta.parquet")
 USER_FEAT_PATH_JS = os.path.join(BASE_DIR, "features_user_w_meta.json")
+USER_FEAT_VAL_PATH_PQ = os.path.join(BASE_DIR, "features_user_w_meta_val.parquet")
+USER_FEAT_VAL_PATH_JS = os.path.join(BASE_DIR, "features_user_w_meta_val.json")
 ITEM_FEAT_PATH_PQ = os.path.join(BASE_DIR, "features_item.parquet")
 ITEM_FEAT_PATH_JS = os.path.join(BASE_DIR, "features_item.json")
 SEQ_DATA_PATH_PQ = os.path.join(BASE_DIR, "features_sequence.parquet")
@@ -274,8 +276,25 @@ import gc
 import numpy as np
 import pandas as pd
 
-def make_user_features(train_df):
+def make_user_features(train_df, target_val_path):
     print("\n👤 [User Stats] Calculating Enhanced Features (with Bucketing & Scaling)...")
+
+
+
+
+    print("\n🎯 [Validation User Stats] Preparing point-in-time features...")
+
+    # 1. 평가 대상 유저 ID 추출 (정답지가 있는 유저들)
+    target_val = pd.read_parquet(target_val_path)
+    val_user_set = set(target_val['customer_id'].unique())
+    print(f" -> Found {len(val_user_set):,} target users for validation.")
+
+    # 2. 9/15 이전 거래 중 '평가 대상 유저'의 기록만 추출
+    # (이미 full_df가 9/15 이전 데이터라면 날짜 필터는 생략 가능)
+    val_train_df = train_df[train_df['customer_id'].isin(val_user_set)].copy()
+    print(f" -> Using {len(val_train_df):,} transaction records for feature calculation.")
+
+
 
     # ==========================================
     # 1. Basic Interaction Stats
@@ -380,7 +399,7 @@ def make_user_features(train_df):
     final_df = final_df[final_cols].fillna(0)
     print("\n🔍 [Check] Generated User Features (Top 5):")
     print(final_df.head(5).T.to_string())
-    save_dataframe(final_df, USER_FEAT_PATH_PQ, USER_FEAT_PATH_JS)
+    save_dataframe(final_df, USER_FEAT_VAL_PATH_PQ, USER_FEAT_VAL_PATH_JS)
     del user_agg, customers_df, customers_meta; gc.collect()
     print("   ✅ User features successfully calculated and saved!")
     
@@ -833,11 +852,16 @@ if __name__ == "__main__":
     #SEQ_VAL_DATA_PATH = os.path.join(BASE_DIR, "features_sequence_val.parquet")
     #make_validation_sequences(full_df, TARGET_VAL_PATH, SEQ_VAL_DATA_PATH)
     train_only_df = full_df[full_df['t_dat'] < VALID_START_DATE].copy()
-    make_user_features(train_only_df)
+    
+    
+    
+    TARGET_VAL_PATH = os.path.join(BASE_DIR, "features_target_val.parquet")
+    
+    make_user_features(train_only_df,TARGET_VAL_PATH)
     
     
     # 2. Validation용 정답지 먼저 생성 (이건 full_df가 필요함)
-    #TARGET_VAL_PATH = os.path.join(BASE_DIR, "features_target_val.parquet")
+    TARGET_VAL_PATH = os.path.join(BASE_DIR, "features_target_val.parquet")
     #make_validation_target_file(full_df, VALID_START_DATE, DATASET_MAX_DATE, TARGET_VAL_PATH)
 
     # 3. 🌟 [핵심 수정] Validation용 피처 생성 시 반드시 'train_df'를 넣으세요!
